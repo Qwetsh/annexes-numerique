@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Annexe A4 — Générateur de documents · Document interactif</title>
+<style>
+  :root{
+    --green:#1f7a54; --green-d:#155c3f; --green-l:#eaf5ef; --ink:#1d2b25; --muted:#5c6b63;
+    --line:#d9e6df; --bg:#f5f9f7; --card:#fff;
+    --shadow:0 2px 10px rgba(20,60,45,.06),0 8px 30px rgba(20,60,45,.05);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.55}
+  .wrap{max-width:1000px;margin:0 auto;padding:0 22px}
+  header.top{background:linear-gradient(135deg,#1f7a54,#155c3f);color:#fff;padding:34px 0 30px}
+  .badge{display:inline-block;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:4px 14px;font-size:13px;font-weight:600}
+  header.top h1{margin:14px 0 6px;font-size:30px}
+  header.top p{margin:0;opacity:.92;max-width:720px}
+  main{padding:34px 0 60px}
+  section{margin:0 0 30px}
+  h2{font-size:21px;color:var(--green-d);margin:0 0 6px;display:flex;align-items:center;gap:9px}
+  h2 .n{background:var(--green);color:#fff;border-radius:8px;font-size:13px;padding:2px 9px;font-weight:700}
+  .lead{color:var(--muted);margin:.2em 0 1.1em}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 22px;box-shadow:var(--shadow)}
+  .grid{display:grid;gap:14px}
+  .g2{grid-template-columns:repeat(2,1fr)} .g3{grid-template-columns:repeat(3,1fr)}
+  @media(max-width:740px){.g2,.g3{grid-template-columns:1fr}}
+  .feature{background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px}
+  .feature h4{margin:0 0 5px;color:var(--green-d);font-size:15.5px}
+  .feature p{margin:0;font-size:13.5px;color:var(--muted)}
+  .pill{display:inline-block;background:var(--green-l);color:var(--green-d);border-radius:999px;padding:3px 11px;font-size:12.5px;font-weight:600;margin:0 4px 6px 0}
+  .tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+  .tab{border:1px solid var(--line);background:#fff;border-radius:999px;padding:8px 16px;cursor:pointer;font-weight:600;font-size:14px;color:var(--muted)}
+  .tab.on{background:var(--green);color:#fff;border-color:var(--green)}
+  .panel{display:none} .panel.on{display:block}
+  .cta{display:inline-block;margin-top:6px;background:var(--green);color:#fff;text-decoration:none;border-radius:9px;padding:9px 16px;font-weight:600;font-size:14px}
+  /* budget calc */
+  .budget{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  @media(max-width:560px){.budget{grid-template-columns:1fr}}
+  .brow{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:8px}
+  .brow label{font-size:13.5px;color:#33473e}
+  .brow input{width:96px;border:1px solid var(--line);border-radius:8px;padding:6px 9px;text-align:right;font-size:14px}
+  .btot{display:flex;justify-content:space-between;font-weight:700;border-top:2px solid var(--line);padding-top:8px;margin-top:4px;color:var(--green-d)}
+  .solde{text-align:center;background:var(--green-l);border-radius:12px;padding:16px;margin-top:14px;font-weight:700;font-size:18px}
+  .solde.neg{background:#fdeceb;color:#c0392b}
+  .col h4{margin:0 0 8px;color:var(--green-d);font-size:14.5px}
+  footer{border-top:1px solid var(--line);padding:22px 0;color:var(--muted);font-size:13px;text-align:center}
+  .note{font-size:13px;color:var(--muted);background:#fff;border:1px dashed var(--line);border-radius:10px;padding:11px 14px}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <span class="badge">Annexe A4 · Rapport référent numérique 2025-2026</span>
+    <h1>Générateur de documents administratifs</h1>
+    <p>Document interactif de présentation. Outil web qui facilite la création et la collecte des autorisations de droit à l'image et de voix, des demandes de sortie et de voyage scolaire — saisie simplifiée pour les collègues et <strong>génération automatique d'un PDF officiel</strong>.</p>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section>
+    <h2><span class="n">1</span> Trois documents générés — parcourez-les</h2>
+    <p class="lead">Une navigation par onglets. <strong>Choisissez un document</strong> pour voir ses champs et options.</p>
+    <div class="tabs">
+      <div class="tab on" onclick="setTab(this,'d-img')">📷 Captation image / son</div>
+      <div class="tab" onclick="setTab(this,'d-sortie')">🚌 Sortie obligatoire</div>
+      <div class="tab" onclick="setTab(this,'d-sejour')">✈️ Demande de sortie / séjour</div>
+    </div>
+    <div class="card">
+      <div class="panel on" id="d-img">
+        <h3 style="margin:0 0 6px;color:var(--green-d)">Autorisation de captation image / son</h3>
+        <p style="font-size:14px">Génère le document à faire signer aux familles, avec autorisation <strong>support par support</strong>.</p>
+        <h4 style="margin:12px 0 6px;color:var(--green-d);font-size:14px">Supports d'exploitation à cocher</h4>
+        <span class="pill">Usage collectif en classe</span>
+        <span class="pill">En ligne via l'ENT (URL)</span>
+        <span class="pill">Internet public (URL)</span>
+        <span class="pill">Support amovible (+ destinataires)</span>
+        <span class="pill">Projection collective</span>
+        <span class="pill">Autre (libre)</span>
+        <h4 style="margin:12px 0 6px;color:var(--green-d);font-size:14px">Informations saisies</h4>
+        <span class="pill">Établissement, classe, année</span>
+        <span class="pill">Finalités envisagées</span>
+        <span class="pill">Projet : titre, dates, lieux</span>
+      </div>
+      <div class="panel" id="d-sortie">
+        <h3 style="margin:0 0 6px;color:var(--green-d)">Sortie scolaire obligatoire</h3>
+        <p style="font-size:14px">Document officiel à retourner aux familles (avec coupon-réponse).</p>
+        <h4 style="margin:12px 0 6px;color:var(--green-d);font-size:14px">Champs</h4>
+        <span class="pill">Organisateur (nom, fonction)</span>
+        <span class="pill">Date, classe(s), lieu</span>
+        <span class="pill">Horaires départ / retour</span>
+        <span class="pill">Matière(s) & objectifs</span>
+        <h4 style="margin:12px 0 6px;color:var(--green-d);font-size:14px">Transport</h4>
+        <span class="pill">À pied · bus scolaire · bus de ville</span>
+        <span class="pill">Car affrété · train · tramway</span>
+        <span class="pill">Lieux de départ / arrivée</span>
+        <span class="pill">Date limite de retour du coupon</span>
+      </div>
+      <div class="panel" id="d-sejour">
+        <h3 style="margin:0 0 6px;color:var(--green-d)">Demande de sortie / séjour (formulaire complet)</h3>
+        <p style="font-size:14px">Le dossier complet pour l'administration : destination, groupe, contenu pédagogique, budget, accompagnateurs, incidences sur l'emploi du temps.</p>
+        <div class="grid g3" style="margin-top:10px">
+          <div class="feature"><h4>Destination & déplacement</h4><p>France / étranger, obligatoire / facultatif, sortie ou séjour avec nuitée, transport.</p></div>
+          <div class="feature"><h4>Composition du groupe</h4><p>Ajout dynamique de classes (effectifs), <strong>import CSV de la liste d'élèves</strong> avec tableau éditable.</p></div>
+          <div class="feature"><h4>Contenu pédagogique</h4><p>8 domaines, disciplines, objectifs, liens au projet d'établissement, restitution.</p></div>
+          <div class="feature"><h4>Budget prévisionnel</h4><p>Recettes & dépenses détaillées, <strong>totaux et solde calculés automatiquement</strong> (voir ci-dessous).</p></div>
+          <div class="feature"><h4>Accompagnateurs</h4><p>Ajout dynamique : nom, qualité, téléphone.</p></div>
+          <div class="feature"><h4>Incidences emploi du temps</h4><p>Impact sur les horaires des classes et des personnels.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="n">2</span> Le budget prévisionnel — calcul automatique</h2>
+    <p class="lead">Comme dans l'outil : modifiez les montants, le total et le solde se recalculent en direct.</p>
+    <div class="card">
+      <div class="budget">
+        <div class="col">
+          <h4>Recettes (€)</h4>
+          <div class="brow"><label>Participation des familles</label><input type="number" id="r1" value="1200" oninput="calc()"></div>
+          <div class="brow"><label>Établissement / FSE</label><input type="number" id="r2" value="300" oninput="calc()"></div>
+          <div class="brow"><label>Subventions (CD, CR, commune…)</label><input type="number" id="r3" value="500" oninput="calc()"></div>
+          <div class="brow"><label>Dons</label><input type="number" id="r4" value="0" oninput="calc()"></div>
+          <div class="btot"><span>Total recettes</span><span id="totR">2 000 €</span></div>
+        </div>
+        <div class="col">
+          <h4>Dépenses (€)</h4>
+          <div class="brow"><label>Transport</label><input type="number" id="d1" value="900" oninput="calc()"></div>
+          <div class="brow"><label>Hébergement / repas</label><input type="number" id="d2" value="700" oninput="calc()"></div>
+          <div class="brow"><label>Activités / visites</label><input type="number" id="d3" value="350" oninput="calc()"></div>
+          <div class="brow"><label>Matériel / divers</label><input type="number" id="d4" value="50" oninput="calc()"></div>
+          <div class="btot"><span>Total dépenses</span><span id="totD">2 000 €</span></div>
+        </div>
+      </div>
+      <div class="solde" id="solde">Solde : 0 €</div>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="n">3</span> Fonctionnalités</h2>
+    <div class="grid g3">
+      <div class="feature"><h4>Génération PDF</h4><p>Mise en page A4 propre, en-tête avec logo et infos de l'établissement, prêt à imprimer / signer.</p></div>
+      <div class="feature"><h4>Aperçu intégré</h4><p>Visualisation du PDF in-situ avant téléchargement.</p></div>
+      <div class="feature"><h4>Import CSV des élèves</h4><p>Parsing automatique de la liste, tableau éditable (nom, prénom, sexe, téléphone d'urgence).</p></div>
+      <div class="feature"><h4>Calculs automatiques</h4><p>Budgets et comptages d'élèves recalculés en temps réel.</p></div>
+      <div class="feature"><h4>Pré-remplissage</h4><p>Les données de l'établissement sont déjà renseignées.</p></div>
+      <div class="feature"><h4>Responsive</h4><p>Formulaires utilisables sur ordinateur comme sur mobile.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="n">4</span> Technique & accès</h2>
+    <div class="grid g2">
+      <div class="card">
+        <h4 style="margin:0 0 8px;color:var(--green-d)">Stack</h4>
+        <span class="pill">HTML / CSS / JavaScript</span>
+        <span class="pill">jsPDF (génération PDF)</span>
+        <span class="pill">LocalStorage</span>
+        <span class="pill">Import CSV</span>
+        <p class="note" style="margin-top:12px">Respecte le RGPD : aucune donnée d'élève n'est envoyée à un serveur tiers, le PDF est généré localement dans le navigateur.</p>
+      </div>
+      <div class="card">
+        <h4 style="margin:0 0 8px;color:var(--green-d)">Outil en ligne</h4>
+        <p style="font-size:14px;color:var(--muted)">L'outil complet et fonctionnel est accessible en ligne :</p>
+        <a class="cta" href="https://qwetsh.github.io/generateur-docs-college/" target="_blank" rel="noopener">Ouvrir le générateur →</a>
+        <p style="font-size:12.5px;color:var(--muted);margin-top:10px">qwetsh.github.io/generateur-docs-college</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="wrap">
+  Annexe A4 · Générateur de documents (droit à l'image / voix, sorties et voyages scolaires)<br>
+  Compte rendu d'activité du référent numérique 2025-2026 · Collège Pierre Mendès France, Woippy · M. Thomas Charles
+</footer>
+
+<script>
+  function fmt(n){return n.toLocaleString('fr-FR')+' €';}
+  function calc(){
+    var R=['r1','r2','r3','r4'].reduce(function(a,id){return a+(+document.getElementById(id).value||0)},0);
+    var D=['d1','d2','d3','d4'].reduce(function(a,id){return a+(+document.getElementById(id).value||0)},0);
+    document.getElementById('totR').textContent=fmt(R);
+    document.getElementById('totD').textContent=fmt(D);
+    var s=R-D, el=document.getElementById('solde');
+    el.textContent='Solde : '+fmt(s)+(s<0?' (déficit)':s>0?' (excédent)':' (équilibré)');
+    el.classList.toggle('neg',s<0);
+  }
+  function setTab(el,id){
+    el.parentNode.querySelectorAll('.tab').forEach(function(t){t.classList.remove('on')});
+    el.classList.add('on');
+    document.querySelectorAll('.panel').forEach(function(p){p.classList.remove('on')});
+    document.getElementById(id).classList.add('on');
+  }
+  calc();
+</script>
+</body>
+</html>

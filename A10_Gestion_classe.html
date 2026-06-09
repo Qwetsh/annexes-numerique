@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Annexe A10 — Gestion de classe · Document interactif</title>
+<style>
+  :root{
+    --green:#1f7a54; --green-d:#155c3f; --green-l:#eaf5ef; --ink:#1d2b25; --muted:#5c6b63;
+    --line:#d9e6df; --bg:#f5f9f7; --card:#fff;
+    --shadow:0 2px 10px rgba(20,60,45,.06),0 8px 30px rgba(20,60,45,.05);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.55}
+  .wrap{max-width:1000px;margin:0 auto;padding:0 22px}
+  header.top{background:linear-gradient(135deg,#1f7a54,#155c3f);color:#fff;padding:34px 0 30px}
+  .badge{display:inline-block;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:4px 14px;font-size:13px;font-weight:600}
+  header.top h1{margin:14px 0 6px;font-size:30px}
+  header.top p{margin:0;opacity:.92;max-width:700px}
+  main{padding:34px 0 60px}
+  section{margin:0 0 30px}
+  h2{font-size:21px;color:var(--green-d);margin:0 0 6px;display:flex;align-items:center;gap:9px}
+  h2 .n{background:var(--green);color:#fff;border-radius:8px;font-size:13px;padding:2px 9px;font-weight:700}
+  .lead{color:var(--muted);margin:.2em 0 1.1em}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 22px;box-shadow:var(--shadow)}
+  .grid{display:grid;gap:14px}
+  .g2{grid-template-columns:repeat(2,1fr)} .g3{grid-template-columns:repeat(3,1fr)}
+  @media(max-width:740px){.g2,.g3{grid-template-columns:1fr}}
+  .feature{background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px}
+  .feature h4{margin:0 0 5px;color:var(--green-d);font-size:15.5px}
+  .feature p{margin:0;font-size:13.5px;color:var(--muted)}
+  .pill{display:inline-block;background:var(--green-l);color:var(--green-d);border-radius:999px;padding:3px 11px;font-size:12.5px;font-weight:600;margin:0 4px 6px 0}
+  /* demo plan + radial */
+  .demo{display:grid;grid-template-columns:1.1fr .9fr;gap:20px}
+  @media(max-width:740px){.demo{grid-template-columns:1fr}}
+  .plan{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+  .stu{background:#fff;border:1px solid var(--line);border-radius:11px;padding:11px 9px;text-align:center;cursor:pointer;position:relative;transition:transform .1s}
+  .stu:hover{transform:translateY(-2px);box-shadow:0 6px 14px rgba(0,0,0,.08)}
+  .stu .av{width:34px;height:34px;border-radius:50%;background:var(--green-l);color:var(--green-d);display:flex;align-items:center;justify-content:center;font-weight:700;margin:0 auto 5px}
+  .stu .nm{font-size:12.5px;font-weight:600}
+  .stu .ct{display:flex;justify-content:center;gap:8px;margin-top:5px;font-size:11px}
+  .stu .ct .p{color:#2e9e5b;font-weight:700} .stu .ct .b{color:#e0651e;font-weight:700}
+  .stu.absent{opacity:.45}
+  .stu.absent::after{content:"absent";position:absolute;top:4px;right:6px;font-size:9px;color:#d6453f;font-weight:700;text-transform:uppercase}
+  /* radial overlay */
+  .radial{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(15,30,24,.45);z-index:50}
+  .radial.on{display:flex}
+  .rmenu{position:relative;width:230px;height:230px}
+  .rcenter{position:absolute;left:50%;top:50%;width:64px;height:64px;margin:-32px;border-radius:50%;background:#fff;border:2px solid var(--green);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--green-d);text-align:center}
+  .ritem{position:absolute;width:62px;height:62px;margin:-31px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;cursor:pointer;font-size:10.5px;font-weight:700;box-shadow:0 6px 14px rgba(0,0,0,.25);animation:pop .18s ease}
+  @keyframes pop{from{transform:scale(.3);opacity:0}to{transform:scale(1);opacity:1}}
+  .ritem .ic{font-size:20px;line-height:1}
+  .toast{position:fixed;left:50%;bottom:34px;transform:translateX(-50%);background:#13251c;color:#fff;padding:11px 20px;border-radius:999px;font-weight:600;font-size:14px;opacity:0;transition:opacity .25s;z-index:60}
+  .toast.on{opacity:1}
+  .hint{font-size:13px;color:var(--muted);margin-top:10px}
+  .metrics{display:flex;gap:10px;flex-wrap:wrap}
+  .metric{flex:1;min-width:120px;background:var(--green-l);border-radius:12px;padding:12px;text-align:center}
+  .metric b{display:block;font-size:20px;color:var(--green-d)} .metric span{font-size:12px;color:var(--muted)}
+  .screens{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px}
+  .schip{border:1px solid var(--line);background:#fff;border-radius:999px;padding:6px 13px;font-size:13px;font-weight:600;color:var(--muted)}
+  footer{border-top:1px solid var(--line);padding:22px 0;color:var(--muted);font-size:13px;text-align:center}
+  .note{font-size:13px;color:var(--muted);background:#fff;border:1px dashed var(--line);border-radius:10px;padding:11px 14px}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <span class="badge">Annexe A10 · Rapport référent numérique 2025-2026</span>
+    <h1>Gestion de classe — saisie en moins de 2 secondes</h1>
+    <p>Document interactif de présentation. Application mobile-first pour enseignants : un <strong>menu radial tactile</strong> permet d'enregistrer n'importe quelle action élève (participation, bavardage, sortie…) en moins de deux secondes, pendant le cours.</p>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section>
+    <h2><span class="n">1</span> L'innovation : le menu radial — essayez-le</h2>
+    <p class="lead">Pendant la séance, l'enseignant voit le plan de classe. <strong>Cliquez sur un élève</strong> : le menu radial apparaît (un appui long de 250 ms sur mobile). Choisissez une action — les compteurs se mettent à jour, sans saisie de texte.</p>
+    <div class="card">
+      <div class="demo">
+        <div>
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+            <strong>4ᵉ B · Salle 210</strong>
+            <span style="font-size:12.5px;color:var(--muted)">Séance en cours · 10 h 24</span>
+          </div>
+          <div class="plan" id="plan"></div>
+          <p class="hint">↑ Démonstration. Sur mobile, l'action complète prend ≤ 2 s avec retour haptique à 3 niveaux.</p>
+        </div>
+        <div>
+          <h4 style="margin:0 0 8px;color:var(--green-d)">Bilan de la séance</h4>
+          <div class="metrics">
+            <div class="metric"><b id="m-part">0</b><span>participations</span></div>
+            <div class="metric"><b id="m-bav">0</b><span>bavardages</span></div>
+            <div class="metric"><b id="m-sort">0</b><span>sorties</span></div>
+          </div>
+          <div style="margin-top:14px">
+            <h4 style="margin:0 0 6px;color:var(--green-d);font-size:14px">5 actions du menu</h4>
+            <span class="pill">✋ Participation +1</span>
+            <span class="pill">💬 Bavardage</span>
+            <span class="pill">❌ Absence</span>
+            <span class="pill">📝 Remarque</span>
+            <span class="pill">🚪 Sortie ▸</span>
+            <p style="font-size:12.5px;color:var(--muted);margin:8px 0 0">Sous-menu Sortie : infirmerie, toilettes, convocation, exclusion.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="n">2</span> Le déroulé d'une séance</h2>
+    <div class="screens">
+      <span class="schip">1 · Choisir la classe</span>
+      <span class="schip">2 · Choisir la salle</span>
+      <span class="schip">3 · Plan de classe</span>
+      <span class="schip">4 · Menu radial</span>
+      <span class="schip">5 · Historique</span>
+    </div>
+    <div class="grid g3">
+      <div class="feature"><h4>Plan de classe</h4><p>Grille de places (colonnes × rangées), élèves positionnés en drag & drop, places non disponibles marquées (allées, bureau prof).</p></div>
+      <div class="feature"><h4>Séance chronométrée</h4><p>Démarrage / fin horodatés, compteurs participations et bavardages visibles sur chaque carte élève.</p></div>
+      <div class="feature"><h4>Retour haptique</h4><p>3 niveaux (light / medium / success). La vibration est la confirmation principale — pas de pop-up.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="n">3</span> Les fonctionnalités</h2>
+    <div class="grid g2">
+      <div class="feature"><h4>Gestion des classes</h4><p>Création / modification, import des élèves par fichier Excel/CSV (nom, prénom, genre, classe), ajout en cours d'année.</p></div>
+      <div class="feature"><h4>Salles & plans</h4><p>Plusieurs salles, grilles personnalisables, repositionnement libre des élèves.</p></div>
+      <div class="feature"><h4>Historique & statistiques</h4><p>Séances passées (date, salle, durée), historique par élève, événements horodatés, filtres par classe.</p></div>
+      <div class="feature"><h4>Mode hors-ligne</h4><p>Fonctionne sans connexion (SQLite local), synchronisation automatique en fin de séance, résolution de conflits.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="n">4</span> Respect du RGPD</h2>
+    <div class="card">
+      <p style="margin:0 0 8px"><strong>Pseudonymisation native :</strong> seul « prénom + 2 lettres du nom » est synchronisé. La table de correspondance complète reste <strong>uniquement sur l'appareil</strong>, jamais sur le serveur.</p>
+      <span class="pill">Isolation des données par compte (RLS)</span>
+      <span class="pill">Suppression définitive (droit à l'oubli)</span>
+      <span class="pill">Minimisation de la saisie</span>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="n">5</span> Technique & objectifs</h2>
+    <div class="grid g2">
+      <div class="card">
+        <h4 style="margin:0 0 8px;color:var(--green-d)">Stack</h4>
+        <span class="pill">Expo SDK 52 · React Native</span>
+        <span class="pill">Reanimated · Gesture Handler</span>
+        <span class="pill">expo-haptics · SQLite</span>
+        <span class="pill">Supabase (Auth, PostgreSQL)</span>
+        <span class="pill">Dashboard web React + Vite</span>
+        <p style="font-size:13px;color:var(--muted);margin-top:10px">Déployée en version 1.0 auprès de quelques testeurs et testeuses.</p>
+      </div>
+      <div class="card">
+        <h4 style="margin:0 0 8px;color:var(--green-d)">Critères de succès (MVP)</h4>
+        <table style="width:100%;border-collapse:collapse;font-size:14px">
+          <tr><td style="padding:6px 0;border-bottom:1px solid var(--line)">Action complète</td><td style="text-align:right;font-weight:700;color:var(--green-d)">≤ 2 s</td></tr>
+          <tr><td style="padding:6px 0;border-bottom:1px solid var(--line)">Latence menu radial</td><td style="text-align:right;font-weight:700;color:var(--green-d)">&lt; 100 ms</td></tr>
+          <tr><td style="padding:6px 0;border-bottom:1px solid var(--line)">Fluidité</td><td style="text-align:right;font-weight:700;color:var(--green-d)">60 FPS</td></tr>
+          <tr><td style="padding:6px 0">Mise en route</td><td style="text-align:right;font-weight:700;color:var(--green-d)">&lt; 30 min</td></tr>
+        </table>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="wrap">
+  Annexe A10 · Gestion de classe — version d'essai en ligne<br>
+  Compte rendu d'activité du référent numérique 2025-2026 · Collège Pierre Mendès France, Woippy · M. Thomas Charles
+</footer>
+
+<!-- overlay radial -->
+<div class="radial" id="radial" onclick="closeRadial(event)">
+  <div class="rmenu" id="rmenu"></div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+  var students=[
+    {n:'Léa M.',i:'LM'},{n:'Hugo D.',i:'HD'},{n:'Inès B.',i:'IB'},
+    {n:'Tom R.',i:'TR'},{n:'Sarah K.',i:'SK'},{n:'Noé P.',i:'NP'},
+    {n:'Emma L.',i:'EL'},{n:'Lucas V.',i:'LV'},{n:'Jade F.',i:'JF'}
+  ];
+  var counts={}, totals={part:0,bav:0,sort:0};
+  var actions=[
+    {k:'part',ic:'✋',l:'Participation',c:'#2e9e5b'},
+    {k:'bav', ic:'💬',l:'Bavardage',  c:'#e0651e'},
+    {k:'abs', ic:'❌',l:'Absence',    c:'#d6453f'},
+    {k:'rem', ic:'📝',l:'Remarque',   c:'#2f6fd6'},
+    {k:'sort',ic:'🚪',l:'Sortie',     c:'#8a4fd6'}
+  ];
+  var current=null;
+  function buildPlan(){
+    var p=document.getElementById('plan'); p.innerHTML='';
+    students.forEach(function(s,idx){
+      counts[idx]=counts[idx]||{part:0,bav:0,absent:false};
+      var d=document.createElement('div'); d.className='stu'+(counts[idx].absent?' absent':'');
+      d.innerHTML='<div class="av">'+s.i+'</div><div class="nm">'+s.n+'</div>'+
+        '<div class="ct"><span class="p">✋'+counts[idx].part+'</span><span class="b">💬'+counts[idx].bav+'</span></div>';
+      d.onclick=function(e){openRadial(idx,e)};
+      p.appendChild(d);
+    });
+  }
+  function openRadial(idx,e){
+    current=idx;
+    var m=document.getElementById('rmenu'); m.innerHTML='';
+    var center=document.createElement('div'); center.className='rcenter'; center.textContent=students[idx].n;
+    m.appendChild(center);
+    var R=82;
+    actions.forEach(function(a,i){
+      var ang=(-90 + i*(360/actions.length))*Math.PI/180;
+      var x=115+R*Math.cos(ang), y=115+R*Math.sin(ang);
+      var it=document.createElement('div'); it.className='ritem'; it.style.background=a.c;
+      it.style.left=x+'px'; it.style.top=y+'px'; it.style.animationDelay=(i*0.03)+'s';
+      it.innerHTML='<span class="ic">'+a.ic+'</span>'+a.l;
+      it.onclick=function(ev){ev.stopPropagation();doAction(idx,a)};
+      m.appendChild(it);
+    });
+    document.getElementById('radial').classList.add('on');
+  }
+  function doAction(idx,a){
+    var msg='';
+    if(a.k==='part'){counts[idx].part++;totals.part++;msg='Participation enregistrée pour '+students[idx].n;}
+    else if(a.k==='bav'){counts[idx].bav++;totals.bav++;msg='Bavardage noté pour '+students[idx].n;}
+    else if(a.k==='abs'){counts[idx].absent=!counts[idx].absent;msg=students[idx].n+(counts[idx].absent?' marqué absent':' de retour');}
+    else if(a.k==='rem'){msg='Remarque libre — '+students[idx].n;}
+    else if(a.k==='sort'){totals.sort++;msg='Sortie (infirmerie / toilettes / convocation / exclusion) — '+students[idx].n;}
+    document.getElementById('m-part').textContent=totals.part;
+    document.getElementById('m-bav').textContent=totals.bav;
+    document.getElementById('m-sort').textContent=totals.sort;
+    document.getElementById('radial').classList.remove('on');
+    buildPlan();
+    showToast(msg);
+  }
+  function closeRadial(e){if(e.target.id==='radial')document.getElementById('radial').classList.remove('on');}
+  var tt;
+  function showToast(m){var t=document.getElementById('toast');t.textContent=m;t.classList.add('on');clearTimeout(tt);tt=setTimeout(function(){t.classList.remove('on')},1900);}
+  buildPlan();
+</script>
+</body>
+</html>

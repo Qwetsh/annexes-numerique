@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Annexe A11 — Logiciel d'affectation · Document interactif</title>
+<style>
+  :root{
+    --green:#1f7a54; --green-d:#155c3f; --green-l:#eaf5ef; --ink:#1d2b25; --muted:#5c6b63;
+    --line:#d9e6df; --bg:#f5f9f7; --card:#fff;
+    --shadow:0 2px 10px rgba(20,60,45,.06),0 8px 30px rgba(20,60,45,.05);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.55}
+  .wrap{max-width:1000px;margin:0 auto;padding:0 22px}
+  header.top{background:linear-gradient(135deg,#1f7a54,#155c3f);color:#fff;padding:34px 0 30px}
+  .badge{display:inline-block;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:4px 14px;font-size:13px;font-weight:600}
+  header.top h1{margin:14px 0 6px;font-size:30px}
+  header.top p{margin:0;opacity:.92;max-width:720px}
+  main{padding:34px 0 60px}
+  section{margin:0 0 30px}
+  h2{font-size:21px;color:var(--green-d);margin:0 0 6px;display:flex;align-items:center;gap:9px}
+  h2 .n{background:var(--green);color:#fff;border-radius:8px;font-size:13px;padding:2px 9px;font-weight:700}
+  .lead{color:var(--muted);margin:.2em 0 1.1em}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 22px;box-shadow:var(--shadow)}
+  .grid{display:grid;gap:14px}
+  .g2{grid-template-columns:repeat(2,1fr)} .g3{grid-template-columns:repeat(3,1fr)}
+  @media(max-width:740px){.g2,.g3{grid-template-columns:1fr}}
+  .feature{background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px}
+  .feature h4{margin:0 0 5px;color:var(--green-d);font-size:15.5px}
+  .feature p{margin:0;font-size:13.5px;color:var(--muted)}
+  .pill{display:inline-block;background:var(--green-l);color:var(--green-d);border-radius:999px;padding:3px 11px;font-size:12.5px;font-weight:600;margin:0 4px 6px 0}
+  .modes{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:16px}
+  @media(max-width:740px){.modes{grid-template-columns:1fr}}
+  .mode{border:2px solid var(--line);background:#fff;border-radius:14px;padding:16px;cursor:pointer;transition:.12s}
+  .mode:hover{border-color:#a9d6c0}
+  .mode.on{border-color:var(--green);background:var(--green-l)}
+  .mode .ic{font-size:24px}
+  .mode h4{margin:6px 0 3px;color:var(--green-d)}
+  .mode p{margin:0;font-size:12.5px;color:var(--muted)}
+  .panel{display:none} .panel.on{display:block}
+  table{width:100%;border-collapse:collapse;font-size:14px}
+  th,td{text-align:left;padding:9px 11px;border-bottom:1px solid var(--line)}
+  th{background:var(--green);color:#fff;font-weight:600}
+  tr:nth-child(even) td{background:#fafdfb}
+  .steps{display:flex;gap:8px;flex-wrap:wrap}
+  .schip{border:1px solid var(--line);background:#fff;border-radius:999px;padding:6px 13px;font-size:13px;font-weight:600;color:var(--muted)}
+  footer{border-top:1px solid var(--line);padding:22px 0;color:var(--muted);font-size:13px;text-align:center}
+  .note{font-size:13px;color:var(--muted);background:#fff;border:1px dashed var(--line);border-radius:10px;padding:11px 14px}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <span class="badge">Annexe A11 · Rapport référent numérique 2025-2026</span>
+    <h1>Logiciel d'affectation (« Groupit »)</h1>
+    <p>Document interactif de présentation. Outil qui automatise les affectations complexes du collège : organisation de l'<strong>oral du DNB</strong>, du <strong>suivi des stages de 3ᵉ</strong>, et création de groupes personnalisés — à partir d'un moteur d'affectation paramétrable par critères pondérés.</p>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section>
+    <h2><span class="n">1</span> Trois modes d'affectation — choisissez-en un</h2>
+    <p class="lead">Le même moteur s'adapte au besoin. <strong>Cliquez sur un mode</strong> pour découvrir ses paramètres et ses options spécifiques.</p>
+    <div class="modes">
+      <div class="mode on" onclick="setMode(this,'m-dnb')">
+        <div class="ic">🎓</div><h4>Oral du DNB</h4><p>Répartir les élèves entre jurys et créneaux.</p>
+      </div>
+      <div class="mode" onclick="setMode(this,'m-stage')">
+        <div class="ic">🏢</div><h4>Suivi de stage 3ᵉ</h4><p>Affecter chaque enseignant aux lieux de stage.</p>
+      </div>
+      <div class="mode" onclick="setMode(this,'m-libre')">
+        <div class="ic">🧩</div><h4>Personnalisé</h4><p>Groupes libres en glisser-déposer.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="panel on" id="m-dnb">
+        <h3 style="margin:0 0 8px;color:var(--green-d)">Mode Oral du DNB</h3>
+        <p style="font-size:14px">Répartit les élèves entre des jurys d'enseignants et des créneaux (demi-journées), en respectant les contraintes et en optimisant la correspondance des matières.</p>
+        <div class="grid g2" style="margin-top:8px">
+          <div>
+            <h4 style="margin:0 0 6px;color:var(--green-d);font-size:14px">Paramètres clés</h4>
+            <span class="pill">Matières autorisées</span>
+            <span class="pill">Jurys vs enseignants individuels</span>
+            <span class="pill">Poids « matière correspondante » (0-100)</span>
+            <span class="pill">Capacité par jury</span>
+            <span class="pill">Créneaux (jeudi matin / après-midi…)</span>
+            <span class="pill">Durée +tiers temps</span>
+            <span class="pill">Remplissage : au plus tôt / équilibré</span>
+          </div>
+          <div>
+            <h4 style="margin:0 0 6px;color:var(--green-d);font-size:14px">Données élève prises en compte</h4>
+            <span class="pill">Parcours / thème (EPI, Avenir…)</span>
+            <span class="pill">Sujet & matières associées</span>
+            <span class="pill">Langue choisie</span>
+            <span class="pill">Tiers temps</span>
+            <span class="pill">Groupe d'oral (2-3 élèves liés)</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel" id="m-stage">
+        <h3 style="margin:0 0 8px;color:var(--green-d)">Mode Suivi de stage (3ᵉ)</h3>
+        <p style="font-size:14px">Affecte les enseignants visiteurs aux élèves en stage en fonction de la <strong>distance géographique</strong> (géocodage + calcul Haversine), de la capacité et de la priorité au professeur principal.</p>
+        <div class="grid g2" style="margin-top:8px">
+          <div>
+            <h4 style="margin:0 0 6px;color:var(--green-d);font-size:14px">Paramètres clés</h4>
+            <span class="pill">Distance maximale (km)</span>
+            <span class="pill">Durée maximale</span>
+            <span class="pill">Prioriser le professeur principal</span>
+            <span class="pill">Capacité par enseignant</span>
+            <span class="pill">Capacité calculée (heures × classes)</span>
+          </div>
+          <div>
+            <h4 style="margin:0 0 6px;color:var(--green-d);font-size:14px">Données stage</h4>
+            <span class="pill">Entreprise & tuteur</span>
+            <span class="pill">Adresse géocodée</span>
+            <span class="pill">Secteur d'activité</span>
+            <span class="pill">Carte interactive (Leaflet)</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel" id="m-libre">
+        <h3 style="margin:0 0 8px;color:var(--green-d)">Mode Personnalisé (libre)</h3>
+        <p style="font-size:14px">Pour tout autre besoin de groupes : interface en <strong>glisser-déposer</strong>, affectation manuelle, contraintes par groupe, sans algorithme imposé.</p>
+        <span class="pill">Groupes libres</span>
+        <span class="pill">Liaison / déliaison élève-enseignant</span>
+        <span class="pill">Contraintes personnalisées</span>
+        <span class="pill">Import / export des groupes</span>
+        <span class="pill">Champs personnalisés (texte, nombre, liste…)</span>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="n">2</span> Le moteur : des critères pondérés</h2>
+    <p class="lead">Chaque affectation reçoit un <strong>score</strong>. Les critères sont activables, pondérés, et peuvent être déclarés « contrainte dure » (bloquante) ou simplement préférés. L'outil explique chaque choix : raison principale, critères utilisés, résumé des scores.</p>
+    <div class="card">
+      <table>
+        <tr><th>Critère</th><th>Rôle</th><th>Réglage</th></tr>
+        <tr><td>Matière correspondante</td><td>Aligner sujet de l'élève et discipline du jury</td><td>Poids 0-100</td></tr>
+        <tr><td>Équilibrage</td><td>Égaliser la taille des groupes / charge enseignant</td><td>Activable</td></tr>
+        <tr><td>Parité</td><td>Mixité de genre dans les groupes</td><td>Activable</td></tr>
+        <tr><td>Distance (stage)</td><td>Minimiser les déplacements enseignant-tuteur</td><td>Distance max</td></tr>
+        <tr><td>Capacité</td><td>Respecter le nombre de places par jury / tuteur</td><td>Contrainte dure</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="n">3</span> Le parcours guidé</h2>
+    <div class="steps" style="margin-bottom:12px">
+      <span class="schip">1 · Importer élèves & enseignants</span>
+      <span class="schip">2 · Choisir le scénario</span>
+      <span class="schip">3 · Régler les critères</span>
+      <span class="schip">4 · Lancer la résolution</span>
+      <span class="schip">5 · Ajuster & valider</span>
+      <span class="schip">6 · Exporter</span>
+    </div>
+    <div class="grid g3">
+      <div class="feature"><h4>Gestion des élèves</h4><p>Import CSV/Excel avec mapping de colonnes, options (latin, allemand…), contraintes « avec / sans », tags.</p></div>
+      <div class="feature"><h4>Gestion des enseignants</h4><p>Disciplines, heures par niveau (capacité), classes en charge, géolocalisation, historique d'affectations.</p></div>
+      <div class="feature"><h4>Jurys</h4><p>Constitution de jurys (titulaires + suppléants), capacité, statistiques de remplissage et matières couvertes.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="n">4</span> Résultats & export</h2>
+    <div class="grid g2">
+      <div class="feature"><h4>Affectations expliquées</h4><p>Chaque affectation affiche son score, la raison principale et les critères utilisés. Aucune « boîte noire ».</p></div>
+      <div class="feature"><h4>Export & archives</h4><p>Export PDF mis en forme, export CSV des données brutes, archivage des scénarios avec bilan (réussies / échouées).</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="n">5</span> Technique</h2>
+    <div class="card">
+      <span class="pill">React 19 · TypeScript · Vite</span>
+      <span class="pill">Zustand (état)</span>
+      <span class="pill">dnd-kit (glisser-déposer)</span>
+      <span class="pill">@react-pdf/renderer</span>
+      <span class="pill">ExcelJS · Papa Parse</span>
+      <span class="pill">Leaflet (cartes)</span>
+      <span class="pill">Dexie / IndexedDB (local)</span>
+      <p class="note" style="margin-top:12px">Testé et validé pour l'organisation des stages de 3ᵉ ; fonctionnel pour l'organisation de l'oral du DNB.</p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="wrap">
+  Annexe A11 · Logiciel d'affectation (stages 3ᵉ / oral du DNB)<br>
+  Compte rendu d'activité du référent numérique 2025-2026 · Collège Pierre Mendès France, Woippy · M. Thomas Charles
+</footer>
+
+<script>
+  function setMode(el,id){
+    document.querySelectorAll('.mode').forEach(function(m){m.classList.remove('on')});
+    el.classList.add('on');
+    document.querySelectorAll('.panel').forEach(function(p){p.classList.remove('on')});
+    document.getElementById(id).classList.add('on');
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,316 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Annexe A6 — LookUp · Document interactif</title>
+<style>
+  :root{
+    --green:#1f7a54; --green-d:#155c3f; --green-l:#eaf5ef; --ink:#1d2b25; --muted:#5c6b63;
+    --line:#d9e6df; --bg:#f5f9f7; --card:#ffffff;
+    --vert:#2e9e5b; --jaune:#cdb022; --orange:#e08a1e; --rougeo:#e0651e; --rouge:#d6453f; --gris:#9098a0;
+    --shadow:0 2px 10px rgba(20,60,45,.06), 0 8px 30px rgba(20,60,45,.05);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Segoe UI",system-ui,-apple-system,Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.55}
+  a{color:var(--green-d)}
+  .wrap{max-width:1000px;margin:0 auto;padding:0 22px}
+  header.top{background:linear-gradient(135deg,#1f7a54,#155c3f);color:#fff;padding:34px 0 30px}
+  .badge{display:inline-block;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.35);
+    border-radius:999px;padding:4px 14px;font-size:13px;font-weight:600;letter-spacing:.3px}
+  header.top h1{margin:14px 0 6px;font-size:30px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+  header.top p{margin:0;opacity:.92;max-width:680px}
+  .logo-eyes{display:inline-flex;gap:3px;vertical-align:middle}
+  .eye{width:26px;height:30px;background:#fff;border-radius:50% 50% 48% 48%/55% 55% 45% 45%;position:relative;border:2px solid #0d3b29}
+  .eye::after{content:"";position:absolute;width:11px;height:11px;background:#13251c;border-radius:50%;top:9px;left:7px;animation:look 4s infinite}
+  @keyframes look{0%,20%{transform:translate(0,0)}30%,45%{transform:translate(7px,-2px)}55%,70%{transform:translate(-6px,2px)}80%,100%{transform:translate(0,0)}}
+  main{padding:34px 0 60px}
+  section{margin:0 0 30px}
+  h2{font-size:21px;color:var(--green-d);margin:0 0 6px;display:flex;align-items:center;gap:9px}
+  h2 .n{background:var(--green);color:#fff;border-radius:8px;font-size:13px;padding:2px 9px;font-weight:700}
+  .lead{color:var(--muted);margin:.2em 0 1.1em}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 22px;box-shadow:var(--shadow)}
+  .grid{display:grid;gap:14px}
+  .g2{grid-template-columns:repeat(2,1fr)} .g3{grid-template-columns:repeat(3,1fr)}
+  @media(max-width:740px){.g2,.g3{grid-template-columns:1fr}}
+  .pill{display:inline-block;background:var(--green-l);color:var(--green-d);border-radius:999px;padding:3px 11px;font-size:12.5px;font-weight:600;margin:0 4px 6px 0}
+  table{width:100%;border-collapse:collapse;font-size:14px}
+  th,td{text-align:left;padding:9px 11px;border-bottom:1px solid var(--line)}
+  th{background:var(--green);color:#fff;font-weight:600}
+  tr:nth-child(even) td{background:#fafdfb}
+  /* simulateur */
+  .sim{display:grid;grid-template-columns:1.3fr 1fr;gap:22px}
+  @media(max-width:740px){.sim{grid-template-columns:1fr}}
+  .axe{margin:0 0 15px}
+  .axe label{display:flex;justify-content:space-between;font-weight:600;font-size:14px;margin-bottom:3px}
+  .axe .w{color:var(--muted);font-weight:500;font-size:12.5px}
+  .axe input[type=range]{width:100%;accent-color:var(--green)}
+  .axe .q{font-size:12.5px;color:var(--muted);margin-top:1px}
+  .gauge{text-align:center;background:var(--green-l);border-radius:14px;padding:22px 18px;position:sticky;top:14px}
+  .cham{width:96px;height:96px;margin:0 auto 8px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+    transition:background .4s;box-shadow:inset 0 -6px 14px rgba(0,0,0,.12)}
+  .cham .eyes{display:flex;gap:5px}
+  .cham .e{width:24px;height:28px;background:#fff;border-radius:50%;border:2px solid #0d3b29;position:relative}
+  .cham .e::after{content:"";position:absolute;width:10px;height:10px;background:#13251c;border-radius:50%;top:9px;left:6px}
+  .score-big{font-size:42px;font-weight:800;line-height:1}
+  .score-big small{font-size:18px;color:var(--muted);font-weight:600}
+  .verdict{font-style:italic;color:var(--ink);margin-top:8px;min-height:42px;font-size:14.5px}
+  .label-state{display:inline-block;border-radius:999px;padding:3px 12px;color:#fff;font-weight:700;font-size:13px;margin-top:6px}
+  /* tabs */
+  .tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+  .tab{border:1px solid var(--line);background:#fff;border-radius:999px;padding:7px 16px;cursor:pointer;font-weight:600;font-size:14px;color:var(--muted)}
+  .tab.on{background:var(--green);color:#fff;border-color:var(--green)}
+  .panel{display:none} .panel.on{display:block}
+  .bubble{background:#fff;border:1px solid var(--line);border-left:4px solid var(--green);border-radius:10px;padding:12px 14px;font-style:italic;color:#33473e;margin:10px 0}
+  /* accordion */
+  details{background:#fff;border:1px solid var(--line);border-radius:11px;margin:0 0 9px;overflow:hidden}
+  summary{cursor:pointer;padding:13px 16px;font-weight:600;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:10px}
+  summary::-webkit-details-marker{display:none}
+  summary::after{content:"+";color:var(--green);font-size:20px;font-weight:700}
+  details[open] summary::after{content:"–"}
+  details .body{padding:0 16px 15px;color:#3a4a42;font-size:14px}
+  .badgecard{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px}
+  .badgecard h4{margin:0 0 4px;font-size:15px;color:var(--green-d)}
+  .badgecard p{margin:0;font-size:13px;color:var(--muted)}
+  .kpi{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px;text-align:center}
+  .kpi b{display:block;font-size:24px;color:var(--green-d)}
+  .kpi span{font-size:12.5px;color:var(--muted)}
+  .note{font-size:13px;color:var(--muted);background:#fff;border:1px dashed var(--line);border-radius:10px;padding:11px 14px}
+  footer{border-top:1px solid var(--line);padding:22px 0;color:var(--muted);font-size:13px;text-align:center}
+  .tag{display:inline-block;background:#fff3e0;color:#a05a00;border:1px solid #f0d8b0;border-radius:999px;padding:2px 11px;font-size:12px;font-weight:600}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <span class="badge">Annexe A6 · Rapport référent numérique 2025-2026</span>
+    <h1><span class="logo-eyes"><span class="eye"></span><span class="eye"></span></span> LookUp — éducation au fact-checking</h1>
+    <p>Document interactif de présentation. Application mobile éducative qui aide les collégiens à exercer leur esprit critique face au contenu des réseaux sociaux. <strong>Projet en phase de conception.</strong></p>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section>
+    <span class="tag">Statut : conception · MVP à venir</span>
+    <div class="card" style="margin-top:12px">
+      <h2><span class="n">1</span> Vision produit</h2>
+      <p class="lead">Né directement des constats de l'enquête menée auprès de 254 élèves : consommation massive de TikTok, Instagram et YouTube sans recul critique.</p>
+      <div class="grid g2">
+        <div>
+          <p><strong>Le principe central :</strong> l'outil <em>ne donne pas la réponse</em>, il <strong>amorce la vérification</strong>. L'élève colle un lien, l'application analyse des signaux objectifs, donne un score préliminaire, puis propose des missions de vérification que l'élève complète lui-même.</p>
+          <p>LookUp évalue la <strong>fiabilité de la source</strong>, jamais la véracité du contenu : « cette source présente des signaux de fiabilité forts/faibles », jamais « cette info est vraie/fausse ».</p>
+        </div>
+        <div>
+          <p><strong>Double couche éducative</strong> — l'app enseigne deux choses à la fois :</p>
+          <span class="pill">Esprit critique sur le contenu</span>
+          <span class="pill">Compréhension des mécaniques de design numérique</span>
+          <p style="margin-top:10px"><strong>Contraintes :</strong></p>
+          <span class="pill">Cible : 6e → 3e (300+ élèves)</span>
+          <span class="pill">Budget : 0 €</span>
+          <span class="pill">Design éthique anti-addiction</span>
+          <span class="pill">Rythme hebdomadaire, pas de streak</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="n">2</span> Simulateur de score — testez l'algorithme</h2>
+    <p class="lead">Chaque analyse évalue le contenu sur 5 axes (0 à 20). Le score final est une moyenne pondérée qui détermine la couleur du caméléon. <strong>Déplacez les curseurs</strong> pour voir réagir le caméléon, comme le ferait un élève.</p>
+    <div class="card">
+      <div class="sim">
+        <div>
+          <div class="axe">
+            <label>Corroboration <span class="w">poids 30 % · d'autres sources confirment ?</span></label>
+            <input type="range" min="0" max="20" value="0" id="ax-cor" oninput="calc()">
+            <div class="q" id="q-cor">« Pas cherché » = 0 sur l'axe le plus lourd → le score plafonne ~14/20.</div>
+          </div>
+          <div class="axe">
+            <label>Preuves <span class="w">poids 25 % · des sources / études citées ?</span></label>
+            <input type="range" min="0" max="20" value="10" id="ax-pre" oninput="calc()">
+          </div>
+          <div class="axe">
+            <label>Source <span class="w">poids 20 % · qui parle ? quelle expertise ?</span></label>
+            <input type="range" min="0" max="20" value="10" id="ax-src" oninput="calc()">
+          </div>
+          <div class="axe">
+            <label>Ton <span class="w">poids 15 % · factuel ↔ alarmiste</span></label>
+            <input type="range" min="0" max="20" value="10" id="ax-ton" oninput="calc()">
+          </div>
+          <div class="axe">
+            <label>Intention <span class="w">poids 10 % · informer ou provoquer ?</span></label>
+            <input type="range" min="0" max="20" value="10" id="ax-int" oninput="calc()">
+          </div>
+        </div>
+        <div class="gauge">
+          <div class="cham" id="cham" style="background:#9098a0">
+            <div class="eyes"><span class="e"></span><span class="e"></span></div>
+          </div>
+          <div class="score-big"><span id="score">7.0</span><small>/20</small></div>
+          <span class="label-state" id="state" style="background:#9098a0">—</span>
+          <div class="verdict" id="verdict">…</div>
+        </div>
+      </div>
+      <div class="note" style="margin-top:14px">Formule : <code>score = source×0,20 + preuves×0,25 + ton×0,15 + corroboration×0,30 + intention×0,10</code>. Sur le parcours YouTube, l'API ajuste automatiquement certains axes ; l'élève peut corriger de ±3 points par axe.</div>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="n">3</span> Les trois parcours par plateforme</h2>
+    <p class="lead">Le format est conversationnel — un caméléon sceptique et impertinent dialogue avec l'élève, jamais un formulaire. La richesse des données disponibles varie selon la plateforme.</p>
+    <div class="tabs">
+      <div class="tab on" onclick="setTab(this,'p-yt')">▶ YouTube — l'enquête</div>
+      <div class="tab" onclick="setTab(this,'p-tt')">♪ TikTok — les indices</div>
+      <div class="tab" onclick="setTab(this,'p-ig')">◎ Instagram — à l'aveugle</div>
+    </div>
+    <div class="card">
+      <div class="panel on" id="p-yt">
+        <p><strong>Le caméléon mène l'enquête.</strong> L'API YouTube fournit gratuitement : titre, chaîne, abonnés, date de création, nombre de vidéos, catégorie, liens. Le caméléon arrive avec des faits et les commente ; l'élève confirme, nuance ou ajuste. Parcours le plus automatisé.</p>
+        <div class="bubble">« La chaîne s'appelle 'ScienceVite', créée il y a… 3 mois. Avec 847 abonnés. Et 42 vidéos en 3 mois. Ça fait une vidéo tous les deux jours. T'en penses quoi ? »</div>
+      </div>
+      <div class="panel" id="p-tt">
+        <p><strong>Le caméléon a des indices.</strong> L'oEmbed TikTok renvoie le titre (avec hashtags) et le nom du compte, mais aucune statistique. Parcours hybride : données + 2-3 allers-retours rapides vers TikTok via des sélecteurs.</p>
+        <div class="bubble">« C'est une vidéo de @ScienceFolle. Le titre dit : 'Les ondes tuent vos cellules ☠️ #science #vérité #flippant'. Déjà… ces hashtags. #vérité et #flippant dans la même vidéo, ça t'inspire quoi ? »</div>
+      </div>
+      <div class="panel" id="p-ig">
+        <p><strong>Le caméléon est aveugle.</strong> Depuis novembre 2025, l'API Instagram ne renvoie plus rien d'exploitable. Le parcours est 100 % guidé : le caméléon pose toutes les questions. C'est le parcours <em>le plus éducatif</em>, car l'élève est pleinement acteur.</p>
+        <div class="bubble">« Instagram me laisse rien voir, c'est verrouillé comme un coffre-fort. On va devoir bosser ensemble. Puisque je suis aveugle sur ce coup, c'est toi mes yeux. 👀 »</div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="n">4</span> Gamification éthique</h2>
+    <p class="lead">Conçue en opposition aux mécaniques addictives : rythme hebdomadaire, quota de 5 analyses/semaine, pas de notifications agressives. L'objectif est l'engagement réfléchi, pas le temps passé.</p>
+    <div class="grid g2">
+      <div class="card">
+        <h4 style="margin:0 0 8px;color:var(--green-d)">Bulles d'XP (monnaie de progression)</h4>
+        <table>
+          <tr><th>Bulle</th><th>Type d'XP</th></tr>
+          <tr><td>🟢 Verte</td><td>Analyse de base (+5 par axe)</td></tr>
+          <tr><td>🔵 Bleue</td><td>Vérification (corroboration +15, review +10)</td></tr>
+          <tr><td>🟡 Dorée</td><td>Bonus (consensus, badge, 1ʳᵉ analyse d'un compte)</td></tr>
+          <tr><td>⭐ Étoile</td><td>Rare (divergence argumentée, badge « j'avais tort »)</td></tr>
+        </table>
+      </div>
+      <div class="card">
+        <h4 style="margin:0 0 8px;color:var(--green-d)">Grades — chacun débloque une fonction</h4>
+        <table>
+          <tr><th>Grade</th><th>XP</th><th>Débloque</th></tr>
+          <tr><td>Stagiaire</td><td>0</td><td>Analyse de base</td></tr>
+          <tr><td>Correspondant</td><td>200</td><td>Commenter les autres</td></tr>
+          <tr><td>Reporter</td><td>500</td><td>Lancer des défis</td></tr>
+          <tr><td>Enquêteur</td><td>1 200</td><td>Missions avancées</td></tr>
+          <tr><td>Rédacteur en chef</td><td>3 000</td><td>Quota 7/semaine</td></tr>
+        </table>
+      </div>
+    </div>
+    <h4 style="color:var(--green-d);margin:18px 0 10px">7 familles de badges</h4>
+    <div class="grid g3">
+      <div class="badgecard"><h4>1 · Premiers pas</h4><p>Première analyse, premier consensus, premier review.</p></div>
+      <div class="badgecard"><h4>2 · Régularité</h4><p>Streaks hebdomadaires + « Retour du vérificateur » (anti-punition).</p></div>
+      <div class="badgecard"><h4>3 · Détective</h4><p>Repérer un compte récent suspect, remonter à la source.</p></div>
+      <div class="badgecard"><h4>4 · Communauté</h4><p>Analyse validée par 3 personnes, 10 reviews, « Médiateur ».</p></div>
+      <div class="badgecard"><h4>5 · Explorateur</h4><p>Un badge par plateforme, sortir de sa bulle informationnelle.</p></div>
+      <div class="badgecard"><h4>6 · Esprit critique</h4><p>Retourneur de veste, Avocat du diable, Nuanceur, « J'avais tort ».</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="n">5</span> Peer review & consensus</h2>
+    <p class="lead">Plusieurs élèves analysent le même lien <strong>en aveugle</strong> (sans voir les autres). C'est la méthode scientifique — la reproductibilité — appliquée au fact-checking. La convergence renforce la confiance, la divergence ouvre un débat.</p>
+    <div class="grid g3" style="margin-bottom:14px">
+      <div class="kpi"><b>3</b><span>analyses min. pour un consensus valide</span></div>
+      <div class="kpi"><b>5+</b><span>consensus solide — badge « vérifié par la communauté »</span></div>
+      <div class="kpi"><b>×3</b><span>poids du prof dans l'« info du jour » (sans dominer)</span></div>
+    </div>
+    <div class="grid g3">
+      <div class="badgecard"><h4>L'info du jour</h4><p>Le prof poste un lien que toute la classe analyse — un rituel collectif.</p></div>
+      <div class="badgecard"><h4>« Vérifier les copains »</h4><p>Bibliothèque de liens à reviewer, priorité aux moins vérifiés.</p></div>
+      <div class="badgecard"><h4>La slot machine</h4><p>Tirage « au hasard » ludique, qui pioche en réalité les liens en attente.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="n">6</span> Section « Coulisses » — la méta-couche éducative</h2>
+    <p class="lead">Des cartes qui expliquent honnêtement chaque choix de conception de l'application : LookUp enseigne aussi l'esprit critique… sur LookUp lui-même. Chaque carte est un support de cours.</p>
+    <details><summary>Pourquoi 5 analyses/semaine et pas illimité ?</summary><div class="body">La limite force à choisir ce qui vaut le coup d'être vérifié. L'illimité mène au clic sans réflexion — exactement ce qu'on combat. <em>Question : les réseaux sociaux sont gratuits et illimités. À ton avis, pourquoi ?</em></div></details>
+    <details><summary>Pourquoi l'analyse en aveugle ?</summary><div class="body">Si tu vois que 10 personnes ont dit « pas fiable », tu diras pareil sans réfléchir. C'est le biais de conformité. <em>Question : si tous tes potes pensent un truc, ça veut dire que c'est vrai ?</em></div></details>
+    <details><summary>Pourquoi pas d'IA ?</summary><div class="body">Si une machine réfléchit à ta place, tu n'apprends rien. Et ça consomme énergie et eau. <em>Question : si une IA te dit qu'une info est vraie, tu la crois ? Pourquoi ?</em></div></details>
+    <details><summary>Pourquoi jamais « vrai » ou « faux » ?</summary><div class="body">La réalité c'est rarement tout vrai ou tout faux. Méfie-toi de quiconque dit avoir LA vérité. <em>Question : est-ce que LookUp lui-même pourrait se tromper ?</em></div></details>
+    <details><summary>Pourquoi un caméléon ?</summary><div class="body">Les fake news changent de couleur pour se fondre dans ton fil. Le caméléon de LookUp révèle les vraies couleurs.</div></details>
+  </section>
+
+  <section>
+    <h2><span class="n">7</span> Architecture & déploiement</h2>
+    <div class="grid g2">
+      <div class="card">
+        <h4 style="margin:0 0 8px;color:var(--green-d)">Stack technique (0 €)</h4>
+        <table>
+          <tr><th>Composant</th><th>Choix</th></tr>
+          <tr><td>Frontend</td><td>React (PWA) → Capacitor en V2</td></tr>
+          <tr><td>Backend / BDD</td><td>Supabase (tier gratuit)</td></tr>
+          <tr><td>YouTube</td><td>Data API v3 (gratuite)</td></tr>
+          <tr><td>TikTok</td><td>oEmbed (sans clé)</td></tr>
+          <tr><td>Instagram</td><td>Parcours 100 % guidé</td></tr>
+          <tr><td>IA / LLM</td><td>Aucun en V1 (choix pédagogique)</td></tr>
+        </table>
+      </div>
+      <div class="card">
+        <h4 style="margin:0 0 8px;color:var(--green-d)">Plan de déploiement</h4>
+        <table>
+          <tr><th>Phase</th><th>Durée</th></tr>
+          <tr><td>0 · Préparation (contenu caméléon)</td><td>1-2 sem.</td></tr>
+          <tr><td>1 · MVP technique</td><td>2-4 sem.</td></tr>
+          <tr><td>2 · Test pilote (1 → 3 classes)</td><td>4-6 sem.</td></tr>
+          <tr><td>3 · Itération</td><td>mois 2-3</td></tr>
+          <tr><td>4 · Stabilisation</td><td>mois 4-6</td></tr>
+          <tr><td>5 · Diffusion (DANE, Canopé, CLEMI)</td><td>continu</td></tr>
+        </table>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="wrap">
+  Annexe A6 · LookUp — Document de conception produit (v1.0, février 2026)<br>
+  Compte rendu d'activité du référent numérique 2025-2026 · Collège Pierre Mendès France, Woippy · M. Thomas Charles
+</footer>
+
+<script>
+  // Réactions du caméléon par palier de score (fidèle au document de conception)
+  var bands = [
+    {min:16, color:'#2e9e5b', name:'Vert',         txt:"Ça a l'air plutôt solide. Mais reste curieux."},
+    {min:12, color:'#cdb022', name:'Jaune-vert',   txt:"Pas mal, mais y'a des zones d'ombre."},
+    {min:8,  color:'#e08a1e', name:'Orange',       txt:"Mouais… j'ai des doutes sérieux."},
+    {min:4,  color:'#e0651e', name:'Rouge-orange', txt:"Ça ne sent pas bon du tout cette histoire."},
+    {min:0,  color:'#d6453f', name:'Rouge',        txt:"Honnêtement ? Méfie-toi."}
+  ];
+  function calc(){
+    var src=+document.getElementById('ax-src').value,
+        pre=+document.getElementById('ax-pre').value,
+        ton=+document.getElementById('ax-ton').value,
+        cor=+document.getElementById('ax-cor').value,
+        int=+document.getElementById('ax-int').value;
+    var s = src*0.20 + pre*0.25 + ton*0.15 + cor*0.30 + int*0.10;
+    var b = bands.find(function(x){return s>=x.min});
+    document.getElementById('score').textContent = s.toFixed(1);
+    document.getElementById('cham').style.background = b.color;
+    document.getElementById('verdict').textContent = '« '+b.txt+' »';
+    var st=document.getElementById('state'); st.textContent=b.name; st.style.background=b.color;
+    document.getElementById('q-cor').textContent = cor===0
+      ? "⚠ « Pas cherché » = 0 : le score est mécaniquement plafonné. Faites l'étape la plus éducative !"
+      : "L'axe le plus lourd (30 %) : la corroboration est le réflexe scientifique central.";
+  }
+  function setTab(el,id){
+    el.parentNode.querySelectorAll('.tab').forEach(function(t){t.classList.remove('on')});
+    el.classList.add('on');
+    document.querySelectorAll('#p-yt,#p-tt,#p-ig').forEach(function(p){p.classList.remove('on')});
+    document.getElementById(id).classList.add('on');
+  }
+  calc();
+</script>
+</body>
+</html>

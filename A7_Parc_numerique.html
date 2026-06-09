@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Annexe A7 — Parc numérique · Document interactif</title>
+<style>
+  :root{
+    --green:#1f7a54; --green-d:#155c3f; --green-l:#eaf5ef; --ink:#1d2b25; --muted:#5c6b63;
+    --line:#d9e6df; --bg:#f5f9f7; --card:#fff;
+    --vert:#2e9e5b; --ambre:#e0a020; --rouge:#d6453f; --gris:#9098a0;
+    --shadow:0 2px 10px rgba(20,60,45,.06),0 8px 30px rgba(20,60,45,.05);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.55}
+  .wrap{max-width:1000px;margin:0 auto;padding:0 22px}
+  header.top{background:linear-gradient(135deg,#1f7a54,#155c3f);color:#fff;padding:34px 0 30px}
+  .badge{display:inline-block;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:4px 14px;font-size:13px;font-weight:600}
+  header.top h1{margin:14px 0 6px;font-size:30px}
+  header.top p{margin:0;opacity:.92;max-width:700px}
+  main{padding:34px 0 60px}
+  section{margin:0 0 30px}
+  h2{font-size:21px;color:var(--green-d);margin:0 0 6px;display:flex;align-items:center;gap:9px}
+  h2 .n{background:var(--green);color:#fff;border-radius:8px;font-size:13px;padding:2px 9px;font-weight:700}
+  .lead{color:var(--muted);margin:.2em 0 1.1em}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 22px;box-shadow:var(--shadow)}
+  .grid{display:grid;gap:14px}
+  .g2{grid-template-columns:repeat(2,1fr)} .g3{grid-template-columns:repeat(3,1fr)} .g4{grid-template-columns:repeat(4,1fr)}
+  @media(max-width:740px){.g2,.g3,.g4{grid-template-columns:1fr 1fr}}
+  table{width:100%;border-collapse:collapse;font-size:14px}
+  th,td{text-align:left;padding:9px 11px;border-bottom:1px solid var(--line)}
+  th{background:var(--green);color:#fff;font-weight:600}
+  tr:nth-child(even) td{background:#fafdfb}
+  .kpi{background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px;text-align:center}
+  .kpi b{display:block;font-size:26px;color:var(--green-d)} .kpi span{font-size:12.5px;color:var(--muted)}
+  .legend{display:flex;gap:10px;flex-wrap:wrap;margin:6px 0 0}
+  .lg{display:inline-flex;align-items:center;gap:7px;font-size:13.5px;font-weight:600;background:#fff;border:1px solid var(--line);border-radius:999px;padding:5px 12px}
+  .dot{width:13px;height:13px;border-radius:50%}
+  /* vue étage */
+  .floor{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+  @media(max-width:560px){.floor{grid-template-columns:repeat(2,1fr)}}
+  .room{border-radius:11px;padding:13px 12px;color:#13251c;cursor:pointer;border:2px solid transparent;transition:transform .12s,box-shadow .12s;min-height:74px}
+  .room:hover{transform:translateY(-3px);box-shadow:0 8px 18px rgba(0,0,0,.12)}
+  .room.sel{border-color:#13251c;box-shadow:0 0 0 3px rgba(31,122,84,.25)}
+  .room b{display:block;font-size:14px} .room span{font-size:12px;opacity:.85}
+  .floor-btns{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:12px}
+  .fb{border:1px solid var(--line);background:#fff;border-radius:8px;padding:6px 14px;cursor:pointer;font-weight:600;color:var(--muted)}
+  .fb.on{background:var(--green);color:#fff;border-color:var(--green)}
+  .detail{background:var(--green-l);border-radius:12px;padding:16px;min-height:150px}
+  .detail h4{margin:0 0 4px;color:var(--green-d)}
+  .state-badge{display:inline-block;border-radius:999px;padding:2px 11px;color:#fff;font-weight:700;font-size:12.5px}
+  .feature{background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px}
+  .feature h4{margin:0 0 5px;color:var(--green-d);font-size:15.5px}
+  .feature p{margin:0;font-size:13.5px;color:var(--muted)}
+  .pill{display:inline-block;background:var(--green-l);color:var(--green-d);border-radius:999px;padding:3px 11px;font-size:12.5px;font-weight:600;margin:0 4px 6px 0}
+  .cta{display:inline-block;margin-top:6px;background:var(--green);color:#fff;text-decoration:none;border-radius:9px;padding:9px 16px;font-weight:600;font-size:14px}
+  footer{border-top:1px solid var(--line);padding:22px 0;color:var(--muted);font-size:13px;text-align:center}
+  .note{font-size:13px;color:var(--muted);background:#fff;border:1px dashed var(--line);border-radius:10px;padding:11px 14px}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <span class="badge">Annexe A7 · Rapport référent numérique 2025-2026</span>
+    <h1>Parc numérique — outil de pilotage</h1>
+    <p>Document interactif de présentation. Application web interne d'inventaire et de pilotage du parc informatique du collège, qui remplace le recensement statique par une vue dynamique de l'état de santé du matériel, salle par salle et étage par étage.</p>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section>
+    <div class="card">
+      <h2><span class="n">1</span> Le fil conducteur : un code d'états sémantiques</h2>
+      <p class="lead">Une même grammaire de couleur parcourt toute l'interface, du badge jusqu'à la maquette 3D. L'état n'est <strong>jamais codé par la couleur seule</strong> : toujours doublé d'un libellé et d'une icône (accessibilité WCAG AA).</p>
+      <div class="legend">
+        <span class="lg"><span class="dot" style="background:var(--vert)"></span> Vert · fonctionnel</span>
+        <span class="lg"><span class="dot" style="background:var(--ambre)"></span> Ambre · vétuste</span>
+        <span class="lg"><span class="dot" style="background:var(--rouge)"></span> Rouge · en panne</span>
+        <span class="lg"><span class="dot" style="background:var(--gris)"></span> Gris · réformé</span>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="n">2</span> Tableau de bord — indicateurs clés</h2>
+    <p class="lead">D'un coup d'œil : l'état de santé global du parc (données de démonstration).</p>
+    <div class="grid g4">
+      <div class="kpi"><b>128</b><span>équipements inventoriés</span></div>
+      <div class="kpi"><b>6,2 ans</b><span>âge moyen du parc</span></div>
+      <div class="kpi"><b>41 %</b><span>matériel de plus de 5 ans</span></div>
+      <div class="kpi"><b>9</b><span>équipements en panne</span></div>
+    </div>
+    <div class="card" style="margin-top:14px">
+      <h4 style="margin:0 0 8px;color:var(--green-d)">Répartition par état</h4>
+      <table>
+        <tr><th>État</th><th>Nombre</th><th>Part</th></tr>
+        <tr><td><span class="dot" style="display:inline-block;background:var(--vert)"></span> Fonctionnel</td><td>74</td><td>58 %</td></tr>
+        <tr><td><span class="dot" style="display:inline-block;background:var(--ambre)"></span> Vétuste</td><td>31</td><td>24 %</td></tr>
+        <tr><td><span class="dot" style="display:inline-block;background:var(--rouge)"></span> En panne</td><td>9</td><td>7 %</td></tr>
+        <tr><td><span class="dot" style="display:inline-block;background:var(--gris)"></span> Réformé</td><td>14</td><td>11 %</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="n">3</span> Vue du collège — explorez un étage</h2>
+    <p class="lead">La version en ligne propose une <strong>maquette 3D Three.js</strong> où chaque salle est teintée selon la santé de son matériel. Voici une version simplifiée et cliquable : <strong>choisissez un étage, puis une salle</strong> pour afficher son détail.</p>
+    <div class="card">
+      <div class="floor-btns">
+        <button class="fb on" onclick="setFloor(this,'rdc')">RDC</button>
+        <button class="fb" onclick="setFloor(this,'r1')">R+1</button>
+        <button class="fb" onclick="setFloor(this,'r2')">R+2</button>
+        <button class="fb" onclick="setFloor(this,'r3')">R+3</button>
+      </div>
+      <div class="grid g2" style="grid-template-columns:1.3fr 1fr">
+        <div class="floor" id="floor"></div>
+        <div class="detail" id="detail">
+          <h4>Sélectionnez une salle</h4>
+          <p style="color:var(--muted);font-size:14px;margin:6px 0 0">Cliquez sur une salle de l'étage pour voir le détail de son matériel et de son état.</p>
+        </div>
+      </div>
+    </div>
+    <div class="note" style="margin-top:12px">Le <strong>R+1 est l'étage « réel »</strong> de la démonstration (CDI, salle informatique 210, labo…) ; les autres étages illustrent le code couleur.</div>
+  </section>
+
+  <section>
+    <h2><span class="n">4</span> Les écrans de l'application</h2>
+    <div class="grid g2">
+      <div class="feature"><h4>Tableau de bord</h4><p>Indicateurs clés, répartition par état, parc par étage, salles à surveiller, répartition par type.</p></div>
+      <div class="feature"><h4>Inventaire des équipements</h4><p>Table triable avec recherche et filtres (type, état, étage) + filtre rapide « + de 5 ans ».</p></div>
+      <div class="feature"><h4>Vue du collège (3D)</h4><p>Maquette interactive : la salle s'élève et s'illumine au clic, le reste s'estompe, panneau latéral détaillé.</p></div>
+      <div class="feature"><h4>Système de design</h4><p>Palette, états sémantiques, échelle typographique, rayons, ombres, composants réutilisables.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="n">5</span> Technique & accès</h2>
+    <div class="grid g2">
+      <div class="card">
+        <h4 style="margin:0 0 8px;color:var(--green-d)">Stack</h4>
+        <span class="pill">Vite + React 18 + TypeScript</span>
+        <span class="pill">React Router</span>
+        <span class="pill">Three.js / react-three-fiber</span>
+        <span class="pill">Design tokens CSS</span>
+        <span class="pill">Prévu pour Supabase</span>
+        <span class="pill">WCAG AA</span>
+        <p style="font-size:13.5px;color:var(--muted);margin-top:10px">Données de démonstration fictives ; l'outil est pensé pour être branché à une base de données réelle. Déploiement automatique sur GitHub Pages.</p>
+      </div>
+      <div class="card">
+        <h4 style="margin:0 0 8px;color:var(--green-d)">Démonstration en ligne</h4>
+        <p style="font-size:14px;color:var(--muted)">Une version complète, avec la vraie maquette 3D, est consultable en ligne :</p>
+        <a class="cta" href="https://qwetsh.github.io/parc-numerique/" target="_blank" rel="noopener">Ouvrir la démo →</a>
+        <p style="font-size:12.5px;color:var(--muted);margin-top:10px">qwetsh.github.io/parc-numerique</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="wrap">
+  Annexe A7 · Parc numérique — outil de pilotage du parc informatique<br>
+  Compte rendu d'activité du référent numérique 2025-2026 · Collège Pierre Mendès France, Woippy · M. Thomas Charles
+</footer>
+
+<script>
+  var C={vert:'#cdeed9',ambre:'#f6e4bf',rouge:'#f4ccca',gris:'#dfe3e6'};
+  var SB={vert:'#2e9e5b',ambre:'#e0a020',rouge:'#d6453f',gris:'#9098a0'};
+  var SN={vert:'Fonctionnel',ambre:'Vétuste',rouge:'En panne',gris:'Réformé'};
+  var data={
+    rdc:[
+      {n:'Accueil',t:'2 postes administratifs',s:'vert',d:'2 PC bureautiques (2023), 1 imprimante. Tout opérationnel.'},
+      {n:'Vie scolaire',t:'3 postes',s:'vert',d:'3 PC récents, 1 photocopieur partagé.'},
+      {n:'Salle 008',t:'Salle de cours',s:'ambre',d:'Vidéoprojecteur de 2016, lampe en fin de vie. À surveiller.'},
+      {n:'Loge',t:'1 poste',s:'rouge',d:'PC en panne (alimentation HS). Ticket de support ouvert.'}
+    ],
+    r1:[
+      {n:'CDI',t:'6 postes élèves',s:'vert',d:'6 PC (2022) en réseau, 2 tablettes de prêt. Bon état.'},
+      {n:'Salle info 210',t:'15 postes',s:'ambre',d:'Parc de 2018 homogène mais vieillissant. Renouvellement à planifier.'},
+      {n:'Labo SVT',t:'4 postes + capteurs',s:'vert',d:'4 PC, ExAO, microscopes numériques. Opérationnel.'},
+      {n:'Salle 215',t:'TNI',s:'rouge',d:'Tableau numérique interactif HS depuis 2 semaines. En attente d’intervention.'}
+    ],
+    r2:[
+      {n:'Salle 308',t:'VPI',s:'vert',d:'Vidéoprojecteur interactif récent (2024). Très bon état.'},
+      {n:'Salle 311',t:'Poste enseignant',s:'ambre',d:'PC de 2017, lent au démarrage. Usage encore possible.'},
+      {n:'Salle 314',t:'Ancien poste',s:'gris',d:'PC réformé, sorti de l’inventaire actif, en attente d’enlèvement.'},
+      {n:'Réserve',t:'Matériel stocké',s:'gris',d:'Anciens écrans cathodiques réformés.'}
+    ],
+    r3:[
+      {n:'Salle 405',t:'VPI',s:'vert',d:'Installation 2023, fonctionnelle.'},
+      {n:'Salle 408',t:'Poste enseignant',s:'rouge',d:'Carte graphique défaillante. Ticket en cours.'},
+      {n:'Salle 410',t:'2 postes',s:'ambre',d:'Postes de 2016, à renouveler dans l’année.'},
+      {n:'Salle 412',t:'Poste enseignant',s:'vert',d:'PC 2022, opérationnel.'}
+    ]
+  };
+  function setFloor(btn,f){
+    document.querySelectorAll('.fb').forEach(function(b){b.classList.remove('on')});
+    btn.classList.add('on');
+    render(f);
+  }
+  function render(f){
+    var fl=document.getElementById('floor'); fl.innerHTML='';
+    data[f].forEach(function(r,i){
+      var d=document.createElement('div');
+      d.className='room'; d.style.background=C[r.s];
+      d.innerHTML='<b>'+r.n+'</b><span>'+r.t+'</span>';
+      d.onclick=function(){
+        document.querySelectorAll('.room').forEach(function(x){x.classList.remove('sel')});
+        d.classList.add('sel');
+        document.getElementById('detail').innerHTML=
+          '<h4>'+r.n+'</h4>'+
+          '<span class="state-badge" style="background:'+SB[r.s]+'">'+SN[r.s]+'</span>'+
+          '<p style="font-size:14px;margin:10px 0 4px"><strong>'+r.t+'</strong></p>'+
+          '<p style="font-size:14px;color:#33473e;margin:0">'+r.d+'</p>';
+      };
+      fl.appendChild(d);
+    });
+  }
+  render('rdc');
+</script>
+</body>
+</html>

@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Annexe A9 — Formation Genially · Document interactif</title>
+<style>
+  :root{
+    --green:#1f7a54; --green-d:#155c3f; --green-l:#eaf5ef; --ink:#1d2b25; --muted:#5c6b63;
+    --line:#d9e6df; --bg:#f5f9f7; --card:#fff;
+    --n1:#2e9e5b; --n2:#1f7a54; --n3:#155c3f;
+    --shadow:0 2px 10px rgba(20,60,45,.06),0 8px 30px rgba(20,60,45,.05);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.55}
+  .wrap{max-width:1000px;margin:0 auto;padding:0 22px}
+  header.top{background:linear-gradient(135deg,#1f7a54,#155c3f);color:#fff;padding:34px 0 30px}
+  .badge{display:inline-block;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:4px 14px;font-size:13px;font-weight:600}
+  header.top h1{margin:14px 0 6px;font-size:30px}
+  header.top p{margin:0;opacity:.92;max-width:720px}
+  main{padding:34px 0 60px}
+  section{margin:0 0 30px}
+  h2{font-size:21px;color:var(--green-d);margin:0 0 6px;display:flex;align-items:center;gap:9px}
+  h2 .n{background:var(--green);color:#fff;border-radius:8px;font-size:13px;padding:2px 9px;font-weight:700}
+  .lead{color:var(--muted);margin:.2em 0 1.1em}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 22px;box-shadow:var(--shadow)}
+  .grid{display:grid;gap:14px}
+  .g2{grid-template-columns:repeat(2,1fr)} .g3{grid-template-columns:repeat(3,1fr)}
+  @media(max-width:740px){.g2,.g3{grid-template-columns:1fr}}
+  .pill{display:inline-block;background:var(--green-l);color:var(--green-d);border-radius:999px;padding:3px 11px;font-size:12.5px;font-weight:600;margin:0 4px 6px 0}
+  table{width:100%;border-collapse:collapse;font-size:14px}
+  th,td{text-align:left;padding:9px 11px;border-bottom:1px solid var(--line)}
+  th{background:var(--green);color:#fff;font-weight:600}
+  tr:nth-child(even) td{background:#fafdfb}
+  /* parcours */
+  .paths{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:14px}
+  @media(max-width:740px){.paths{grid-template-columns:1fr}}
+  .path{border:2px solid var(--line);background:#fff;border-radius:14px;padding:15px;cursor:pointer;transition:.12s}
+  .path:hover{border-color:#a9d6c0}
+  .path.on{border-color:var(--green);background:var(--green-l)}
+  .path h4{margin:2px 0 3px;color:var(--green-d)}
+  .path p{margin:0;font-size:12.5px;color:var(--muted)}
+  .path .d{font-size:12px;font-weight:700;color:var(--green)}
+  /* modules */
+  .levels{margin-top:6px}
+  .lvl-title{font-weight:700;color:var(--green-d);margin:16px 0 8px;display:flex;align-items:center;gap:8px;font-size:15px}
+  .lvl-title .dot{width:11px;height:11px;border-radius:50%}
+  details.mod{background:#fff;border:1px solid var(--line);border-radius:11px;margin:0 0 8px;overflow:hidden;transition:.12s}
+  details.mod.hl{border-color:var(--green);box-shadow:0 0 0 2px rgba(31,122,84,.18)}
+  details.mod summary{cursor:pointer;padding:12px 15px;font-weight:600;list-style:none;display:flex;align-items:center;gap:10px}
+  details.mod summary::-webkit-details-marker{display:none}
+  .mcode{background:var(--green);color:#fff;border-radius:7px;font-size:12px;font-weight:700;padding:2px 8px;flex-shrink:0}
+  details.mod summary .arr{margin-left:auto;color:var(--green);font-weight:700;font-size:18px}
+  details.mod[open] summary .arr{transform:rotate(45deg)}
+  details.mod .body{padding:0 15px 14px 15px;font-size:13.5px;color:#3a4a42}
+  details.mod .body b{color:var(--green-d)}
+  .crcn{display:inline-block;background:#eef3ff;color:#2f4f8f;border-radius:6px;padding:1px 8px;font-size:11.5px;font-weight:600;margin:2px 4px 2px 0}
+  footer{border-top:1px solid var(--line);padding:22px 0;color:var(--muted);font-size:13px;text-align:center}
+  .note{font-size:13px;color:var(--muted);background:#fff;border:1px dashed var(--line);border-radius:10px;padding:11px 14px}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <span class="badge">Annexe A9 · Rapport référent numérique 2025-2026</span>
+    <h1>Formation « Maîtriser Genially »</h1>
+    <p>Document interactif de présentation. Formation interne modulaire et auto-portée : <strong>9 modules sur 3 niveaux</strong>, conçue entièrement <em>dans</em> Genially pour servir de modèle reproductible, adossée au référentiel CRCN. Déploiement prévu courant octobre 2026.</p>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section>
+    <div class="card">
+      <h2><span class="n">1</span> Le principe : former sur l'outil grâce à l'outil</h2>
+      <p class="lead">La formation est réalisée entièrement dans Genially : elle montre les possibilités par l'exemple, immerge le participant dès la première minute et constitue un modèle qu'il peut s'approprier.</p>
+      <span class="pill">Format hybride (présentiel + autonomie)</span>
+      <span class="pill">9 modules indépendants</span>
+      <span class="pill">3 niveaux de maîtrise</span>
+      <span class="pill">Chaque module = un livrable concret</span>
+      <span class="pill">Fil rouge (modules 4-8)</span>
+      <span class="pill">Aucun prérequis</span>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="n">2</span> Choisissez votre parcours</h2>
+    <p class="lead">La page d'accueil propose trois portes d'entrée selon le temps disponible. <strong>Cliquez sur un parcours</strong> : les modules concernés s'allument dans la liste ci-dessous.</p>
+    <div class="paths">
+      <div class="path" onclick="setPath(this,['M1','M2','M3'])">
+        <span class="d">~ 30 min</span><h4>Express</h4><p>M1 → M2 → M3 · Créer et partager une première production à partir d'un template.</p>
+      </div>
+      <div class="path" onclick="setPath(this,['M1','M4','M5','M6'])">
+        <span class="d">1 h à 2 h</span><h4>Guidé</h4><p>M1 → M4 → M5 → M6 · Concevoir une activité interactive complète de zéro.</p>
+      </div>
+      <div class="path" onclick="setPath(this,['M1','M2','M3','M4','M5','M6','M7','M8','M9'])">
+        <span class="d">Libre</span><h4>Expert</h4><p>M1 → M9 · Tout maîtriser, jusqu'aux variables et conditions.</p>
+      </div>
+    </div>
+    <p class="note">La navigation est totalement libre : les parcours sont des suggestions, pas des contraintes.</p>
+  </section>
+
+  <section>
+    <h2><span class="n">3</span> Les 9 modules</h2>
+    <div class="levels" id="mods"></div>
+  </section>
+
+  <section>
+    <h2><span class="n">4</span> Compétences visées — référentiel CRCN</h2>
+    <p class="lead">La formation couvre les niveaux 1 à 5 du domaine <strong>D3 (Création de contenu)</strong>, avec des contributions sur D2 (Communication) et D4 (Protection et sécurité). Le CRCN est aussi évalué par PIX.</p>
+    <div class="card">
+      <table>
+        <tr><th>Module</th><th>Compétence</th><th>Domaine(s)</th><th>Niveau</th></tr>
+        <tr><td>M1</td><td>Créer un espace de travail, gérer ses données</td><td>D3.1 · D4.2 · D5.1</td><td>1</td></tr>
+        <tr><td>M2</td><td>Adapter un contenu numérique existant</td><td>D3.1 · D3.3</td><td>2</td></tr>
+        <tr><td>M3</td><td>Partager et diffuser des contenus</td><td>D2.1 · D2.3 · D4.2</td><td>2</td></tr>
+        <tr><td>M4</td><td>Créer une production multimédia originale</td><td>D3.1 · D3.2 · D3.3</td><td>3</td></tr>
+        <tr><td>M5</td><td>Concevoir des interactions numériques</td><td>D3.2 · D3.3</td><td>3</td></tr>
+        <tr><td>M6</td><td>Intégrer des ressources multimédias</td><td>D3.2 · D1.3 · D4.1</td><td>3</td></tr>
+        <tr><td>M7</td><td>Architecturer une expérience utilisateur</td><td>D3.2 · D3.3</td><td>4</td></tr>
+        <tr><td>M8</td><td>Programmer des comportements conditionnels</td><td>D3.2 · D3.3 · D5.2</td><td>5</td></tr>
+        <tr><td>M9</td><td>Analyser et transférer une pratique</td><td>D3.3 · D5.2 · D2.3</td><td>4-5</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="n">5</span> Modalités pratiques</h2>
+    <div class="grid g2">
+      <div class="card">
+        <h4 style="margin:0 0 8px;color:var(--green-d)">Public & accès</h4>
+        <p style="font-size:14px;margin:0 0 8px">Tous les personnels : enseignants de toutes disciplines, CPE, personnels administratifs. Niveaux très hétérogènes, chacun à son rythme.</p>
+        <span class="pill">Lien unique partagé</span>
+        <span class="pill">Autonomie ou atelier</span>
+        <span class="pill">Intégrable à l'ENT</span>
+      </div>
+      <div class="card">
+        <h4 style="margin:0 0 8px;color:var(--green-d)">Matériel & RGPD</h4>
+        <p style="font-size:14px;margin:0 0 8px">Ordinateur + navigateur à jour (Chrome/Firefox) + adresse e-mail. Tablette déconseillée pour la création.</p>
+        <span class="pill">Compte Genially gratuit (version Edu)</span>
+        <span class="pill">Pas de données d'élèves publiées</span>
+        <span class="pill">Partage privé privilégié</span>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="wrap">
+  Annexe A9 · Formation « Genially & Canva » — support en cours de création<br>
+  Compte rendu d'activité du référent numérique 2025-2026 · Collège Pierre Mendès France, Woippy · M. Thomas Charles · thomas.charles@ac-nancy-metz.fr
+</footer>
+
+<script>
+  var levels=[
+    {t:'Niveau 1 — Découverte (~30 min)',c:'#2e9e5b',mods:[
+      {id:'M1',t:'Créer son compte et découvrir l’interface',o:'Se repérer dans Genially et créer son espace de travail.',l:'Un compte actif, prêt pour la suite.',crcn:['D5.1','D3.1','D4.2']},
+      {id:'M2',t:'Utiliser un template',o:'Produire une première création fonctionnelle rapidement (modifier sans casser la structure).',l:'Une première création personnalisée, publiable.',crcn:['D3.1','D3.3']},
+      {id:'M3',t:'Partager et intégrer dans l’ENT',o:'Rendre sa création accessible : lien public/privé, iframe, intégration ENT, RGPD.',l:'Un lien fonctionnel, prêt à partager.',crcn:['D2.1','D2.3','D4.2']}
+    ]},
+    {t:'Niveau 2 — Construction (~1 h à 2 h)',c:'#1f7a54',mods:[
+      {id:'M4',t:'Créer de zéro',o:'Construire sans template : fonds, blocs de texte, formes, calques, alignement.',l:'Une page structurée, base d’une activité.',crcn:['D3.1','D3.2','D3.3']},
+      {id:'M5',t:'Ajouter de l’interactivité',o:'Boutons, liens internes/externes, popups, infobulles, zones cliquables.',l:'Une activité avec navigation interactive.',crcn:['D3.2','D3.3']},
+      {id:'M6',t:'Insérer des médias',o:'Vidéo YouTube/Vimeo, audio, iframe (padlet, carte, formulaire), bonnes pratiques.',l:'Une activité multimédia complète.',crcn:['D3.2','D1.3','D4.1']}
+    ]},
+    {t:'Niveau 3 — Maîtrise (libre)',c:'#155c3f',mods:[
+      {id:'M7',t:'Navigation complexe',o:'Pages, scènes, ancres ; menu interne ; escape game / parcours ramifié.',l:'Un parcours navigable avec menu.',crcn:['D3.2','D3.3']},
+      {id:'M8',t:'Variables et conditions',o:'Logique conditionnelle : variables, afficher/masquer, score, feedback personnalisé.',l:'Une activité avec logique conditionnelle.',crcn:['D3.2','D3.3','D5.2']},
+      {id:'M9',t:'Méta-module — comment ce Genially a été conçu',o:'Décryptage de la structure, des variables et des choix graphiques de la formation elle-même.',l:'Une fiche-mémo personnelle.',crcn:['D3.3','D5.2','D2.3']}
+    ]}
+  ];
+  function buildMods(){
+    var c=document.getElementById('mods'); c.innerHTML='';
+    levels.forEach(function(lv){
+      var h=document.createElement('div'); h.className='lvl-title';
+      h.innerHTML='<span class="dot" style="background:'+lv.c+'"></span>'+lv.t;
+      c.appendChild(h);
+      lv.mods.forEach(function(m){
+        var d=document.createElement('details'); d.className='mod'; d.id='mod-'+m.id;
+        d.innerHTML='<summary><span class="mcode">'+m.id+'</span> '+m.t+'<span class="arr">+</span></summary>'+
+          '<div class="body"><p style="margin:0 0 6px"><b>Objectif :</b> '+m.o+'</p>'+
+          '<p style="margin:0 0 8px"><b>Livrable :</b> '+m.l+'</p>'+
+          m.crcn.map(function(x){return '<span class="crcn">'+x+'</span>'}).join('')+'</div>';
+        c.appendChild(d);
+      });
+    });
+  }
+  function setPath(el,ids){
+    document.querySelectorAll('.path').forEach(function(p){p.classList.remove('on')});
+    el.classList.add('on');
+    document.querySelectorAll('details.mod').forEach(function(d){d.classList.remove('hl')});
+    ids.forEach(function(id){var d=document.getElementById('mod-'+id);if(d)d.classList.add('hl')});
+  }
+  buildMods();
+</script>
+</body>
+</html>
