@@ -15,6 +15,7 @@ Annexes interactives du rapport numérique, hébergées via **GitHub Pages** et 
 | A9 — Formation Genially | https://qwetsh.github.io/annexes-numerique/A9_Formation_Genially.html |
 | A10 — Gestion de classe | https://qwetsh.github.io/annexes-numerique/A10_Gestion_classe.html |
 | A11 — Affectation Groupit | https://qwetsh.github.io/annexes-numerique/A11_Affectation_Groupit.html |
+| A12 — Générateur d'exercices | https://qwetsh.github.io/annexes-numerique/A12_Generateur_exercices.html |
 
 ## Intégration en iframe
 
@@ -59,6 +60,11 @@ Copie ce bloc et remplace le nom de fichier par l'annexe voulue :
 **A11 — Affectation Groupit**
 ```html
 <iframe src="https://qwetsh.github.io/annexes-numerique/A11_Affectation_Groupit.html" width="100%" height="600" style="border:0;" loading="lazy" title="Annexe A11 - Affectation Groupit"></iframe>
+```
+
+**A12 — Générateur d'exercices**
+```html
+<iframe src="https://qwetsh.github.io/annexes-numerique/A12_Generateur_exercices.html" width="100%" height="600" style="border:0;" loading="lazy" title="Annexe A12 - Generateur d'exercices"></iframe>
 ```
 
 ## Mettre à jour une annexe

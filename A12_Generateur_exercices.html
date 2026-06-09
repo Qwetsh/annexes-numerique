@@ -1,0 +1,445 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Annexe A12 — Générateur d'exercices · Document interactif</title>
+<style>
+  :root{
+    --green:#1f7a54; --green-d:#155c3f; --green-l:#eaf5ef; --ink:#1d2b25; --muted:#5c6b63;
+    --line:#d9e6df; --bg:#f5f9f7; --card:#fff;
+    --shadow:0 2px 10px rgba(20,60,45,.06),0 8px 30px rgba(20,60,45,.05);
+    /* accent « application » */
+    --app:#4338ca; --app-h:#3730a3; --app-bg-l:#f3f2ff; --app-line:#e6e4fb;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.55}
+  a{color:var(--green-d)}
+  .wrap{max-width:1000px;margin:0 auto;padding:0 22px}
+  header.top{background:linear-gradient(135deg,#1f7a54,#155c3f);color:#fff;padding:34px 0 30px}
+  .badge{display:inline-block;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:4px 14px;font-size:13px;font-weight:600;letter-spacing:.3px}
+  header.top h1{margin:14px 0 6px;font-size:30px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+  header.top p{margin:0;opacity:.92;max-width:760px}
+  main{padding:34px 0 60px}
+  section{margin:0 0 30px}
+  h2{font-size:21px;color:var(--green-d);margin:0 0 6px;display:flex;align-items:center;gap:9px}
+  h2 .n{background:var(--green);color:#fff;border-radius:8px;font-size:13px;padding:2px 9px;font-weight:700}
+  h3{color:var(--green-d)}
+  .lead{color:var(--muted);margin:.2em 0 1.1em}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 22px;box-shadow:var(--shadow)}
+  .grid{display:grid;gap:14px}
+  .g2{grid-template-columns:repeat(2,1fr)} .g3{grid-template-columns:repeat(3,1fr)} .g4{grid-template-columns:repeat(4,1fr)}
+  @media(max-width:740px){.g2,.g3,.g4{grid-template-columns:1fr}}
+  .feature{background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px}
+  .feature h4{margin:0 0 5px;color:var(--green-d);font-size:15.5px}
+  .feature p{margin:0;font-size:13.5px;color:var(--muted)}
+  .pill{display:inline-block;background:var(--green-l);color:var(--green-d);border-radius:999px;padding:3px 11px;font-size:12.5px;font-weight:600;margin:0 4px 6px 0}
+  .kpi{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px;text-align:center}
+  .kpi b{display:block;font-size:24px;color:var(--green-d)} .kpi span{font-size:12.5px;color:var(--muted)}
+  .cta{display:inline-block;margin-top:6px;background:var(--green);color:#fff;text-decoration:none;border-radius:9px;padding:9px 16px;font-weight:600;font-size:14px}
+  .note{font-size:13px;color:var(--muted);background:#fff;border:1px dashed var(--line);border-radius:10px;padding:11px 14px}
+  details{background:#fff;border:1px solid var(--line);border-radius:11px;margin:0 0 9px;overflow:hidden}
+  summary{cursor:pointer;padding:13px 16px;font-weight:600;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:10px;color:var(--green-d)}
+  summary::-webkit-details-marker{display:none}
+  summary::after{content:"+";color:var(--green);font-size:20px;font-weight:700}
+  details[open] summary::after{content:"\2013"}
+  details .body{padding:0 16px 15px;color:#3a4a42;font-size:14px}
+  footer{border-top:1px solid var(--line);padding:22px 0;color:var(--muted);font-size:13px;text-align:center}
+  code{background:var(--app-bg-l);color:var(--app);border-radius:4px;padding:1px 5px;font-size:12.5px}
+
+  /* matières (chips colorées) */
+  .subj{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:4px 12px;font-size:13px;font-weight:600;margin:0 5px 7px 0;border:1px solid transparent}
+
+  /* ─────── boîtier « démo intégrée » : reproduit l'UI réelle (sidebar + cartes) ─────── */
+  .demo{border:2px solid var(--app);border-radius:14px;overflow:hidden;margin:6px 0 4px;box-shadow:0 6px 22px rgba(67,56,202,.10)}
+  .demo-bar{background:var(--app);color:#fff;display:flex;align-items:center;gap:8px;padding:7px 12px;font-size:12.5px;font-weight:600}
+  .demo-bar .dots{display:flex;gap:5px;margin-right:4px}
+  .demo-bar .dots i{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.55);display:inline-block}
+  .demo-bar .lbl{margin-left:auto;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.4);border-radius:999px;padding:2px 10px;font-size:11px;letter-spacing:.3px}
+  .demo-body{background:#eef0f6;padding:14px;display:grid;grid-template-columns:230px 1fr;gap:14px}
+  @media(max-width:740px){.demo-body{grid-template-columns:1fr}}
+  .side{background:#fff;border:1px solid #e3e3ef;border-radius:10px;padding:12px}
+  .side h5{margin:0 0 4px;font-size:11px;text-transform:uppercase;letter-spacing:.4px;color:#8a8aa3}
+  .side .seg{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:12px}
+  .chipbtn{border:1px solid #d6d6e6;background:#fff;border-radius:7px;padding:5px 9px;font-size:12px;cursor:pointer;font-weight:600;color:#444}
+  .chipbtn.on{background:var(--app);color:#fff;border-color:var(--app)}
+  .side label.row{display:flex;align-items:center;justify-content:space-between;font-size:12.5px;margin:6px 0;font-weight:500}
+  .side input[type=number]{width:54px;padding:3px 6px;border:1px solid #ccc;border-radius:5px;font-family:inherit}
+  .switch{display:flex;align-items:center;gap:6px;font-size:12.5px;font-weight:500;margin:6px 0}
+  .genbtn{width:100%;background:var(--app);color:#fff;border:none;border-radius:8px;padding:10px;font-weight:700;font-size:13.5px;cursor:pointer;margin-top:4px}
+  .genbtn:hover{background:var(--app-h)}
+  .stage{min-height:120px}
+  /* carte exercice reproduite */
+  .exo{background:#fff;border:1px solid #e3e3ef;border-radius:10px;padding:14px 16px;margin-bottom:12px;box-shadow:0 1px 4px rgba(30,30,60,.05)}
+  .exo .head{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:8px}
+  .exo .t{font-weight:700;font-size:14.5px}
+  .exo .pts{font-size:11px;font-weight:700;border-radius:999px;padding:2px 9px;white-space:nowrap}
+  .exo .ctx{font-style:italic;color:#555;font-size:13px;margin:4px 0 8px}
+  .exo .doc{background:#f7f7fb;border:1px solid #ececf4;border-radius:7px;padding:8px 10px;margin:6px 0;font-size:12.5px}
+  .exo .doc b{color:var(--app)}
+  .exo table{border-collapse:collapse;margin:6px 0;font-size:12px;width:100%}
+  .exo th,.exo td{border:1px solid #d8d8e6;padding:3px 7px;text-align:center}
+  .exo th{background:var(--app-bg-l);color:var(--app)}
+  .exo ol{margin:8px 0 0;padding-left:22px}
+  .exo ol li{margin:5px 0;font-size:13.5px}
+  .exo .qpts{color:#999;font-size:11.5px}
+  .corrige{background:#f3faf6;border-left:3px solid var(--green);border-radius:0 7px 7px 0;padding:8px 12px;margin-top:10px;font-size:12.5px}
+  .corrige b{color:var(--green-d)}
+  .regen{background:#fff;color:var(--app);border:1px solid var(--app);border-radius:6px;padding:3px 9px;font-size:11.5px;font-weight:600;cursor:pointer}
+  .regen:hover{background:var(--app-bg-l)}
+  .demo-cap{font-size:12px;color:var(--muted);background:#fff;border:1px dashed var(--line);border-top:none;border-radius:0 0 12px 12px;padding:9px 14px;margin-top:-4px}
+  .counter{font-size:12px;color:var(--app);font-weight:600;margin-top:4px}
+  .step{display:flex;gap:12px;align-items:flex-start;margin-bottom:12px}
+  .step .num{flex:0 0 auto;width:28px;height:28px;border-radius:50%;background:var(--green);color:#fff;font-weight:700;display:flex;align-items:center;justify-content:center;font-size:14px}
+  .step .txt{font-size:14px}.step .txt b{color:var(--green-d)}
+  .tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+  .tab{border:1px solid var(--line);background:#fff;border-radius:999px;padding:7px 14px;cursor:pointer;font-weight:600;font-size:13.5px;color:var(--muted)}
+  .tab.on{background:var(--green);color:#fff;border-color:var(--green)}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <span class="badge">Annexe A12 · Rapport référent numérique 2025-2026</span>
+    <h1>🎲 Générateur d'exercices différenciés</h1>
+    <p>Document interactif de présentation. Application web interne qui produit, en un clic et pour <strong>toutes les matières du collège</strong>, des séries d'exercices accompagnées de leur corrigé. Comme tout est <strong>tiré au sort à chaque génération</strong>, les exercices sont renouvelables à l'infini et prêts à imprimer — entièrement dans le navigateur, sans aucune donnée d'élève.</p>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- 1. Le problème résolu -->
+  <section>
+    <h2><span class="n">1</span> Le problème résolu</h2>
+    <p class="lead">Trouver ou fabriquer des exercices d'entraînement — variés, corrigés, adaptés au niveau — est chronophage ; et un même énoncé circule vite entre élèves. L'outil fournit une réserve inépuisable d'exercices uniques, avec leur correction.</p>
+    <div class="card">
+      <div class="grid g2">
+        <div>
+          <p>L'enseignant choisit une <strong>matière</strong>, un <strong>niveau</strong> (de la 6ᵉ à la 3ᵉ) et les <strong>chapitres</strong> à travailler, puis lance la génération. L'application assemble des exercices dont les énoncés, les valeurs numériques et les contextes sont <strong>tirés au sort</strong> : deux élèves n'obtiennent jamais le même sujet, et l'on peut régénérer la série autant de fois que nécessaire.</p>
+          <p>Chaque série est livrée <strong>avec son corrigé</strong> (affichable ou masquable) et s'exporte en <strong>Word ou PDF</strong>, prête à photocopier. Idéal pour la <strong>différenciation</strong>, la <strong>remédiation</strong> et l'<strong>entraînement au brevet</strong>.</p>
+        </div>
+        <div class="grid g2">
+          <div class="kpi"><b>8</b><span>matières couvertes</span></div>
+          <div class="kpi"><b>6ᵉ → 3ᵉ</b><span>tous les niveaux</span></div>
+          <div class="kpi"><b>∞</b><span>variantes par chapitre</span></div>
+          <div class="kpi"><b>0&nbsp;€</b><span>local, RGPD, hors-ligne</span></div>
+        </div>
+      </div>
+      <p class="note" style="margin-top:14px"><strong>Confidentialité :</strong> l'outil ne manipule aucune donnée personnelle d'élève. Tout est calculé dans le navigateur ; rien n'est envoyé sur un serveur.</p>
+    </div>
+  </section>
+
+  <!-- 2. Les matières -->
+  <section>
+    <h2><span class="n">2</span> Huit matières, quatre niveaux</h2>
+    <p class="lead">Un même outil pour toute l'équipe pédagogique. Chaque matière propose ses chapitres et ses formats d'exercices propres.</p>
+    <div class="card">
+      <div style="margin-bottom:10px">
+        <span class="subj" style="background:#eef3fb;color:#2356a0;border-color:#cfe0f7">📐 Mathématiques</span>
+        <span class="subj" style="background:#f3eeff;color:#7c3aed;border-color:#e2d6fb">⚗️ Physique-Chimie</span>
+        <span class="subj" style="background:#ecfdf5;color:#059669;border-color:#c6f0dd">🧬 SVT</span>
+        <span class="subj" style="background:#ecfdf5;color:#059669;border-color:#c6f0dd">🔬 Sciences &amp; Technologie</span>
+        <span class="subj" style="background:#fef1f2;color:#be123c;border-color:#f8d3d9">📝 Français</span>
+        <span class="subj" style="background:#fffbeb;color:#d97706;border-color:#f7e6bf">🌍 Histoire-Géo · EMC</span>
+        <span class="subj" style="background:#eff6ff;color:#1d4ed8;border-color:#cfe0fb">🇬🇧 Anglais</span>
+        <span class="subj" style="background:#fef2f2;color:#dc2626;border-color:#f8d0d0">🇩🇪 Allemand</span>
+      </div>
+      <div class="grid g3" style="margin-top:6px">
+        <div class="feature"><h4>Plus de 200 modules</h4><p>Chaque chapitre dispose d'un ou plusieurs générateurs dédiés, conformes aux programmes du cycle 3 et du cycle 4.</p></div>
+        <div class="feature"><h4>5 formats d'exercices</h4><p>Calcul / géométrie, QCM, texte à trous (conjugaison, accords, homophones), réécriture, et étude de documents type « brevet ».</p></div>
+        <div class="feature"><h4>Figures dynamiques</h4><p>Graphiques, figures de géométrie (Pythagore, Thalès, trigonométrie), arbres de parenté, réseaux alimentaires, cartes, schémas de protocole.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. DÉMO : générer un exercice -->
+  <section>
+    <h2><span class="n">3</span> Démo : générez un exercice, en direct</h2>
+    <p class="lead">Une <strong>maquette réduite</strong> du vrai logiciel. Choisissez une matière et un chapitre, puis cliquez sur <strong>Générer</strong>. Chaque clic produit un exercice <strong>différent</strong> (valeurs et contexte tirés au sort), avec son corrigé — exactement comme dans l'outil.</p>
+    <div class="demo">
+      <div class="demo-bar"><span class="dots"><i></i><i></i><i></i></span> Générateur d'exercices différenciés <span class="lbl">DÉMO INTÉGRÉE</span></div>
+      <div class="demo-body">
+        <div class="side">
+          <h5>Matière</h5>
+          <div class="seg" id="seg-subj">
+            <button class="chipbtn on" data-s="maths" onclick="pickSubj(this)">📐 Maths</button>
+            <button class="chipbtn" data-s="francais" onclick="pickSubj(this)">📝 Français</button>
+            <button class="chipbtn" data-s="svt" onclick="pickSubj(this)">🧬 SVT</button>
+            <button class="chipbtn" data-s="anglais" onclick="pickSubj(this)">🇬🇧 Anglais</button>
+          </div>
+          <h5>Chapitre</h5>
+          <div class="seg" id="seg-topic"></div>
+          <label class="row">Nombre d'exercices <input type="number" id="nbExos" value="2" min="1" max="4"></label>
+          <label class="switch"><input type="checkbox" id="showCor" checked> Afficher le corrigé</label>
+          <button class="genbtn" onclick="generer()">⚡ Générer la série</button>
+          <div class="counter" id="counter"></div>
+        </div>
+        <div class="stage" id="stage">
+          <div class="note" style="background:#fff">Sélectionnez un chapitre puis cliquez sur <strong>Générer la série</strong>.</div>
+        </div>
+      </div>
+    </div>
+    <div class="demo-cap">Les générateurs de cette démo (théorème de Pythagore, aire/périmètre, conjugaison, homophones, assemblage SVT « brevet », <em>present simple</em>…) exécutent la <strong>même logique de tirage et de calcul</strong> que le logiciel réel. Dans l'outil complet, le corrigé et les figures sont aussi rendus, et la série s'exporte en Word/PDF.</div>
+  </section>
+
+  <!-- 4. Données réelles -->
+  <section>
+    <h2><span class="n">4</span> Des exercices ancrés dans des données réelles</h2>
+    <p class="lead">Pour plusieurs chapitres de SVT, les exercices de type « brevet » sont bâtis à partir de <strong>données ouvertes officielles</strong>, puis randomisés dans des fourchettes réalistes : les élèves analysent des données authentiques.</p>
+    <div class="card">
+      <div class="grid g4">
+        <div class="feature"><h4>GBIF</h4><p>Biodiversité, espèces invasives, occurrences d'espèces.</p></div>
+        <div class="feature"><h4>Hub'Eau</h4><p>Qualité des rivières, teneur en nitrates des cours d'eau.</p></div>
+        <div class="feature"><h4>NOAA</h4><p>Anomalies de température, suivi du réchauffement.</p></div>
+        <div class="feature"><h4>Open-Meteo</h4><p>Relevés et séries de températures.</p></div>
+      </div>
+      <p class="note" style="margin-top:14px">Principe d'assemblage « par briques » : l'outil tire un <strong>contexte</strong> (eutrophisation, blanchissement corallien, surpêche, espèce invasive…), y associe 2 à 3 <strong>documents</strong> compatibles (tableau, graphique, texte) aux valeurs randomisées, puis 3 à 4 <strong>questions</strong> de compétences variées (extraire, interpréter, raisonner) et une <strong>question de synthèse</strong>. Résultat : des centaines de combinaisons par thème.</p>
+    </div>
+  </section>
+
+  <!-- 5. Export -->
+  <section>
+    <h2><span class="n">5</span> De la génération à la feuille distribuée</h2>
+    <p class="lead">Tout se passe dans le navigateur, sans installation ni dépôt de fichier.</p>
+    <div class="card">
+      <div class="step"><span class="num">1</span><div class="txt"><b>Sélection.</b> Matière, niveau, chapitres à travailler et nombre d'exercices.</div></div>
+      <div class="step"><span class="num">2</span><div class="txt"><b>Génération.</b> L'outil tire au sort un générateur par exercice, randomise valeurs et contextes, puis <b>valide automatiquement</b> la cohérence de chaque énoncé avant affichage.</div></div>
+      <div class="step"><span class="num">3</span><div class="txt"><b>Ajustement.</b> On affiche ou masque le corrigé, on régénère un exercice qui ne convient pas, ou toute la série en un clic.</div></div>
+      <div class="step"><span class="num">4</span><div class="txt"><b>Export.</b> La série s'exporte en <b>Word</b> (en-tête nom/prénom, barème) ou en <b>PDF</b>, prête à photocopier.</div></div>
+    </div>
+  </section>
+
+  <!-- 6. Sous le capot -->
+  <section>
+    <h2><span class="n">6</span> Sous le capot — détails vérifiables</h2>
+    <details>
+      <summary>Architecture du code</summary>
+      <div class="body">Application monopage <strong>React / TypeScript</strong> (build <code>Vite</code>). Une barre latérale pilote cycle / niveau / matière / chapitres ; un registre central associe chaque (niveau, matière) à ses générateurs. Plus de 200 modules de génération, organisés par matière et par niveau, alimentent une carte d'exercice unique (<code>ExerciseCard</code>).</div>
+    </details>
+    <details>
+      <summary>Le moteur de tirage</summary>
+      <div class="body">À chaque génération, l'outil choisit un générateur parmi les chapitres actifs, qui produit un exercice avec des valeurs aléatoires (nombres, énoncés, contextes). Une fonction de validation rejette et régénère les exercices incohérents. C'est ce tirage qui rend chaque feuille unique.</div>
+    </details>
+    <details>
+      <summary>Figures &amp; données</summary>
+      <div class="body">Les figures sont dessinées en direct (composants dédiés : graphiques en barres et en courbes, figures de Pythagore / Thalès / trigonométrie, arbres phylogénétiques, réseaux trophiques, blocs Scratch, cartes sismiques cartographiées avec Leaflet, schémas de protocole). Plusieurs chapitres de SVT s'appuient sur des jeux de données ouvertes (GBIF, Hub'Eau, NOAA, Open-Meteo).</div>
+    </details>
+    <details>
+      <summary>Conformité RGPD</summary>
+      <div class="body">Aucune donnée personnelle d'élève n'est saisie ni transmise : l'outil ne génère que des énoncés. Le traitement est 100 % local (navigateur), sans serveur ni compte.</div>
+    </details>
+    <div class="grid g2" style="margin-top:14px">
+      <div class="card">
+        <h4 style="margin:0 0 8px;color:var(--green-d)">Stack technique</h4>
+        <span class="pill">React 19 / TypeScript</span>
+        <span class="pill">Vite</span>
+        <span class="pill">Leaflet (cartes)</span>
+        <span class="pill">Export Word (.doc)</span>
+        <span class="pill">Export PDF (impression)</span>
+        <span class="pill">Données ouvertes (GBIF, Hub'Eau, NOAA…)</span>
+        <span class="pill">100 % navigateur, hors-ligne</span>
+      </div>
+      <div class="card">
+        <h4 style="margin:0 0 8px;color:var(--green-d)">Accès</h4>
+        <p style="font-size:14px;color:var(--muted);margin-top:0">Application interne en cours de mise à disposition auprès des équipes.</p>
+        <p style="font-size:12.5px;color:var(--muted);margin-top:10px">Démonstration : lien à insérer.</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="wrap">
+  Annexe A12 · Générateur d'exercices différenciés (toutes matières, 6ᵉ–3ᵉ)<br>
+  Compte rendu d'activité du référent numérique 2025-2026 · Collège Pierre Mendès France, Woippy · M. Thomas Charles
+</footer>
+
+<script>
+/* ─────────── Données des chapitres par matière ─────────── */
+var TOPICS = {
+  maths:    [{id:'pyth',label:'Pythagore'},{id:'aire',label:'Aire & périmètre'}],
+  francais: [{id:'conj',label:'Conjugaison'},{id:'homo',label:'Homophones'}],
+  svt:      [{id:'eco',label:'Écosystèmes (brevet)'}],
+  anglais:  [{id:'present',label:'Present simple'},{id:'plural',label:'Pluriels'}]
+};
+var SUBJ_COLOR = {maths:'#2356a0', francais:'#be123c', svt:'#059669', anglais:'#1d4ed8'};
+var SUBJ_BG    = {maths:'#eef3fb', francais:'#fef1f2', svt:'#ecfdf5', anglais:'#eff6ff'};
+
+var curSubj='maths', curTopic='pyth', total=0;
+
+/* util */
+function ri(a,b){return a+Math.floor(Math.random()*(b-a+1));}
+function pick(arr){return arr[Math.floor(Math.random()*arr.length)];}
+function esc(s){return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+
+/* ─────────── Générateurs (mêmes principes que le code source) ─────────── */
+function genPyth(){
+  var tr=pick([[3,4,5],[6,8,10],[5,12,13],[8,15,17],[9,12,15],[7,24,25],[20,21,29]]);
+  var k=pick([1,1,1,2]); var a=tr[0]*k,b=tr[1]*k,c=tr[2]*k;
+  return {
+    title:'Théorème de Pythagore', pts:4,
+    body:'<p>ABC est un triangle rectangle en A. On donne AB = <b>'+a+' cm</b> et AC = <b>'+b+' cm</b>.</p>'+
+         '<ol><li>Quelle est l\'hypoténuse de ce triangle ?</li>'+
+         '<li>Calculer la longueur BC.</li></ol>',
+    cor:'<b>1.</b> L\'hypoténuse est [BC] (côté opposé à l\'angle droit).<br>'+
+        '<b>2.</b> BC² = AB² + AC² = '+a+'² + '+b+'² = '+(a*a)+' + '+(b*b)+' = '+(a*a+b*b)+'. '+
+        'Donc BC = √'+(a*a+b*b)+' = <b>'+c+' cm</b>.'
+  };
+}
+function genAire(){
+  var L=ri(6,18),l=ri(3,L-1);
+  return {
+    title:'Aire et périmètre d\'un rectangle', pts:3,
+    body:'<p>Un rectangle mesure <b>'+L+' cm</b> de longueur et <b>'+l+' cm</b> de largeur.</p>'+
+         '<ol><li>Calculer son périmètre.</li><li>Calculer son aire.</li></ol>',
+    cor:'<b>1.</b> P = 2 × (L + l) = 2 × ('+L+' + '+l+') = <b>'+(2*(L+l))+' cm</b>.<br>'+
+        '<b>2.</b> A = L × l = '+L+' × '+l+' = <b>'+(L*l)+' cm²</b>.'
+  };
+}
+function genConj(){
+  var v=pick([['chanter','chant'],['regarder','regard'],['jouer','jou'],['marcher','march'],['danser','dans']]);
+  var temps=pick([
+    {n:'futur',  suj:[['je',v[1]+'erai'],['tu',v[1]+'eras'],['il',v[1]+'era'],['nous',v[1]+'erons'],['ils',v[1]+'eront']]},
+    {n:'imparfait',suj:[['je',v[1]+'ais'],['tu',v[1]+'ais'],['il',v[1]+'ait'],['nous',v[1]+'ions'],['ils',v[1]+'aient']]}
+  ]);
+  var lignes=[]; var cor=[];
+  for(var i=0;i<3;i++){var s=pick(temps.suj); lignes.push((i+1)+'. '+s[0]+' (<i>'+v[0]+'</i>) ____'); cor.push((i+1)+'. '+s[0]+' <b>'+s[1]+'</b>');}
+  return {
+    title:'Conjugaison — '+temps.n, pts:3,
+    body:'<p class="ctx">Conjuguer le verbe entre parenthèses à l\''+temps.n+'.</p><ol style="list-style:none;padding-left:0">'+lignes.map(function(l){return '<li>'+l+'</li>';}).join('')+'</ol>',
+    cor:cor.join('<br>')
+  };
+}
+function genHomo(){
+  var items=pick([
+    {q:'a / à',  ph:[['Il ___ fini son travail.','a'],['Nous allons ___ la piscine.','à'],['Elle ___ raison.','a']]},
+    {q:'et / est',ph:[['Le chat ___ le chien dorment.','et'],['Mon frère ___ grand.','est'],['Il est tôt ___ il fait froid.','et']]},
+    {q:'son / sont',ph:[['Les élèves ___ partis.','sont'],['Il a oublié ___ cahier.','son'],['Elles ___ contentes.','sont']]}
+  ]);
+  var cor=[];
+  var body='<p class="ctx">Compléter avec « '+items.q+' ».</p><ol>';
+  items.ph.forEach(function(p,i){ body+='<li>'+p[0].replace('___','____')+'</li>'; cor.push((i+1)+'. '+p[0].replace('___','<b>'+p[1]+'</b>')); });
+  body+='</ol>';
+  return {title:'Homophones — '+items.q, pts:3, body:body, cor:cor.join('<br>')};
+}
+function genPresent(){
+  var rows=pick([
+    [['She','go','goes','to school by bus.'],['They','play','play','football on Sundays.'],['He','watch','watches','TV every evening.']],
+    [['My sister','like','likes','chocolate.'],['We','live','live','in Metz.'],['It','rain','rains','a lot in autumn.']]
+  ]);
+  var cor=[]; var body='<p class="ctx">Put the verb in the present simple.</p><ol>';
+  rows.forEach(function(r,i){ body+='<li>'+r[0]+' ____ ('+r[1]+') '+r[3]+'</li>'; cor.push((i+1)+'. '+r[0]+' <b>'+r[2]+'</b> '+r[3]); });
+  body+='</ol>';
+  return {title:'Present simple', pts:3, body:body, cor:cor.join('<br>')};
+}
+function genPlural(){
+  var ws=pick([
+    [['baby','babies'],['box','boxes'],['leaf','leaves'],['city','cities']],
+    [['child','children'],['man','men'],['tomato','tomatoes'],['knife','knives']]
+  ]);
+  var sel=[]; while(sel.length<3){var w=pick(ws); if(sel.indexOf(w)<0)sel.push(w);}
+  var cor=[]; var body='<p class="ctx">Write the plural form.</p><ol>';
+  sel.forEach(function(w,i){ body+='<li>one '+w[0]+' → two ____</li>'; cor.push((i+1)+'. '+w[0]+' → <b>'+w[1]+'</b>'); });
+  body+='</ol>';
+  return {title:'Plurals', pts:3, body:body, cor:cor.join('<br>')};
+}
+/* SVT — assemblage « par briques » (sous-ensemble réel de la banque) */
+var SVT_AXES=[
+  {ctx:'Depuis plusieurs années, un lac connaît une prolifération d\'algues vertes en été ; des poissons meurent et l\'eau devient trouble. Des scientifiques mènent une étude.',
+   docT:'Teneur en nutriments et chlorophylle du lac',
+   cols:['Année','Nitrates (mg/L)','Chlorophylle a (µg/L)'],
+   gen:function(){var y0=ri(2014,2017);var n=[ri(5,9),ri(12,18),ri(24,32)];var c=[ri(3,6),ri(12,18),ri(30,40)];
+     return [[y0,n[0],c[0]],[y0+3,n[1],c[1]],[y0+6,n[2],c[2]]];},
+   qs:[['Extraire','Décrire l\'évolution des nitrates et de la chlorophylle a entre la première et la dernière année.',2],
+       ['Raisonner','Expliquer le lien entre l\'augmentation des nitrates et la prolifération des algues.',3]],
+   synth:'Rédiger un court paragraphe expliquant comment les activités humaines perturbent cet écosystème aquatique, et proposer deux mesures.',
+   corA:'Les nitrates et la chlorophylle a augmentent tous deux sur la période : les deux courbes sont corrélées.',
+   corB:'Les nitrates (engrais) enrichissent le milieu → les algues disposent de plus de nutriments → elles prolifèrent (eutrophisation).'},
+  {ctx:'Des océanographes suivent un récif corallien du Pacifique Sud et constatent une augmentation des épisodes de blanchissement depuis 15 ans.',
+   docT:'Température de l\'eau et blanchissement des coraux',
+   cols:['Année','Température (°C)','Coraux blanchis (%)'],
+   gen:function(){var y0=ri(2008,2012);var t=[ (27+Math.random()).toFixed(1), (28+Math.random()).toFixed(1), (29+Math.random()).toFixed(1)];var b=[ri(5,15),ri(30,45),ri(60,80)];
+     return [[y0,t[0],b[0]],[y0+5,t[1],b[1]],[y0+10,t[2],b[2]]];},
+   qs:[['Extraire','Décrire l\'évolution de la température de l\'eau et du taux de blanchissement.',2],
+       ['Raisonner','Expliquer comment la hausse de température provoque le blanchissement puis la mort des coraux.',3]],
+   synth:'Montrer comment le réchauffement climatique menace la biodiversité, à l\'échelle de l\'océan et au-delà.',
+   corA:'La température et le pourcentage de coraux blanchis augmentent tous deux au fil des années.',
+   corB:'Hausse de température → stress du corail → expulsion des zooxanthelles (algues symbiotiques) → blanchissement → mort si le stress persiste.'}
+];
+function genSVT(){
+  var ax=pick(SVT_AXES); var rows=ax.gen();
+  var tbl='<table><tr>'+ax.cols.map(function(c){return '<th>'+c+'</th>';}).join('')+'</tr>'+
+    rows.map(function(r){return '<tr>'+r.map(function(v){return '<td>'+v+'</td>';}).join('')+'</tr>';}).join('')+'</table>';
+  var q1=ax.qs[0],q2=ax.qs[1];
+  return {
+    title:'Étude de documents — Écosystèmes', pts:8, ctx:ax.ctx,
+    body:'<div class="doc"><b>Document 1 — '+ax.docT+'</b>'+tbl+'</div>'+
+         '<ol><li>'+q1[1]+' <span class="qpts">('+q1[2]+' pts)</span></li>'+
+         '<li>'+q2[1]+' <span class="qpts">('+q2[2]+' pts)</span></li>'+
+         '<li>'+ax.synth+' <span class="qpts">(3 pts)</span></li></ol>',
+    cor:'<b>1.</b> '+ax.corA+'<br><b>2.</b> '+ax.corB+'<br><b>3.</b> Paragraphe argumenté attendu (constat → mécanisme → conséquences → mesures).'
+  };
+}
+
+var GEN={pyth:genPyth, aire:genAire, conj:genConj, homo:genHomo, eco:genSVT, present:genPresent, plural:genPlural};
+
+/* ─────────── Interface ─────────── */
+function renderTopics(){
+  var seg=document.getElementById('seg-topic'); seg.innerHTML='';
+  TOPICS[curSubj].forEach(function(t,i){
+    var b=document.createElement('button'); b.className='chipbtn'+(i===0?' on':''); b.textContent=t.label;
+    b.onclick=function(){ seg.querySelectorAll('.chipbtn').forEach(function(x){x.classList.remove('on')}); b.classList.add('on'); curTopic=t.id; };
+    seg.appendChild(b);
+  });
+  curTopic=TOPICS[curSubj][0].id;
+}
+function pickSubj(btn){
+  document.getElementById('seg-subj').querySelectorAll('.chipbtn').forEach(function(x){x.classList.remove('on')});
+  btn.classList.add('on'); curSubj=btn.getAttribute('data-s'); renderTopics();
+  var c=SUBJ_COLOR[curSubj];
+  document.documentElement.style.setProperty('--app', c);
+}
+function generer(){
+  var n=Math.max(1,Math.min(4, parseInt(document.getElementById('nbExos').value)||1));
+  var showCor=document.getElementById('showCor').checked;
+  var col=SUBJ_COLOR[curSubj], bg=SUBJ_BG[curSubj];
+  var stage=document.getElementById('stage'); stage.innerHTML='';
+  for(var i=0;i<n;i++){
+    var ex=GEN[curTopic]();
+    var div=document.createElement('div'); div.className='exo';
+    div.innerHTML=
+      '<div class="head"><div class="t" style="color:'+col+'">Exercice '+(i+1)+' — '+esc(ex.title)+'</div>'+
+      '<span class="pts" style="background:'+bg+';color:'+col+'">'+ex.pts+' pts</span></div>'+
+      (ex.ctx?'<div class="ctx">'+esc(ex.ctx)+'</div>':'')+
+      ex.body+
+      (showCor?'<div class="corrige"><b>Corrigé :</b><br>'+ex.cor+'</div>':'')+
+      '<div style="text-align:right;margin-top:8px"><button class="regen">↻ Régénérer celui-ci</button></div>';
+    (function(container,idx){
+      container.querySelector('.regen').onclick=function(){ regenOne(container,idx); };
+    })(div,i);
+    stage.appendChild(div);
+  }
+  total+=n;
+  document.getElementById('counter').textContent='Exercices générés depuis l\'ouverture : '+total+' — tous différents.';
+}
+function regenOne(container,idx){
+  var showCor=document.getElementById('showCor').checked;
+  var col=SUBJ_COLOR[curSubj], bg=SUBJ_BG[curSubj];
+  var ex=GEN[curTopic]();
+  container.innerHTML=
+    '<div class="head"><div class="t" style="color:'+col+'">Exercice '+(idx+1)+' — '+esc(ex.title)+'</div>'+
+    '<span class="pts" style="background:'+bg+';color:'+col+'">'+ex.pts+' pts</span></div>'+
+    (ex.ctx?'<div class="ctx">'+esc(ex.ctx)+'</div>':'')+
+    ex.body+
+    (showCor?'<div class="corrige"><b>Corrigé :</b><br>'+ex.cor+'</div>':'')+
+    '<div style="text-align:right;margin-top:8px"><button class="regen">↻ Régénérer celui-ci</button></div>';
+  container.querySelector('.regen').onclick=function(){ regenOne(container,idx); };
+  total++; document.getElementById('counter').textContent='Exercices générés depuis l\'ouverture : '+total+' — tous différents.';
+}
+
+/* init */
+renderTopics();
+document.documentElement.style.setProperty('--app', SUBJ_COLOR[curSubj]);
+</script>
+</body>
+</html>
