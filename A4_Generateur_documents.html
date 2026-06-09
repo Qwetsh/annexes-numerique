@@ -9,18 +9,22 @@
     --green:#1f7a54; --green-d:#155c3f; --green-l:#eaf5ef; --ink:#1d2b25; --muted:#5c6b63;
     --line:#d9e6df; --bg:#f5f9f7; --card:#fff;
     --shadow:0 2px 10px rgba(20,60,45,.06),0 8px 30px rgba(20,60,45,.05);
+    /* couleurs réelles du logiciel (charte État / bleu Marianne) */
+    --app-blue:#000091; --app-blue-h:#0000b8; --app-bg-l:#f5f5fe; --app-bg2:#f9f9ff; --app-line:#e8e8f0;
   }
   *{box-sizing:border-box}
   body{margin:0;font-family:"Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.55}
+  a{color:var(--green-d)}
   .wrap{max-width:1000px;margin:0 auto;padding:0 22px}
   header.top{background:linear-gradient(135deg,#1f7a54,#155c3f);color:#fff;padding:34px 0 30px}
-  .badge{display:inline-block;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:4px 14px;font-size:13px;font-weight:600}
-  header.top h1{margin:14px 0 6px;font-size:30px}
-  header.top p{margin:0;opacity:.92;max-width:720px}
+  .badge{display:inline-block;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:4px 14px;font-size:13px;font-weight:600;letter-spacing:.3px}
+  header.top h1{margin:14px 0 6px;font-size:30px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+  header.top p{margin:0;opacity:.92;max-width:740px}
   main{padding:34px 0 60px}
   section{margin:0 0 30px}
   h2{font-size:21px;color:var(--green-d);margin:0 0 6px;display:flex;align-items:center;gap:9px}
   h2 .n{background:var(--green);color:#fff;border-radius:8px;font-size:13px;padding:2px 9px;font-weight:700}
+  h3{color:var(--green-d)}
   .lead{color:var(--muted);margin:.2em 0 1.1em}
   .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 22px;box-shadow:var(--shadow)}
   .grid{display:grid;gap:14px}
@@ -30,141 +34,332 @@
   .feature h4{margin:0 0 5px;color:var(--green-d);font-size:15.5px}
   .feature p{margin:0;font-size:13.5px;color:var(--muted)}
   .pill{display:inline-block;background:var(--green-l);color:var(--green-d);border-radius:999px;padding:3px 11px;font-size:12.5px;font-weight:600;margin:0 4px 6px 0}
+  .kpi{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px;text-align:center}
+  .kpi b{display:block;font-size:24px;color:var(--green-d)} .kpi span{font-size:12.5px;color:var(--muted)}
   .tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
   .tab{border:1px solid var(--line);background:#fff;border-radius:999px;padding:8px 16px;cursor:pointer;font-weight:600;font-size:14px;color:var(--muted)}
   .tab.on{background:var(--green);color:#fff;border-color:var(--green)}
   .panel{display:none} .panel.on{display:block}
   .cta{display:inline-block;margin-top:6px;background:var(--green);color:#fff;text-decoration:none;border-radius:9px;padding:9px 16px;font-weight:600;font-size:14px}
-  /* budget calc */
-  .budget{display:grid;grid-template-columns:1fr 1fr;gap:18px}
-  @media(max-width:560px){.budget{grid-template-columns:1fr}}
-  .brow{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:8px}
-  .brow label{font-size:13.5px;color:#33473e}
-  .brow input{width:96px;border:1px solid var(--line);border-radius:8px;padding:6px 9px;text-align:right;font-size:14px}
-  .btot{display:flex;justify-content:space-between;font-weight:700;border-top:2px solid var(--line);padding-top:8px;margin-top:4px;color:var(--green-d)}
-  .solde{text-align:center;background:var(--green-l);border-radius:12px;padding:16px;margin-top:14px;font-weight:700;font-size:18px}
-  .solde.neg{background:#fdeceb;color:#c0392b}
-  .col h4{margin:0 0 8px;color:var(--green-d);font-size:14.5px}
-  footer{border-top:1px solid var(--line);padding:22px 0;color:var(--muted);font-size:13px;text-align:center}
   .note{font-size:13px;color:var(--muted);background:#fff;border:1px dashed var(--line);border-radius:10px;padding:11px 14px}
+  details{background:#fff;border:1px solid var(--line);border-radius:11px;margin:0 0 9px;overflow:hidden}
+  summary{cursor:pointer;padding:13px 16px;font-weight:600;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:10px;color:var(--green-d)}
+  summary::-webkit-details-marker{display:none}
+  summary::after{content:"+";color:var(--green);font-size:20px;font-weight:700}
+  details[open] summary::after{content:"\2013"}
+  details .body{padding:0 16px 15px;color:#3a4a42;font-size:14px}
+  table{width:100%;border-collapse:collapse;font-size:13.5px}
+  th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line)}
+  th{background:var(--green);color:#fff;font-weight:600}
+  footer{border-top:1px solid var(--line);padding:22px 0;color:var(--muted);font-size:13px;text-align:center}
+
+  /* ───────── Boîtier « démo intégrée » : reproduit l'UI réelle (charte bleu État) ───────── */
+  .demo{border:2px solid var(--app-blue);border-radius:14px;overflow:hidden;margin:6px 0 4px;box-shadow:0 6px 22px rgba(0,0,145,.10)}
+  .demo-bar{background:var(--app-blue);color:#fff;display:flex;align-items:center;gap:8px;padding:7px 12px;font-size:12.5px;font-weight:600}
+  .demo-bar .dots{display:flex;gap:5px;margin-right:4px}
+  .demo-bar .dots i{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.55);display:inline-block}
+  .demo-bar .lbl{margin-left:auto;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.4);border-radius:999px;padding:2px 10px;font-size:11px;letter-spacing:.3px}
+  .demo-body{background:#f0f2f5;padding:14px}
+  .app-head{background:var(--app-blue);color:#fff;text-align:center;padding:10px;border-radius:8px 8px 0 0;margin:-14px -14px 12px}
+  .app-head b{font-size:15px;display:block}
+  .app-head small{opacity:.85;font-size:12px}
+  /* onglets internes du logiciel */
+  .doc-nav{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+  .doc-tab{padding:6px 12px;border:2px solid var(--app-blue);background:#fff;color:var(--app-blue);font-weight:600;border-radius:6px;cursor:pointer;font-size:12.5px}
+  .doc-tab.active,.doc-tab:hover{background:var(--app-blue);color:#fff}
+  /* champs façon logiciel */
+  .fld{background:#fff;border:1px solid #ddd;border-radius:8px;padding:12px 14px;margin-bottom:10px}
+  .fld legend,.fld .leg{font-weight:700;color:var(--app-blue);font-size:13px;margin-bottom:8px;display:block}
+  .frow{display:flex;gap:10px;flex-wrap:wrap}
+  .fg{flex:1;min-width:120px;margin-bottom:8px}
+  .fg label{display:block;font-size:11.5px;font-weight:600;color:#333;margin-bottom:3px}
+  .fg input,.fg select,.fg textarea{width:100%;padding:6px 8px;border:1px solid #ccc;border-radius:4px;font-size:12.5px;font-family:inherit}
+  .fg input:focus,.fg select:focus,.fg textarea:focus{outline:none;border-color:var(--app-blue);box-shadow:0 0 0 2px rgba(0,0,145,.12)}
+  .chk{display:flex;align-items:center;gap:6px;font-size:12.5px;margin:4px 0;font-weight:500}
+  .chk input{width:auto}
+  .app-btn{background:var(--app-blue);color:#fff;border:none;border-radius:6px;padding:8px 14px;font-weight:700;font-size:12.5px;cursor:pointer}
+  .app-btn:hover{background:var(--app-blue-h)}
+  .app-btn.ghost{background:#fff;color:var(--app-blue);border:2px solid var(--app-blue)}
+  .btn-sm{background:var(--app-bg-l);color:var(--app-blue);border:1px solid var(--app-blue);border-radius:4px;padding:4px 9px;font-size:12px;cursor:pointer}
+  .btn-x{background:#fff;color:#d00;border:1px solid #d00;border-radius:4px;padding:2px 7px;font-size:11px;cursor:pointer;line-height:1}
+  /* aperçu "feuille A4" reproduit dans la démo */
+  .sheet{background:#fff;border:1px solid #ccc;border-radius:6px;padding:16px 18px;font-size:11.5px;color:#1a1a2e;box-shadow:inset 0 0 0 1px #f0f0f6}
+  .sheet .topbar{height:6px;background:var(--app-blue);border-radius:3px;margin:-16px -18px 10px}
+  .sheet h5{color:var(--app-blue);text-align:center;margin:0 0 2px;font-size:13px}
+  .sheet .sub{text-align:center;color:#777;font-size:10px;margin-bottom:10px}
+  .sheet .stitle{color:var(--app-blue);font-weight:700;font-size:11.5px;border-bottom:1px solid var(--app-blue);display:inline-block;margin:8px 0 4px}
+  .sheet .kv{margin:2px 0}.sheet .kv b{color:#000}
+  .sheet .box{background:var(--app-bg-l);border-radius:5px;padding:8px 10px;margin:6px 0}
+  .sheet .supp{border-bottom:1px solid #eee;padding:4px 0;display:flex;gap:8px;align-items:flex-start}
+  .sheet .cb{font-family:monospace;color:#333;white-space:nowrap}
+  .warnbox{background:#fff5e6;border:1px solid #dc7800;color:#b56200;border-radius:5px;padding:7px 10px;font-weight:700;font-size:11px;margin:6px 0}
+  /* budget démo */
+  .btot{background:var(--app-bg-l);color:var(--app-blue);border-radius:5px;padding:6px 10px;text-align:center;font-weight:700;font-size:13px;margin-top:6px}
+  .bbal{text-align:center;font-weight:700;border-radius:5px;padding:7px;margin-top:8px;font-size:13.5px}
+  .bbal.pos{background:#e8f5e9;color:#2e7d32}.bbal.neg{background:#ffebee;color:#c62828}
+  .ro{background:#f0f0f0;font-weight:600}
+  .demo-cap{font-size:12px;color:var(--muted);background:#fff;border:1px dashed var(--line);border-top:none;border-radius:0 0 12px 12px;padding:9px 14px;margin-top:-4px}
+  .etab{font-size:13px;color:var(--green-d);background:var(--green-l);border-radius:7px;padding:3px 10px;font-weight:600;display:inline-block;margin:2px 4px 2px 0}
+  .csvbtn{background:#fff;border:1px dashed var(--app-blue);color:var(--app-blue);border-radius:6px;padding:6px 11px;font-size:12px;font-weight:600;cursor:pointer}
+  .etable{font-size:11.5px;margin-top:8px}
+  .etable th{background:var(--app-bg-l);color:var(--app-blue);border-bottom:2px solid var(--app-blue);font-size:10.5px;padding:5px 6px}
+  .etable td{padding:4px 6px;border-bottom:1px solid #eee}
+  .etable tr:nth-child(even) td{background:#fafafa}
+  .etable input,.etable select{width:100%;padding:2px 5px;font-size:11px;border:1px solid #ddd;border-radius:3px;font-family:inherit}
+  .step{display:flex;gap:12px;align-items:flex-start;margin-bottom:12px}
+  .step .num{flex:0 0 auto;width:28px;height:28px;border-radius:50%;background:var(--green);color:#fff;font-weight:700;display:flex;align-items:center;justify-content:center;font-size:14px}
+  .step .txt{font-size:14px}.step .txt b{color:var(--green-d)}
 </style>
 </head>
 <body>
 <header class="top">
   <div class="wrap">
     <span class="badge">Annexe A4 · Rapport référent numérique 2025-2026</span>
-    <h1>Générateur de documents administratifs</h1>
-    <p>Document interactif de présentation. Outil web qui facilite la création et la collecte des autorisations de droit à l'image et de voix, des demandes de sortie et de voyage scolaire — saisie simplifiée pour les collègues et <strong>génération automatique d'un PDF officiel</strong>.</p>
+    <h1>📄 Générateur de documents officiels</h1>
+    <p>Document interactif de présentation. Application web qui assiste les collègues dans la rédaction et l'édition des <strong>documents administratifs réglementaires</strong> du collège — autorisation de captation image / son, information de sortie scolaire obligatoire, et dossier complet de demande de sortie ou séjour — avec <strong>génération automatique d'un PDF officiel</strong> conforme à la charte de l'État, entièrement dans le navigateur.</p>
   </div>
 </header>
 
 <main class="wrap">
 
+  <!-- ───────────────── 1. À quoi ça sert ───────────────── -->
   <section>
-    <h2><span class="n">1</span> Trois documents générés — parcourez-les</h2>
-    <p class="lead">Une navigation par onglets. <strong>Choisissez un document</strong> pour voir ses champs et options.</p>
+    <h2><span class="n">1</span> Le problème résolu</h2>
+    <p class="lead">Trois documents lourds à remplir à la main, sources d'erreurs et de pertes de temps, refondus en formulaires guidés qui produisent un PDF prêt à signer.</p>
+    <div class="card">
+      <div class="grid g2">
+        <div>
+          <p>Chaque sortie, projet vidéo ou voyage scolaire impose aux enseignants de remplir des formulaires académiques denses (consentement RGPD, coupons-réponse, budget prévisionnel, listes nominatives…). Recopiés chaque année, ils sont chronophages et fragiles.</p>
+          <p>L'outil <strong>pré-remplit les données de l'établissement</strong>, guide la saisie champ par champ, recalcule automatiquement budgets et effectifs, puis assemble un <strong>PDF mis en page</strong> reproduisant fidèlement le document officiel (en-tête ministériel, mentions légales, numérotation des pages).</p>
+        </div>
+        <div class="grid g2">
+          <div class="kpi"><b>3</b><span>documents générés</span></div>
+          <div class="kpi"><b>100&nbsp;%</b><span>traitement local (RGPD)</span></div>
+          <div class="kpi"><b>0&nbsp;€</b><span>coût, aucun serveur</span></div>
+          <div class="kpi"><b>PDF</b><span>conforme charte État</span></div>
+        </div>
+      </div>
+      <p class="note" style="margin-top:14px"><strong>Confidentialité&nbsp;:</strong> aucune donnée d'élève n'est envoyée vers un serveur. Le fichier CSV importé et le PDF sont traités <em>uniquement</em> dans le navigateur (bibliothèque jsPDF embarquée localement). Données de l'établissement déjà saisies&nbsp;: <span class="etab">Collège Pierre Mendès France</span><span class="etab">57140 WOIPPY</span><span class="etab">03 87 54 36 40</span><span class="etab">Année 2026</span></p>
+    </div>
+  </section>
+
+  <!-- ───────────────── 2. Les 3 documents ───────────────── -->
+  <section>
+    <h2><span class="n">2</span> Les trois documents — parcourez-les</h2>
+    <p class="lead">Le logiciel est une application à onglet unique (SPA)&nbsp;: une barre de navigation bascule entre trois formulaires. <strong>Choisissez un document</strong> pour voir ses champs réels.</p>
     <div class="tabs">
       <div class="tab on" onclick="setTab(this,'d-img')">📷 Captation image / son</div>
       <div class="tab" onclick="setTab(this,'d-sortie')">🚌 Sortie obligatoire</div>
-      <div class="tab" onclick="setTab(this,'d-sejour')">✈️ Demande de sortie / séjour</div>
+      <div class="tab" onclick="setTab(this,'d-sejour')">✈️ Demande sortie / séjour</div>
     </div>
     <div class="card">
       <div class="panel on" id="d-img">
-        <h3 style="margin:0 0 6px;color:var(--green-d)">Autorisation de captation image / son</h3>
-        <p style="font-size:14px">Génère le document à faire signer aux familles, avec autorisation <strong>support par support</strong>.</p>
-        <h4 style="margin:12px 0 6px;color:var(--green-d);font-size:14px">Supports d'exploitation à cocher</h4>
+        <h3 style="margin:0 0 6px">Autorisation de captation image / son</h3>
+        <p style="font-size:14px;margin-top:0">Recueille le consentement RGPD des familles pour photographier, filmer ou enregistrer un élève dans le cadre d'un projet. Le document est conçu pour que les parents autorisent ou refusent <strong>support d'exploitation par support</strong>, en cochant OUI/NON dans le PDF.</p>
+        <h4 style="margin:12px 0 6px;color:var(--green-d);font-size:14px">Supports d'exploitation à cocher (réels)</h4>
         <span class="pill">Usage collectif en classe</span>
-        <span class="pill">En ligne via l'ENT (URL)</span>
-        <span class="pill">Internet public (URL)</span>
-        <span class="pill">Support amovible (+ destinataires)</span>
-        <span class="pill">Projection collective</span>
+        <span class="pill">En ligne — accès réservé (ENT, plateforme, extranet)</span>
+        <span class="pill">En ligne — Internet (monde entier)</span>
+        <span class="pill">Support de stockage amovible (+ destinataires)</span>
+        <span class="pill">Projection collective (3 sous-usages)</span>
         <span class="pill">Autre (libre)</span>
         <h4 style="margin:12px 0 6px;color:var(--green-d);font-size:14px">Informations saisies</h4>
-        <span class="pill">Établissement, classe, année</span>
+        <span class="pill">Établissement, tél., commune, année, classe</span>
         <span class="pill">Finalités envisagées</span>
-        <span class="pill">Projet : titre, dates, lieux</span>
+        <span class="pill">Projet audio-visuel : nom, titre de l'œuvre</span>
+        <span class="pill">Dates et lieux d'enregistrement</span>
+        <p class="note" style="margin-top:12px">Le PDF produit déroule 6 sections officielles&nbsp;: <strong>1.</strong> Finalités · <strong>2.</strong> Désignation du projet · <strong>3.</strong> Modes d'exploitation (tableau OUI/NON) · <strong>4.</strong> Consentement de l'élève · <strong>5.</strong> Autorisation parentale · <strong>6.</strong> Exercice des droits (contact DPD&nbsp;: dpd@ac-nancy-metz.fr, CNIL). Mentions visées&nbsp;: art. 9 Code civil, CEDH, RGPD 2016/679, loi 78-17.</p>
       </div>
+
       <div class="panel" id="d-sortie">
-        <h3 style="margin:0 0 6px;color:var(--green-d)">Sortie scolaire obligatoire</h3>
-        <p style="font-size:14px">Document officiel à retourner aux familles (avec coupon-réponse).</p>
-        <h4 style="margin:12px 0 6px;color:var(--green-d);font-size:14px">Champs</h4>
-        <span class="pill">Organisateur (nom, fonction)</span>
-        <span class="pill">Date, classe(s), lieu</span>
-        <span class="pill">Horaires départ / retour</span>
-        <span class="pill">Matière(s) & objectifs</span>
-        <h4 style="margin:12px 0 6px;color:var(--green-d);font-size:14px">Transport</h4>
-        <span class="pill">À pied · bus scolaire · bus de ville</span>
-        <span class="pill">Car affrété · train · tramway</span>
-        <span class="pill">Lieux de départ / arrivée</span>
-        <span class="pill">Date limite de retour du coupon</span>
-      </div>
-      <div class="panel" id="d-sejour">
-        <h3 style="margin:0 0 6px;color:var(--green-d)">Demande de sortie / séjour (formulaire complet)</h3>
-        <p style="font-size:14px">Le dossier complet pour l'administration : destination, groupe, contenu pédagogique, budget, accompagnateurs, incidences sur l'emploi du temps.</p>
+        <h3 style="margin:0 0 6px">Sortie scolaire obligatoire</h3>
+        <p style="font-size:14px;margin-top:0">Produit l'information aux parents pour une sortie gratuite sur temps scolaire, <strong>avec un accusé de réception détachable</strong> (séparé par une ligne de pointillés) que les familles retournent signé.</p>
         <div class="grid g3" style="margin-top:10px">
-          <div class="feature"><h4>Destination & déplacement</h4><p>France / étranger, obligatoire / facultatif, sortie ou séjour avec nuitée, transport.</p></div>
-          <div class="feature"><h4>Composition du groupe</h4><p>Ajout dynamique de classes (effectifs), <strong>import CSV de la liste d'élèves</strong> avec tableau éditable.</p></div>
-          <div class="feature"><h4>Contenu pédagogique</h4><p>8 domaines, disciplines, objectifs, liens au projet d'établissement, restitution.</p></div>
-          <div class="feature"><h4>Budget prévisionnel</h4><p>Recettes & dépenses détaillées, <strong>totaux et solde calculés automatiquement</strong> (voir ci-dessous).</p></div>
-          <div class="feature"><h4>Accompagnateurs</h4><p>Ajout dynamique : nom, qualité, téléphone.</p></div>
-          <div class="feature"><h4>Incidences emploi du temps</h4><p>Impact sur les horaires des classes et des personnels.</p></div>
+          <div class="feature"><h4>Organisateur</h4><p>Nom et fonction de l'enseignant responsable.</p></div>
+          <div class="feature"><h4>Détails</h4><p>Date, classe(s), lieu, heures de départ / retour, matière(s), objectifs.</p></div>
+          <div class="feature"><h4>Transport</h4><p>7 modes&nbsp;: à pied, bus scolaire, bus de ville, car affrété, train, tramway, véhicule personnel ; lieux de départ / arrivée.</p></div>
+        </div>
+        <p class="note" style="margin-top:12px">Le PDF affiche un encadré d'alerte orange «&nbsp;Cette sortie, organisée sur le temps scolaire, est gratuite et donc obligatoire&nbsp;». L'accusé de réception comporte la date limite de retour du coupon, la déclaration d'assurance, la case PAI et l'autorisation des mesures d'urgence.</p>
+      </div>
+
+      <div class="panel" id="d-sejour">
+        <h3 style="margin:0 0 6px">Demande de sortie / séjour (dossier complet)</h3>
+        <p style="font-size:14px;margin-top:0">Le dossier réglementaire pour l'administration&nbsp;: <em>«&nbsp;Sorties et séjours collectifs d'élèves du second degré&nbsp;»</em>. Le PDF généré comporte la page principale + <strong>Annexe 1 (budget)</strong> + <strong>Annexe 2 (listes nominatives)</strong>.</p>
+        <div class="grid g3" style="margin-top:10px">
+          <div class="feature"><h4>Destination & déplacement</h4><p>France / étranger, obligatoire / facultatif, sortie sans nuitée ou séjour avec nuitée (réciprocité + hébergement), transport.</p></div>
+          <div class="feature"><h4>Composition du groupe</h4><p>Ajout dynamique de classes (effectif, participants) avec <strong>totaux automatiques</strong>.</p></div>
+          <div class="feature"><h4>Contenu pédagogique</h4><p>8 domaines, disciplines, objectifs, liens au projet d'établissement, activités, restitution, élèves non-participants.</p></div>
+          <div class="feature"><h4>Budget prévisionnel</h4><p>Recettes & dépenses détaillées, <strong>totaux et solde calculés en direct</strong> (voir §4).</p></div>
+          <div class="feature"><h4>Accompagnateurs</h4><p>Ajout dynamique&nbsp;: nom, qualité, téléphone.</p></div>
+          <div class="feature"><h4>Liste des élèves</h4><p><strong>Import CSV</strong> de la liste, tableau éditable nom / prénom / sexe / tél. urgence (voir §5).</p></div>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- ───────────────── 3. DÉMO : Captation image/son ───────────────── -->
   <section>
-    <h2><span class="n">2</span> Le budget prévisionnel — calcul automatique</h2>
-    <p class="lead">Comme dans l'outil : modifiez les montants, le total et le solde se recalculent en direct.</p>
+    <h2><span class="n">3</span> Démo&nbsp;: l'autorisation de captation, en direct</h2>
+    <p class="lead">Une <strong>maquette réduite</strong> du vrai logiciel. Remplissez le mini-formulaire et cochez les supports&nbsp;: l'aperçu du document officiel se met à jour à chaque frappe, exactement comme dans l'outil.</p>
+    <div class="demo">
+      <div class="demo-bar"><span class="dots"><i></i><i></i><i></i></span> Générateur de Documents Officiels <span class="lbl">DÉMO INTÉGRÉE</span></div>
+      <div class="demo-body">
+        <div class="app-head"><b>Générateur de Documents Officiels</b><small>Collège Pierre Mendès France</small></div>
+        <div class="grid g2" style="gap:14px">
+          <div>
+            <div class="fld">
+              <span class="leg">Projet audio-visuel</span>
+              <div class="frow">
+                <div class="fg"><label>Classe de</label><input id="c-classe" value="Cinquième 3" oninput="capRender()"></div>
+                <div class="fg"><label>Année scolaire</label><input id="c-annee" value="2026" oninput="capRender()"></div>
+              </div>
+              <div class="fg"><label>Nom du projet</label><input id="c-projet" value="La météo du futur" oninput="capRender()"></div>
+              <div class="frow">
+                <div class="fg"><label>Date(s) — du</label><input type="date" id="c-d1" value="2026-03-10" oninput="capRender()"></div>
+                <div class="fg"><label>au</label><input type="date" id="c-d2" value="2026-03-14" oninput="capRender()"></div>
+              </div>
+              <div class="fg"><label>Lieu(x) d'enregistrement</label><input id="c-lieu" value="Salle 400" oninput="capRender()"></div>
+            </div>
+            <div class="fld">
+              <span class="leg">3 — Supports envisagés (cochez)</span>
+              <label class="chk"><input type="checkbox" id="s-classe" checked onchange="capRender()"> Usage collectif en classe</label>
+              <label class="chk"><input type="checkbox" id="s-ent" onchange="capRender()"> En ligne — accès réservé (ENT)</label>
+              <label class="chk"><input type="checkbox" id="s-net" onchange="capRender()"> En ligne — Internet (monde entier)</label>
+              <label class="chk"><input type="checkbox" id="s-stock" onchange="capRender()"> Support de stockage amovible</label>
+              <label class="chk"><input type="checkbox" id="s-proj" checked onchange="capRender()"> Projection collective</label>
+              <div style="text-align:right;margin-top:8px"><button class="app-btn ghost" onclick="capRender()">Aperçu PDF</button></div>
+            </div>
+          </div>
+          <div>
+            <div class="sheet" id="cap-sheet"><!-- aperçu généré --></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="demo-cap">Aperçu reconstitué&nbsp;: dans le logiciel réel, ce rendu est un <strong>vrai PDF</strong> A4 (jsPDF) téléchargeable, avec en-tête «&nbsp;Ministère de l'Éducation nationale&nbsp;», logo de l'académie et numérotation des pages. Seuls les supports cochés apparaissent — chaque famille coche ensuite OUI/NON pour chacun.</div>
+  </section>
+
+  <!-- ───────────────── 4. DÉMO : Budget ───────────────── -->
+  <section>
+    <h2><span class="n">4</span> Démo&nbsp;: le budget prévisionnel auto-calculé</h2>
+    <p class="lead">Reproduction fidèle du module budget de la «&nbsp;Demande de sortie / séjour&nbsp;». La participation des familles se calcule <strong>nombre × montant</strong>, les totaux recettes/dépenses et le solde se recalculent à chaque saisie. Le solde passe au <span style="color:#2e7d32;font-weight:700">vert</span> (équilibré/excédent) ou au <span style="color:#c62828;font-weight:700">rouge</span> (déficit).</p>
+    <div class="demo">
+      <div class="demo-bar"><span class="dots"><i></i><i></i><i></i></span> Demande de sortie / séjour — Budget prévisionnel <span class="lbl">DÉMO INTÉGRÉE</span></div>
+      <div class="demo-body">
+        <div class="grid g2" style="gap:16px">
+          <div class="fld">
+            <span class="leg" style="text-align:center;display:block">Recettes</span>
+            <div style="font-size:10.5px;color:#666;text-transform:uppercase;border-bottom:1px solid #eee;margin-bottom:6px">Participation</div>
+            <div class="frow">
+              <div class="fg"><label>Nb familles</label><input type="number" id="b-nb" value="28" min="0" oninput="budCalc()"></div>
+              <div class="fg"><label>× montant (€)</label><input type="number" id="b-mt" value="15" min="0" step="0.01" oninput="budCalc()"></div>
+              <div class="fg"><label>Total familles</label><input type="text" id="b-totfam" class="ro" readonly></div>
+            </div>
+            <div class="fg"><label>Établissement (€)</label><input type="number" id="b-etab" value="200" min="0" step="0.01" oninput="budCalc()"></div>
+            <div class="fg"><label>Dons (FSE, MDL, associations) (€)</label><input type="number" id="b-dons" value="0" min="0" step="0.01" oninput="budCalc()"></div>
+            <div style="font-size:10.5px;color:#666;text-transform:uppercase;border-bottom:1px solid #eee;margin:6px 0">Subventions</div>
+            <div class="frow">
+              <div class="fg"><label>Commune</label><input type="number" id="b-com" value="150" min="0" step="0.01" oninput="budCalc()"></div>
+              <div class="fg"><label>Conseil Départemental</label><input type="number" id="b-dep" value="0" min="0" step="0.01" oninput="budCalc()"></div>
+            </div>
+            <div class="btot">TOTAL RECETTES&nbsp;: <span id="b-totR">0.00</span> €</div>
+          </div>
+          <div class="fld">
+            <span class="leg" style="text-align:center;display:block">Dépenses</span>
+            <div style="font-size:10.5px;color:#666;text-transform:uppercase;border-bottom:1px solid #eee;margin-bottom:6px">Transport</div>
+            <div class="frow">
+              <div class="fg"><label>Bus</label><input type="number" id="b-bus" value="480" min="0" step="0.01" oninput="budCalc()"></div>
+              <div class="fg"><label>Train</label><input type="number" id="b-train" value="0" min="0" step="0.01" oninput="budCalc()"></div>
+            </div>
+            <div style="font-size:10.5px;color:#666;text-transform:uppercase;border-bottom:1px solid #eee;margin:6px 0">Hébergement / Repas</div>
+            <div class="fg"><label>Repas</label><input type="number" id="b-repas" value="0" min="0" step="0.01" oninput="budCalc()"></div>
+            <div style="font-size:10.5px;color:#666;text-transform:uppercase;border-bottom:1px solid #eee;margin:6px 0">Activités / Divers</div>
+            <div class="frow">
+              <div class="fg"><label>Activités / Visites</label><input type="number" id="b-act" value="120" min="0" step="0.01" oninput="budCalc()"></div>
+              <div class="fg"><label>Matériel pédagogique</label><input type="number" id="b-mat" value="0" min="0" step="0.01" oninput="budCalc()"></div>
+            </div>
+            <div class="btot">TOTAL DÉPENSES&nbsp;: <span id="b-totD">0.00</span> €</div>
+          </div>
+        </div>
+        <div class="bbal" id="b-bal"></div>
+      </div>
+    </div>
+    <div class="demo-cap">Logique identique au code source&nbsp;: <code>total familles = nb × montant</code>, puis solde = recettes − dépenses. Dans l'outil complet, les recettes agrègent 8 lignes (familles, établissement, dons, 4 subventions + autres) et les dépenses 9 lignes (bus, train, avion, autre transport, hébergement, repas, activités, matériel, divers). Ces montants alimentent l'Annexe 1 du PDF.</div>
+  </section>
+
+  <!-- ───────────────── 5. DÉMO : Import CSV ───────────────── -->
+  <section>
+    <h2><span class="n">5</span> Démo&nbsp;: import CSV de la liste d'élèves</h2>
+    <p class="lead">Le logiciel lit un CSV exporté du logiciel de gestion (séparateur «&nbsp;point-virgule&nbsp;»), repère les colonnes <em>Élèves</em> et <em>Sexe</em>, sépare automatiquement le <strong>NOM</strong> (mots en majuscules) du <strong>Prénom</strong>, convertit «&nbsp;Féminin/Masculin&nbsp;» en F/M, puis affiche un tableau éditable. <strong>Cliquez sur «&nbsp;Simuler l'import&nbsp;»</strong> pour voir le parsing en action.</p>
+    <div class="demo">
+      <div class="demo-bar"><span class="dots"><i></i><i></i><i></i></span> Demande de sortie / séjour — Liste des élèves <span class="lbl">DÉMO INTÉGRÉE</span></div>
+      <div class="demo-body">
+        <div class="fld">
+          <span class="leg">Liste des élèves — import CSV</span>
+          <p style="font-size:11.5px;color:#666;font-style:italic;margin:0 0 8px">Fichier CSV (séparateur&nbsp;: point-virgule). Les colonnes Nom et Sexe sont extraites automatiquement.</p>
+          <div style="background:#fff;border:1px solid #ddd;border-radius:5px;padding:8px 10px;font-family:monospace;font-size:11px;color:#444;white-space:pre-wrap;overflow:auto" id="csv-raw">"Élèves";"Date naissance";"Classe";"Sexe"
+"DUPONT Marie";"12/05/2013";"5e3";"Féminin"
+"BEN ALI Yanis";"03/09/2013";"5e3";"Masculin"
+"DE LA TOUR Léa";"21/01/2014";"5e3";"Féminin"
+"MARTIN-DURAND Hugo";"08/11/2013";"5e3";"Masculin"</div>
+          <div style="margin:10px 0;display:flex;gap:8px;flex-wrap:wrap">
+            <button class="csvbtn" onclick="csvImport()">📥 Simuler l'import du CSV</button>
+            <button class="btn-sm" onclick="csvAddRow()">+ Ajouter un élève</button>
+          </div>
+          <div id="csv-zone" style="display:none">
+            <p style="font-size:12.5px;margin:4px 0"><strong id="csv-count">0</strong> élève(s) importé(s)</p>
+            <table class="etable"><thead><tr><th>#</th><th>Nom</th><th>Prénom</th><th>Sexe</th><th>Tél. urgence</th><th></th></tr></thead><tbody id="csv-body"></tbody></table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="demo-cap">Cet aperçu exécute <strong>le même algorithme de parsing que le code source</strong>&nbsp;: découpe par «&nbsp;;&nbsp;», retrait des guillemets, classement majuscule→NOM / reste→Prénom, normalisation du sexe. Le tableau reste éditable (ajout, suppression) et alimente l'Annexe 2 du PDF.</div>
+  </section>
+
+  <!-- ───────────────── 6. Génération PDF ───────────────── -->
+  <section>
+    <h2><span class="n">6</span> Comment le PDF est fabriqué</h2>
+    <p class="lead">Tout se passe dans le navigateur, sans connexion ni dépôt de fichier. Voici le flux réel.</p>
     <div class="card">
-      <div class="budget">
-        <div class="col">
-          <h4>Recettes (€)</h4>
-          <div class="brow"><label>Participation des familles</label><input type="number" id="r1" value="1200" oninput="calc()"></div>
-          <div class="brow"><label>Établissement / FSE</label><input type="number" id="r2" value="300" oninput="calc()"></div>
-          <div class="brow"><label>Subventions (CD, CR, commune…)</label><input type="number" id="r3" value="500" oninput="calc()"></div>
-          <div class="brow"><label>Dons</label><input type="number" id="r4" value="0" oninput="calc()"></div>
-          <div class="btot"><span>Total recettes</span><span id="totR">2 000 €</span></div>
-        </div>
-        <div class="col">
-          <h4>Dépenses (€)</h4>
-          <div class="brow"><label>Transport</label><input type="number" id="d1" value="900" oninput="calc()"></div>
-          <div class="brow"><label>Hébergement / repas</label><input type="number" id="d2" value="700" oninput="calc()"></div>
-          <div class="brow"><label>Activités / visites</label><input type="number" id="d3" value="350" oninput="calc()"></div>
-          <div class="brow"><label>Matériel / divers</label><input type="number" id="d4" value="50" oninput="calc()"></div>
-          <div class="btot"><span>Total dépenses</span><span id="totD">2 000 €</span></div>
-        </div>
-      </div>
-      <div class="solde" id="solde">Solde : 0 €</div>
+      <div class="step"><span class="num">1</span><div class="txt"><b>Saisie guidée.</b> L'enseignant remplit les champs ; les données de l'établissement sont déjà préremplies, les calculs (budget, effectifs) s'actualisent en direct.</div></div>
+      <div class="step"><span class="num">2</span><div class="txt"><b>Collecte.</b> Au clic, le logiciel rassemble les valeurs (cases, listes dynamiques, tableau d'élèves) dans un objet de données structuré.</div></div>
+      <div class="step"><span class="num">3</span><div class="txt"><b>Mise en page jsPDF.</b> Le document est dessiné au millimètre sur un canevas A4&nbsp;: barre bleue État, logo de l'académie (SVG converti en PNG), titres soulignés centrés, encadrés, retours à la ligne automatiques, sauts de page et numérotation «&nbsp;page/total&nbsp;».</div></div>
+      <div class="step"><span class="num">4</span><div class="txt"><b>Aperçu & téléchargement.</b> Le PDF s'affiche dans un cadre intégré, ou se télécharge avec un nom de fichier explicite (ex.&nbsp;: <code>Autorisation_captation_Cinquième_La_météo_du_futur.pdf</code>).</div></div>
     </div>
   </section>
 
+  <!-- ───────────────── 7. Détails techniques ───────────────── -->
   <section>
-    <h2><span class="n">3</span> Fonctionnalités</h2>
-    <div class="grid g3">
-      <div class="feature"><h4>Génération PDF</h4><p>Mise en page A4 propre, en-tête avec logo et infos de l'établissement, prêt à imprimer / signer.</p></div>
-      <div class="feature"><h4>Aperçu intégré</h4><p>Visualisation du PDF in-situ avant téléchargement.</p></div>
-      <div class="feature"><h4>Import CSV des élèves</h4><p>Parsing automatique de la liste, tableau éditable (nom, prénom, sexe, téléphone d'urgence).</p></div>
-      <div class="feature"><h4>Calculs automatiques</h4><p>Budgets et comptages d'élèves recalculés en temps réel.</p></div>
-      <div class="feature"><h4>Pré-remplissage</h4><p>Les données de l'établissement sont déjà renseignées.</p></div>
-      <div class="feature"><h4>Responsive</h4><p>Formulaires utilisables sur ordinateur comme sur mobile.</p></div>
-    </div>
-  </section>
-
-  <section>
-    <h2><span class="n">4</span> Technique & accès</h2>
-    <div class="grid g2">
+    <h2><span class="n">7</span> Sous le capot — détails vérifiables</h2>
+    <details>
+      <summary>Architecture du code</summary>
+      <div class="body">Application monopage&nbsp;: <code>index.html</code> (les 3 formulaires + barre d'onglets), <code>style.css</code> (charte bleu État #000091, fond #f5f5fe), <code>app.js</code> (captation + sortie + navigation), <code>demande.js</code> (dossier sortie/séjour, import CSV, budget). La bibliothèque <code>jspdf.umd.min.js</code> est embarquée localement dans <code>/lib</code> — aucun CDN.</div>
+    </details>
+    <details>
+      <summary>Génération PDF (jsPDF)</summary>
+      <div class="body">Format A4 en millimètres, marges fixes, helpers maison&nbsp;: <code>wrappedText</code> (découpe automatique), <code>sectionTitle</code> (titre centré souligné), <code>checkPageBreak</code> (saut de page si dépassement), <code>addPageNumbers</code>. Couleurs codées en dur&nbsp;: bleu [0,0,145], fond clair [245,245,254], gris [100,100,100].</div>
+    </details>
+    <details>
+      <summary>Listes dynamiques</summary>
+      <div class="body">Boutons «&nbsp;+ Ajouter une classe&nbsp;», «&nbsp;+ Ajouter un accompagnateur&nbsp;», «&nbsp;+ Ajouter un élève&nbsp;» injectent des lignes supprimables. Les effectifs des classes sont totalisés dans le PDF&nbsp;; les accompagnateurs et élèves remplissent les tableaux nominatifs de l'Annexe 2 (avec lignes vides de réserve).</div>
+    </details>
+    <details>
+      <summary>Conformité RGPD intégrée au document</summary>
+      <div class="body">L'autorisation de captation rappelle les fondements juridiques (Code civil art. 9, CEDH art. 8, RGPD 2016/679, loi 78-17), la durée de conservation (1 année scolaire), le contact du délégué à la protection des données (dpd@ac-nancy-metz.fr) et le recours CNIL. Le traitement étant 100 % local, aucune donnée ne transite par un tiers.</div>
+    </details>
+    <div class="grid g2" style="margin-top:14px">
       <div class="card">
-        <h4 style="margin:0 0 8px;color:var(--green-d)">Stack</h4>
-        <span class="pill">HTML / CSS / JavaScript</span>
-        <span class="pill">jsPDF (génération PDF)</span>
-        <span class="pill">LocalStorage</span>
-        <span class="pill">Import CSV</span>
-        <p class="note" style="margin-top:12px">Respecte le RGPD : aucune donnée d'élève n'est envoyée à un serveur tiers, le PDF est généré localement dans le navigateur.</p>
+        <h4 style="margin:0 0 8px;color:var(--green-d)">Stack technique</h4>
+        <span class="pill">HTML / CSS / JavaScript (vanilla)</span>
+        <span class="pill">jsPDF (local, hors-ligne)</span>
+        <span class="pill">FileReader (lecture CSV)</span>
+        <span class="pill">SPA à onglets</span>
+        <span class="pill">SVG → canvas → PNG (logo)</span>
+        <span class="pill">Aucune dépendance réseau</span>
       </div>
       <div class="card">
         <h4 style="margin:0 0 8px;color:var(--green-d)">Outil en ligne</h4>
-        <p style="font-size:14px;color:var(--muted)">L'outil complet et fonctionnel est accessible en ligne :</p>
+        <p style="font-size:14px;color:var(--muted);margin-top:0">L'outil complet et fonctionnel est accessible en ligne&nbsp;:</p>
         <a class="cta" href="https://qwetsh.github.io/generateur-docs-college/" target="_blank" rel="noopener">Ouvrir le générateur →</a>
         <p style="font-size:12.5px;color:var(--muted);margin-top:10px">qwetsh.github.io/generateur-docs-college</p>
       </div>
@@ -179,23 +374,127 @@
 </footer>
 
 <script>
-  function fmt(n){return n.toLocaleString('fr-FR')+' €';}
-  function calc(){
-    var R=['r1','r2','r3','r4'].reduce(function(a,id){return a+(+document.getElementById(id).value||0)},0);
-    var D=['d1','d2','d3','d4'].reduce(function(a,id){return a+(+document.getElementById(id).value||0)},0);
-    document.getElementById('totR').textContent=fmt(R);
-    document.getElementById('totD').textContent=fmt(D);
-    var s=R-D, el=document.getElementById('solde');
-    el.textContent='Solde : '+fmt(s)+(s<0?' (déficit)':s>0?' (excédent)':' (équilibré)');
-    el.classList.toggle('neg',s<0);
-  }
+  /* ─── Onglets de présentation ─── */
   function setTab(el,id){
     el.parentNode.querySelectorAll('.tab').forEach(function(t){t.classList.remove('on')});
     el.classList.add('on');
-    document.querySelectorAll('.panel').forEach(function(p){p.classList.remove('on')});
+    document.querySelectorAll('#d-img,#d-sortie,#d-sejour').forEach(function(p){p.classList.remove('on')});
     document.getElementById(id).classList.add('on');
   }
-  calc();
+
+  /* ─── Démo 1 : aperçu autorisation captation ─── */
+  function frDate(v){
+    if(!v) return '...';
+    var p=v.split('-'); if(p.length!==3) return v;
+    return p[2]+'/'+p[1]+'/'+p[0];
+  }
+  function esc(s){return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+  function capRender(){
+    var classe=document.getElementById('c-classe').value;
+    var annee=document.getElementById('c-annee').value;
+    var projet=document.getElementById('c-projet').value;
+    var d1=frDate(document.getElementById('c-d1').value);
+    var d2=frDate(document.getElementById('c-d2').value);
+    var lieu=document.getElementById('c-lieu').value;
+    var supports=[];
+    if(document.getElementById('s-classe').checked) supports.push('Usage collectif en classe');
+    if(document.getElementById('s-ent').checked) supports.push('En ligne — accès réservé (ENT, plateforme, extranet)');
+    if(document.getElementById('s-net').checked) supports.push('En ligne — Internet (monde entier)');
+    if(document.getElementById('s-stock').checked) supports.push('Support de stockage amovible');
+    if(document.getElementById('s-proj').checked) supports.push('Projection collective');
+    var rows=supports.length
+      ? supports.map(function(s){return '<div class="supp"><span class="cb">[OUI] [NON]</span><span>'+esc(s)+'</span></div>';}).join('')
+      : '<div style="color:#999;font-style:italic;padding:6px 0">Aucun support coché.</div>';
+    document.getElementById('cap-sheet').innerHTML =
+      '<div class="topbar"></div>'+
+      '<h5>MINISTÈRE DE L\'ÉDUCATION NATIONALE</h5>'+
+      '<div class="sub">Autorisation de captation de l\'image / de la voix</div>'+
+      '<div class="box">'+
+        '<div class="kv"><b>Établissement&nbsp;:</b> Collège Pierre Mendès France</div>'+
+        '<div class="kv"><b>57140 WOIPPY</b> — Tél. 03 87 54 36 40</div>'+
+        '<div class="kv"><b>Année scolaire&nbsp;:</b> '+esc(annee||'...')+' &nbsp; <b>Classe de&nbsp;:</b> '+esc(classe||'...')+'</div>'+
+      '</div>'+
+      '<div class="stitle">1 — Finalités envisagées</div>'+
+      '<div class="kv" style="color:#555">Gestion administrative, activités pédagogiques…</div>'+
+      '<div class="stitle">2 — Désignation du projet audio-visuel</div>'+
+      '<div class="kv">Projet&nbsp;: «&nbsp;'+esc(projet||'...')+'&nbsp;»</div>'+
+      '<div class="kv">Date(s)&nbsp;: <span style="color:#c00">du '+d1+' au '+d2+'</span> &nbsp; Lieu(x)&nbsp;: '+esc(lieu||'...')+'</div>'+
+      '<div class="stitle">3 — Modes d\'exploitation envisagés</div>'+
+      '<div style="font-size:10px;color:#777;margin-bottom:2px">Les familles cochent OUI ou NON pour chaque support&nbsp;:</div>'+
+      rows;
+  }
+
+  /* ─── Démo 2 : budget ─── */
+  function num(id){return parseFloat(document.getElementById(id).value)||0;}
+  function budCalc(){
+    var totFam=num('b-nb')*num('b-mt');
+    document.getElementById('b-totfam').value=totFam.toFixed(2);
+    var R=totFam+num('b-etab')+num('b-dons')+num('b-com')+num('b-dep');
+    var D=num('b-bus')+num('b-train')+num('b-repas')+num('b-act')+num('b-mat');
+    document.getElementById('b-totR').textContent=R.toFixed(2);
+    document.getElementById('b-totD').textContent=D.toFixed(2);
+    var bal=R-D, el=document.getElementById('b-bal');
+    if(R===0&&D===0){el.textContent='';el.className='bbal';return;}
+    if(bal>=0){el.textContent='Solde : +'+bal.toFixed(2)+' € (équilibré / excédent)';el.className='bbal pos';}
+    else{el.textContent='Solde : '+bal.toFixed(2)+' € (déficit)';el.className='bbal neg';}
+  }
+
+  /* ─── Démo 3 : import CSV (parsing identique au code source) ─── */
+  function parseCSV(text){
+    var lines=text.split('\n').filter(function(l){return l.trim();});
+    if(lines.length<2) return [];
+    var header=lines[0].split(';').map(function(h){return h.replace(/"/g,'').trim();});
+    var colNom=header.indexOf('Élèves')!==-1?header.indexOf('Élèves'):0;
+    var colSexe=header.indexOf('Sexe')!==-1?header.indexOf('Sexe'):3;
+    var out=[];
+    for(var i=1;i<lines.length;i++){
+      var cols=lines[i].split(';').map(function(c){return c.replace(/"/g,'').trim();});
+      if(!cols[colNom]) continue;
+      var full=cols[colNom], parts=full.split(' '), nom=[], prenom=[];
+      for(var j=0;j<parts.length;j++){
+        if(parts[j]===parts[j].toUpperCase()&&parts[j].length>1) nom.push(parts[j]);
+        else prenom.push(parts[j]);
+      }
+      var sexe=cols[colSexe]||'';
+      if(sexe==='Féminin') sexe='F'; else if(sexe==='Masculin') sexe='M';
+      out.push({nom:nom.join(' ')||full, prenom:prenom.join(' ')||'', sexe:sexe});
+    }
+    return out;
+  }
+  function csvRow(el){
+    var tr=document.createElement('tr');
+    tr.innerHTML='<td class="rn"></td>'+
+      '<td><input value="'+esc(el.nom||'')+'"></td>'+
+      '<td><input value="'+esc(el.prenom||'')+'"></td>'+
+      '<td><select><option value="M"'+(el.sexe==='M'?' selected':'')+'>M</option><option value="F"'+(el.sexe==='F'?' selected':'')+'>F</option></select></td>'+
+      '<td><input placeholder="06 ..."></td>'+
+      '<td><button class="btn-x">✕</button></td>';
+    tr.querySelector('.btn-x').addEventListener('click',function(){tr.remove();csvRenumber();});
+    return tr;
+  }
+  function csvRenumber(){
+    var rows=document.querySelectorAll('#csv-body tr');
+    document.getElementById('csv-count').textContent=rows.length;
+    rows.forEach(function(tr,i){tr.querySelector('.rn').textContent=i+1;});
+  }
+  function csvImport(){
+    var data=parseCSV(document.getElementById('csv-raw').textContent);
+    var body=document.getElementById('csv-body');
+    body.innerHTML='';
+    data.forEach(function(el){body.appendChild(csvRow(el));});
+    document.getElementById('csv-zone').style.display='block';
+    csvRenumber();
+  }
+  function csvAddRow(){
+    var body=document.getElementById('csv-body');
+    body.appendChild(csvRow({}));
+    document.getElementById('csv-zone').style.display='block';
+    csvRenumber();
+  }
+
+  /* init */
+  capRender();
+  budCalc();
 </script>
 </body>
 </html>

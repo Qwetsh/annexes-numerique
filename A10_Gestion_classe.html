@@ -9,6 +9,13 @@
     --green:#1f7a54; --green-d:#155c3f; --green-l:#eaf5ef; --ink:#1d2b25; --muted:#5c6b63;
     --line:#d9e6df; --bg:#f5f9f7; --card:#fff;
     --shadow:0 2px 10px rgba(20,60,45,.06),0 8px 30px rgba(20,60,45,.05);
+    /* Palette réelle de l'application (constants/theme.ts) */
+    --c-part:#10B981; --c-part-l:#34D399; --c-part-s:#ECFDF5;
+    --c-bav:#F59E0B;  --c-bav-l:#FBBF24;  --c-bav-s:#FFFBEB;
+    --c-abs:#EF4444;  --c-abs-l:#F87171;  --c-abs-s:#FEF2F2;
+    --c-rem:#3B82F6;  --c-rem-l:#60A5FA;  --c-rem-s:#EFF6FF;
+    --c-sort:#8B5CF6; --c-sort-l:#A78BFA; --c-sort-s:#F5F3FF;
+    --c-infirm:#EC4899; --c-toil:#06B6D4; --c-conv:#78716C; --c-excl:#DC2626;
   }
   *{box-sizing:border-box}
   body{margin:0;font-family:"Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.55}
@@ -16,50 +23,110 @@
   header.top{background:linear-gradient(135deg,#1f7a54,#155c3f);color:#fff;padding:34px 0 30px}
   .badge{display:inline-block;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:4px 14px;font-size:13px;font-weight:600}
   header.top h1{margin:14px 0 6px;font-size:30px}
-  header.top p{margin:0;opacity:.92;max-width:700px}
+  header.top p{margin:0;opacity:.92;max-width:720px}
   main{padding:34px 0 60px}
-  section{margin:0 0 30px}
+  section{margin:0 0 32px}
   h2{font-size:21px;color:var(--green-d);margin:0 0 6px;display:flex;align-items:center;gap:9px}
   h2 .n{background:var(--green);color:#fff;border-radius:8px;font-size:13px;padding:2px 9px;font-weight:700}
+  h3{font-size:16px;color:var(--green-d);margin:18px 0 8px}
   .lead{color:var(--muted);margin:.2em 0 1.1em}
   .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 22px;box-shadow:var(--shadow)}
   .grid{display:grid;gap:14px}
-  .g2{grid-template-columns:repeat(2,1fr)} .g3{grid-template-columns:repeat(3,1fr)}
-  @media(max-width:740px){.g2,.g3{grid-template-columns:1fr}}
+  .g2{grid-template-columns:repeat(2,1fr)} .g3{grid-template-columns:repeat(3,1fr)} .g4{grid-template-columns:repeat(4,1fr)}
+  @media(max-width:740px){.g2,.g3,.g4{grid-template-columns:1fr}}
   .feature{background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px}
   .feature h4{margin:0 0 5px;color:var(--green-d);font-size:15.5px}
   .feature p{margin:0;font-size:13.5px;color:var(--muted)}
   .pill{display:inline-block;background:var(--green-l);color:var(--green-d);border-radius:999px;padding:3px 11px;font-size:12.5px;font-weight:600;margin:0 4px 6px 0}
-  /* demo plan + radial */
-  .demo{display:grid;grid-template-columns:1.1fr .9fr;gap:20px}
-  @media(max-width:740px){.demo{grid-template-columns:1fr}}
-  .plan{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-  .stu{background:#fff;border:1px solid var(--line);border-radius:11px;padding:11px 9px;text-align:center;cursor:pointer;position:relative;transition:transform .1s}
-  .stu:hover{transform:translateY(-2px);box-shadow:0 6px 14px rgba(0,0,0,.08)}
-  .stu .av{width:34px;height:34px;border-radius:50%;background:var(--green-l);color:var(--green-d);display:flex;align-items:center;justify-content:center;font-weight:700;margin:0 auto 5px}
-  .stu .nm{font-size:12.5px;font-weight:600}
-  .stu .ct{display:flex;justify-content:center;gap:8px;margin-top:5px;font-size:11px}
-  .stu .ct .p{color:#2e9e5b;font-weight:700} .stu .ct .b{color:#e0651e;font-weight:700}
-  .stu.absent{opacity:.45}
-  .stu.absent::after{content:"absent";position:absolute;top:4px;right:6px;font-size:9px;color:#d6453f;font-weight:700;text-transform:uppercase}
-  /* radial overlay */
-  .radial{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(15,30,24,.45);z-index:50}
-  .radial.on{display:flex}
-  .rmenu{position:relative;width:230px;height:230px}
-  .rcenter{position:absolute;left:50%;top:50%;width:64px;height:64px;margin:-32px;border-radius:50%;background:#fff;border:2px solid var(--green);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--green-d);text-align:center}
-  .ritem{position:absolute;width:62px;height:62px;margin:-31px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;cursor:pointer;font-size:10.5px;font-weight:700;box-shadow:0 6px 14px rgba(0,0,0,.25);animation:pop .18s ease}
-  @keyframes pop{from{transform:scale(.3);opacity:0}to{transform:scale(1);opacity:1}}
-  .ritem .ic{font-size:20px;line-height:1}
-  .toast{position:fixed;left:50%;bottom:34px;transform:translateX(-50%);background:#13251c;color:#fff;padding:11px 20px;border-radius:999px;font-weight:600;font-size:14px;opacity:0;transition:opacity .25s;z-index:60}
-  .toast.on{opacity:1}
-  .hint{font-size:13px;color:var(--muted);margin-top:10px}
-  .metrics{display:flex;gap:10px;flex-wrap:wrap}
-  .metric{flex:1;min-width:120px;background:var(--green-l);border-radius:12px;padding:12px;text-align:center}
-  .metric b{display:block;font-size:20px;color:var(--green-d)} .metric span{font-size:12px;color:var(--muted)}
-  .screens{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px}
-  .schip{border:1px solid var(--line);background:#fff;border-radius:999px;padding:6px 13px;font-size:13px;font-weight:600;color:var(--muted)}
-  footer{border-top:1px solid var(--line);padding:22px 0;color:var(--muted);font-size:13px;text-align:center}
+  table{width:100%;border-collapse:collapse;font-size:14px}
+  th,td{text-align:left;padding:9px 11px;border-bottom:1px solid var(--line)}
+  th{background:var(--green);color:#fff;font-weight:600}
+  tr:nth-child(even) td{background:#fafdfb}
+  code{background:#eef5f1;border:1px solid var(--line);border-radius:5px;padding:1px 5px;font-size:12.5px}
   .note{font-size:13px;color:var(--muted);background:#fff;border:1px dashed var(--line);border-radius:10px;padding:11px 14px}
+  .hint{font-size:13px;color:var(--muted);margin-top:10px}
+
+  /* === Cadre "démo intégrée" façon écran tactile réduit === */
+  .demo-frame{position:relative;background:linear-gradient(180deg,#0f172a,#1e293b);border-radius:26px;padding:14px;box-shadow:0 14px 40px rgba(15,23,42,.3),inset 0 0 0 2px #334155;max-width:420px;margin:0 auto}
+  .demo-frame.wide{max-width:100%}
+  .demo-tag{position:absolute;top:-11px;left:18px;background:var(--green);color:#fff;font-size:11px;font-weight:700;letter-spacing:.4px;padding:3px 11px;border-radius:999px;text-transform:uppercase;z-index:4;box-shadow:0 3px 8px rgba(0,0,0,.2)}
+  .demo-screen{background:#F8FAFC;border-radius:16px;overflow:hidden;position:relative}
+  .app-bar{background:var(--c-part);color:#fff;padding:9px 14px;font-size:13.5px;font-weight:600;display:flex;justify-content:space-between;align-items:center}
+  .app-bar .right{font-size:12px;opacity:.92;font-weight:500}
+  .infobar{background:#F1F5F9;color:#64748B;font-size:11.5px;padding:6px 14px;text-align:center;border-bottom:1px solid #E2E8F0}
+
+  /* plan de classe (grille réelle row,col + tableau) */
+  .stage{padding:14px 12px 16px;position:relative}
+  .teacher{margin:0 auto 12px;width:62%;background:#E2E8F0;color:#475569;border-radius:9px;text-align:center;font-size:11px;font-weight:700;padding:6px 0;letter-spacing:1px}
+  .grid-room{display:grid;gap:7px;justify-content:center}
+  .seat{aspect-ratio:1/1;border-radius:11px;border:1.5px solid #E2E8F0;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;position:relative;user-select:none;transition:transform .08s, box-shadow .12s, border-color .12s;padding:2px}
+  .seat.empty{background:transparent;border:1.5px dashed #E2E8F0;cursor:default}
+  .seat.empty::after{content:"allée";font-size:8px;color:#cbd5e1}
+  .seat.occ:hover{transform:translateY(-2px);box-shadow:0 6px 14px rgba(15,23,42,.12);border-color:var(--c-part-l)}
+  .seat.occ:active{transform:scale(.96)}
+  .seat .nm{font-size:11px;font-weight:700;color:#0F172A;line-height:1.05;text-align:center}
+  .seat .ct{display:flex;gap:5px;margin-top:3px;font-size:9.5px;font-weight:700}
+  .seat .ct .p{color:var(--c-part)} .seat .ct .b{color:var(--c-bav)}
+  .seat.sel{border-color:var(--c-part);box-shadow:0 0 0 3px var(--c-part-s)}
+  .seat.absent{opacity:.5}
+  .seat .abs-badge{position:absolute;top:3px;right:4px;background:var(--c-abs);color:#fff;font-size:7.5px;font-weight:800;padding:1px 4px;border-radius:5px}
+  .seat .out-badge{position:absolute;bottom:3px;background:var(--c-sort);color:#fff;font-size:8px;font-weight:700;padding:1px 5px;border-radius:6px}
+
+  /* menu radial (overlay DANS la démo, pas plein écran) */
+  .radial-ov{position:absolute;inset:0;background:rgba(15,23,42,.40);display:none;z-index:10;border-radius:16px;overflow:hidden}
+  .radial-ov.on{display:block}
+  .rmenu{position:absolute;width:0;height:0}
+  .rcenter{position:absolute;width:58px;height:58px;left:-29px;top:-29px;border-radius:50%;background:rgba(255,255,255,.98);display:flex;align-items:center;justify-content:center;font-size:10.5px;font-weight:700;color:#0F172A;text-align:center;padding:4px;box-shadow:0 4px 14px rgba(0,0,0,.25);z-index:2}
+  .ritem{position:absolute;width:62px;height:62px;left:-31px;top:-31px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;cursor:pointer;font-size:9px;font-weight:700;border:1.5px solid rgba(255,255,255,.6);box-shadow:0 4px 12px rgba(0,0,0,.3);transition:transform .12s, box-shadow .12s;animation:pop .2s cubic-bezier(.2,1.3,.5,1) both}
+  .ritem:hover{transform:scale(1.18);z-index:5;box-shadow:0 6px 18px rgba(0,0,0,.4)}
+  @keyframes pop{from{transform:scale(.3);opacity:0}to{transform:scale(1);opacity:1}}
+  .ritem .ic{font-size:18px;line-height:1;margin-bottom:1px}
+  .ritem .lb{max-width:56px;text-align:center;line-height:1}
+  .ritem .arrow{position:absolute;top:3px;right:5px;font-size:13px;font-weight:800;color:rgba(255,255,255,.85)}
+  .selname{position:absolute;left:50%;top:10px;transform:translateX(-50%);background:rgba(15,23,42,.85);color:#fff;font-size:11px;font-weight:600;padding:4px 12px;border-radius:999px;z-index:3}
+  .demo-toast{position:absolute;left:50%;bottom:12px;transform:translateX(-50%);background:#0F172A;color:#fff;padding:8px 15px;border-radius:999px;font-weight:600;font-size:12px;opacity:0;transition:opacity .25s;z-index:20;max-width:90%;text-align:center}
+  .demo-toast.on{opacity:1}
+
+  /* progress ring (appui long) */
+  .pring{position:absolute;width:46px;height:46px;left:-23px;top:-23px;border-radius:50%;border:3px solid rgba(16,185,129,.25);z-index:9;display:none}
+  .pring.on{display:block}
+  .pring i{position:absolute;inset:-3px;border-radius:50%;border:3px solid transparent;border-top-color:var(--c-part);animation:spin .4s linear forwards}
+  @keyframes spin{to{transform:rotate(360deg)}}
+
+  /* bilan / mini-dashboard */
+  .metrics{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 6px}
+  .metric{flex:1;min-width:96px;border-radius:12px;padding:11px 8px;text-align:center}
+  .metric b{display:block;font-size:22px;font-weight:800;line-height:1.1} .metric span{font-size:11px;color:var(--muted);font-weight:600}
+  .m-part{background:var(--c-part-s)} .m-part b{color:var(--c-part)}
+  .m-bav{background:var(--c-bav-s)} .m-bav b{color:#b45309}
+  .m-sort{background:var(--c-sort-s)} .m-sort b{color:var(--c-sort)}
+  .m-score{background:var(--green-l)} .m-score b{color:var(--green-d)}
+  .timer{font-variant-numeric:tabular-nums}
+
+  .legend{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+  .lg{display:inline-flex;align-items:center;gap:5px;font-size:11.5px;font-weight:600;color:#475569;background:#fff;border:1px solid var(--line);border-radius:999px;padding:3px 9px}
+  .lg .dot{width:11px;height:11px;border-radius:50%}
+
+  .screens{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}
+  .schip{border:1px solid var(--line);background:#fff;border-radius:999px;padding:6px 13px;font-size:13px;font-weight:600;color:var(--muted)}
+
+  /* leaderboard / tableau de bord élève */
+  .lb-row{display:flex;align-items:center;gap:10px;padding:7px 4px;border-bottom:1px solid var(--line);font-size:13.5px}
+  .lb-row:last-child{border-bottom:none}
+  .lb-av{width:30px;height:30px;border-radius:50%;background:var(--green-l);color:var(--green-d);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12px;flex-shrink:0}
+  .lb-name{flex:1;font-weight:600}
+  .lb-bar{flex:2;height:9px;border-radius:999px;background:#eef2f0;overflow:hidden;min-width:60px}
+  .lb-bar i{display:block;height:100%;border-radius:999px;background:linear-gradient(90deg,var(--c-part),var(--c-part-l))}
+  .lb-sc{width:42px;text-align:right;font-weight:800;color:var(--green-d)}
+
+  /* tampons */
+  .stampcard{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;max-width:300px;margin:8px 0}
+  .slot{aspect-ratio:1/1;border-radius:10px;border:1.5px dashed #cbd5e1;display:flex;align-items:center;justify-content:center;font-size:18px;background:#fff;cursor:pointer;transition:transform .1s}
+  .slot.filled{border-style:solid;border-color:var(--c-part-l);background:var(--c-part-s);animation:pop .25s both}
+  .slot:hover{transform:scale(1.06)}
+
+  footer{border-top:1px solid var(--line);padding:22px 0;color:var(--muted);font-size:13px;text-align:center}
+  .kbd{background:#0F172A;color:#fff;border-radius:6px;padding:1px 7px;font-size:11.5px;font-weight:700}
 </style>
 </head>
 <body>
@@ -67,101 +134,196 @@
   <div class="wrap">
     <span class="badge">Annexe A10 · Rapport référent numérique 2025-2026</span>
     <h1>Gestion de classe — saisie en moins de 2 secondes</h1>
-    <p>Document interactif de présentation. Application mobile-first pour enseignants : un <strong>menu radial tactile</strong> permet d'enregistrer n'importe quelle action élève (participation, bavardage, sortie…) en moins de deux secondes, pendant le cours.</p>
+    <p>Application mobile-first conçue pour les enseignants de collège. Son innovation centrale : un <strong>menu radial tactile</strong> qui permet d'enregistrer n'importe quelle action d'un élève (implication, malus, sortie, absence, remarque) <strong>en moins de deux secondes</strong>, sans quitter le tableau des yeux. Ce document reproduit fidèlement, en démos jouables, l'interface réelle du logiciel.</p>
   </div>
 </header>
 
 <main class="wrap">
 
+  <!-- ============ 1. DÉMO MENU RADIAL ============ -->
   <section>
-    <h2><span class="n">1</span> L'innovation : le menu radial — essayez-le</h2>
-    <p class="lead">Pendant la séance, l'enseignant voit le plan de classe. <strong>Cliquez sur un élève</strong> : le menu radial apparaît (un appui long de 250 ms sur mobile). Choisissez une action — les compteurs se mettent à jour, sans saisie de texte.</p>
-    <div class="card">
-      <div class="demo">
-        <div>
-          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
-            <strong>4ᵉ B · Salle 210</strong>
-            <span style="font-size:12.5px;color:var(--muted)">Séance en cours · 10 h 24</span>
+    <h2><span class="n">1</span> Le menu radial — essayez-le</h2>
+    <p class="lead">Pendant la séance, l'enseignant voit le <strong>plan de classe</strong>. Il <strong>maintient l'appui</strong> sur un élève (400 ms — un anneau de progression se remplit), le menu radial s'ouvre autour du doigt, il glisse vers une action et relâche : c'est enregistré. La démo ci-dessous reproduit cette interaction (clic au lieu de l'appui long). Les compteurs et le score se mettent à jour instantanément.</p>
+
+    <div class="demo-frame wide">
+      <span class="demo-tag">démo intégrée — interface réelle</span>
+      <div class="demo-screen" id="screenSession">
+        <div class="app-bar"><span>4ᵉ B</span><span class="right">Séance · <span class="timer" id="clock">00:00</span></span></div>
+        <div class="infobar" id="infobar">Salle 210 — touchez un élève pour ouvrir le menu radial</div>
+        <div class="stage" id="stage">
+          <div class="teacher">TABLEAU</div>
+          <div class="grid-room" id="room"></div>
+
+          <!-- overlay radial (interne à la démo) -->
+          <div class="radial-ov" id="radialOv">
+            <div class="selname" id="selName"></div>
+            <div class="rmenu" id="rmenu"></div>
           </div>
-          <div class="plan" id="plan"></div>
-          <p class="hint">↑ Démonstration. Sur mobile, l'action complète prend ≤ 2 s avec retour haptique à 3 niveaux.</p>
+          <div class="pring" id="pring"><i></i></div>
+          <div class="demo-toast" id="toast"></div>
         </div>
-        <div>
-          <h4 style="margin:0 0 8px;color:var(--green-d)">Bilan de la séance</h4>
-          <div class="metrics">
-            <div class="metric"><b id="m-part">0</b><span>participations</span></div>
-            <div class="metric"><b id="m-bav">0</b><span>bavardages</span></div>
-            <div class="metric"><b id="m-sort">0</b><span>sorties</span></div>
-          </div>
-          <div style="margin-top:14px">
-            <h4 style="margin:0 0 6px;color:var(--green-d);font-size:14px">5 actions du menu</h4>
-            <span class="pill">✋ Participation +1</span>
-            <span class="pill">💬 Bavardage</span>
-            <span class="pill">❌ Absence</span>
-            <span class="pill">📝 Remarque</span>
-            <span class="pill">🚪 Sortie ▸</span>
-            <p style="font-size:12.5px;color:var(--muted);margin:8px 0 0">Sous-menu Sortie : infirmerie, toilettes, convocation, exclusion.</p>
-          </div>
+      </div>
+    </div>
+
+    <div class="grid g2" style="margin-top:16px">
+      <div class="card">
+        <h4 style="margin:0 0 10px;color:var(--green-d)">Bilan de la séance (temps réel)</h4>
+        <div class="metrics">
+          <div class="metric m-part"><b id="m-part">0</b><span>implications</span></div>
+          <div class="metric m-bav"><b id="m-bav">0</b><span>malus</span></div>
+          <div class="metric m-sort"><b id="m-sort">0</b><span>sorties</span></div>
+          <div class="metric m-score"><b id="m-score">0</b><span>score classe</span></div>
         </div>
+        <p class="hint" style="margin-top:4px">Le <strong>score</strong> réel de l'app = implications − malus. Le menu écrit dans une « table d'événements » horodatée (<code>events</code>), exactement comme l'application.</p>
+      </div>
+      <div class="card">
+        <h4 style="margin:0 0 8px;color:var(--green-d)">Les 5 actions du menu (couleurs réelles)</h4>
+        <div class="legend">
+          <span class="lg"><span class="dot" style="background:var(--c-part-l)"></span>✋ Implication</span>
+          <span class="lg"><span class="dot" style="background:var(--c-bav-l)"></span>💬 Malus</span>
+          <span class="lg"><span class="dot" style="background:var(--c-sort-l)"></span>🚪 Sortie ›</span>
+          <span class="lg"><span class="dot" style="background:var(--c-rem-l)"></span>📝 Remarque</span>
+          <span class="lg"><span class="dot" style="background:var(--c-abs-l)"></span>❌ Absence</span>
+        </div>
+        <p style="font-size:13px;color:var(--muted);margin:12px 0 4px">Le bouton <strong>Sortie</strong> ouvre un <strong>sous-menu radial</strong> :</p>
+        <div class="legend">
+          <span class="lg"><span class="dot" style="background:var(--c-infirm)"></span>🏥 Infirmerie</span>
+          <span class="lg"><span class="dot" style="background:var(--c-toil)"></span>🚻 Toilettes</span>
+          <span class="lg"><span class="dot" style="background:var(--c-conv)"></span>📋 Convocation</span>
+          <span class="lg"><span class="dot" style="background:var(--c-excl)"></span>⛔ Exclusion</span>
+        </div>
+        <p class="hint" style="margin-top:10px">Astuce reproduite ici : maintenir <strong>✋ Implication</strong> (clic droit ou clic prolongé sur l'action) déclenche un <strong>bonus</strong> de points (+2 / +3 / +5 / +10).</p>
       </div>
     </div>
   </section>
 
+  <!-- ============ 2. GESTES & TIMINGS ============ -->
   <section>
-    <h2><span class="n">2</span> Le déroulé d'une séance</h2>
+    <h2><span class="n">2</span> La grammaire des gestes (sans saisie de texte)</h2>
+    <p class="lead">Tout est pensé pour rester sous la barre des 2 secondes. Le <strong>retour haptique</strong> (vibration à 3 intensités) est la confirmation principale : aucune fenêtre à valider.</p>
+    <div class="grid g3">
+      <div class="feature"><h4>Appui long → menu</h4><p>Maintenir <span class="kbd">400 ms</span> sur un élève ouvre le menu radial centré sur le doigt. Un anneau de progression matérialise l'attente. Vibration <em>medium</em>.</p></div>
+      <div class="feature"><h4>Glisser → survol</h4><p>En glissant sans lever le doigt, l'action survolée grossit (×1,2) et vibre <em>léger</em>. Détection angulaire très tolérante (rayon 25 px → 300 px).</p></div>
+      <div class="feature"><h4>Relâcher → valider</h4><p>Lever le doigt sur une action l'enregistre + vibration <em>success</em>. Relâcher hors du menu = annulation, le menu se referme.</p></div>
+      <div class="feature"><h4>Sous-menu Sortie</h4><p>Survoler <strong>🚪 Sortie</strong> ~300 ms ouvre les 4 sous-actions en couronne. Le sous-menu se replie automatiquement s'il sort de l'écran.</p></div>
+      <div class="feature"><h4>Maintien Implication → bonus</h4><p>Garder le doigt sur ✋ remplit un arc en 1,5 s : on bascule alors sur l'attribution d'un <strong>bonus</strong> de plusieurs points avec motif.</p></div>
+      <div class="feature"><h4>Double-tap → tampon</h4><p>Un double appui sur un élève ouvre directement le sélecteur de <strong>carte à tampons</strong> (récompenses), sans passer par le menu radial.</p></div>
+      <div class="feature"><h4>Élève absent</h4><p>Toucher un élève déjà marqué absent propose d'<strong>annuler l'absence</strong> au lieu d'ouvrir le menu.</p></div>
+      <div class="feature"><h4>Élève sorti</h4><p>Toucher un élève « en sortie » affiche depuis combien de temps il est parti et propose de <strong>marquer son retour</strong>.</p></div>
+      <div class="feature"><h4>Objectifs mesurés</h4><p>Action complète <span class="kbd">≤ 2 s</span>, latence menu <span class="kbd">&lt; 100 ms</span>, animations <span class="kbd">60 FPS</span>.</p></div>
+    </div>
+  </section>
+
+  <!-- ============ 3. DÉMO PLAN DE CLASSE ============ -->
+  <section>
+    <h2><span class="n">3</span> Plan de classe & déroulé d'une séance</h2>
+    <p class="lead">Une séance se prépare en quelques secondes : choisir la classe, choisir la salle, le plan de classe apparaît. La salle est une <strong>grille (rangées × colonnes)</strong> où l'on peut désactiver des cases (allées, bureau du professeur) et placer les élèves par glisser-déposer. La démo ci-dessous permet de <strong>déplacer un élève</strong> vers une place libre.</p>
     <div class="screens">
-      <span class="schip">1 · Choisir la classe</span>
-      <span class="schip">2 · Choisir la salle</span>
+      <span class="schip">1 · Classe</span>
+      <span class="schip">2 · Salle</span>
       <span class="schip">3 · Plan de classe</span>
       <span class="schip">4 · Menu radial</span>
-      <span class="schip">5 · Historique</span>
+      <span class="schip">5 · Bilan & historique</span>
     </div>
-    <div class="grid g3">
-      <div class="feature"><h4>Plan de classe</h4><p>Grille de places (colonnes × rangées), élèves positionnés en drag & drop, places non disponibles marquées (allées, bureau prof).</p></div>
-      <div class="feature"><h4>Séance chronométrée</h4><p>Démarrage / fin horodatés, compteurs participations et bavardages visibles sur chaque carte élève.</p></div>
-      <div class="feature"><h4>Retour haptique</h4><p>3 niveaux (light / medium / success). La vibration est la confirmation principale — pas de pop-up.</p></div>
+
+    <div class="demo-frame wide">
+      <span class="demo-tag">démo intégrée — éditeur de plan</span>
+      <div class="demo-screen">
+        <div class="app-bar"><span>Plan — 4ᵉ B · Salle 210</span><span class="right" id="planHint">Touchez un élève, puis une place libre</span></div>
+        <div class="stage" style="padding-bottom:18px">
+          <div class="teacher">TABLEAU</div>
+          <div class="grid-room" id="planRoom"></div>
+        </div>
+      </div>
     </div>
+    <p class="hint">Grille 5 colonnes : les cases « allée » sont désactivées (stockées en JSON, ex. <code>["1,2"]</code>). Chaque couple classe + salle mémorise son propre plan.</p>
   </section>
 
+  <!-- ============ 4. DÉMO TABLEAU DE BORD ============ -->
   <section>
-    <h2><span class="n">3</span> Les fonctionnalités</h2>
-    <div class="grid g2">
-      <div class="feature"><h4>Gestion des classes</h4><p>Création / modification, import des élèves par fichier Excel/CSV (nom, prénom, genre, classe), ajout en cours d'année.</p></div>
-      <div class="feature"><h4>Salles & plans</h4><p>Plusieurs salles, grilles personnalisables, repositionnement libre des élèves.</p></div>
-      <div class="feature"><h4>Historique & statistiques</h4><p>Séances passées (date, salle, durée), historique par élève, événements horodatés, filtres par classe.</p></div>
-      <div class="feature"><h4>Mode hors-ligne</h4><p>Fonctionne sans connexion (SQLite local), synchronisation automatique en fin de séance, résolution de conflits.</p></div>
-    </div>
-  </section>
-
-  <section>
-    <h2><span class="n">4</span> Respect du RGPD</h2>
+    <h2><span class="n">4</span> Tableau de bord & suivi des élèves</h2>
+    <p class="lead">Après les séances, l'enseignant consulte des statistiques par <strong>trimestre</strong> (T1 / T2 / T3 / année). Pour chaque élève : score (implications − malus), évolution, absences, remarques, et une note d'<strong>oral</strong> (1 à 5 : Insuffisant → Très bien) attribuée au hasard ou au choix pendant le cours. Choisissez une période pour recalculer le classement (données fictives).</p>
     <div class="card">
-      <p style="margin:0 0 8px"><strong>Pseudonymisation native :</strong> seul « prénom + 2 lettres du nom » est synchronisé. La table de correspondance complète reste <strong>uniquement sur l'appareil</strong>, jamais sur le serveur.</p>
-      <span class="pill">Isolation des données par compte (RLS)</span>
-      <span class="pill">Suppression définitive (droit à l'oubli)</span>
-      <span class="pill">Minimisation de la saisie</span>
+      <div class="screens" style="margin-bottom:14px">
+        <span class="schip on" data-per="T1" id="tabT1" style="cursor:pointer">Trimestre 1</span>
+        <span class="schip" data-per="T2" style="cursor:pointer">Trimestre 2</span>
+        <span class="schip" data-per="T3" style="cursor:pointer">Trimestre 3</span>
+        <span class="schip" data-per="year" style="cursor:pointer">Année</span>
+      </div>
+      <div id="board"></div>
+      <p class="hint">↑ Mini-tableau de bord : barre = score d'implication relatif. Cliquez sur une période pour la recalculer.</p>
     </div>
   </section>
 
+  <!-- ============ 5. RÉCOMPENSES & ÉVALUATIONS ============ -->
   <section>
-    <h2><span class="n">5</span> Technique & objectifs</h2>
+    <h2><span class="n">5</span> Récompenses, oral & travail de groupe</h2>
     <div class="grid g2">
       <div class="card">
-        <h4 style="margin:0 0 8px;color:var(--green-d)">Stack</h4>
-        <span class="pill">Expo SDK 52 · React Native</span>
-        <span class="pill">Reanimated · Gesture Handler</span>
-        <span class="pill">expo-haptics · SQLite</span>
-        <span class="pill">Supabase (Auth, PostgreSQL)</span>
-        <span class="pill">Dashboard web React + Vite</span>
-        <p style="font-size:13px;color:var(--muted);margin-top:10px">Déployée en version 1.0 auprès de quelques testeurs et testeuses.</p>
+        <h4 style="margin:0 0 6px;color:var(--green-d)">Cartes à tampons</h4>
+        <p style="font-size:13.5px;color:var(--muted);margin:0 0 4px">Une carte = <strong>10 emplacements</strong>. Chaque tampon récompense un comportement positif (19 catégories réelles : aide à un camarade, oral remarquable, autonomie…). Carte complète = un <strong>bonus</strong> au choix de l'élève. Cliquez pour tamponner :</p>
+        <div class="stampcard" id="stampCard"></div>
+        <p class="hint" id="stampMsg">0 / 10 — choisissez une récompense quand la carte est pleine.</p>
+        <div class="legend">
+          <span class="lg">🤝 Aider un camarade</span><span class="lg">🎤 Oral remarquable</span>
+          <span class="lg">🦾 Autonomie</span><span class="lg">🎨 Créativité</span>
+        </div>
       </div>
       <div class="card">
-        <h4 style="margin:0 0 8px;color:var(--green-d)">Critères de succès (MVP)</h4>
-        <table style="width:100%;border-collapse:collapse;font-size:14px">
-          <tr><td style="padding:6px 0;border-bottom:1px solid var(--line)">Action complète</td><td style="text-align:right;font-weight:700;color:var(--green-d)">≤ 2 s</td></tr>
-          <tr><td style="padding:6px 0;border-bottom:1px solid var(--line)">Latence menu radial</td><td style="text-align:right;font-weight:700;color:var(--green-d)">&lt; 100 ms</td></tr>
-          <tr><td style="padding:6px 0;border-bottom:1px solid var(--line)">Fluidité</td><td style="text-align:right;font-weight:700;color:var(--green-d)">60 FPS</td></tr>
-          <tr><td style="padding:6px 0">Mise en route</td><td style="text-align:right;font-weight:700;color:var(--green-d)">&lt; 30 min</td></tr>
+        <h4 style="margin:0 0 6px;color:var(--green-d)">Évaluation orale & groupes notés</h4>
+        <p style="font-size:13.5px;color:var(--muted);margin:0 0 8px"><strong>Oral :</strong> pendant le cours, l'app tire un élève <em>non encore évalué</em> ce trimestre (mode 🎲 hasard ou 🎯 choisir) et propose une note de 1 à 5 :</p>
+        <table>
+          <tr><th>Note</th><th>Libellé</th></tr>
+          <tr><td>1</td><td>Insuffisant</td></tr>
+          <tr><td>2</td><td>Fragile</td></tr>
+          <tr><td>3</td><td>Satisfaisant</td></tr>
+          <tr><td>4</td><td>Bien</td></tr>
+          <tr><td>5</td><td>Très bien</td></tr>
+        </table>
+        <p style="font-size:13.5px;color:var(--muted);margin:12px 0 0"><strong>Groupes notés :</strong> séances de TP avec critères et barème, note par groupe et <strong>malus de conduite</strong>, le tout relié à la séance en cours.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 6. RGPD ============ -->
+  <section>
+    <h2><span class="n">6</span> Conception « RGPD by design »</h2>
+    <div class="card">
+      <p style="margin:0 0 10px"><strong>Pseudonymisation native.</strong> À l'import, chaque élève reçoit un pseudonyme « <em>prénom + 2 premières lettres du nom</em> » (ex. <code>Marie DUPONT → Marie DU</code>). Seul ce pseudonyme circule vers le serveur. La <strong>table de correspondance des noms complets</strong> (<code>local_student_mapping</code>) reste <strong>uniquement sur l'appareil</strong> et n'est <strong>jamais synchronisée</strong>.</p>
+      <div class="grid g4" style="margin:6px 0 2px">
+        <span class="pill">Noms complets locaux uniquement</span>
+        <span class="pill">Isolation par compte (RLS)</span>
+        <span class="pill">Minimisation de la saisie</span>
+        <span class="pill">Suppression définitive (droit à l'oubli)</span>
+      </div>
+      <p class="note" style="margin-top:12px">Tous les prénoms employés dans ce document sont <strong>fictifs</strong> : c'est précisément le principe de minimisation que le logiciel applique en production.</p>
+    </div>
+  </section>
+
+  <!-- ============ 7. TECHNIQUE ============ -->
+  <section>
+    <h2><span class="n">7</span> Architecture & fiabilité</h2>
+    <div class="grid g2">
+      <div class="card">
+        <h4 style="margin:0 0 8px;color:var(--green-d)">Stack technique</h4>
+        <span class="pill">Expo SDK 54 · React Native</span>
+        <span class="pill">Expo Router · Zustand</span>
+        <span class="pill">Reanimated · Gesture Handler</span>
+        <span class="pill">expo-haptics</span>
+        <span class="pill">SQLite local (offline-first)</span>
+        <span class="pill">Supabase · PostgreSQL · RLS</span>
+        <p style="font-size:13px;color:var(--muted);margin-top:10px"><strong>Hors-ligne d'abord :</strong> tout est écrit en base SQLite locale ; la synchronisation se fait quand le réseau revient, avec horodatage <code>synced_at</code> sur chaque enregistrement.</p>
+      </div>
+      <div class="card">
+        <h4 style="margin:0 0 8px;color:var(--green-d)">Modèle de données (réel)</h4>
+        <table>
+          <tr><th>Table</th><th>Rôle</th></tr>
+          <tr><td><code>classes</code> / <code>students</code></td><td>Classes & élèves pseudonymisés</td></tr>
+          <tr><td><code>rooms</code> / <code>class_room_plans</code></td><td>Salles (grille) & plans de classe</td></tr>
+          <tr><td><code>sessions</code> / <code>events</code></td><td>Séances & actions horodatées</td></tr>
+          <tr><td><code>group_sessions</code></td><td>TP notés, critères, malus</td></tr>
+          <tr><td><code>stamp_cards</code> / <code>stamps</code></td><td>Cartes à tampons & bonus</td></tr>
+          <tr><td><code>local_student_mapping</code></td><td>Noms réels — <strong>jamais synchronisé</strong></td></tr>
         </table>
       </div>
     </div>
@@ -170,77 +332,356 @@
 </main>
 
 <footer class="wrap">
-  Annexe A10 · Gestion de classe — version d'essai en ligne<br>
+  Annexe A10 · Gestion de classe — menu radial tactile, plan de classe & RGPD<br>
   Compte rendu d'activité du référent numérique 2025-2026 · Collège Pierre Mendès France, Woippy · M. Thomas Charles
 </footer>
 
-<!-- overlay radial -->
-<div class="radial" id="radial" onclick="closeRadial(event)">
-  <div class="rmenu" id="rmenu"></div>
-</div>
-<div class="toast" id="toast"></div>
-
 <script>
-  var students=[
-    {n:'Léa M.',i:'LM'},{n:'Hugo D.',i:'HD'},{n:'Inès B.',i:'IB'},
-    {n:'Tom R.',i:'TR'},{n:'Sarah K.',i:'SK'},{n:'Noé P.',i:'NP'},
-    {n:'Emma L.',i:'EL'},{n:'Lucas V.',i:'LV'},{n:'Jade F.',i:'JF'}
+(function(){
+  "use strict";
+
+  /* ===== Données fictives (RGPD : prénoms inventés) ===== */
+  // pseudo = "prénom + 2 lettres du nom" comme dans l'app
+  var ROSTER = [
+    {id:'s1', pseudo:'Léa MA'},  {id:'s2', pseudo:'Hugo DU'}, {id:'s3', pseudo:'Inès BE'},
+    {id:'s4', pseudo:'Tom RO'},  {id:'s5', pseudo:'Sarah KA'},{id:'s6', pseudo:'Noé PE'},
+    {id:'s7', pseudo:'Emma LE'}, {id:'s8', pseudo:'Lucas VI'},{id:'s9', pseudo:'Jade FA'},
+    {id:'s10',pseudo:'Adam SO'}, {id:'s11',pseudo:'Lina BR'}, {id:'s12',pseudo:'Yanis GU'}
   ];
-  var counts={}, totals={part:0,bav:0,sort:0};
-  var actions=[
-    {k:'part',ic:'✋',l:'Participation',c:'#2e9e5b'},
-    {k:'bav', ic:'💬',l:'Bavardage',  c:'#e0651e'},
-    {k:'abs', ic:'❌',l:'Absence',    c:'#d6453f'},
-    {k:'rem', ic:'📝',l:'Remarque',   c:'#2f6fd6'},
-    {k:'sort',ic:'🚪',l:'Sortie',     c:'#8a4fd6'}
+
+  // Actions réelles + couleurs réelles (constants/menuItems.ts, *Light)
+  var ACTIONS = [
+    {id:'participation', label:'Implication', icon:'✋', color:'#34D399'},
+    {id:'bavardage',     label:'Malus',       icon:'💬', color:'#FBBF24'},
+    {id:'sortie',        label:'Sortie',      icon:'🚪', color:'#A78BFA', sub:[
+        {id:'infirmerie',  label:'Infirmerie',  icon:'🏥', color:'#F472B6'},
+        {id:'toilettes',   label:'Toilettes',   icon:'🚻', color:'#22D3EE'},
+        {id:'convocation', label:'Convocation', icon:'📋', color:'#A8A29E'},
+        {id:'exclusion',   label:'Exclusion',   icon:'⛔', color:'#F87171'}
+    ]},
+    {id:'remarque',      label:'Remarque',    icon:'📝', color:'#60A5FA'},
+    {id:'absence',       label:'Absence',     icon:'❌', color:'#FB7185'}
   ];
-  var current=null;
-  function buildPlan(){
-    var p=document.getElementById('plan'); p.innerHTML='';
-    students.forEach(function(s,idx){
-      counts[idx]=counts[idx]||{part:0,bav:0,absent:false};
-      var d=document.createElement('div'); d.className='stu'+(counts[idx].absent?' absent':'');
-      d.innerHTML='<div class="av">'+s.i+'</div><div class="nm">'+s.n+'</div>'+
-        '<div class="ct"><span class="p">✋'+counts[idx].part+'</span><span class="b">💬'+counts[idx].bav+'</span></div>';
-      d.onclick=function(e){openRadial(idx,e)};
-      p.appendChild(d);
+
+  var COLS = 5, ROWS = 3;            // grille 3 rangées x 5 colonnes
+  var DISABLED = ['0,2','1,2'];      // allée centrale (col 2, 2 cases)
+  var counts = {};                   // counts[id] = {part,bav,sort,absent,out}
+  var totals = {part:0, bav:0, sort:0};
+  ROSTER.forEach(function(s){ counts[s.id] = {part:0,bav:0,sort:0,absent:false,out:false}; });
+
+  /* ===== Plan de la séance : positions {"row,col":id} ===== */
+  var positions = {};
+  (function seed(){
+    var i=0;
+    for(var r=0;r<ROWS;r++){
+      for(var c=0;c<COLS;c++){
+        if(DISABLED.indexOf(r+','+c)>=0) continue;
+        if(i<ROSTER.length){ positions[r+','+c]=ROSTER[i].id; i++; }
+      }
+    }
+  })();
+
+  var byId = {}; ROSTER.forEach(function(s){ byId[s.id]=s; });
+  var firstName = function(s){ return s.pseudo.split(' ')[0]; };
+
+  /* ===== Horloge de séance ===== */
+  var clockEl = document.getElementById('clock');
+  var t0 = Date.now();
+  setInterval(function(){
+    var sec = Math.floor((Date.now()-t0)/1000);
+    var m = Math.floor(sec/60), s = sec%60;
+    clockEl.textContent = (m<10?'0':'')+m+':'+(s<10?'0':'')+s;
+  }, 1000);
+
+  /* ===== Rendu du plan de séance (démo 1) ===== */
+  var room = document.getElementById('room');
+  function sizePx(){ return Math.min(58, Math.floor((Math.min(420, room.parentElement.clientWidth)-40)/COLS)); }
+
+  function renderRoom(){
+    room.style.gridTemplateColumns = 'repeat('+COLS+', '+sizePx()+'px)';
+    room.innerHTML='';
+    for(var r=0;r<ROWS;r++){
+      for(var c=0;c<COLS;c++){
+        var key=r+','+c, cell=document.createElement('div');
+        if(DISABLED.indexOf(key)>=0){ cell.className='seat empty'; room.appendChild(cell); continue; }
+        var sid=positions[key];
+        if(!sid){ cell.className='seat'; cell.style.borderStyle='dashed'; cell.style.opacity='.5'; room.appendChild(cell); continue; }
+        var s=byId[sid], ct=counts[sid];
+        cell.className='seat occ'+(ct.absent?' absent':'')+(selectedId===sid?' sel':'');
+        var html='<div class="nm">'+firstName(s)+'</div>';
+        if(ct.absent){ html='<div class="abs-badge">ABS</div>'+html; }
+        else if(ct.out){ html+='<div class="out-badge">🚪 '+ct.out+'</div>'; }
+        else if(ct.part>0||ct.bav>0){
+          html+='<div class="ct">'+(ct.part>0?'<span class="p">✋'+ct.part+'</span>':'')+(ct.bav>0?'<span class="b">💬'+ct.bav+'</span>':'')+'</div>';
+        }
+        cell.innerHTML=html;
+        (function(sid,cell){
+          cell.addEventListener('mousedown', function(e){ startPress(sid, e); });
+          cell.addEventListener('mouseup',   function(){ cancelPress(); });
+          cell.addEventListener('mouseleave',function(){ cancelPress(); });
+          cell.addEventListener('touchstart',function(e){ startPress(sid, e.touches[0]); }, {passive:true});
+          cell.addEventListener('touchend',  function(){ cancelPress(); });
+          cell.addEventListener('click',     function(e){ tapStudent(sid, e); });
+        })(sid, cell);
+        room.appendChild(cell);
+      }
+    }
+  }
+
+  /* ===== Appui long simulé (anneau de progression) ===== */
+  var pring = document.getElementById('pring');
+  var pressTimer=null, pressOpened=false, selectedId=null;
+
+  function localXY(clientX, clientY){
+    var st=document.getElementById('stage').getBoundingClientRect();
+    return {x:clientX-st.left, y:clientY-st.top};
+  }
+  function startPress(sid, pt){
+    var ct=counts[sid];
+    if(ct.absent || ct.out) return;        // géré par le clic (annuler abs / retour)
+    cancelPress();
+    pressOpened=false;
+    var p=localXY(pt.clientX, pt.clientY);
+    pring.style.left=(p.x-23)+'px'; pring.style.top=(p.y-23)+'px';
+    pring.classList.add('on');
+    var ring=pring.querySelector('i'); ring.style.animation='none'; void ring.offsetWidth; ring.style.animation='spin .4s linear forwards';
+    pressTimer=setTimeout(function(){
+      pressOpened=true; pring.classList.remove('on');
+      openRadial(sid, p.x, p.y);
+    }, 400);
+  }
+  function cancelPress(){
+    if(pressTimer){ clearTimeout(pressTimer); pressTimer=null; }
+    pring.classList.remove('on');
+  }
+  // clic = raccourci d'ouverture (et gestion absent/sorti)
+  function tapStudent(sid, e){
+    var ct=counts[sid];
+    if(ct.absent){ ct.absent=false; renderRoom(); toast(firstName(byId[sid])+' — absence annulée'); return; }
+    if(ct.out){ ct.out=false; totals.sort=Math.max(0,totals.sort); renderRoom(); toast(firstName(byId[sid])+' est de retour en classe'); return; }
+    if(pressOpened){ pressOpened=false; return; } // déjà ouvert par l'appui long
+    var p=localXY(e.clientX, e.clientY);
+    openRadial(sid, p.x, p.y);
+  }
+
+  /* ===== Menu radial ===== */
+  var radialOv=document.getElementById('radialOv'),
+      rmenu=document.getElementById('rmenu'),
+      selName=document.getElementById('selName');
+  var STAGE_R=78, SUB_R=66;
+
+  function clamp(v,min,max){ return Math.max(min, Math.min(max, v)); }
+
+  function openRadial(sid, x, y){
+    selectedId=sid;
+    var st=document.getElementById('stage');
+    var W=st.clientWidth, H=st.clientHeight;
+    // garde le menu dans le cadre (comme calculateClampedMenuPosition)
+    var cx=clamp(x, STAGE_R+34, W-STAGE_R-34);
+    var cy=clamp(y, STAGE_R+34, H-STAGE_R-20);
+    rmenu.style.left=cx+'px'; rmenu.style.top=cy+'px';
+    selName.textContent=byId[sid].pseudo;
+    buildRing(ACTIONS, STAGE_R, sid, null);
+    radialOv.classList.add('on');
+    renderRoom();
+  }
+
+  function buildRing(items, R, sid, parent){
+    rmenu.innerHTML='';
+    var center=document.createElement('div'); center.className='rcenter';
+    center.textContent = parent ? parent.label : firstName(byId[sid]);
+    rmenu.appendChild(center);
+    items.forEach(function(a, i){
+      // angle = index*2π/n − π/2  (exactement comme RadialMenuItem.tsx)
+      var ang = (i*2*Math.PI)/items.length - Math.PI/2;
+      var ix = Math.cos(ang)*R, iy = Math.sin(ang)*R;
+      var it=document.createElement('div'); it.className='ritem';
+      it.style.background=a.color; it.style.transform='translate('+ix+'px,'+iy+'px)';
+      it.style.animationDelay=(i*0.03)+'s';
+      it.innerHTML='<span class="ic">'+a.icon+'</span><span class="lb">'+a.label+'</span>'+(a.sub?'<span class="arrow">›</span>':'');
+      it.addEventListener('mouseenter', function(){ it.style.boxShadow='0 6px 18px rgba(0,0,0,.4)'; });
+      it.addEventListener('click', function(ev){
+        ev.stopPropagation();
+        if(a.sub){ buildRing(a.sub, SUB_R, sid, a); return; }
+        // maintien Implication -> bonus (ici : clic droit déjà géré ; sinon +1)
+        applyAction(sid, parent ? parent.id : a.id, parent ? a.id : null, a, parent);
+      });
+      // clic droit / appui prolongé sur Implication = bonus
+      if(a.id==='participation'){
+        it.addEventListener('contextmenu', function(ev){
+          ev.preventDefault(); ev.stopPropagation();
+          var pts=[2,3,5,10][Math.floor(Math.random()*4)];
+          applyBonus(sid, pts);
+        });
+      }
+      rmenu.appendChild(it);
     });
   }
-  function openRadial(idx,e){
-    current=idx;
-    var m=document.getElementById('rmenu'); m.innerHTML='';
-    var center=document.createElement('div'); center.className='rcenter'; center.textContent=students[idx].n;
-    m.appendChild(center);
-    var R=82;
-    actions.forEach(function(a,i){
-      var ang=(-90 + i*(360/actions.length))*Math.PI/180;
-      var x=115+R*Math.cos(ang), y=115+R*Math.sin(ang);
-      var it=document.createElement('div'); it.className='ritem'; it.style.background=a.c;
-      it.style.left=x+'px'; it.style.top=y+'px'; it.style.animationDelay=(i*0.03)+'s';
-      it.innerHTML='<span class="ic">'+a.ic+'</span>'+a.l;
-      it.onclick=function(ev){ev.stopPropagation();doAction(idx,a)};
-      m.appendChild(it);
-    });
-    document.getElementById('radial').classList.add('on');
+
+  function closeRadial(){
+    radialOv.classList.remove('on');
+    selectedId=null; renderRoom();
   }
-  function doAction(idx,a){
-    var msg='';
-    if(a.k==='part'){counts[idx].part++;totals.part++;msg='Participation enregistrée pour '+students[idx].n;}
-    else if(a.k==='bav'){counts[idx].bav++;totals.bav++;msg='Bavardage noté pour '+students[idx].n;}
-    else if(a.k==='abs'){counts[idx].absent=!counts[idx].absent;msg=students[idx].n+(counts[idx].absent?' marqué absent':' de retour');}
-    else if(a.k==='rem'){msg='Remarque libre — '+students[idx].n;}
-    else if(a.k==='sort'){totals.sort++;msg='Sortie (infirmerie / toilettes / convocation / exclusion) — '+students[idx].n;}
+  radialOv.addEventListener('click', function(e){ if(e.target===radialOv) closeRadial(); });
+
+  function refreshMetrics(){
     document.getElementById('m-part').textContent=totals.part;
     document.getElementById('m-bav').textContent=totals.bav;
     document.getElementById('m-sort').textContent=totals.sort;
-    document.getElementById('radial').classList.remove('on');
-    buildPlan();
-    showToast(msg);
+    document.getElementById('m-score').textContent=(totals.part-totals.bav);
   }
-  function closeRadial(e){if(e.target.id==='radial')document.getElementById('radial').classList.remove('on');}
-  var tt;
-  function showToast(m){var t=document.getElementById('toast');t.textContent=m;t.classList.add('on');clearTimeout(tt);tt=setTimeout(function(){t.classList.remove('on')},1900);}
-  buildPlan();
+
+  function applyAction(sid, typeId, subId, item, parent){
+    var s=byId[sid], ct=counts[sid], msg='';
+    switch(typeId){
+      case 'participation': ct.part++; totals.part++; msg='✋ Implication +1 — '+s.pseudo; break;
+      case 'bavardage':     ct.bav++;  totals.bav++;  msg='💬 Malus noté — '+s.pseudo; break;
+      case 'absence':       ct.absent=true; msg='❌ '+s.pseudo+' marqué(e) absent(e)'; break;
+      case 'remarque':      msg='📝 Remarque libre saisie — '+s.pseudo; break;
+      case 'sortie':
+        var labels={infirmerie:'🏥 infirmerie',toilettes:'🚻 toilettes',convocation:'📋 convocation',exclusion:'⛔ exclusion'};
+        ct.out='0m'; totals.sort++;
+        msg=s.pseudo+' en sortie ('+(labels[subId]||subId)+')';
+        break;
+    }
+    refreshMetrics();
+    closeRadial();
+    renderRoom();
+    toast(msg);
+  }
+  function applyBonus(sid, pts){
+    var s=byId[sid], ct=counts[sid];
+    ct.part+=pts; totals.part+=pts;
+    refreshMetrics(); closeRadial(); renderRoom();
+    toast('🌟 Bonus +'+pts+' pts — '+s.pseudo);
+  }
+
+  /* ===== Toast ===== */
+  var toastEl=document.getElementById('toast'), toastT=null;
+  function toast(m){ toastEl.textContent=m; toastEl.classList.add('on'); clearTimeout(toastT); toastT=setTimeout(function(){ toastEl.classList.remove('on'); }, 2000); }
+
+  /* ===== DÉMO 2 : éditeur de plan (déplacer un élève) ===== */
+  var planRoom=document.getElementById('planRoom'), planHint=document.getElementById('planHint');
+  // positions indépendantes pour la démo plan
+  var planPos = JSON.parse(JSON.stringify(positions));
+  var planSel=null;
+  function renderPlan(){
+    var px=sizePx();
+    planRoom.style.gridTemplateColumns='repeat('+COLS+', '+px+'px)';
+    planRoom.innerHTML='';
+    for(var r=0;r<ROWS;r++){
+      for(var c=0;c<COLS;c++){
+        var key=r+','+c, cell=document.createElement('div');
+        if(DISABLED.indexOf(key)>=0){ cell.className='seat empty'; planRoom.appendChild(cell); continue; }
+        var sid=planPos[key];
+        cell.className='seat'+(sid?' occ':'')+(sid&&planSel===sid?' sel':'');
+        if(!sid){ cell.style.borderStyle='dashed'; cell.style.opacity='.6'; }
+        cell.innerHTML = sid ? '<div class="nm">'+firstName(byId[sid])+'</div>' : '';
+        (function(key,sid){
+          cell.addEventListener('click', function(){ planClick(key, sid); });
+        })(key, sid);
+        planRoom.appendChild(cell);
+      }
+    }
+  }
+  function planClick(key, sid){
+    if(planSel===null){
+      if(sid){ planSel=sid; planHint.textContent='Place '+firstName(byId[sid])+' sur une case libre'; renderPlan(); }
+      return;
+    }
+    // une sélection est active : on déplace / échange
+    var fromKey=null;
+    for(var k in planPos){ if(planPos[k]===planSel){ fromKey=k; break; } }
+    if(sid){ planPos[fromKey]=sid; }        // échange de deux élèves
+    else { delete planPos[fromKey]; }        // déplacement vers case libre
+    planPos[key]=planSel;
+    var moved=firstName(byId[planSel]);
+    planSel=null;
+    planHint.textContent='Touchez un élève, puis une place libre';
+    renderPlan();
+    toast(moved+' déplacé(e)');
+  }
+
+  /* ===== DÉMO 3 : tableau de bord par trimestre ===== */
+  // jeux de données fictifs par période
+  var DATA = {
+    T1:{}, T2:{}, T3:{}
+  };
+  (function genData(){
+    // graines déterministes pour un rendu stable
+    var seedV=42; function rnd(){ seedV=(seedV*1103515245+12345)&0x7fffffff; return seedV/0x7fffffff; }
+    ROSTER.forEach(function(s){
+      ['T1','T2','T3'].forEach(function(per){
+        var p=Math.floor(rnd()*22)+2, b=Math.floor(rnd()*8);
+        DATA[per][s.id]={part:p, bav:b, oral:Math.floor(rnd()*5)+1};
+      });
+    });
+  })();
+  function periodData(per){
+    if(per==='year'){
+      var agg={};
+      ROSTER.forEach(function(s){
+        var p=0,b=0; ['T1','T2','T3'].forEach(function(t){ p+=DATA[t][s.id].part; b+=DATA[t][s.id].bav; });
+        agg[s.id]={part:p,bav:b,oral:DATA.T3[s.id].oral};
+      });
+      return agg;
+    }
+    return DATA[per];
+  }
+  var board=document.getElementById('board');
+  function renderBoard(per){
+    var d=periodData(per);
+    var rows=ROSTER.map(function(s){
+      var st=d[s.id]; return {s:s, score:st.part-st.bav, part:st.part, bav:st.bav, oral:st.oral};
+    }).sort(function(a,b){ return b.score-a.score; });
+    var max=Math.max.apply(null, rows.map(function(r){ return r.score; })); if(max<=0) max=1;
+    board.innerHTML = rows.map(function(r){
+      var initials=r.s.pseudo.split(' ').map(function(w){return w[0];}).join('');
+      var w=Math.max(4, Math.round(r.score/max*100));
+      var oralStars='★'.repeat(r.oral)+'<span style="color:#cbd5e1">'+'★'.repeat(5-r.oral)+'</span>';
+      return '<div class="lb-row">'+
+        '<div class="lb-av">'+initials+'</div>'+
+        '<div class="lb-name">'+r.s.pseudo+'<div style="font-size:11px;color:#94a3b8;font-weight:500">✋'+r.part+' · 💬'+r.bav+' · oral '+oralStars+'</div></div>'+
+        '<div class="lb-bar"><i style="width:'+w+'%"></i></div>'+
+        '<div class="lb-sc">'+(r.score>=0?'+':'')+r.score+'</div>'+
+      '</div>';
+    }).join('');
+  }
+  var chips=document.querySelectorAll('[data-per]');
+  chips.forEach(function(ch){
+    ch.addEventListener('click', function(){
+      chips.forEach(function(c){ c.classList.remove('on'); });
+      ch.classList.add('on');
+      renderBoard(ch.getAttribute('data-per'));
+    });
+  });
+
+  /* ===== DÉMO 4 : carte à tampons ===== */
+  var STAMP_ICONS=['🤝','🎤','🦾','🎨','⭐','📚','✍️','💡','🎯','🧠'];
+  var stampCard=document.getElementById('stampCard'), stampMsg=document.getElementById('stampMsg');
+  var stampFilled=0;
+  function renderStamp(){
+    stampCard.innerHTML='';
+    for(var i=0;i<10;i++){
+      var slot=document.createElement('div');
+      slot.className='slot'+(i<stampFilled?' filled':'');
+      slot.textContent = i<stampFilled ? STAMP_ICONS[i] : '';
+      (function(i){ slot.addEventListener('click', function(){ stamp(i); }); })(i);
+      stampCard.appendChild(slot);
+    }
+  }
+  function stamp(i){
+    if(stampFilled>=10){ stampFilled=0; renderStamp(); stampMsg.textContent='Nouvelle carte démarrée — 0 / 10.'; return; }
+    stampFilled=Math.min(10, Math.max(stampFilled, i+1));
+    renderStamp();
+    if(stampFilled>=10){ stampMsg.innerHTML='🎉 Carte complète ! Bonus à choisir : <em>« Choisir sa place de la semaine »</em>. (Cliquez pour repartir à zéro.)'; }
+    else { stampMsg.textContent=stampFilled+' / 10 tampons.'; }
+  }
+
+  /* ===== Init ===== */
+  renderRoom(); renderPlan(); renderBoard('T1'); renderStamp(); refreshMetrics();
+  window.addEventListener('resize', function(){ renderRoom(); renderPlan(); });
+})();
 </script>
 </body>
 </html>

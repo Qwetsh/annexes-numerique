@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Annexe A9 — Formation Genially · Document interactif</title>
+<title>Annexe A9 — Formation « Maîtriser Genially » · Document interactif</title>
 <style>
   :root{
     --green:#1f7a54; --green-d:#155c3f; --green-l:#eaf5ef; --ink:#1d2b25; --muted:#5c6b63;
@@ -13,185 +13,673 @@
   }
   *{box-sizing:border-box}
   body{margin:0;font-family:"Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.55}
+  a{color:var(--green-d)}
   .wrap{max-width:1000px;margin:0 auto;padding:0 22px}
   header.top{background:linear-gradient(135deg,#1f7a54,#155c3f);color:#fff;padding:34px 0 30px}
-  .badge{display:inline-block;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:4px 14px;font-size:13px;font-weight:600}
-  header.top h1{margin:14px 0 6px;font-size:30px}
-  header.top p{margin:0;opacity:.92;max-width:720px}
+  .badge{display:inline-block;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:4px 14px;font-size:13px;font-weight:600;letter-spacing:.3px}
+  header.top h1{margin:14px 0 6px;font-size:30px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+  header.top p{margin:0;opacity:.92;max-width:760px}
   main{padding:34px 0 60px}
   section{margin:0 0 30px}
   h2{font-size:21px;color:var(--green-d);margin:0 0 6px;display:flex;align-items:center;gap:9px}
   h2 .n{background:var(--green);color:#fff;border-radius:8px;font-size:13px;padding:2px 9px;font-weight:700}
+  h3{font-size:16px;color:var(--green-d);margin:18px 0 8px}
   .lead{color:var(--muted);margin:.2em 0 1.1em}
   .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 22px;box-shadow:var(--shadow)}
   .grid{display:grid;gap:14px}
-  .g2{grid-template-columns:repeat(2,1fr)} .g3{grid-template-columns:repeat(3,1fr)}
-  @media(max-width:740px){.g2,.g3{grid-template-columns:1fr}}
+  .g2{grid-template-columns:repeat(2,1fr)} .g3{grid-template-columns:repeat(3,1fr)} .g4{grid-template-columns:repeat(4,1fr)}
+  @media(max-width:740px){.g2,.g3,.g4{grid-template-columns:1fr}}
   .pill{display:inline-block;background:var(--green-l);color:var(--green-d);border-radius:999px;padding:3px 11px;font-size:12.5px;font-weight:600;margin:0 4px 6px 0}
   table{width:100%;border-collapse:collapse;font-size:14px}
   th,td{text-align:left;padding:9px 11px;border-bottom:1px solid var(--line)}
   th{background:var(--green);color:#fff;font-weight:600}
   tr:nth-child(even) td{background:#fafdfb}
-  /* parcours */
-  .paths{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:14px}
+  code{background:#eef5f1;border:1px solid var(--line);border-radius:5px;padding:1px 5px;font-size:12.5px}
+  .crcn{display:inline-block;background:#eef3ff;color:#2f4f8f;border-radius:6px;padding:1px 8px;font-size:11.5px;font-weight:600;margin:2px 4px 2px 0}
+  .note{font-size:13px;color:var(--muted);background:#fff;border:1px dashed var(--line);border-radius:10px;padding:11px 14px}
+  .tag{display:inline-block;background:#fff3e0;color:#a05a00;border:1px solid #f0d8b0;border-radius:999px;padding:2px 11px;font-size:12px;font-weight:600}
+  .kpi{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px;text-align:center}
+  .kpi b{display:block;font-size:24px;color:var(--green-d)}
+  .kpi span{font-size:12.5px;color:var(--muted)}
+  .badgecard{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px}
+  .badgecard h4{margin:0 0 4px;font-size:15px;color:var(--green-d)}
+  .badgecard p{margin:0;font-size:13px;color:var(--muted)}
+  footer{border-top:1px solid var(--line);padding:22px 0;color:var(--muted);font-size:13px;text-align:center}
+
+  /* logo gen façon icône */
+  .gen-ic{display:inline-flex;width:34px;height:34px;border-radius:10px;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.4);align-items:center;justify-content:center;font-size:18px}
+
+  /* ====== Sélecteur de parcours ====== */
+  .paths{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:14px}
   @media(max-width:740px){.paths{grid-template-columns:1fr}}
-  .path{border:2px solid var(--line);background:#fff;border-radius:14px;padding:15px;cursor:pointer;transition:.12s}
+  .path{border:2px solid var(--line);background:#fff;border-radius:14px;padding:15px;cursor:pointer;transition:.12s;text-align:left;font-family:inherit}
   .path:hover{border-color:#a9d6c0}
-  .path.on{border-color:var(--green);background:var(--green-l)}
-  .path h4{margin:2px 0 3px;color:var(--green-d)}
-  .path p{margin:0;font-size:12.5px;color:var(--muted)}
+  .path.on{border-color:var(--green);background:var(--green-l);box-shadow:0 0 0 3px rgba(31,122,84,.12)}
+  .path h4{margin:2px 0 3px;color:var(--green-d);font-size:15px}
+  .path p{margin:0;font-size:12px;color:var(--muted)}
   .path .d{font-size:12px;font-weight:700;color:var(--green)}
-  /* modules */
-  .levels{margin-top:6px}
+  .path-out{background:var(--green-l);border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin-top:4px}
+  .path-out .seq{display:flex;flex-wrap:wrap;gap:7px;align-items:center;margin:8px 0}
+  .seq .step{display:inline-flex;align-items:center;gap:6px;background:#fff;border:1px solid var(--line);border-radius:999px;padding:4px 11px;font-size:12.5px;font-weight:600;color:var(--green-d)}
+  .seq .arrow{color:var(--green);font-weight:800}
+  .seq .mc{background:var(--green);color:#fff;border-radius:6px;font-size:11px;padding:1px 6px;font-weight:700}
+  .path-out .meta{font-size:13px;color:var(--ink)}
+  .path-out .meta b{color:var(--green-d)}
+
+  /* ====== Progression ====== */
+  .progbar-wrap{display:flex;align-items:center;gap:12px;margin:2px 0 14px}
+  .progbar{flex:1;height:12px;background:#e3efe8;border-radius:7px;overflow:hidden;border:1px solid var(--line)}
+  .progfill{height:100%;width:0;background:linear-gradient(90deg,#2e9e5b,#1f7a54);border-radius:7px;transition:width .5s cubic-bezier(.16,1,.3,1)}
+  .prog-pct{font-weight:800;color:var(--green-d);font-size:14px;min-width:118px;text-align:right}
+  .prog-reset{background:none;border:1px solid var(--line);color:var(--muted);border-radius:9px;padding:6px 12px;font-size:12px;cursor:pointer;font-family:inherit}
+  .prog-reset:hover{border-color:#a9d6c0;color:var(--green-d)}
+
+  /* ====== Carte des 9 modules ====== */
   .lvl-title{font-weight:700;color:var(--green-d);margin:16px 0 8px;display:flex;align-items:center;gap:8px;font-size:15px}
   .lvl-title .dot{width:11px;height:11px;border-radius:50%}
-  details.mod{background:#fff;border:1px solid var(--line);border-radius:11px;margin:0 0 8px;overflow:hidden;transition:.12s}
-  details.mod.hl{border-color:var(--green);box-shadow:0 0 0 2px rgba(31,122,84,.18)}
-  details.mod summary{cursor:pointer;padding:12px 15px;font-weight:600;list-style:none;display:flex;align-items:center;gap:10px}
-  details.mod summary::-webkit-details-marker{display:none}
-  .mcode{background:var(--green);color:#fff;border-radius:7px;font-size:12px;font-weight:700;padding:2px 8px;flex-shrink:0}
-  details.mod summary .arr{margin-left:auto;color:var(--green);font-weight:700;font-size:18px}
-  details.mod[open] summary .arr{transform:rotate(45deg)}
-  details.mod .body{padding:0 15px 14px 15px;font-size:13.5px;color:#3a4a42}
-  details.mod .body b{color:var(--green-d)}
-  .crcn{display:inline-block;background:#eef3ff;color:#2f4f8f;border-radius:6px;padding:1px 8px;font-size:11.5px;font-weight:600;margin:2px 4px 2px 0}
-  footer{border-top:1px solid var(--line);padding:22px 0;color:var(--muted);font-size:13px;text-align:center}
-  .note{font-size:13px;color:var(--muted);background:#fff;border:1px dashed var(--line);border-radius:10px;padding:11px 14px}
+  .lvl-title .meta{margin-left:auto;font-weight:600;font-size:12.5px;color:var(--muted)}
+  .modgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+  @media(max-width:740px){.modgrid{grid-template-columns:1fr}}
+  .modcard{position:relative;border:2px solid var(--line);background:#fff;border-radius:13px;padding:13px 14px;cursor:pointer;transition:.13s;text-align:left;font-family:inherit;color:inherit;overflow:hidden}
+  .modcard:hover{border-color:#a9d6c0;transform:translateY(-2px)}
+  .modcard.hl{border-color:var(--green);box-shadow:0 0 0 3px rgba(31,122,84,.15)}
+  .modcard.seen{background:var(--green-l)}
+  .modcard .top{display:flex;align-items:center;gap:9px;margin-bottom:5px}
+  .modcard .mc{background:var(--green);color:#fff;border-radius:7px;font-size:12px;font-weight:800;padding:2px 8px;flex-shrink:0}
+  .modcard .ic{font-size:18px;margin-left:auto}
+  .modcard h4{margin:0;font-size:13.5px;color:var(--ink);line-height:1.3}
+  .modcard .obj{font-size:11.5px;color:var(--muted);margin:6px 0 0}
+  .modcard .seen-tick{position:absolute;top:9px;right:10px;width:18px;height:18px;border-radius:50%;background:var(--green);color:#fff;font-size:11px;font-weight:900;display:none;align-items:center;justify-content:center;line-height:1}
+  .modcard.seen .seen-tick{display:flex}
+  .modcard.seen .ic{display:none}
+
+  /* ====== Popup module ====== */
+  .ovl{position:fixed;inset:0;background:rgba(13,40,29,.55);backdrop-filter:blur(3px);display:none;align-items:center;justify-content:center;z-index:100;padding:18px}
+  .ovl.show{display:flex;animation:fade .2s ease both}
+  @keyframes fade{from{opacity:0}to{opacity:1}}
+  .modal{background:#fff;border-radius:18px;max-width:560px;width:100%;max-height:88vh;overflow-y:auto;box-shadow:0 24px 70px rgba(10,30,22,.4);animation:pop .25s cubic-bezier(.16,1,.3,1) both}
+  @keyframes pop{from{opacity:0;transform:translateY(14px) scale(.97)}to{opacity:1;transform:none}}
+  .modal-head{background:linear-gradient(135deg,#1f7a54,#155c3f);color:#fff;padding:18px 22px;border-radius:18px 18px 0 0;position:sticky;top:0}
+  .modal-head .mc{background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.4);border-radius:7px;font-size:12px;font-weight:800;padding:2px 9px}
+  .modal-head h3{margin:8px 0 2px;color:#fff;font-size:19px}
+  .modal-head .lvl{font-size:12.5px;opacity:.9}
+  .modal-close{position:absolute;top:14px;right:16px;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.4);color:#fff;width:30px;height:30px;border-radius:50%;font-size:17px;cursor:pointer;line-height:1}
+  .modal-body{padding:18px 22px 22px}
+  .mrow{margin:0 0 13px}
+  .mrow .lab{font-size:11px;font-weight:800;letter-spacing:.6px;text-transform:uppercase;color:var(--green);display:flex;align-items:center;gap:6px;margin-bottom:3px}
+  .mrow p{margin:0;font-size:14px;color:#33473e}
+  .mrow ul{margin:4px 0 0;padding-left:18px;font-size:13.5px;color:#33473e}
+  .mrow ul li{margin:2px 0}
+  .deliv{background:var(--green-l);border:1px solid var(--line);border-radius:11px;padding:11px 13px;font-size:13.5px}
+  .deliv b{color:var(--green-d)}
+  .modal-nav{display:flex;justify-content:space-between;gap:10px;margin-top:16px}
+  .modal-nav button{flex:1;border:1px solid var(--line);background:#fff;color:var(--green-d);border-radius:11px;padding:10px;font-weight:700;font-size:13px;cursor:pointer;font-family:inherit}
+  .modal-nav button:hover:not(:disabled){background:var(--green-l)}
+  .modal-nav button:disabled{opacity:.4;cursor:default}
+
+  /* ====== Cadre démo intégrée façon Genially ====== */
+  .demo-wrap{display:flex;gap:22px;flex-wrap:wrap;align-items:flex-start;margin-top:6px}
+  .demo-side{flex:1;min-width:240px}
+  .demo-label{display:inline-flex;align-items:center;gap:7px;background:#11161e;color:#cdeede;border:1px solid #2b3a33;border-radius:999px;padding:4px 13px;font-size:12px;font-weight:700;letter-spacing:.4px;margin-bottom:10px}
+  .demo-label .dot{width:8px;height:8px;border-radius:50%;background:#39d98a;box-shadow:0 0 7px #39d98a}
+  .stage{flex:0 0 360px;max-width:100%;border:9px solid #11161e;border-radius:20px;background:#0d1512;box-shadow:0 14px 40px rgba(10,30,22,.28);overflow:hidden;position:relative;margin:0 auto}
+  .stage-bar{background:#11161e;color:#9fe7c4;font-size:11px;font-weight:700;letter-spacing:.4px;padding:7px 13px;display:flex;align-items:center;gap:8px}
+  .stage-bar .dots{display:inline-flex;gap:4px}
+  .stage-bar .dots i{width:8px;height:8px;border-radius:50%;display:inline-block}
+  .stage-cap{font-size:11.5px;color:var(--muted);text-align:center;margin-top:8px;font-style:italic}
+  @media(max-width:740px){.stage{flex:0 0 auto;width:100%}}
+
+  /* ---- Démo M5 : zones cliquables / popups (scène interactive) ---- */
+  .gscene{position:relative;height:300px;background:radial-gradient(circle at 30% 20%,#16302a,#0d1512)}
+  .gscene .title{position:absolute;top:14px;left:0;right:0;text-align:center;color:#eafff4;font-weight:800;font-size:15px}
+  .gscene .sub{position:absolute;top:38px;left:0;right:0;text-align:center;color:#7fd6ab;font-size:11px}
+  .hot{position:absolute;border:2px dashed #39d98a;border-radius:14px;background:rgba(57,217,138,.10);cursor:pointer;transition:.15s;display:flex;align-items:center;justify-content:center}
+  .hot:hover{background:rgba(57,217,138,.22);transform:scale(1.04)}
+  .hot .hi{font-size:26px}
+  .hot .pulse{position:absolute;width:14px;height:14px;border-radius:50%;background:#39d98a;top:-7px;right:-7px;animation:bp 1.6s infinite}
+  @keyframes bp{0%{box-shadow:0 0 0 0 rgba(57,217,138,.7)}70%{box-shadow:0 0 0 11px rgba(57,217,138,0)}100%{box-shadow:0 0 0 0 rgba(57,217,138,0)}}
+  .gpop{position:absolute;inset:0;background:rgba(7,16,12,.92);display:none;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:26px;animation:fade .2s ease both}
+  .gpop.show{display:flex}
+  .gpop .pemoji{font-size:40px;margin-bottom:8px}
+  .gpop h5{margin:0 0 6px;color:#eafff4;font-size:16px}
+  .gpop p{margin:0;color:#bfe9d3;font-size:12.5px;max-width:240px;line-height:1.5}
+  .gpop .gback{margin-top:16px;background:#39d98a;color:#04130c;border:none;border-radius:10px;padding:8px 16px;font-weight:800;font-size:12.5px;cursor:pointer;font-family:inherit}
+  .ghint{position:absolute;bottom:10px;left:0;right:0;text-align:center;color:#5e8a76;font-size:10.5px}
+
+  /* ---- Démo M8 : quiz à score conditionnel (variables) ---- */
+  .quiz{font-family:"Segoe UI",system-ui,sans-serif;color:#eafff4;min-height:300px;padding:16px 16px 18px;background:radial-gradient(circle at 70% 0%,#173228,#0d1512);position:relative}
+  .quiz .hud{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+  .quiz .var{background:#11211b;border:1px solid #2b4a3b;border-radius:10px;padding:6px 11px;font-size:12px;font-weight:700}
+  .quiz .var b{color:#39d98a;font-size:15px}
+  .quiz .qn{font-size:10.5px;color:#7fd6ab;font-weight:700;letter-spacing:.4px}
+  .quiz .qtext{font-size:14px;font-weight:700;margin:6px 0 12px;min-height:40px}
+  .quiz .opts{display:flex;flex-direction:column;gap:8px}
+  .qbtn{background:#11211b;border:1.5px solid #2b4a3b;color:#dfffe9;border-radius:11px;padding:10px 12px;font-size:12.5px;font-weight:600;cursor:pointer;font-family:inherit;text-align:left;transition:.13s}
+  .qbtn:hover:not(:disabled){background:#16301f;border-color:#39d98a88}
+  .qbtn.good{background:#10401f;border-color:#39d98a;color:#bdffd4}
+  .qbtn.bad{background:#3a1414;border-color:#ff6b5e;color:#ffc9c4}
+  .qbtn:disabled{cursor:default}
+  .qfb{margin-top:11px;font-size:12px;min-height:18px;font-weight:600}
+  .qnext{margin-top:12px;width:100%;background:#39d98a;color:#04130c;border:none;border-radius:11px;padding:11px;font-weight:800;font-size:13px;cursor:pointer;font-family:inherit;display:none}
+  .qnext.show{display:block}
+  .qend{text-align:center;padding:18px 6px;display:none}
+  .qend.show{display:block;animation:pop .3s ease both}
+  .qend .em{font-size:46px}
+  .qend .sc{font-size:34px;font-weight:900;line-height:1}
+  .qend .vr{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.8px;margin:4px 0 8px}
+  .qend p{font-size:12.5px;color:#bfe9d3;margin:0 auto;max-width:250px}
+  .qend .restart{margin-top:14px;background:none;border:1px solid #2b4a3b;color:#7fd6ab;border-radius:10px;padding:8px 15px;font-size:12px;cursor:pointer;font-family:inherit}
+  .cond-box{font-size:12px;color:#33473e;background:#fff;border:1px solid var(--line);border-left:4px solid var(--green);border-radius:10px;padding:11px 13px;margin-top:10px}
+  .cond-box code{background:#eef5f1}
 </style>
 </head>
 <body>
 <header class="top">
   <div class="wrap">
     <span class="badge">Annexe A9 · Rapport référent numérique 2025-2026</span>
-    <h1>Formation « Maîtriser Genially »</h1>
-    <p>Document interactif de présentation. Formation interne modulaire et auto-portée : <strong>9 modules sur 3 niveaux</strong>, conçue entièrement <em>dans</em> Genially pour servir de modèle reproductible, adossée au référentiel CRCN. Déploiement prévu courant octobre 2026.</p>
+    <h1><span class="gen-ic">✨</span> Formation « Maîtriser Genially »</h1>
+    <p>Document interactif de présentation. Formation interne <strong>modulaire et auto-portée</strong> : <strong>9 modules sur 3 niveaux</strong>, conçue entièrement <em>dans</em> Genially pour servir de modèle reproductible, adossée au référentiel CRCN (niveaux 1 à 5). De la découverte aux fonctions avancées, chacun progresse à son rythme.</p>
   </div>
 </header>
 
 <main class="wrap">
 
+  <!-- 1. Principe -->
   <section>
-    <div class="card">
+    <span class="tag">Statut : conception du support en cours · déploiement prévu courant 2026</span>
+    <div class="card" style="margin-top:12px">
       <h2><span class="n">1</span> Le principe : former sur l'outil grâce à l'outil</h2>
-      <p class="lead">La formation est réalisée entièrement dans Genially : elle montre les possibilités par l'exemple, immerge le participant dès la première minute et constitue un modèle qu'il peut s'approprier.</p>
-      <span class="pill">Format hybride (présentiel + autonomie)</span>
-      <span class="pill">9 modules indépendants</span>
-      <span class="pill">3 niveaux de maîtrise</span>
-      <span class="pill">Chaque module = un livrable concret</span>
-      <span class="pill">Fil rouge (modules 4-8)</span>
-      <span class="pill">Aucun prérequis</span>
+      <p class="lead">Genially est un outil de création de contenus numériques interactifs (présentations, activités élèves, infographies, parcours gamifiés) : gratuit, sans installation, compatible ENT. La formation est réalisée <strong>entièrement dans Genially</strong> : elle montre les possibilités par l'exemple, immerge le participant dès la première minute et constitue un modèle qu'il peut s'approprier.</p>
+      <div class="grid g2">
+        <div>
+          <p><strong>Une formation DANS Genially, SUR Genially.</strong> Cohérence totale contenu / support : le participant apprend en manipulant l'outil dont il découvre les capacités. Le support de formation est lui-même une démonstration de ce qu'on peut produire.</p>
+          <p><strong>Chaque module est&nbsp;:</strong></p>
+          <span class="pill">Autonome — suivi seul</span>
+          <span class="pill">Progressif — s'appuie sur les acquis du niveau</span>
+          <span class="pill">Productif — débouche sur un livrable</span>
+        </div>
+        <div>
+          <p><strong>Caractéristiques clés&nbsp;:</strong></p>
+          <span class="pill">Format hybride (présentiel + autonomie)</span>
+          <span class="pill">9 modules indépendants</span>
+          <span class="pill">3 niveaux de maîtrise</span>
+          <span class="pill">Fil rouge (modules 4 → 8)</span>
+          <span class="pill">Aucun prérequis</span>
+          <span class="pill">Tous les personnels</span>
+        </div>
+      </div>
+      <div class="note" style="margin-top:14px"><strong>Le fil rouge.</strong> Les modules 4 à 8 (niveaux 2 et 3) sont articulés autour d'un fil rouge : le participant construit incrémentalement une <strong>même création</strong> tout au long de la formation. Il repart avec une production complète et utile — pas des exercices épars.</div>
     </div>
   </section>
 
+  <!-- 2. Sélecteur de parcours (DÉMO) -->
   <section>
     <h2><span class="n">2</span> Choisissez votre parcours</h2>
-    <p class="lead">La page d'accueil propose trois portes d'entrée selon le temps disponible. <strong>Cliquez sur un parcours</strong> : les modules concernés s'allument dans la liste ci-dessous.</p>
+    <p class="lead">La page d'accueil propose trois portes d'entrée selon le temps disponible, plus un accès libre au menu complet. <strong>Cliquez sur une porte&nbsp;:</strong> la séquence de modules et la durée s'affichent, et les modules concernés s'allument dans la carte de la section&nbsp;3.</p>
+    <span class="demo-label"><span class="dot"></span>Démo intégrée · sélecteur de parcours</span>
     <div class="paths">
-      <div class="path" onclick="setPath(this,['M1','M2','M3'])">
-        <span class="d">~ 30 min</span><h4>Express</h4><p>M1 → M2 → M3 · Créer et partager une première production à partir d'un template.</p>
+      <button class="path" data-path="exp" onclick="setPath(this)">
+        <span class="d">⏱ ~ 30 min</span><h4>Express</h4><p>« J'ai 30 min » — créer et partager une première production à partir d'un template.</p>
+      </button>
+      <button class="path" data-path="gui" onclick="setPath(this)">
+        <span class="d">⏱ 1 h à 2 h</span><h4>Guidé</h4><p>« J'ai 1 h-2 h » — concevoir une activité interactive complète de zéro.</p>
+      </button>
+      <button class="path" data-path="ext" onclick="setPath(this)">
+        <span class="d">⏱ Libre</span><h4>Expert</h4><p>« Je veux tout maîtriser » — toutes les fonctions, y compris les variables.</p>
+      </button>
+      <button class="path" data-path="lib" onclick="setPath(this)">
+        <span class="d">⏱ À la carte</span><h4>Accès libre</h4><p>Menu complet — accéder directement au module souhaité, à tout moment.</p>
+      </button>
+    </div>
+    <div class="path-out" id="pathOut">
+      <div class="meta" id="pathMeta">Sélectionnez un parcours ci-dessus pour afficher sa séquence de modules et sa durée.</div>
+      <div class="seq" id="pathSeq"></div>
+      <div class="meta" id="pathGoal"></div>
+    </div>
+    <p class="note" style="margin-top:12px">La navigation est <strong>totalement libre</strong> : chaque module reste accessible depuis le menu à tout moment. Les parcours sont des suggestions, pas des contraintes.</p>
+  </section>
+
+  <!-- 3. Carte des 9 modules + progression (DÉMO) -->
+  <section>
+    <h2><span class="n">3</span> Les 9 modules — carte interactive</h2>
+    <p class="lead">Une carte des 9 modules répartis sur les 3 niveaux. <strong>Cliquez une carte</strong> pour ouvrir le détail du module (objectif, contenu, activité, livrable, compétences CRCN). Un <strong>indicateur de progression</strong> coche les modules au fur et à mesure que vous les consultez.</p>
+    <span class="demo-label"><span class="dot"></span>Démo intégrée · carte cliquable + suivi de progression</span>
+    <div class="progbar-wrap">
+      <div class="progbar"><div class="progfill" id="progfill"></div></div>
+      <span class="prog-pct" id="progpct">0 / 9 module visité</span>
+      <button class="prog-reset" onclick="resetProg()">↺ Réinitialiser</button>
+    </div>
+    <div id="mods"></div>
+  </section>
+
+  <!-- Popup module -->
+  <div class="ovl" id="ovl" onclick="if(event.target===this)closeMod()">
+    <div class="modal" role="dialog" aria-modal="true">
+      <div class="modal-head">
+        <button class="modal-close" onclick="closeMod()" aria-label="Fermer">×</button>
+        <span class="mc" id="m-code">M1</span>
+        <h3 id="m-title">Titre</h3>
+        <div class="lvl" id="m-lvl">Niveau</div>
       </div>
-      <div class="path" onclick="setPath(this,['M1','M4','M5','M6'])">
-        <span class="d">1 h à 2 h</span><h4>Guidé</h4><p>M1 → M4 → M5 → M6 · Concevoir une activité interactive complète de zéro.</p>
-      </div>
-      <div class="path" onclick="setPath(this,['M1','M2','M3','M4','M5','M6','M7','M8','M9'])">
-        <span class="d">Libre</span><h4>Expert</h4><p>M1 → M9 · Tout maîtriser, jusqu'aux variables et conditions.</p>
+      <div class="modal-body">
+        <div class="mrow"><div class="lab">🎯 Objectif</div><p id="m-obj"></p></div>
+        <div class="mrow"><div class="lab">📚 Contenu</div><ul id="m-cont"></ul></div>
+        <div class="mrow"><div class="lab">✏️ Activité</div><p id="m-act"></p></div>
+        <div class="mrow"><div class="lab">📦 Livrable</div><div class="deliv" id="m-liv"></div></div>
+        <div class="mrow"><div class="lab">🎓 Compétences CRCN</div><div id="m-crcn"></div></div>
+        <div class="modal-nav">
+          <button id="m-prev" onclick="navMod(-1)">← Module précédent</button>
+          <button id="m-next" onclick="navMod(1)">Module suivant →</button>
+        </div>
       </div>
     </div>
-    <p class="note">La navigation est totalement libre : les parcours sont des suggestions, pas des contraintes.</p>
+  </div>
+
+  <!-- 4. Démo M5 : zones cliquables -->
+  <section>
+    <h2><span class="n">4</span> Module 5 illustré — zones cliquables &amp; popups</h2>
+    <p class="lead">Le module M5 « Ajouter de l'interactivité » apprend à rendre une création cliquable et engageante : boutons, liens internes, popups, infobulles et <strong>zones cliquables sur image</strong>. Voici une reproduction de cette interaction « façon Genially » : <strong>cliquez les zones</strong> pour faire apparaître les popups.</p>
+    <div class="demo-wrap">
+      <div class="stage">
+        <div class="stage-bar"><span class="dots"><i style="background:#ff5f57"></i><i style="background:#febc2e"></i><i style="background:#28c840"></i></span> Scène interactive · zones cliquables</div>
+        <div class="gscene" id="gscene">
+          <div class="title">Le cycle de l'eau 💧</div>
+          <div class="sub">Touche les zones surlignées pour en savoir plus</div>
+          <button class="hot" style="top:80px;left:24px;width:92px;height:64px" onclick="gPop('☀️','Évaporation','Sous l’effet du soleil, l’eau des océans et des lacs s’évapore et monte dans l’atmosphère sous forme de vapeur.')"><span class="hi">☀️</span><span class="pulse"></span></button>
+          <button class="hot" style="top:70px;right:26px;width:92px;height:64px" onclick="gPop('☁️','Condensation','En altitude, la vapeur refroidit et se condense en gouttelettes : ce sont les nuages qui se forment.')"><span class="hi">☁️</span><span class="pulse"></span></button>
+          <button class="hot" style="bottom:34px;left:50%;transform:translateX(-50%);width:120px;height:60px" onclick="gPop('🌧️','Précipitations','Les gouttelettes s’assemblent, s’alourdissent et retombent sous forme de pluie, de neige ou de grêle.')"><span class="hi">🌧️</span><span class="pulse"></span></button>
+          <div class="ghint" id="ghint">3 zones à explorer — 0 / 3 découvertes</div>
+          <div class="gpop" id="gpop">
+            <div class="pemoji" id="gpop-em">💧</div>
+            <h5 id="gpop-t"></h5>
+            <p id="gpop-p"></p>
+            <button class="gback" onclick="gClose()">← Retour à la scène</button>
+          </div>
+        </div>
+        <div class="stage-cap">Reproduction d'une interaction Genially (zones cliquables → popups)</div>
+      </div>
+      <div class="demo-side">
+        <p>Dans Genially, n'importe quel objet (forme, icône, zone d'une image) peut recevoir une interactivité : au survol ou au clic, il déclenche une <strong>infobulle</strong>, un <strong>popup</strong> (fenêtre), un <strong>lien</strong> interne (vers une autre page) ou externe.</p>
+        <p>C'est exactement l'activité demandée au module&nbsp;5&nbsp;: <em>« ajouter 3 types d'interactions »</em>. Ici, 3 zones cliquables révèlent chacune un popup explicatif — un schéma annoté devient une activité élève autonome.</p>
+        <div class="note">Aucune donnée n'est envoyée nulle part : tout se passe dans la page. C'est une simple <strong>illustration</strong> du mécanisme enseigné, pas un vrai Genially embarqué.</div>
+      </div>
+    </div>
   </section>
 
+  <!-- 5. Démo M8 : quiz à variables / conditions -->
   <section>
-    <h2><span class="n">3</span> Les 9 modules</h2>
-    <div class="levels" id="mods"></div>
+    <h2><span class="n">5</span> Module 8 illustré — variables &amp; conditions (quiz à score)</h2>
+    <p class="lead">Le module M8 « Variables et conditions » est le sommet de la formation : il apprend à personnaliser une création par une <strong>logique conditionnelle</strong>. L'activité du module est précisément <em>« ajouter un système de score simple : 3 bonnes réponses → message de félicitations »</em>. La voici reproduite en vrai.</p>
+    <div class="demo-wrap">
+      <div class="stage">
+        <div class="stage-bar"><span class="dots"><i style="background:#ff5f57"></i><i style="background:#febc2e"></i><i style="background:#28c840"></i></span> Quiz · variable « score » &amp; condition</div>
+        <div class="quiz">
+          <div id="quizPlay">
+            <div class="hud">
+              <span class="qn" id="qnum">Question 1 / 3</span>
+              <span class="var">score = <b id="qscore">0</b> / 3</span>
+            </div>
+            <div class="qtext" id="qtext"></div>
+            <div class="opts" id="qopts"></div>
+            <div class="qfb" id="qfb"></div>
+            <button class="qnext" id="qnext" onclick="quizNext()">Question suivante →</button>
+          </div>
+          <div class="qend" id="quizEnd">
+            <div class="em" id="qend-em">🎉</div>
+            <div class="sc"><span id="qend-sc">0</span> / 3</div>
+            <div class="vr" id="qend-vr"></div>
+            <p id="qend-msg"></p>
+            <button class="restart" onclick="quizInit()">↺ Recommencer le quiz</button>
+          </div>
+        </div>
+        <div class="stage-cap">Reproduction d'un quiz Genially piloté par variable conditionnelle</div>
+      </div>
+      <div class="demo-side">
+        <p>À chaque bonne réponse, une <strong>variable</strong> <code>score</code> (un nombre) est incrémentée. À la fin, une <strong>condition</strong> teste sa valeur et affiche un écran différent : c'est le cœur des fonctions avancées de Genially.</p>
+        <div class="cond-box">
+          <strong>La condition reproduite&nbsp;:</strong><br>
+          <code>SI score = 3 → écran « Félicitations 🎉 »</code><br>
+          <code>SI score = 2 → écran « Presque ! »</code><br>
+          <code>SINON → écran « À retravailler »</code>
+        </div>
+        <p style="margin-top:10px">Au-delà du score, les variables servent aussi à afficher un prénom, à donner un feedback personnalisé, ou — comme dans cette formation elle-même (module M9) — à <strong>suivre la progression</strong> du participant.</p>
+      </div>
+    </div>
   </section>
 
+  <!-- 6. CRCN -->
   <section>
-    <h2><span class="n">4</span> Compétences visées — référentiel CRCN</h2>
-    <p class="lead">La formation couvre les niveaux 1 à 5 du domaine <strong>D3 (Création de contenu)</strong>, avec des contributions sur D2 (Communication) et D4 (Protection et sécurité). Le CRCN est aussi évalué par PIX.</p>
+    <h2><span class="n">6</span> Compétences visées — référentiel CRCN</h2>
+    <p class="lead">La formation couvre les <strong>niveaux 1 à 5</strong> du domaine <strong>D3 (Création de contenu)</strong>, avec des contributions sur D2 (Communication), D4 (Protection et sécurité), D1 (Information) et D5 (Environnement numérique). Le CRCN (référentiel 2022) est évalué par PIX.</p>
     <div class="card">
       <table>
-        <tr><th>Module</th><th>Compétence</th><th>Domaine(s)</th><th>Niveau</th></tr>
-        <tr><td>M1</td><td>Créer un espace de travail, gérer ses données</td><td>D3.1 · D4.2 · D5.1</td><td>1</td></tr>
-        <tr><td>M2</td><td>Adapter un contenu numérique existant</td><td>D3.1 · D3.3</td><td>2</td></tr>
-        <tr><td>M3</td><td>Partager et diffuser des contenus</td><td>D2.1 · D2.3 · D4.2</td><td>2</td></tr>
-        <tr><td>M4</td><td>Créer une production multimédia originale</td><td>D3.1 · D3.2 · D3.3</td><td>3</td></tr>
-        <tr><td>M5</td><td>Concevoir des interactions numériques</td><td>D3.2 · D3.3</td><td>3</td></tr>
-        <tr><td>M6</td><td>Intégrer des ressources multimédias</td><td>D3.2 · D1.3 · D4.1</td><td>3</td></tr>
-        <tr><td>M7</td><td>Architecturer une expérience utilisateur</td><td>D3.2 · D3.3</td><td>4</td></tr>
-        <tr><td>M8</td><td>Programmer des comportements conditionnels</td><td>D3.2 · D3.3 · D5.2</td><td>5</td></tr>
-        <tr><td>M9</td><td>Analyser et transférer une pratique</td><td>D3.3 · D5.2 · D2.3</td><td>4-5</td></tr>
+        <tr><th>Module</th><th>Compétence développée</th><th>Domaine(s)</th><th>Niveau</th></tr>
+        <tr><td><b>M1</b></td><td>Créer un espace de travail numérique, gérer ses données</td><td>D3.1 · D4.2 · D5.1</td><td>1</td></tr>
+        <tr><td><b>M2</b></td><td>Adapter un contenu numérique existant</td><td>D3.1 · D3.3</td><td>2</td></tr>
+        <tr><td><b>M3</b></td><td>Partager et diffuser des contenus</td><td>D2.1 · D2.3 · D4.2</td><td>2</td></tr>
+        <tr><td><b>M4</b></td><td>Créer une production multimédia originale</td><td>D3.1 · D3.2 · D3.3</td><td>3</td></tr>
+        <tr><td><b>M5</b></td><td>Concevoir des interactions numériques</td><td>D3.2 · D3.3</td><td>3</td></tr>
+        <tr><td><b>M6</b></td><td>Intégrer des ressources multimédias</td><td>D3.2 · D1.3 · D4.1</td><td>3</td></tr>
+        <tr><td><b>M7</b></td><td>Architecturer une expérience utilisateur</td><td>D3.2 · D3.3</td><td>4</td></tr>
+        <tr><td><b>M8</b></td><td>Programmer des comportements conditionnels</td><td>D3.2 · D3.3 · D5.2</td><td>5</td></tr>
+        <tr><td><b>M9</b></td><td>Analyser et transférer une pratique numérique</td><td>D3.3 · D5.2 · D2.3</td><td>4-5</td></tr>
       </table>
     </div>
   </section>
 
+  <!-- 7. Modalités -->
   <section>
-    <h2><span class="n">5</span> Modalités pratiques</h2>
+    <h2><span class="n">7</span> Modalités pratiques</h2>
     <div class="grid g2">
       <div class="card">
-        <h4 style="margin:0 0 8px;color:var(--green-d)">Public & accès</h4>
-        <p style="font-size:14px;margin:0 0 8px">Tous les personnels : enseignants de toutes disciplines, CPE, personnels administratifs. Niveaux très hétérogènes, chacun à son rythme.</p>
-        <span class="pill">Lien unique partagé</span>
-        <span class="pill">Autonomie ou atelier</span>
+        <h4 style="margin:0 0 8px;color:var(--green-d)">Public &amp; accès</h4>
+        <p style="font-size:14px;margin:0 0 8px">Tous les personnels : enseignants de toutes disciplines, CPE et formateurs, personnels administratifs. Niveaux très hétérogènes, chacun progresse à son rythme. <strong>Aucun prérequis</strong> au-delà d'une utilisation basique d'un navigateur.</p>
+        <span class="pill">Lien unique partagé par le référent</span>
+        <span class="pill">Autonomie à tout moment, sans inscription</span>
+        <span class="pill">Ateliers présentiels ponctuels</span>
         <span class="pill">Intégrable à l'ENT</span>
       </div>
       <div class="card">
-        <h4 style="margin:0 0 8px;color:var(--green-d)">Matériel & RGPD</h4>
-        <p style="font-size:14px;margin:0 0 8px">Ordinateur + navigateur à jour (Chrome/Firefox) + adresse e-mail. Tablette déconseillée pour la création.</p>
+        <h4 style="margin:0 0 8px;color:var(--green-d)">Matériel requis</h4>
+        <p style="font-size:14px;margin:0 0 8px">Tablette déconseillée pour la création.</p>
+        <span class="pill">Ordinateur PC / Mac connecté</span>
+        <span class="pill">Navigateur à jour (Chrome / Firefox)</span>
+        <span class="pill">Safari compatible mais moins stable</span>
+        <span class="pill">Une adresse e-mail</span>
         <span class="pill">Compte Genially gratuit (version Edu)</span>
-        <span class="pill">Pas de données d'élèves publiées</span>
-        <span class="pill">Partage privé privilégié</span>
+        <span class="pill">De 30 min à plusieurs heures</span>
       </div>
+    </div>
+    <div class="grid g3" style="margin-top:14px">
+      <div class="kpi"><b>9</b><span>modules indépendants</span></div>
+      <div class="kpi"><b>3</b><span>parcours + accès libre</span></div>
+      <div class="kpi"><b>1 → 5</b><span>niveaux CRCN couverts</span></div>
+    </div>
+  </section>
+
+  <!-- 8. RGPD -->
+  <section>
+    <h2><span class="n">8</span> Points de vigilance RGPD</h2>
+    <p class="lead">Genially est édité par une société espagnole (<strong>Genially Web S.L.</strong>). La formation intègre ces points de vigilance, notamment dès le module M3 (partage et données).</p>
+    <div class="grid g3">
+      <div class="badgecard"><h4>Hébergement des données</h4><p>Les données des comptes enseignants sont hébergées <strong>hors UE</strong> — à vérifier avec la DRANE.</p></div>
+      <div class="badgecard"><h4>Données d'élèves</h4><p><strong>Ne jamais intégrer</strong> de données personnelles d'élèves dans les créations publiées.</p></div>
+      <div class="badgecard"><h4>Mode de partage</h4><p>Privilégier le <strong>lien privé</strong> plutôt que public pour les activités destinées aux élèves.</p></div>
+    </div>
+  </section>
+
+  <!-- 9. Conclusion -->
+  <section>
+    <div class="card">
+      <h2><span class="n">9</span> En synthèse</h2>
+      <p class="lead">Une opportunité de développer les compétences numériques des personnels de manière pragmatique, adaptée et autonome.</p>
+      <p>La conception modulaire répond à des besoins très différents — de la découverte à la maîtrise avancée — <strong>sans exclure ni contraindre</strong> : chacun choisit son parcours, son rythme et ses modules. La démarche « <strong>former sur l'outil grâce à l'outil</strong> » est elle-même un modèle pédagogique réutilisable par les enseignants pour leurs propres élèves.</p>
     </div>
   </section>
 
 </main>
 
 <footer class="wrap">
-  Annexe A9 · Formation « Genially & Canva » — support en cours de création<br>
-  Compte rendu d'activité du référent numérique 2025-2026 · Collège Pierre Mendès France, Woippy · M. Thomas Charles · thomas.charles@ac-nancy-metz.fr
+  Annexe A9 · Formation « Maîtriser Genially » — de la découverte aux fonctions avancées<br>
+  Compte rendu d'activité du référent numérique 2025-2026 · Collège Pierre Mendès France, Woippy · M. Thomas Charles
 </footer>
 
 <script>
+  /* ===================== Données des 9 modules ===================== */
   var levels=[
-    {t:'Niveau 1 — Découverte (~30 min)',c:'#2e9e5b',mods:[
-      {id:'M1',t:'Créer son compte et découvrir l’interface',o:'Se repérer dans Genially et créer son espace de travail.',l:'Un compte actif, prêt pour la suite.',crcn:['D5.1','D3.1','D4.2']},
-      {id:'M2',t:'Utiliser un template',o:'Produire une première création fonctionnelle rapidement (modifier sans casser la structure).',l:'Une première création personnalisée, publiable.',crcn:['D3.1','D3.3']},
-      {id:'M3',t:'Partager et intégrer dans l’ENT',o:'Rendre sa création accessible : lien public/privé, iframe, intégration ENT, RGPD.',l:'Un lien fonctionnel, prêt à partager.',crcn:['D2.1','D2.3','D4.2']}
+    {t:'Niveau 1 — Découverte', dur:'~ 30 min', c:'#2e9e5b', mods:[
+      {id:'M1', ic:'🚪', t:'Créer son compte et découvrir l’interface', lvl:'Niveau 1 — Découverte',
+        o:'Se repérer dans Genially et créer son espace de travail.',
+        cont:['Créer un compte (gratuit vs Edu)','Tour de l’interface : tableau de bord, éditeur, bibliothèque','Découvrir les types de créations'],
+        act:'Créer son compte, puis relever un mini-défi : repérer 5 éléments de l’interface.',
+        liv:'Un compte actif, prêt pour la suite.', crcn:['D5.1 (n.1)','D3.1 (n.1)','D4.2 (n.1)']},
+      {id:'M2', ic:'🎨', t:'Utiliser un template',lvl:'Niveau 1 — Découverte',
+        o:'Produire une première création fonctionnelle rapidement.',
+        cont:['Choisir un template adapté','Modifier textes, couleurs, images sans casser la structure','Supprimer et dupliquer des pages'],
+        act:'Choisir un template et le personnaliser avec un contenu réel de sa discipline.',
+        liv:'Une première création personnalisée, publiable.', crcn:['D3.1 (n.2)','D3.3 (n.2)']},
+      {id:'M3', ic:'🔗', t:'Partager et intégrer dans l’ENT',lvl:'Niveau 1 — Découverte',
+        o:'Rendre sa création accessible.',
+        cont:['Modes de partage : lien public, lien privé, intégration iframe','Intégration dans les ENT','Droits et RGPD sur les données collectées par Genially'],
+        act:'Publier le livrable du module M2 et générer un lien.',
+        liv:'Un lien fonctionnel, prêt à partager.', crcn:['D2.1 (n.2)','D2.3 (n.2)','D4.2 (n.2)']}
     ]},
-    {t:'Niveau 2 — Construction (~1 h à 2 h)',c:'#1f7a54',mods:[
-      {id:'M4',t:'Créer de zéro',o:'Construire sans template : fonds, blocs de texte, formes, calques, alignement.',l:'Une page structurée, base d’une activité.',crcn:['D3.1','D3.2','D3.3']},
-      {id:'M5',t:'Ajouter de l’interactivité',o:'Boutons, liens internes/externes, popups, infobulles, zones cliquables.',l:'Une activité avec navigation interactive.',crcn:['D3.2','D3.3']},
-      {id:'M6',t:'Insérer des médias',o:'Vidéo YouTube/Vimeo, audio, iframe (padlet, carte, formulaire), bonnes pratiques.',l:'Une activité multimédia complète.',crcn:['D3.2','D1.3','D4.1']}
+    {t:'Niveau 2 — Construction', dur:'~ 1 h à 2 h', c:'#1f7a54', mods:[
+      {id:'M4', ic:'🧱', t:'Créer de zéro',lvl:'Niveau 2 — Construction',
+        o:'Construire sans template en maîtrisant la mise en page.',
+        cont:['Choisir un fond','Blocs de texte : styles, hiérarchie','Formes, icônes, images','Calques et alignement'],
+        act:'Créer une page d’accueil pour une activité élève (titre, consigne, visuel).',
+        liv:'Une page structurée, base d’une activité.', crcn:['D3.1 (n.3)','D3.2 (n.2)','D3.3 (n.3)']},
+      {id:'M5', ic:'👆', t:'Ajouter de l’interactivité',lvl:'Niveau 2 — Construction',
+        o:'Rendre la création cliquable et engageante.',
+        cont:['Boutons et liens internes','Liens externes','Popups et infobulles','Zones cliquables sur image'],
+        act:'Ajouter 3 types d’interactions sur la création du module M4. (Démo en section 4.)',
+        liv:'Une activité avec navigation interactive.', crcn:['D3.2 (n.3)','D3.3 (n.3)']},
+      {id:'M6', ic:'🎬', t:'Insérer des médias',lvl:'Niveau 2 — Construction',
+        o:'Enrichir la création avec du multimédia.',
+        cont:['Vidéo YouTube / Vimeo','Audio','Iframe (padlet, carte, formulaire)','Bonnes pratiques : poids, accessibilité, droit d’auteur'],
+        act:'Intégrer une vidéo ET un contenu en iframe.',
+        liv:'Une activité multimédia complète.', crcn:['D3.2 (n.3)','D1.3 (n.2)','D4.1 (n.2)']}
     ]},
-    {t:'Niveau 3 — Maîtrise (libre)',c:'#155c3f',mods:[
-      {id:'M7',t:'Navigation complexe',o:'Pages, scènes, ancres ; menu interne ; escape game / parcours ramifié.',l:'Un parcours navigable avec menu.',crcn:['D3.2','D3.3']},
-      {id:'M8',t:'Variables et conditions',o:'Logique conditionnelle : variables, afficher/masquer, score, feedback personnalisé.',l:'Une activité avec logique conditionnelle.',crcn:['D3.2','D3.3','D5.2']},
-      {id:'M9',t:'Méta-module — comment ce Genially a été conçu',o:'Décryptage de la structure, des variables et des choix graphiques de la formation elle-même.',l:'Une fiche-mémo personnelle.',crcn:['D3.3','D5.2','D2.3']}
+    {t:'Niveau 3 — Maîtrise', dur:'libre', c:'#155c3f', mods:[
+      {id:'M7', ic:'🗺️', t:'Navigation complexe',lvl:'Niveau 3 — Maîtrise',
+        o:'Construire une structure multi-niveaux cohérente.',
+        cont:['Pages vs scènes vs ancres','Menu de navigation interne','Structurer un escape game / parcours ramifié','Tester la navigation'],
+        act:'Transformer la création en mini-parcours à 3 embranchements.',
+        liv:'Un parcours navigable avec menu.', crcn:['D3.2 (n.4)','D3.3 (n.4)']},
+      {id:'M8', ic:'⚙️', t:'Variables et conditions',lvl:'Niveau 3 — Maîtrise',
+        o:'Personnaliser la création via une logique conditionnelle.',
+        cont:['Qu’est-ce qu’une variable (texte, nombre, booléen)','Créer et appeler une variable','Conditions : afficher / masquer selon une action','Cas d’usage : score, prénom affiché, feedback personnalisé'],
+        act:'Ajouter un système de score simple : 3 bonnes réponses → message de félicitations. (Démo en section 5.)',
+        liv:'Une activité avec logique conditionnelle.', crcn:['D3.2 (n.5)','D3.3 (n.5)','D5.2 (n.3)']},
+      {id:'M9', ic:'🔍', t:'Méta-module — comment ce Genially a été conçu',lvl:'Niveau 3 — Maîtrise',
+        o:'Comprendre la conception pour reproduire la démarche.',
+        cont:['Décryptage de la structure de navigation','Variables utilisées (suivi de progression, parcours)','Choix graphiques et justifications','Ressources pour aller plus loin'],
+        act:'Module réflexif : noter 3 idées à réutiliser.',
+        liv:'Une fiche-mémo personnelle (popup de notes).', crcn:['D3.3 (n.5)','D5.2 (n.4)','D2.3 (n.3)']}
     ]}
   ];
-  function buildMods(){
+  var allMods=[]; levels.forEach(function(lv){lv.mods.forEach(function(m){m._lvlColor=lv.c;allMods.push(m);});});
+  var seen={}; var current=null;
+
+  /* ===================== Construction de la carte ===================== */
+  (function buildMods(){
     var c=document.getElementById('mods'); c.innerHTML='';
     levels.forEach(function(lv){
       var h=document.createElement('div'); h.className='lvl-title';
-      h.innerHTML='<span class="dot" style="background:'+lv.c+'"></span>'+lv.t;
+      h.innerHTML='<span class="dot" style="background:'+lv.c+'"></span>'+lv.t+
+        '<span class="meta">'+lv.dur+'</span>';
       c.appendChild(h);
+      var g=document.createElement('div'); g.className='modgrid';
       lv.mods.forEach(function(m){
-        var d=document.createElement('details'); d.className='mod'; d.id='mod-'+m.id;
-        d.innerHTML='<summary><span class="mcode">'+m.id+'</span> '+m.t+'<span class="arr">+</span></summary>'+
-          '<div class="body"><p style="margin:0 0 6px"><b>Objectif :</b> '+m.o+'</p>'+
-          '<p style="margin:0 0 8px"><b>Livrable :</b> '+m.l+'</p>'+
-          m.crcn.map(function(x){return '<span class="crcn">'+x+'</span>'}).join('')+'</div>';
-        c.appendChild(d);
+        var b=document.createElement('button'); b.className='modcard'; b.id='card-'+m.id;
+        b.innerHTML='<span class="seen-tick">✓</span>'+
+          '<div class="top"><span class="mc">'+m.id+'</span><h4>'+m.t+'</h4><span class="ic">'+m.ic+'</span></div>'+
+          '<div class="obj">'+m.o+'</div>';
+        b.onclick=function(){openMod(m.id);};
+        g.appendChild(b);
       });
+      c.appendChild(g);
+    });
+  })();
+
+  /* ===================== Popup module ===================== */
+  function modById(id){return allMods.filter(function(m){return m.id===id;})[0];}
+  function openMod(id){
+    var m=modById(id); if(!m)return; current=id;
+    document.getElementById('m-code').textContent=m.id;
+    document.getElementById('m-title').textContent=m.t;
+    document.getElementById('m-lvl').textContent=m.lvl;
+    document.getElementById('m-obj').textContent=m.o;
+    document.getElementById('m-cont').innerHTML=m.cont.map(function(x){return '<li>'+x+'</li>';}).join('');
+    document.getElementById('m-act').textContent=m.act;
+    document.getElementById('m-liv').innerHTML='<b>Livrable :</b> '+m.liv;
+    document.getElementById('m-crcn').innerHTML=m.crcn.map(function(x){return '<span class="crcn">'+x+'</span>';}).join('');
+    var idx=allMods.indexOf(m);
+    document.getElementById('m-prev').disabled=(idx===0);
+    document.getElementById('m-next').disabled=(idx===allMods.length-1);
+    document.getElementById('ovl').classList.add('show');
+    markSeen(id);
+  }
+  function navMod(d){
+    var m=modById(current); var idx=allMods.indexOf(m)+d;
+    if(idx>=0 && idx<allMods.length) openMod(allMods[idx].id);
+  }
+  function closeMod(){document.getElementById('ovl').classList.remove('show');}
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')closeMod();});
+
+  /* ===================== Progression ===================== */
+  function markSeen(id){
+    if(seen[id])return;
+    seen[id]=true;
+    var card=document.getElementById('card-'+id); if(card)card.classList.add('seen');
+    updateProg();
+  }
+  function updateProg(){
+    var n=Object.keys(seen).length;
+    document.getElementById('progfill').style.width=(n/9*100)+'%';
+    document.getElementById('progpct').textContent=n+' / 9 module'+(n>1?'s':'')+' visité'+(n>1?'s':'');
+  }
+  function resetProg(){
+    seen={};
+    document.querySelectorAll('.modcard').forEach(function(c){c.classList.remove('seen');});
+    updateProg();
+  }
+
+  /* ===================== Sélecteur de parcours ===================== */
+  var paths={
+    exp:{name:'Express',dur:'~ 30 min',seq:['M1','M2','M3'],goal:'Créer et partager une première production à partir d’un template.'},
+    gui:{name:'Guidé',dur:'1 h à 2 h',seq:['M1','M4','M5','M6'],goal:'Concevoir une activité interactive complète de zéro.'},
+    ext:{name:'Expert',dur:'libre',seq:['M1','M2','M3','M4','M5','M6','M7','M8','M9'],goal:'Maîtriser toutes les fonctions, y compris les variables.'},
+    lib:{name:'Accès libre',dur:'à la carte',seq:['M1','M2','M3','M4','M5','M6','M7','M8','M9'],goal:'Accéder directement au module souhaité, dans l’ordre que vous voulez.'}
+  };
+  function setPath(btn){
+    document.querySelectorAll('.path').forEach(function(p){p.classList.remove('on');});
+    btn.classList.add('on');
+    var p=paths[btn.getAttribute('data-path')];
+    document.getElementById('pathMeta').innerHTML='Parcours <b>'+p.name+'</b> · durée : <b>'+p.dur+'</b> · <b>'+p.seq.length+'</b> module'+(p.seq.length>1?'s':'')+'.';
+    var seqHtml='';
+    if(btn.getAttribute('data-path')==='lib'){
+      seqHtml='<span class="step">📂 Menu complet — tous les modules accessibles librement</span>';
+    } else {
+      p.seq.forEach(function(id,i){
+        seqHtml+='<span class="step"><span class="mc">'+id+'</span></span>';
+        if(i<p.seq.length-1)seqHtml+='<span class="arrow">→</span>';
+      });
+    }
+    document.getElementById('pathSeq').innerHTML=seqHtml;
+    document.getElementById('pathGoal').innerHTML='<b>Objectif :</b> '+p.goal;
+    // surligner les cartes concernées
+    document.querySelectorAll('.modcard').forEach(function(c){c.classList.remove('hl');});
+    p.seq.forEach(function(id){var c=document.getElementById('card-'+id);if(c)c.classList.add('hl');});
+  }
+
+  /* ===================== Démo M5 : zones cliquables ===================== */
+  var gSeen={};
+  function gPop(em,title,txt){
+    document.getElementById('gpop-em').textContent=em;
+    document.getElementById('gpop-t').textContent=title;
+    document.getElementById('gpop-p').textContent=txt;
+    document.getElementById('gpop').classList.add('show');
+    gSeen[title]=true;
+    var n=Object.keys(gSeen).length;
+    document.getElementById('ghint').textContent='3 zones à explorer — '+n+' / 3 découverte'+(n>1?'s':'');
+  }
+  function gClose(){document.getElementById('gpop').classList.remove('show');}
+
+  /* ===================== Démo M8 : quiz à variable conditionnelle ===================== */
+  var quizQs=[
+    {q:'Dans Genially, qu’est-ce qu’une « variable » ?',
+     opts:[
+       {t:'Une valeur mémorisée (nombre, texte, booléen) que la création peut lire et modifier.',ok:true},
+       {t:'Un modèle de présentation déjà mis en page.',ok:false},
+       {t:'Un effet d’animation appliqué à un objet.',ok:false}
+     ],
+     fbOk:'Exact : une variable stocke une valeur réutilisable, comme le score.',
+     fbNo:'Non — c’est une valeur mémorisée (ici le score), pas un modèle ni une animation.'},
+    {q:'Pour incrémenter le score à chaque bonne réponse, on utilise…',
+     opts:[
+       {t:'Une action « + 1 sur la variable score » liée au bon bouton.',ok:true},
+       {t:'Un nouveau Genially à chaque question.',ok:false},
+       {t:'Rien : Genially compte tout seul les bonnes réponses.',ok:false}
+     ],
+     fbOk:'Oui : on lie au bon bouton l’action qui ajoute 1 à la variable.',
+     fbNo:'Non — il faut lier au bon bouton une action « score + 1 » ; Genially ne devine pas.'},
+    {q:'Comment afficher « Félicitations » uniquement avec 3 bonnes réponses ?',
+     opts:[
+       {t:'Une condition : SI score = 3 ALORS afficher l’écran de félicitations.',ok:true},
+       {t:'En mettant le message bien en évidence sur toutes les pages.',ok:false},
+       {t:'C’est impossible dans Genially.',ok:false}
+     ],
+     fbOk:'Parfait : une condition teste la variable et déclenche l’affichage.',
+     fbNo:'Non — c’est justement le rôle d’une condition « SI score = 3 ».'}
+  ];
+  var qIdx,qScore,qAnswered;
+  function quizInit(){
+    qIdx=0;qScore=0;
+    document.getElementById('quizEnd').classList.remove('show');
+    document.getElementById('quizPlay').style.display='block';
+    document.getElementById('qscore').textContent='0';
+    quizRender();
+  }
+  function quizRender(){
+    qAnswered=false;
+    var Q=quizQs[qIdx];
+    document.getElementById('qnum').textContent='Question '+(qIdx+1)+' / 3';
+    document.getElementById('qtext').textContent=Q.q;
+    document.getElementById('qfb').textContent='';
+    document.getElementById('qfb').style.color='';
+    document.getElementById('qnext').classList.remove('show');
+    document.getElementById('qnext').textContent=(qIdx<2)?'Question suivante →':'Voir le résultat →';
+    var box=document.getElementById('qopts'); box.innerHTML='';
+    Q.opts.forEach(function(o){
+      var b=document.createElement('button'); b.className='qbtn'; b.textContent=o.t;
+      b.onclick=function(){quizPick(o,b,Q);};
+      box.appendChild(b);
     });
   }
-  function setPath(el,ids){
-    document.querySelectorAll('.path').forEach(function(p){p.classList.remove('on')});
-    el.classList.add('on');
-    document.querySelectorAll('details.mod').forEach(function(d){d.classList.remove('hl')});
-    ids.forEach(function(id){var d=document.getElementById('mod-'+id);if(d)d.classList.add('hl')});
+  function quizPick(o,btn,Q){
+    if(qAnswered)return; qAnswered=true;
+    var btns=document.querySelectorAll('#qopts .qbtn');
+    btns.forEach(function(b){b.disabled=true;});
+    var fb=document.getElementById('qfb');
+    if(o.ok){
+      btn.classList.add('good'); qScore++;
+      document.getElementById('qscore').textContent=qScore;
+      fb.textContent='✓ '+Q.fbOk; fb.style.color='#39d98a';
+    } else {
+      btn.classList.add('bad');
+      // mettre en évidence la bonne réponse
+      Q.opts.forEach(function(opt,i){if(opt.ok)btns[i].classList.add('good');});
+      fb.textContent='✗ '+Q.fbNo; fb.style.color='#ff8a80';
+    }
+    document.getElementById('qnext').classList.add('show');
   }
-  buildMods();
+  function quizNext(){
+    if(qIdx<quizQs.length-1){qIdx++;quizRender();}
+    else quizFinish();
+  }
+  function quizFinish(){
+    document.getElementById('quizPlay').style.display='none';
+    var end=document.getElementById('quizEnd');
+    document.getElementById('qend-sc').textContent=qScore;
+    var em,vr,msg,col;
+    if(qScore===3){em='🎉';vr='Félicitations !';col='#39d98a';
+      msg='3 bonnes réponses sur 3. La condition « SI score = 3 » est validée : c’est l’écran de félicitations qui s’affiche.';}
+    else if(qScore===2){em='🙂';vr='Presque !';col='#ffd166';
+      msg='2 bonnes réponses : la condition « SI score = 3 » n’est pas satisfaite — un autre écran s’affiche.';}
+    else {em='💪';vr='À retravailler';col='#ff8a80';
+      msg='Moins de 2 bonnes réponses : la condition envoie vers l’écran de révision. Recommence !';}
+    document.getElementById('qend-em').textContent=em;
+    var v=document.getElementById('qend-vr'); v.textContent=vr; v.style.color=col;
+    document.getElementById('qend-sc').style.color=col;
+    document.getElementById('qend-msg').textContent=msg;
+    end.classList.add('show');
+  }
+
+  /* ===================== Init ===================== */
+  updateProg();
+  quizInit();
 </script>
 </body>
 </html>

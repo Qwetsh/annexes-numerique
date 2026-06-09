@@ -28,6 +28,7 @@
   section{margin:0 0 30px}
   h2{font-size:21px;color:var(--green-d);margin:0 0 6px;display:flex;align-items:center;gap:9px}
   h2 .n{background:var(--green);color:#fff;border-radius:8px;font-size:13px;padding:2px 9px;font-weight:700}
+  h3{font-size:16px;color:var(--green-d);margin:18px 0 8px}
   .lead{color:var(--muted);margin:.2em 0 1.1em}
   .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 22px;box-shadow:var(--shadow)}
   .grid{display:grid;gap:14px}
@@ -38,6 +39,7 @@
   th,td{text-align:left;padding:9px 11px;border-bottom:1px solid var(--line)}
   th{background:var(--green);color:#fff;font-weight:600}
   tr:nth-child(even) td{background:#fafdfb}
+  code{background:#eef5f1;border:1px solid var(--line);border-radius:5px;padding:1px 5px;font-size:12.5px}
   /* simulateur */
   .sim{display:grid;grid-template-columns:1.3fr 1fr;gap:22px}
   @media(max-width:740px){.sim{grid-template-columns:1fr}}
@@ -78,6 +80,146 @@
   .note{font-size:13px;color:var(--muted);background:#fff;border:1px dashed var(--line);border-radius:10px;padding:11px 14px}
   footer{border-top:1px solid var(--line);padding:22px 0;color:var(--muted);font-size:13px;text-align:center}
   .tag{display:inline-block;background:#fff3e0;color:#a05a00;border:1px solid #f0d8b0;border-radius:999px;padding:2px 11px;font-size:12px;font-weight:600}
+
+  /* ===== Cadre « modèle réduit » façon téléphone ===== */
+  .demo-wrap{display:flex;gap:22px;flex-wrap:wrap;align-items:flex-start}
+  .demo-side{flex:1;min-width:240px}
+  .demo-label{display:inline-flex;align-items:center;gap:7px;background:#11161e;color:#cdeede;border:1px solid #2b3a33;
+    border-radius:999px;padding:4px 13px;font-size:12px;font-weight:700;letter-spacing:.4px;margin-bottom:10px}
+  .demo-label .dot{width:8px;height:8px;border-radius:50%;background:#39d98a;box-shadow:0 0 7px #39d98a}
+  .phone{width:300px;flex:0 0 300px;margin:0 auto;border:9px solid #11161e;border-radius:34px;background:#0a0a0f;
+    box-shadow:0 14px 40px rgba(10,30,22,.28);overflow:hidden;position:relative}
+  .phone::before{content:"";position:absolute;top:9px;left:50%;transform:translateX(-50%);width:90px;height:18px;
+    background:#11161e;border-radius:0 0 12px 12px;z-index:30}
+  .screen{height:560px;overflow-y:auto;overflow-x:hidden;position:relative;scrollbar-width:thin}
+  .screen::-webkit-scrollbar{width:5px} .screen::-webkit-scrollbar-thumb{background:#2a3b33;border-radius:4px}
+  .phone-cap{font-size:11.5px;color:var(--muted);text-align:center;margin-top:8px;font-style:italic}
+  @media(max-width:740px){.phone{flex:0 0 auto;width:280px}}
+
+  /* ----- Skin sombre commun aux écrans LookUp (fidèle aux maquettes) ----- */
+  .lu{font-family:"Plus Jakarta Sans","Segoe UI",system-ui,sans-serif;background:#0a0a0f;color:#f5f5f7;min-height:100%;padding-bottom:64px}
+  .lu *{box-sizing:border-box}
+  .lu-head{position:sticky;top:0;z-index:10;background:rgba(10,10,15,.92);backdrop-filter:blur(8px);
+    padding:14px 14px 9px;display:flex;justify-content:space-between;align-items:center}
+  .lu-logo{font-weight:900;font-size:18px;background:linear-gradient(135deg,#00ff88,#64d2ff);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:#00ff88}
+  .lu-chips{display:flex;gap:6px}
+  .lu-chip{font-size:11px;font-weight:800;padding:3px 9px;border-radius:20px;background:#13131a;border:1px solid #2c2c2e}
+  .lu-chip.fire{color:#ff9f0a;border-color:#ff9f0a55} .lu-chip.gem{color:#64d2ff;border-color:#64d2ff55}
+  .lu-pad{padding:0 14px}
+  .lu-hero{display:flex;gap:12px;align-items:center;padding:12px 14px 4px}
+  .lu-ava{width:58px;height:58px;border-radius:18px;background:linear-gradient(135deg,#00ff88,#00cc6a);
+    display:flex;align-items:center;justify-content:center;font-size:30px;flex-shrink:0;box-shadow:0 0 18px #00ff8844}
+  .lu-hi h4{margin:0;font-size:15px;font-weight:800}
+  .lu-hi p{margin:2px 0 0;font-size:11px;color:#8e8e93}
+  .lu-lvl{display:inline-block;margin-top:5px;font-size:10px;font-weight:700;letter-spacing:.4px;background:#bf5af233;color:#d79bff;padding:3px 9px;border-radius:8px}
+  .lu-xpwrap{padding:12px 14px 4px}
+  .lu-xprow{display:flex;justify-content:space-between;font-size:11px;font-weight:700;margin-bottom:5px}
+  .lu-xprow .a{color:#00ff88} .lu-xprow .b{color:#5a5d6e}
+  .lu-xptrack{height:9px;background:#1e1e2a;border-radius:6px;overflow:hidden}
+  .lu-xpfill{height:100%;background:linear-gradient(90deg,#00ff88,#64d2ff);border-radius:6px;width:0;transition:width 1s cubic-bezier(.16,1,.3,1)}
+  .lu-stats{display:flex;gap:8px;padding:14px}
+  .lu-stat{flex:1;background:#13131a;border:1px solid #2c2c2e;border-radius:14px;padding:11px 6px;text-align:center}
+  .lu-stat b{display:block;font-size:20px;font-weight:800;line-height:1}
+  .lu-stat .g{color:#00ff88} .lu-stat .p{color:#bf5af2} .lu-stat .c{color:#64d2ff}
+  .lu-stat span{font-size:9.5px;text-transform:uppercase;letter-spacing:.6px;color:#8e8e93;font-weight:700}
+  .lu-cta{margin:0 14px 8px;width:calc(100% - 28px);border:none;border-radius:16px;padding:15px;cursor:pointer;
+    background:linear-gradient(135deg,#00ff88,#00cc6a);color:#04130c;font-weight:800;font-size:14px;font-family:inherit;box-shadow:0 0 18px #00ff8844}
+  .lu-cta small{display:block;font-weight:600;font-size:10px;opacity:.75;margin-top:2px}
+  .lu-seclbl{font-size:10px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:#8e8e93;margin:14px 0 8px}
+  .lu-mission{background:#13131a;border:1px solid #2c2c2e;border-radius:16px;padding:13px;display:flex;align-items:center;gap:11px}
+  .lu-mi{width:42px;height:42px;border-radius:12px;background:linear-gradient(135deg,#ffd60a,#ff9f0a);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+  .lu-mb{flex:1} .lu-mb .t{font-size:13px;font-weight:700;margin-bottom:6px}
+  .lu-mtrack{height:7px;background:#1e1e2a;border-radius:5px;overflow:hidden}
+  .lu-mfill{height:100%;width:66%;background:linear-gradient(90deg,#ffd60a,#ff9f0a);border-radius:5px}
+  .lu-ms{font-size:10px;color:#5a5d6e;font-weight:700;margin-top:4px}
+  .lu-mr{font-size:11px;font-weight:800;color:#04130c;background:#ffd60a;padding:4px 9px;border-radius:10px;white-space:nowrap}
+  .lu-badges{display:flex;gap:9px;overflow-x:auto;padding-bottom:4px;scrollbar-width:none}
+  .lu-badges::-webkit-scrollbar{display:none}
+  .lu-bd{flex:0 0 auto;width:70px;text-align:center;cursor:pointer}
+  .lu-bd .ic{width:52px;height:52px;border-radius:16px;margin:0 auto 5px;display:flex;align-items:center;justify-content:center;font-size:24px;background:#1e1e2a;border:2px solid #2c2c2e}
+  .lu-bd.on .ic{border-color:#00ff88;box-shadow:0 0 14px #00ff8855}
+  .lu-bd.off .ic{opacity:.35;filter:grayscale(1)}
+  .lu-bd .nm{font-size:9.5px;font-weight:700;color:#8e8e93;line-height:1.25}
+  .lu-bd.on .nm{color:#f5f5f7}
+  .lu-feed{display:flex;flex-direction:column;gap:9px}
+  .lu-row{background:#13131a;border:1px solid #2c2c2e;border-radius:15px;padding:12px;display:flex;align-items:center;gap:11px;position:relative;overflow:hidden;cursor:pointer;text-align:left;width:100%;font-family:inherit;color:inherit}
+  .lu-row::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px}
+  .lu-row.hi::before{background:#00ff88} .lu-row.mid::before{background:#ffd60a} .lu-row.lo::before{background:#ff453a}
+  .lu-pl{width:40px;height:40px;border-radius:11px;background:#1e1e2a;display:flex;align-items:center;justify-content:center;font-size:19px;flex-shrink:0}
+  .lu-rc{flex:1;min-width:0} .lu-rt{font-size:12.5px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .lu-rm{font-size:10px;color:#8e8e93;margin-top:2px}
+  .lu-rs{flex-shrink:0;text-align:center}
+  .lu-rs b{font-family:"DM Mono",monospace;font-size:17px;font-weight:700;line-height:1;display:block}
+  .lu-rs.hi b{color:#00ff88} .lu-rs.mid b{color:#ffd60a} .lu-rs.lo b{color:#ff453a}
+  .lu-rs span{font-size:8.5px;font-weight:800;text-transform:uppercase;letter-spacing:.6px}
+  .lu-rs.hi span{color:#00b894} .lu-rs.mid span{color:#f0932b} .lu-rs.lo span{color:#ee5a24}
+  .lu-nav{position:absolute;bottom:0;left:0;right:0;background:rgba(10,10,15,.96);border-top:1px solid #2c2c2e;
+    display:flex;align-items:center;justify-content:space-around;padding:7px 0 9px;z-index:10}
+  .lu-nv{display:flex;flex-direction:column;align-items:center;gap:2px}
+  .lu-nv .i{font-size:18px} .lu-nv .l{font-size:8.5px;font-weight:700;text-transform:uppercase;color:#48484a}
+  .lu-nv.on .l{color:#00ff88}
+  .lu-scan{width:46px;height:46px;border-radius:50%;background:linear-gradient(135deg,#00ff88,#00cc6a);display:flex;align-items:center;justify-content:center;font-size:21px;margin-top:-16px;border:3px solid #0a0a0f;box-shadow:0 0 16px #00ff8855;cursor:pointer}
+
+  /* ----- Démo conversationnelle (caméléon) ----- */
+  .lu-conv{padding:14px}
+  .lu-convtop{display:flex;align-items:center;gap:9px;margin-bottom:12px}
+  .lu-cface{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,#00ff88,#00cc6a);display:flex;align-items:center;justify-content:center;font-size:21px;flex-shrink:0}
+  .lu-convtop .nm{font-size:13px;font-weight:800} .lu-convtop .st{font-size:10px;color:#8e8e93}
+  .chatlog{display:flex;flex-direction:column;gap:9px;min-height:300px}
+  .msg{max-width:84%;padding:9px 12px;border-radius:14px;font-size:12.5px;line-height:1.45;animation:msgin .3s ease both}
+  @keyframes msgin{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+  .msg.bot{align-self:flex-start;background:#1e1e2a;border:1px solid #2c2c2e;border-bottom-left-radius:5px}
+  .msg.me{align-self:flex-end;background:linear-gradient(135deg,#00ff88,#00cc6a);color:#04130c;font-weight:600;border-bottom-right-radius:5px}
+  .msg .axe-up{display:block;margin-top:5px;font-size:10.5px;font-weight:800;color:#00ff88}
+  .choices{display:flex;flex-direction:column;gap:7px;margin-top:6px}
+  .choice{background:#13131a;border:1.5px solid #00ff8855;color:#dfffe9;border-radius:12px;padding:9px 11px;font-size:12px;font-weight:600;
+    cursor:pointer;font-family:inherit;text-align:left;transition:background .15s}
+  .choice:hover{background:#16261d}
+  .conv-result{margin-top:10px;background:#13131a;border:1px solid #2c2c2e;border-radius:14px;padding:13px;text-align:center;display:none}
+  .conv-result.show{display:block;animation:msgin .35s ease both}
+  .conv-result .sc{font-family:"DM Mono",monospace;font-size:30px;font-weight:700}
+  .conv-result .tg{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:1px;margin-top:2px}
+  .conv-restart{margin-top:9px;background:none;border:1px solid #2c2c2e;color:#8e8e93;border-radius:10px;padding:7px 13px;font-size:11px;cursor:pointer;font-family:inherit}
+
+  /* ----- Démo profil / grades ----- */
+  .lu-prof{padding:16px 14px}
+  .lu-pcard{background:#13131a;border:1px solid #2c2c2e;border-radius:18px;padding:16px;text-align:center;margin-bottom:14px}
+  .lu-pava{width:74px;height:74px;border-radius:22px;margin:0 auto 8px;background:linear-gradient(135deg,#00ff88,#00cc6a);display:flex;align-items:center;justify-content:center;font-size:38px;box-shadow:0 0 22px #00ff8855}
+  .lu-pname{font-size:17px;font-weight:900} .lu-pcls{font-size:11px;color:#8e8e93;margin-top:2px}
+  .lu-track-lbl{font-size:10px;font-weight:800;letter-spacing:1.4px;text-transform:uppercase;color:#8e8e93;margin:0 0 9px}
+  .grades{display:flex;flex-direction:column;gap:0}
+  .grade{display:flex;align-items:center;gap:11px;padding:9px 4px;border-bottom:1px solid #1e1e2a;cursor:pointer}
+  .grade .gi{width:40px;height:40px;border-radius:11px;background:#1e1e2a;border:2px solid #2c2c2e;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+  .grade.done .gi{border-color:#00ff88;box-shadow:0 0 10px #00ff8844}
+  .grade.cur .gi{border-color:#ffd60a;box-shadow:0 0 12px #ffd60a66;animation:pulse 2s infinite}
+  @keyframes pulse{50%{box-shadow:0 0 20px #ffd60a99}}
+  .grade.lock .gi{opacity:.35;filter:grayscale(1)}
+  .grade .gb{flex:1} .grade .gn{font-size:13px;font-weight:800} .grade .gx{font-size:10.5px;color:#8e8e93}
+  .grade.cur .gn{color:#ffd60a} .grade.done .gn{color:#00ff88}
+  .grade .gtick{font-size:13px;font-weight:900}
+  .grade.done .gtick{color:#00ff88} .grade.cur .gtick{color:#ffd60a} .grade.lock .gtick{color:#3a3a44}
+  .gdetail{font-size:11px;color:#aeb6c2;background:#11161e;border:1px solid #1e1e2a;border-radius:10px;padding:9px 11px;margin:2px 0 4px;display:none}
+  .gdetail.show{display:block;animation:msgin .25s ease both}
+
+  /* ----- Démo consensus / peer review ----- */
+  .lu-cons{padding:16px 14px}
+  .cons-link{background:#13131a;border:1px solid #2c2c2e;border-radius:14px;padding:12px;display:flex;align-items:center;gap:10px;margin-bottom:14px}
+  .cons-link .pl{width:38px;height:38px;border-radius:11px;background:#1e1e2a;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+  .cons-link .t{font-size:12px;font-weight:700} .cons-link .m{font-size:10px;color:#8e8e93}
+  .cons-rows{display:flex;flex-direction:column;gap:8px;margin-bottom:14px}
+  .cvote{display:flex;align-items:center;gap:9px;background:#13131a;border:1px solid #2c2c2e;border-radius:12px;padding:9px 11px;opacity:.32;transition:opacity .3s}
+  .cvote.show{opacity:1}
+  .cvote .who{width:26px;height:26px;border-radius:50%;background:#1e1e2a;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+  .cvote .nm{flex:1;font-size:11.5px;color:#aeb6c2}
+  .cvote .vs{font-family:"DM Mono",monospace;font-size:14px;font-weight:700}
+  .cvote.hi .vs{color:#00ff88} .cvote.mid .vs{color:#ffd60a} .cvote.lo .vs{color:#ff453a}
+  .cons-meter{background:#13131a;border:1px solid #2c2c2e;border-radius:14px;padding:14px;text-align:center}
+  .cons-big{font-family:"DM Mono",monospace;font-size:34px;font-weight:700;line-height:1}
+  .cons-state{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:1px;margin-top:3px;min-height:15px}
+  .cons-note{font-size:11px;color:#8e8e93;margin-top:8px;line-height:1.4;min-height:30px}
+  .cons-btn{margin-top:12px;width:100%;border:none;border-radius:12px;padding:11px;cursor:pointer;font-family:inherit;font-weight:800;font-size:12px;
+    background:linear-gradient(135deg,#00ff88,#00cc6a);color:#04130c}
+  .cons-btn:disabled{opacity:.4;cursor:default;background:#1e1e2a;color:#8e8e93}
 </style>
 </head>
 <body>
@@ -92,10 +234,10 @@
 <main class="wrap">
 
   <section>
-    <span class="tag">Statut : conception · MVP à venir</span>
+    <span class="tag">Statut : conception · maquettes d'interface réalisées · MVP à venir</span>
     <div class="card" style="margin-top:12px">
       <h2><span class="n">1</span> Vision produit</h2>
-      <p class="lead">Né directement des constats de l'enquête menée auprès de 254 élèves : consommation massive de TikTok, Instagram et YouTube sans recul critique.</p>
+      <p class="lead">Née directement des constats de l'enquête menée auprès de 254 élèves : consommation massive de TikTok, Instagram et YouTube sans recul critique.</p>
       <div class="grid g2">
         <div>
           <p><strong>Le principe central :</strong> l'outil <em>ne donne pas la réponse</em>, il <strong>amorce la vérification</strong>. L'élève colle un lien, l'application analyse des signaux objectifs, donne un score préliminaire, puis propose des missions de vérification que l'élève complète lui-même.</p>
@@ -105,19 +247,147 @@
           <p><strong>Double couche éducative</strong> — l'app enseigne deux choses à la fois :</p>
           <span class="pill">Esprit critique sur le contenu</span>
           <span class="pill">Compréhension des mécaniques de design numérique</span>
-          <p style="margin-top:10px"><strong>Contraintes :</strong></p>
-          <span class="pill">Cible : 6e → 3e (300+ élèves)</span>
+          <p style="margin-top:10px"><strong>Contraintes de conception :</strong></p>
+          <span class="pill">Cible : 6ᵉ → 3ᵉ (300+ élèves)</span>
           <span class="pill">Budget : 0 €</span>
           <span class="pill">Design éthique anti-addiction</span>
-          <span class="pill">Rythme hebdomadaire, pas de streak</span>
+          <span class="pill">Rythme hebdomadaire</span>
         </div>
+      </div>
+      <div class="note" style="margin-top:14px"><strong>Ce que montrent les maquettes.</strong> Six variantes visuelles du tableau de bord élève ont été dessinées (de la version sobre « éditoriale » à une version « arcade rétro »). Toutes partagent le même squelette : un caméléon mascotte 🦎, un profil (« CaméléonVert », classe de 4ᵉB, grade « Détective »), une barre d'XP, trois statistiques (analyses, fakes repérés, précision), un gros bouton « Analyser un contenu », une mission du jour, des badges et un historique des analyses. Les modèles réduits ci-dessous reproduisent fidèlement ces écrans.</div>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="n">2</span> Le tableau de bord de l'élève — maquette reproduite</h2>
+    <p class="lead">Reproduction interactive de l'écran d'accueil tel qu'il figure dans les maquettes du projet. C'est le premier écran que voit l'élève : son avatar, sa progression et son historique d'analyses. <strong>Touchez les éléments</strong> — la barre d'XP se remplit, les badges et les analyses réagissent.</p>
+    <div class="demo-wrap">
+      <div class="demo-side">
+        <span class="demo-label"><span class="dot"></span>Démo · maquette interactive</span>
+        <p>Les chiffres et libellés sont ceux des maquettes : <strong>23 analyses</strong>, <strong>4 fakes</strong> repérés, <strong>89 % de précision</strong>, niveau 8 « Détective », <strong>2 450 / 3 500 XP</strong>.</p>
+        <p>Le score de chaque analyse est exprimé <strong>sur 100</strong> dans l'interface, avec trois états lisibles : <span class="pill" style="background:#e6f7ee;color:#1c7a4a">Fiable</span> <span class="pill" style="background:#fdf4d6;color:#8a6d00">Douteux</span> <span class="pill" style="background:#fde3e1;color:#b23a34">Fake</span>. Le moteur d'analyse sous-jacent (section 4) raisonne lui sur 5 axes ; ces deux échelles sont reliées.</p>
+        <p class="note">Les exemples d'analyses sont tirés tels quels des maquettes : une vidéo de vulgarisation (ScienceEtonnante, 88), un contenu santé TikTok (@sante.miracle, 40), un post complotiste Instagram (@verite.cachee.off, 15) et un article du Monde sur le GIEC (85).</p>
+      </div>
+      <div>
+        <div class="phone"><div class="screen">
+          <div class="lu">
+            <div class="lu-head">
+              <span class="lu-logo">LookUp</span>
+              <span class="lu-chips"><span class="lu-chip fire">🔥 7</span><span class="lu-chip gem">💎 340</span></span>
+            </div>
+            <div class="lu-hero">
+              <div class="lu-ava">🦎</div>
+              <div class="lu-hi">
+                <h4>CaméléonVert</h4>
+                <p>Prêt·e à scroller malin ?</p>
+                <span class="lu-lvl">🎖 Niveau 8 — Détective</span>
+              </div>
+            </div>
+            <div class="lu-xpwrap">
+              <div class="lu-xprow"><span class="a">2 450 XP</span><span class="b">Niveau 9 → 3 500 XP</span></div>
+              <div class="lu-xptrack"><div class="lu-xpfill" id="luxp"></div></div>
+            </div>
+            <div class="lu-stats">
+              <div class="lu-stat"><b class="g">23</b><span>Analyses</span></div>
+              <div class="lu-stat"><b class="p">4</b><span>Fakes</span></div>
+              <div class="lu-stat"><b class="c">89%</b><span>Précision</span></div>
+            </div>
+            <button class="lu-cta" onclick="luPing(this)">🔍 Analyser un contenu<small>Colle un lien TikTok, Insta ou YouTube</small></button>
+            <div class="lu-pad">
+              <div class="lu-seclbl">⚡ Mission du jour</div>
+              <div class="lu-mission">
+                <div class="lu-mi">🎯</div>
+                <div class="lu-mb"><div class="t">Analyse 3 contenus aujourd'hui</div><div class="lu-mtrack"><div class="lu-mfill"></div></div><div class="lu-ms">2 / 3 terminés</div></div>
+                <div class="lu-mr">+100 XP</div>
+              </div>
+              <div class="lu-seclbl">🏆 Badges</div>
+              <div class="lu-badges">
+                <div class="lu-bd on" onclick="luBadge(this,'Premier pas — ta toute première analyse !')"><div class="ic">🔰</div><div class="nm">Premier pas</div></div>
+                <div class="lu-bd on" onclick="luBadge(this,'Enquêteur — 10 analyses menées au bout.')"><div class="ic">🕵️</div><div class="nm">Enquêteur</div></div>
+                <div class="lu-bd on" onclick="luBadge(this,'Chasseur de fake — tu as démasqué 3 sources peu fiables.')"><div class="ic">🛡️</div><div class="nm">Chasseur</div></div>
+                <div class="lu-bd on" onclick="luBadge(this,'Régularité — 7 semaines de vérifications.')"><div class="ic">⚡</div><div class="nm">Régularité</div></div>
+                <div class="lu-bd off" onclick="luBadge(this,'🔒 Maître analyste — encore verrouillé. Continue !')"><div class="ic">👑</div><div class="nm">Maître</div></div>
+                <div class="lu-bd off" onclick="luBadge(this,'🔒 Légende — le tout dernier badge.')"><div class="ic">🌟</div><div class="nm">Légende</div></div>
+              </div>
+              <div class="lu-seclbl">📋 Dernières analyses</div>
+              <div class="lu-feed">
+                <button class="lu-row hi" onclick="luBadge(this,'Vidéo de vulgarisation, sources affichées, ton factuel → signaux de fiabilité forts.')">
+                  <div class="lu-pl">▶️</div><div class="lu-rc"><div class="lu-rt">Le réchauffement climatique en 10 min</div><div class="lu-rm">ScienceEtonnante · YouTube · Hier</div></div>
+                  <div class="lu-rs hi"><b>88</b><span>Fiable</span></div>
+                </button>
+                <button class="lu-row mid" onclick="luBadge(this,'Promesse santé spectaculaire, aucune source citée → score douteux, à vérifier.')">
+                  <div class="lu-pl">🎵</div><div class="lu-rc"><div class="lu-rt">CETTE technique change TOUT 😱🔥</div><div class="lu-rm">@sante.miracle · TikTok · Lun.</div></div>
+                  <div class="lu-rs mid"><b>40</b><span>Douteux</span></div>
+                </button>
+                <button class="lu-row lo" onclick="luBadge(this,'Compte récent, ton alarmiste, « on vous cache la vérité » → signaux faibles.')">
+                  <div class="lu-pl">📸</div><div class="lu-rc"><div class="lu-rt">ON VOUS CACHE LA VÉRITÉ sur les vaccins</div><div class="lu-rm">@verite.cachee.off · Instagram · Dim.</div></div>
+                  <div class="lu-rs lo"><b>15</b><span>Fake</span></div>
+                </button>
+                <button class="lu-row hi" onclick="luBadge(this,'Média établi, faits sourcés → signaux de fiabilité forts.')">
+                  <div class="lu-pl">📰</div><div class="lu-rc"><div class="lu-rt">Rapport GIEC : les points clés</div><div class="lu-rm">lemonde.fr · Article · Sam.</div></div>
+                  <div class="lu-rs hi"><b>85</b><span>Fiable</span></div>
+                </button>
+              </div>
+              <div id="lutoast" style="text-align:center;font-size:11px;color:#00ff88;min-height:18px;margin-top:10px;font-weight:700"></div>
+            </div>
+            <div class="lu-nav">
+              <div class="lu-nv on"><span class="i">🏠</span><span class="l">Accueil</span></div>
+              <div class="lu-nv"><span class="i">📊</span><span class="l">Rang</span></div>
+              <div class="lu-scan" onclick="luPing(document.querySelector('.lu-cta'))">🔍</div>
+              <div class="lu-nv"><span class="i">🏆</span><span class="l">Badges</span></div>
+              <div class="lu-nv"><span class="i">👤</span><span class="l">Profil</span></div>
+            </div>
+          </div>
+        </div></div>
+        <div class="phone-cap">Écran d'accueil — modèle réduit (≈ 1 / 1,3)</div>
       </div>
     </div>
   </section>
 
   <section>
-    <h2><span class="n">2</span> Simulateur de score — testez l'algorithme</h2>
-    <p class="lead">Chaque analyse évalue le contenu sur 5 axes (0 à 20). Le score final est une moyenne pondérée qui détermine la couleur du caméléon. <strong>Déplacez les curseurs</strong> pour voir réagir le caméléon, comme le ferait un élève.</p>
+    <h2><span class="n">3</span> Une analyse, étape par étape — démo conversationnelle</h2>
+    <p class="lead">Le cœur de LookUp : le format est <strong>conversationnel</strong>, jamais un formulaire. Un caméléon sceptique et impertinent dialogue avec l'élève. Ci-dessous, une mini-simulation d'une analyse YouTube : <strong>cliquez vos réponses</strong>, le dialogue avance et construit le score sous vos yeux.</p>
+    <div class="demo-wrap">
+      <div>
+        <div class="phone"><div class="screen">
+          <div class="lu">
+            <div class="lu-head"><span class="lu-logo">LookUp</span><span class="lu-chips"><span class="lu-chip gem">Analyse</span></span></div>
+            <div class="lu-conv">
+              <div class="lu-convtop">
+                <div class="lu-cface">🦎</div>
+                <div><div class="nm">Le caméléon</div><div class="st" id="convstep">mène l'enquête…</div></div>
+              </div>
+              <div class="chatlog" id="chatlog"></div>
+              <div class="conv-result" id="convres">
+                <div class="sc" id="convsc">—</div>
+                <div class="tg" id="convtg"></div>
+                <p style="font-size:11px;color:#aeb6c2;margin:8px 0 0" id="convmsg"></p>
+                <button class="conv-restart" onclick="convInit()">↺ Refaire l'analyse</button>
+              </div>
+            </div>
+            <div class="lu-nav">
+              <div class="lu-nv"><span class="i">🏠</span><span class="l">Accueil</span></div>
+              <div class="lu-nv"><span class="i">📊</span><span class="l">Rang</span></div>
+              <div class="lu-scan">🔍</div>
+              <div class="lu-nv"><span class="i">🏆</span><span class="l">Badges</span></div>
+              <div class="lu-nv on"><span class="i">👤</span><span class="l">Profil</span></div>
+            </div>
+          </div>
+        </div></div>
+        <div class="phone-cap">Parcours conversationnel — modèle réduit</div>
+      </div>
+      <div class="demo-side">
+        <span class="demo-label"><span class="dot"></span>Démo · dialogue interactif</span>
+        <p>L'exemple repris est l'analyse n°1 du tableau de bord : la vidéo <em>« Le réchauffement climatique en 10 min »</em> de ScienceEtonnante. Le caméléon arrive avec des <strong>faits objectifs</strong> (issus de l'API YouTube : ancienneté de la chaîne, abonnés, sources en description) et demande à l'élève de les interpréter.</p>
+        <p>Chaque bonne interprétation fait progresser un <strong>axe du score</strong> (corroboration, preuves, source, ton…). À la fin, le caméléon livre un verdict <strong>sur la fiabilité</strong> — jamais « vrai » ou « faux ».</p>
+        <p class="note">L'élève reste l'acteur : l'app pose les questions, c'est lui qui cherche et tranche. C'est exactement ce que les maquettes appellent « le caméléon mène l'enquête, mais tu décides ».</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="n">4</span> Le moteur de score — testez l'algorithme</h2>
+    <p class="lead">Sous le score affiché « sur 100 » dans l'interface, l'analyse repose sur 5 axes notés de 0 à 20. Le résultat est une moyenne pondérée qui détermine la couleur du caméléon. <strong>Déplacez les curseurs</strong> pour voir réagir le caméléon, comme le ferait un élève en répondant aux questions.</p>
     <div class="card">
       <div class="sim">
         <div>
@@ -148,17 +418,18 @@
             <div class="eyes"><span class="e"></span><span class="e"></span></div>
           </div>
           <div class="score-big"><span id="score">7.0</span><small>/20</small></div>
+          <div style="font-size:13px;color:var(--muted);margin-top:2px">soit <strong id="score100">35</strong> / 100 dans l'app</div>
           <span class="label-state" id="state" style="background:#9098a0">—</span>
           <div class="verdict" id="verdict">…</div>
         </div>
       </div>
-      <div class="note" style="margin-top:14px">Formule : <code>score = source×0,20 + preuves×0,25 + ton×0,15 + corroboration×0,30 + intention×0,10</code>. Sur le parcours YouTube, l'API ajuste automatiquement certains axes ; l'élève peut corriger de ±3 points par axe.</div>
+      <div class="note" style="margin-top:14px">Formule : <code>score = corroboration×0,30 + preuves×0,25 + source×0,20 + ton×0,15 + intention×0,10</code>. Le résultat /20 est converti en /100 pour l'affichage (le « 88 » de ScienceEtonnante, le « 15 » du post complotiste). Sur le parcours YouTube, l'API ajuste automatiquement certains axes ; l'élève peut corriger de ±3 points par axe.</div>
     </div>
   </section>
 
   <section>
-    <h2><span class="n">3</span> Les trois parcours par plateforme</h2>
-    <p class="lead">Le format est conversationnel — un caméléon sceptique et impertinent dialogue avec l'élève, jamais un formulaire. La richesse des données disponibles varie selon la plateforme.</p>
+    <h2><span class="n">5</span> Les trois parcours par plateforme</h2>
+    <p class="lead">Le format reste conversationnel partout, mais la richesse des données disponibles varie selon la plateforme — ce qui change la nature du parcours.</p>
     <div class="tabs">
       <div class="tab on" onclick="setTab(this,'p-yt')">▶ YouTube — l'enquête</div>
       <div class="tab" onclick="setTab(this,'p-tt')">♪ TikTok — les indices</div>
@@ -166,7 +437,7 @@
     </div>
     <div class="card">
       <div class="panel on" id="p-yt">
-        <p><strong>Le caméléon mène l'enquête.</strong> L'API YouTube fournit gratuitement : titre, chaîne, abonnés, date de création, nombre de vidéos, catégorie, liens. Le caméléon arrive avec des faits et les commente ; l'élève confirme, nuance ou ajuste. Parcours le plus automatisé.</p>
+        <p><strong>Le caméléon mène l'enquête.</strong> L'API YouTube fournit gratuitement : titre, chaîne, abonnés, date de création, nombre de vidéos, catégorie, liens. Le caméléon arrive avec des faits et les commente ; l'élève confirme, nuance ou ajuste. Parcours le plus automatisé. <em>(C'est ce parcours qui est rejoué dans la démo de la section 3.)</em></p>
         <div class="bubble">« La chaîne s'appelle 'ScienceVite', créée il y a… 3 mois. Avec 847 abonnés. Et 42 vidéos en 3 mois. Ça fait une vidéo tous les deux jours. T'en penses quoi ? »</div>
       </div>
       <div class="panel" id="p-tt">
@@ -174,58 +445,118 @@
         <div class="bubble">« C'est une vidéo de @ScienceFolle. Le titre dit : 'Les ondes tuent vos cellules ☠️ #science #vérité #flippant'. Déjà… ces hashtags. #vérité et #flippant dans la même vidéo, ça t'inspire quoi ? »</div>
       </div>
       <div class="panel" id="p-ig">
-        <p><strong>Le caméléon est aveugle.</strong> Depuis novembre 2025, l'API Instagram ne renvoie plus rien d'exploitable. Le parcours est 100 % guidé : le caméléon pose toutes les questions. C'est le parcours <em>le plus éducatif</em>, car l'élève est pleinement acteur.</p>
+        <p><strong>Le caméléon est aveugle.</strong> Depuis novembre 2025, l'API Instagram ne renvoie plus rien d'exploitable. Le parcours est 100 % guidé : le caméléon pose toutes les questions. C'est le parcours <em>le plus éducatif</em>, car l'élève est pleinement acteur. <em>(C'est le cas du post @verite.cachee.off de l'historique, noté 15/100.)</em></p>
         <div class="bubble">« Instagram me laisse rien voir, c'est verrouillé comme un coffre-fort. On va devoir bosser ensemble. Puisque je suis aveugle sur ce coup, c'est toi mes yeux. 👀 »</div>
       </div>
     </div>
   </section>
 
   <section>
-    <h2><span class="n">4</span> Gamification éthique</h2>
-    <p class="lead">Conçue en opposition aux mécaniques addictives : rythme hebdomadaire, quota de 5 analyses/semaine, pas de notifications agressives. L'objectif est l'engagement réfléchi, pas le temps passé.</p>
-    <div class="grid g2">
-      <div class="card">
-        <h4 style="margin:0 0 8px;color:var(--green-d)">Bulles d'XP (monnaie de progression)</h4>
-        <table>
-          <tr><th>Bulle</th><th>Type d'XP</th></tr>
-          <tr><td>🟢 Verte</td><td>Analyse de base (+5 par axe)</td></tr>
-          <tr><td>🔵 Bleue</td><td>Vérification (corroboration +15, review +10)</td></tr>
-          <tr><td>🟡 Dorée</td><td>Bonus (consensus, badge, 1ʳᵉ analyse d'un compte)</td></tr>
-          <tr><td>⭐ Étoile</td><td>Rare (divergence argumentée, badge « j'avais tort »)</td></tr>
-        </table>
+    <h2><span class="n">6</span> Profil, grades & gamification — maquette interactive</h2>
+    <p class="lead">La progression reprend les codes du jeu vidéo (« battle pass ») au service de l'éducation. Les maquettes détaillent une échelle de 10 grades, chacun matérialisé par une icône. <strong>Touchez un grade</strong> dans l'écran pour voir ce qu'il débloque.</p>
+    <div class="demo-wrap">
+      <div>
+        <div class="phone"><div class="screen">
+          <div class="lu">
+            <div class="lu-head"><span class="lu-logo">LookUp</span><span class="lu-chips"><span class="lu-chip fire">🔥 7</span></span></div>
+            <div class="lu-prof">
+              <div class="lu-pcard">
+                <div class="lu-pava">🦎</div>
+                <div class="lu-pname">CaméléonVert</div>
+                <div class="lu-pcls">Classe de 4ᵉB · Rang #3</div>
+                <div class="lu-xpwrap" style="padding:12px 0 0">
+                  <div class="lu-xprow"><span class="a">Niveau 8</span><span class="b">2 450 / 3 500 XP</span></div>
+                  <div class="lu-xptrack"><div class="lu-xpfill" id="luxp2"></div></div>
+                </div>
+              </div>
+              <div class="lu-track-lbl">🏆 Progression — Tier 4 / 10</div>
+              <div class="grades" id="grades"></div>
+            </div>
+            <div class="lu-nav">
+              <div class="lu-nv"><span class="i">🏠</span><span class="l">Accueil</span></div>
+              <div class="lu-nv"><span class="i">📊</span><span class="l">Rang</span></div>
+              <div class="lu-scan">🔍</div>
+              <div class="lu-nv"><span class="i">🏆</span><span class="l">Badges</span></div>
+              <div class="lu-nv on"><span class="i">👤</span><span class="l">Profil</span></div>
+            </div>
+          </div>
+        </div></div>
+        <div class="phone-cap">Écran profil / grades — modèle réduit</div>
       </div>
-      <div class="card">
-        <h4 style="margin:0 0 8px;color:var(--green-d)">Grades — chacun débloque une fonction</h4>
-        <table>
-          <tr><th>Grade</th><th>XP</th><th>Débloque</th></tr>
-          <tr><td>Stagiaire</td><td>0</td><td>Analyse de base</td></tr>
-          <tr><td>Correspondant</td><td>200</td><td>Commenter les autres</td></tr>
-          <tr><td>Reporter</td><td>500</td><td>Lancer des défis</td></tr>
-          <tr><td>Enquêteur</td><td>1 200</td><td>Missions avancées</td></tr>
-          <tr><td>Rédacteur en chef</td><td>3 000</td><td>Quota 7/semaine</td></tr>
-        </table>
+      <div class="demo-side">
+        <span class="demo-label"><span class="dot"></span>Démo · grades cliquables</span>
+        <p>Le grade actuel dans les maquettes est <strong>Détective</strong> (4ᵉ sur 10). Chaque grade débloque une fonction, dans une logique où l'on gagne des <em>capacités</em>, pas seulement des points.</p>
+        <h3>Monnaie de progression : les bulles d'XP</h3>
+        <div class="grid g2" style="gap:8px">
+          <div class="badgecard"><h4>🟢 Verte</h4><p>Analyse de base (chaque axe complété).</p></div>
+          <div class="badgecard"><h4>🔵 Bleue</h4><p>Vérification : corroboration, peer review.</p></div>
+          <div class="badgecard"><h4>🟡 Dorée</h4><p>Bonus : consensus, 1ʳᵉ analyse d'un compte.</p></div>
+          <div class="badgecard"><h4>⭐ Étoile</h4><p>Rare : divergence argumentée, « j'avais tort ».</p></div>
+        </div>
+        <p class="note" style="margin-top:10px">Les maquettes affichent aussi des compteurs « 🔥 7 » (régularité hebdomadaire) et « 💎 340 ». La section 8 « Coulisses » explique pourquoi ces mécaniques sont volontairement <strong>bridées</strong> (rythme hebdomadaire, anti-punition) pour rester éthiques.</p>
       </div>
     </div>
-    <h4 style="color:var(--green-d);margin:18px 0 10px">7 familles de badges</h4>
+    <h3>7 familles de badges</h3>
     <div class="grid g3">
       <div class="badgecard"><h4>1 · Premiers pas</h4><p>Première analyse, premier consensus, premier review.</p></div>
-      <div class="badgecard"><h4>2 · Régularité</h4><p>Streaks hebdomadaires + « Retour du vérificateur » (anti-punition).</p></div>
+      <div class="badgecard"><h4>2 · Régularité</h4><p>Semaines de suite + « Retour du vérificateur » (anti-punition).</p></div>
       <div class="badgecard"><h4>3 · Détective</h4><p>Repérer un compte récent suspect, remonter à la source.</p></div>
       <div class="badgecard"><h4>4 · Communauté</h4><p>Analyse validée par 3 personnes, 10 reviews, « Médiateur ».</p></div>
       <div class="badgecard"><h4>5 · Explorateur</h4><p>Un badge par plateforme, sortir de sa bulle informationnelle.</p></div>
-      <div class="badgecard"><h4>6 · Esprit critique</h4><p>Retourneur de veste, Avocat du diable, Nuanceur, « J'avais tort ».</p></div>
+      <div class="badgecard"><h4>6 · Esprit critique</h4><p>Avocat du diable, Nuanceur, « J'avais tort ».</p></div>
     </div>
   </section>
 
   <section>
-    <h2><span class="n">5</span> Peer review & consensus</h2>
-    <p class="lead">Plusieurs élèves analysent le même lien <strong>en aveugle</strong> (sans voir les autres). C'est la méthode scientifique — la reproductibilité — appliquée au fact-checking. La convergence renforce la confiance, la divergence ouvre un débat.</p>
-    <div class="grid g3" style="margin-bottom:14px">
-      <div class="kpi"><b>3</b><span>analyses min. pour un consensus valide</span></div>
-      <div class="kpi"><b>5+</b><span>consensus solide — badge « vérifié par la communauté »</span></div>
-      <div class="kpi"><b>×3</b><span>poids du prof dans l'« info du jour » (sans dominer)</span></div>
+    <h2><span class="n">7</span> Peer review & consensus — démo interactive</h2>
+    <p class="lead">Plusieurs élèves analysent le même lien <strong>en aveugle</strong> (sans voir les autres). C'est la méthode scientifique — la reproductibilité — appliquée au fact-checking. <strong>Cliquez « Révéler les analyses »</strong> pour voir le consensus se construire.</p>
+    <div class="demo-wrap">
+      <div class="demo-side">
+        <span class="demo-label"><span class="dot"></span>Démo · consensus de classe</span>
+        <p>On reprend la vidéo TikTok @sante.miracle (« CETTE technique change TOUT 😱🔥 »). Quatre élèves l'ont analysée chacun de leur côté. L'app n'affiche le résultat collectif qu'une fois plusieurs analyses réunies.</p>
+        <div class="grid g3" style="margin:6px 0 2px">
+          <div class="kpi"><b>3</b><span>analyses min. pour un consensus valide</span></div>
+          <div class="kpi"><b>5+</b><span>consensus solide — badge « vérifié par la communauté »</span></div>
+          <div class="kpi"><b>×3</b><span>poids du prof dans l'« info du jour »</span></div>
+        </div>
+        <p class="note">La convergence renforce la confiance ; la <strong>divergence</strong> n'est pas un échec : elle ouvre un débat en classe, qui rapporte des bulles d'XP rares.</p>
+      </div>
+      <div>
+        <div class="phone"><div class="screen">
+          <div class="lu">
+            <div class="lu-head"><span class="lu-logo">LookUp</span><span class="lu-chips"><span class="lu-chip gem">Consensus</span></span></div>
+            <div class="lu-cons">
+              <div class="cons-link">
+                <div class="pl">🎵</div>
+                <div><div class="t">CETTE technique change TOUT 😱🔥</div><div class="m">@sante.miracle · TikTok</div></div>
+              </div>
+              <div class="lu-track-lbl">👥 Analyses de la classe (en aveugle)</div>
+              <div class="cons-rows" id="consrows">
+                <div class="cvote mid"><div class="who">🦎</div><div class="nm">CaméléonVert</div><div class="vs">40</div></div>
+                <div class="cvote lo"><div class="who">🦊</div><div class="nm">RenardMalin</div><div class="vs">30</div></div>
+                <div class="cvote mid"><div class="who">🐢</div><div class="nm">TortueSage</div><div class="vs">48</div></div>
+                <div class="cvote mid"><div class="who">🦉</div><div class="nm">HibouVeille</div><div class="vs">42</div></div>
+              </div>
+              <div class="cons-meter">
+                <div class="cons-big" id="consbig">??</div>
+                <div class="cons-state" id="consstate" style="color:#8e8e93">En attente</div>
+                <div class="cons-note" id="consnote">Analyse d'abord toi-même, puis révèle ce qu'en pense la classe.</div>
+                <button class="cons-btn" id="consbtn" onclick="consReveal()">Révéler les analyses →</button>
+              </div>
+            </div>
+            <div class="lu-nav">
+              <div class="lu-nv"><span class="i">🏠</span><span class="l">Accueil</span></div>
+              <div class="lu-nv on"><span class="i">📊</span><span class="l">Rang</span></div>
+              <div class="lu-scan">🔍</div>
+              <div class="lu-nv"><span class="i">🏆</span><span class="l">Badges</span></div>
+              <div class="lu-nv"><span class="i">👤</span><span class="l">Profil</span></div>
+            </div>
+          </div>
+        </div></div>
+        <div class="phone-cap">Écran consensus — modèle réduit</div>
+      </div>
     </div>
-    <div class="grid g3">
+    <div class="grid g3" style="margin-top:14px">
       <div class="badgecard"><h4>L'info du jour</h4><p>Le prof poste un lien que toute la classe analyse — un rituel collectif.</p></div>
       <div class="badgecard"><h4>« Vérifier les copains »</h4><p>Bibliothèque de liens à reviewer, priorité aux moins vérifiés.</p></div>
       <div class="badgecard"><h4>La slot machine</h4><p>Tirage « au hasard » ludique, qui pioche en réalité les liens en attente.</p></div>
@@ -233,17 +564,18 @@
   </section>
 
   <section>
-    <h2><span class="n">6</span> Section « Coulisses » — la méta-couche éducative</h2>
+    <h2><span class="n">8</span> Section « Coulisses » — la méta-couche éducative</h2>
     <p class="lead">Des cartes qui expliquent honnêtement chaque choix de conception de l'application : LookUp enseigne aussi l'esprit critique… sur LookUp lui-même. Chaque carte est un support de cours.</p>
-    <details><summary>Pourquoi 5 analyses/semaine et pas illimité ?</summary><div class="body">La limite force à choisir ce qui vaut le coup d'être vérifié. L'illimité mène au clic sans réflexion — exactement ce qu'on combat. <em>Question : les réseaux sociaux sont gratuits et illimités. À ton avis, pourquoi ?</em></div></details>
-    <details><summary>Pourquoi l'analyse en aveugle ?</summary><div class="body">Si tu vois que 10 personnes ont dit « pas fiable », tu diras pareil sans réfléchir. C'est le biais de conformité. <em>Question : si tous tes potes pensent un truc, ça veut dire que c'est vrai ?</em></div></details>
+    <details><summary>Pourquoi un rythme hebdomadaire et pas illimité ?</summary><div class="body">Limiter le nombre d'analyses force à choisir ce qui vaut le coup d'être vérifié. L'illimité mène au clic sans réflexion — exactement ce qu'on combat. <em>Question : les réseaux sociaux sont gratuits et illimités. À ton avis, pourquoi ?</em></div></details>
+    <details><summary>Pourquoi l'analyse en aveugle ?</summary><div class="body">Si tu vois que 10 personnes ont dit « pas fiable », tu diras pareil sans réfléchir. C'est le biais de conformité. C'est aussi pour ça que la démo « consensus » (section 7) ne révèle les autres analyses qu'<strong>après</strong> la tienne. <em>Question : si tous tes potes pensent un truc, ça veut dire que c'est vrai ?</em></div></details>
     <details><summary>Pourquoi pas d'IA ?</summary><div class="body">Si une machine réfléchit à ta place, tu n'apprends rien. Et ça consomme énergie et eau. <em>Question : si une IA te dit qu'une info est vraie, tu la crois ? Pourquoi ?</em></div></details>
-    <details><summary>Pourquoi jamais « vrai » ou « faux » ?</summary><div class="body">La réalité c'est rarement tout vrai ou tout faux. Méfie-toi de quiconque dit avoir LA vérité. <em>Question : est-ce que LookUp lui-même pourrait se tromper ?</em></div></details>
-    <details><summary>Pourquoi un caméléon ?</summary><div class="body">Les fake news changent de couleur pour se fondre dans ton fil. Le caméléon de LookUp révèle les vraies couleurs.</div></details>
+    <details><summary>Pourquoi jamais « vrai » ou « faux », mais « fiable / douteux / fake » ?</summary><div class="body">La réalité c'est rarement tout vrai ou tout faux. Le score porte sur la <strong>fiabilité des signaux</strong> de la source, pas sur la vérité du contenu. Méfie-toi de quiconque dit avoir LA vérité. <em>Question : est-ce que LookUp lui-même pourrait se tromper ?</em></div></details>
+    <details><summary>Et le « 🔥 7 » de régularité — n'est-ce pas une mécanique addictive ?</summary><div class="body">C'est une tension assumée, visible dans les maquettes. La régularité est encouragée (esprit critique = habitude), mais <strong>sans punition</strong> : pas de perte si on saute une semaine, un badge « Retour du vérificateur » accueille ceux qui reviennent. C'est exactement le genre de choix qu'une carte « coulisses » donne à débattre aux élèves.</div></details>
+    <details><summary>Pourquoi un caméléon ?</summary><div class="body">Les fake news changent de couleur pour se fondre dans ton fil. Le caméléon de LookUp révèle les vraies couleurs — et change lui-même de couleur selon le score (vert → rouge).</div></details>
   </section>
 
   <section>
-    <h2><span class="n">7</span> Architecture & déploiement</h2>
+    <h2><span class="n">9</span> Architecture & déploiement</h2>
     <div class="grid g2">
       <div class="card">
         <h4 style="margin:0 0 8px;color:var(--green-d)">Stack technique (0 €)</h4>
@@ -270,17 +602,18 @@
         </table>
       </div>
     </div>
+    <div class="note" style="margin-top:14px">État actuel : la <strong>direction artistique de l'interface</strong> a été explorée à travers 6 maquettes du tableau de bord élève (la version sobre « éditoriale » sert de base à cette présentation). Le moteur d'analyse, les parcours conversationnels et le système de consensus sont <strong>spécifiés mais pas encore développés</strong> — le projet reste en phase de conception.</div>
   </section>
 
 </main>
 
 <footer class="wrap">
-  Annexe A6 · LookUp — Document de conception produit (v1.0, février 2026)<br>
+  Annexe A6 · LookUp — Document de conception produit (v2.0, juin 2026)<br>
   Compte rendu d'activité du référent numérique 2025-2026 · Collège Pierre Mendès France, Woippy · M. Thomas Charles
 </footer>
 
 <script>
-  // Réactions du caméléon par palier de score (fidèle au document de conception)
+  /* ===================== Simulateur de score (5 axes) ===================== */
   var bands = [
     {min:16, color:'#2e9e5b', name:'Vert',         txt:"Ça a l'air plutôt solide. Mais reste curieux."},
     {min:12, color:'#cdb022', name:'Jaune-vert',   txt:"Pas mal, mais y'a des zones d'ombre."},
@@ -297,6 +630,7 @@
     var s = src*0.20 + pre*0.25 + ton*0.15 + cor*0.30 + int*0.10;
     var b = bands.find(function(x){return s>=x.min});
     document.getElementById('score').textContent = s.toFixed(1);
+    document.getElementById('score100').textContent = Math.round(s*5);
     document.getElementById('cham').style.background = b.color;
     document.getElementById('verdict').textContent = '« '+b.txt+' »';
     var st=document.getElementById('state'); st.textContent=b.name; st.style.background=b.color;
@@ -311,6 +645,164 @@
     document.getElementById(id).classList.add('on');
   }
   calc();
+
+  /* ===================== Dashboard : interactions ===================== */
+  // Remplissage des barres d'XP quand elles entrent à l'écran
+  (function(){
+    function fill(){ var a=document.getElementById('luxp'),b=document.getElementById('luxp2');
+      if(a) a.style.width='70%'; if(b) b.style.width='70%'; }
+    if('IntersectionObserver' in window){
+      var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.style.width='70%';io.unobserve(e.target);}});});
+      ['luxp','luxp2'].forEach(function(id){var el=document.getElementById(id);if(el)io.observe(el);});
+    } else { setTimeout(fill,400); }
+  })();
+  function luToast(t){ var el=document.getElementById('lutoast'); if(!el)return; el.textContent=t; clearTimeout(el._t); el._t=setTimeout(function(){el.textContent='';},2600); }
+  function luPing(btn){ btn.animate([{transform:'scale(1)'},{transform:'scale(0.97)'},{transform:'scale(1)'}],{duration:160}); luToast('Colle un lien pour lancer une analyse 🦎'); }
+  function luBadge(el,txt){ if(el.animate) el.animate([{opacity:.6},{opacity:1}],{duration:200}); luToast(txt); }
+
+  /* ===================== Démo conversationnelle ===================== */
+  var convQs = [
+    {
+      bot:"Salut ! On regarde « Le réchauffement climatique en 10 min » de ScienceEtonnante. La chaîne existe depuis 2015 et a 1,3 million d'abonnés. Ça t'inspire confiance, l'ancienneté ?",
+      step:"Étape 1 / 4 · La source",
+      choices:[
+        {t:"Une chaîne ancienne et suivie, c'est plutôt rassurant.", pts:18, ax:"+ Source", good:true},
+        {t:"Les abonnés ne prouvent rien sur le fond.", pts:13, ax:"+ Source (nuance)", good:true},
+        {t:"Aucune idée, je n'ai pas regardé.", pts:4, ax:"Source : 4/20", good:false}
+      ]
+    },
+    {
+      bot:"En description, l'auteur a mis des liens vers des articles scientifiques et le rapport du GIEC. Tu en fais quoi ?",
+      step:"Étape 2 / 4 · Les preuves",
+      choices:[
+        {t:"Des sources citées et vérifiables : bon point.", pts:18, ax:"+ Preuves", good:true},
+        {t:"Je clique pour vérifier qu'elles disent bien ça.", pts:20, ax:"+ Preuves (top !)", good:true},
+        {t:"Bof, je ne lis jamais les descriptions.", pts:6, ax:"Preuves : 6/20", good:false}
+      ]
+    },
+    {
+      bot:"Le ton de la vidéo est posé, il explique sans crier au scandale. Comparé à « ÇA VA TOUS NOUS TUER 😱 », t'en penses quoi ?",
+      step:"Étape 3 / 4 · Le ton",
+      choices:[
+        {t:"Un ton factuel, c'est bon signe.", pts:17, ax:"+ Ton", good:true},
+        {t:"Le ton seul ne suffit pas à juger.", pts:14, ax:"+ Ton (nuance)", good:true},
+        {t:"J'aime quand c'est dramatique, c'est plus fun.", pts:7, ax:"Ton : 7/20", good:false}
+      ]
+    },
+    {
+      bot:"Dernière étape, la plus importante : as-tu cherché si d'autres sources fiables disent la même chose ?",
+      step:"Étape 4 / 4 · La corroboration",
+      choices:[
+        {t:"Oui, j'ai trouvé l'ADEME et Le Monde qui confirment.", pts:19, ax:"+ Corroboration", good:true},
+        {t:"J'ai cherché un peu, ça semble cohérent.", pts:13, ax:"+ Corroboration (partielle)", good:true},
+        {t:"Non, pas cherché.", pts:2, ax:"Corroboration : 2/20 ⚠", good:false}
+      ]
+    }
+  ];
+  // poids alignés sur le moteur : corroboration 30, preuves 25, source 20, ton 15 (+ intention fixée)
+  var convWeights = [0.20, 0.25, 0.15, 0.30]; // ordre des étapes : source, preuves, ton, corroboration
+  var convIdx, convScore;
+  function convInit(){
+    convIdx=0; convScore=0;
+    document.getElementById('convres').classList.remove('show');
+    document.getElementById('chatlog').innerHTML='';
+    convAsk();
+  }
+  function convAddMsg(cls, html){
+    var log=document.getElementById('chatlog');
+    var d=document.createElement('div'); d.className='msg '+cls; d.innerHTML=html;
+    log.appendChild(d);
+    var sc=log.closest('.screen'); if(sc) sc.scrollTop=sc.scrollHeight;
+    return d;
+  }
+  function convAsk(){
+    var q=convQs[convIdx];
+    document.getElementById('convstep').textContent=q.step;
+    convAddMsg('bot', q.bot);
+    var wrap=document.createElement('div'); wrap.className='choices';
+    q.choices.forEach(function(c){
+      var b=document.createElement('button'); b.className='choice'; b.textContent=c.t;
+      b.onclick=function(){ convPick(c, wrap); };
+      wrap.appendChild(b);
+    });
+    document.getElementById('chatlog').appendChild(wrap);
+    var sc=wrap.closest('.screen'); if(sc) sc.scrollTop=sc.scrollHeight;
+  }
+  function convPick(c, wrap){
+    wrap.remove();
+    convAddMsg('me', c.t + '<span class="axe-up">'+c.ax+'</span>');
+    convScore += c.pts * convWeights[convIdx];
+    convIdx++;
+    if(convIdx < convQs.length){ setTimeout(convAsk, 350); }
+    else { setTimeout(convFinish, 450); }
+  }
+  function convFinish(){
+    document.getElementById('convstep').textContent='Verdict du caméléon';
+    var s20 = convScore;                 // déjà pondéré sur ~20 (l'axe intention est neutre ici)
+    var s100 = Math.round(s20*5);
+    var tg, color, msg;
+    if(s100>=70){ tg='Fiable'; color='#00ff88'; msg="Signaux de fiabilité forts. Mais reste curieux : un bon dossier aujourd'hui peut vieillir."; }
+    else if(s100>=40){ tg='Douteux'; color='#ffd60a'; msg="Des zones d'ombre. Ni à croire ni à jeter : creuse encore avant de partager."; }
+    else { tg='Fake probable'; color='#ff453a'; msg="Signaux faibles. Je ne dis pas que c'est faux — je dis : méfie-toi et ne relaie pas."; }
+    var sc=document.getElementById('convsc'); sc.textContent=s100; sc.style.color=color;
+    var t=document.getElementById('convtg'); t.textContent=tg; t.style.color=color;
+    document.getElementById('convmsg').textContent='« '+msg+' »';
+    document.getElementById('convres').classList.add('show');
+    convAddMsg('bot', "Verdict : <strong>"+s100+"/100 — "+tg+"</strong>. Souviens-toi : je note la <em>fiabilité de la source</em>, jamais « vrai » ou « faux ».");
+  }
+  convInit();
+
+  /* ===================== Démo profil / grades ===================== */
+  var grades = [
+    {ic:'🔰', nm:'Recrue',      xp:'0 XP',     st:'done', d:"Analyse de base débloquée. Bienvenue dans l'enquête !"},
+    {ic:'🕵️', nm:'Enquêteur',  xp:'200 XP',   st:'done', d:"Tu peux commenter les analyses des autres élèves."},
+    {ic:'🛡️', nm:'Chasseur',   xp:'500 XP',   st:'done', d:"Tu peux lancer des défis d'analyse à la classe."},
+    {ic:'⚡', nm:'Détective',   xp:'1 200 XP', st:'cur',  d:"Grade actuel. Missions avancées + peer review en aveugle."},
+    {ic:'🔥', nm:'Expert',      xp:'3 000 XP', st:'lock', d:"Quota hebdomadaire élargi (7 analyses au lieu de 5)."},
+    {ic:'💎', nm:'Vétéran',     xp:'5 000 XP', st:'lock', d:"Accès aux statistiques fines de tes biais d'analyse."},
+    {ic:'⭐', nm:'Maître',      xp:'8 000 XP', st:'lock', d:"Tu peux proposer « l'info du jour » à ta classe."},
+    {ic:'🌟', nm:'Champion',    xp:'12 000 XP',st:'lock', d:"Mentor : tu valides les analyses des plus jeunes."},
+    {ic:'👑', nm:'Légende',     xp:'18 000 XP',st:'lock', d:"Personnalisation avancée du caméléon."},
+    {ic:'🏆', nm:'Mythique',    xp:'25 000 XP',st:'lock', d:"Le sommet. Réservé aux vérificateurs les plus assidus."}
+  ];
+  (function(){
+    var c=document.getElementById('grades'); if(!c) return;
+    grades.forEach(function(g,i){
+      var row=document.createElement('div'); row.className='grade '+g.st;
+      var tick = g.st==='done' ? '✓' : (g.st==='cur' ? '▸' : '🔒');
+      row.innerHTML='<div class="gi">'+g.ic+'</div><div class="gb"><div class="gn">'+g.nm+'</div><div class="gx">'+g.xp+'</div></div><div class="gtick">'+tick+'</div>';
+      var det=document.createElement('div'); det.className='gdetail'; det.textContent=g.d;
+      row.onclick=function(){
+        var open=det.classList.contains('show');
+        document.querySelectorAll('#grades .gdetail').forEach(function(x){x.classList.remove('show')});
+        if(!open) det.classList.add('show');
+      };
+      c.appendChild(row); c.appendChild(det);
+    });
+  })();
+
+  /* ===================== Démo consensus / peer review ===================== */
+  var consData = [40,30,48,42]; // notes /100 des 4 élèves (TikTok @sante.miracle)
+  function consReveal(){
+    var rows=document.querySelectorAll('#consrows .cvote');
+    rows.forEach(function(r,i){ setTimeout(function(){ r.classList.add('show'); }, i*450); });
+    var btn=document.getElementById('consbtn'); btn.disabled=true; btn.textContent='Analyses révélées';
+    setTimeout(function(){
+      var avg=Math.round(consData.reduce(function(a,b){return a+b;},0)/consData.length);
+      var spread=Math.max.apply(null,consData)-Math.min.apply(null,consData);
+      var big=document.getElementById('consbig'); big.textContent=avg;
+      var state=document.getElementById('consstate'); var note=document.getElementById('consnote');
+      var color = avg>=70?'#00ff88':(avg>=40?'#ffd60a':'#ff453a');
+      big.style.color=color;
+      var label = avg>=70?'Fiable':(avg>=40?'Douteux':'Fake probable');
+      state.textContent='Consensus : '+label; state.style.color=color;
+      if(spread<=15){
+        note.innerHTML="<strong>Convergence forte</strong> (écart de "+spread+" pts) : 4 analyses indépendantes aboutissent au même verdict. La confiance dans le résultat augmente.";
+      } else {
+        note.innerHTML="<strong>Divergence</strong> (écart de "+spread+" pts) : pas d'accord franc. Ce n'est pas un échec — c'est le moment d'en débattre en classe.";
+      }
+    }, rows.length*450 + 350);
+  }
 </script>
 </body>
 </html>

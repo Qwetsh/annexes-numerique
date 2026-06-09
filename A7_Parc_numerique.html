@@ -8,47 +8,42 @@
   :root{
     --green:#1f7a54; --green-d:#155c3f; --green-l:#eaf5ef; --ink:#1d2b25; --muted:#5c6b63;
     --line:#d9e6df; --bg:#f5f9f7; --card:#fff;
-    --vert:#2e9e5b; --ambre:#e0a020; --rouge:#d6453f; --gris:#9098a0;
+    /* États sémantiques — couleurs « solid » EXACTES du dépôt (tokens.css) */
+    --ok-solid:#18924c;  --ok-tint:#e7f6ec;  --ok-line:#b7e3c4;  --ok-ink:#11703a;
+    --warn-solid:#c9790a; --warn-tint:#fdf1de; --warn-line:#f3d49a; --warn-ink:#8f5406;
+    --bad-solid:#d23b2c; --bad-tint:#fce9e7; --bad-line:#f4c0ba; --bad-ink:#a32a1e;
+    --gone-solid:#5b6b7f; --gone-tint:#eef1f5; --gone-line:#d3dae3; --gone-ink:#44515f;
+    --none-tint:#f3f5f8; --none-line:#dfe5ec; --none-ink:#8a97a8;
+    --alert:#ef4444; --alert-d:#b91c1c;
     --shadow:0 2px 10px rgba(20,60,45,.06),0 8px 30px rgba(20,60,45,.05);
   }
   *{box-sizing:border-box}
   body{margin:0;font-family:"Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.55}
-  .wrap{max-width:1000px;margin:0 auto;padding:0 22px}
+  .wrap{max-width:1040px;margin:0 auto;padding:0 22px}
   header.top{background:linear-gradient(135deg,#1f7a54,#155c3f);color:#fff;padding:34px 0 30px}
   .badge{display:inline-block;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:4px 14px;font-size:13px;font-weight:600}
   header.top h1{margin:14px 0 6px;font-size:30px}
-  header.top p{margin:0;opacity:.92;max-width:700px}
+  header.top p{margin:0;opacity:.93;max-width:760px}
   main{padding:34px 0 60px}
   section{margin:0 0 30px}
   h2{font-size:21px;color:var(--green-d);margin:0 0 6px;display:flex;align-items:center;gap:9px}
   h2 .n{background:var(--green);color:#fff;border-radius:8px;font-size:13px;padding:2px 9px;font-weight:700}
+  h3{margin:0 0 6px;color:var(--green-d);font-size:16px}
   .lead{color:var(--muted);margin:.2em 0 1.1em}
   .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 22px;box-shadow:var(--shadow)}
   .grid{display:grid;gap:14px}
   .g2{grid-template-columns:repeat(2,1fr)} .g3{grid-template-columns:repeat(3,1fr)} .g4{grid-template-columns:repeat(4,1fr)}
   @media(max-width:740px){.g2,.g3,.g4{grid-template-columns:1fr 1fr}}
+  @media(max-width:480px){.g3,.g4{grid-template-columns:1fr}}
   table{width:100%;border-collapse:collapse;font-size:14px}
   th,td{text-align:left;padding:9px 11px;border-bottom:1px solid var(--line)}
   th{background:var(--green);color:#fff;font-weight:600}
   tr:nth-child(even) td{background:#fafdfb}
   .kpi{background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px;text-align:center}
-  .kpi b{display:block;font-size:26px;color:var(--green-d)} .kpi span{font-size:12.5px;color:var(--muted)}
+  .kpi b{display:block;font-size:26px;color:var(--green-d);font-variant-numeric:tabular-nums} .kpi span{font-size:12.5px;color:var(--muted)}
   .legend{display:flex;gap:10px;flex-wrap:wrap;margin:6px 0 0}
   .lg{display:inline-flex;align-items:center;gap:7px;font-size:13.5px;font-weight:600;background:#fff;border:1px solid var(--line);border-radius:999px;padding:5px 12px}
-  .dot{width:13px;height:13px;border-radius:50%}
-  /* vue étage */
-  .floor{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
-  @media(max-width:560px){.floor{grid-template-columns:repeat(2,1fr)}}
-  .room{border-radius:11px;padding:13px 12px;color:#13251c;cursor:pointer;border:2px solid transparent;transition:transform .12s,box-shadow .12s;min-height:74px}
-  .room:hover{transform:translateY(-3px);box-shadow:0 8px 18px rgba(0,0,0,.12)}
-  .room.sel{border-color:#13251c;box-shadow:0 0 0 3px rgba(31,122,84,.25)}
-  .room b{display:block;font-size:14px} .room span{font-size:12px;opacity:.85}
-  .floor-btns{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:12px}
-  .fb{border:1px solid var(--line);background:#fff;border-radius:8px;padding:6px 14px;cursor:pointer;font-weight:600;color:var(--muted)}
-  .fb.on{background:var(--green);color:#fff;border-color:var(--green)}
-  .detail{background:var(--green-l);border-radius:12px;padding:16px;min-height:150px}
-  .detail h4{margin:0 0 4px;color:var(--green-d)}
-  .state-badge{display:inline-block;border-radius:999px;padding:2px 11px;color:#fff;font-weight:700;font-size:12.5px}
+  .dot{width:13px;height:13px;border-radius:50%;display:inline-block;flex:none}
   .feature{background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px}
   .feature h4{margin:0 0 5px;color:var(--green-d);font-size:15.5px}
   .feature p{margin:0;font-size:13.5px;color:var(--muted)}
@@ -56,102 +51,364 @@
   .cta{display:inline-block;margin-top:6px;background:var(--green);color:#fff;text-decoration:none;border-radius:9px;padding:9px 16px;font-weight:600;font-size:14px}
   footer{border-top:1px solid var(--line);padding:22px 0;color:var(--muted);font-size:13px;text-align:center}
   .note{font-size:13px;color:var(--muted);background:#fff;border:1px dashed var(--line);border-radius:10px;padding:11px 14px}
+  ul.tight{margin:.4em 0 0;padding-left:20px} ul.tight li{margin:.25em 0;font-size:14px}
+  code{font-family:"Cascadia Code",Consolas,Menlo,monospace;background:var(--green-l);color:var(--green-d);border-radius:5px;padding:1px 6px;font-size:12.5px}
+
+  /* ---- État : badge (couleur TOUJOURS doublée par le libellé) ---- */
+  .ebadge{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:3px 10px;font-size:12.5px;font-weight:600;border:1px solid}
+  .ebadge .d{width:8px;height:8px;border-radius:50%}
+  .e-ok{background:var(--ok-tint);border-color:var(--ok-line);color:var(--ok-ink)} .e-ok .d{background:var(--ok-solid)}
+  .e-warn{background:var(--warn-tint);border-color:var(--warn-line);color:var(--warn-ink)} .e-warn .d{background:var(--warn-solid)}
+  .e-bad{background:var(--bad-tint);border-color:var(--bad-line);color:var(--bad-ink)} .e-bad .d{background:var(--bad-solid)}
+  .e-gone{background:var(--gone-tint);border-color:var(--gone-line);color:var(--gone-ink)} .e-gone .d{background:var(--gone-solid)}
+  .e-none{background:var(--none-tint);border-color:var(--none-line);color:var(--none-ink)} .e-none .d{background:var(--none-ink)}
+
+  /* ---- Cadre « démo intégrée » ---- */
+  .demo{border:2px solid var(--green);border-radius:16px;overflow:hidden;margin-top:6px;background:#fbfdfc}
+  .demo-bar{background:linear-gradient(135deg,#1f7a54,#155c3f);color:#fff;padding:9px 16px;font-size:12.5px;font-weight:700;display:flex;align-items:center;gap:9px;letter-spacing:.02em}
+  .demo-bar .live{width:9px;height:9px;border-radius:50%;background:#7bf3b3;box-shadow:0 0 8px #7bf3b3;flex:none}
+  .demo-bar small{font-weight:500;opacity:.85;margin-left:auto;letter-spacing:0}
+  .demo-body{padding:16px}
+
+  /* ---- Mini-app : barre + sidebar reproduites ---- */
+  .miniapp{border:1px solid var(--line);border-radius:11px;overflow:hidden;background:#fff;display:grid;grid-template-columns:188px 1fr}
+  @media(max-width:680px){.miniapp{grid-template-columns:1fr}}
+  .ma-side{background:#0f172a;color:#cbd5e1;padding:12px 10px;font-size:13px}
+  .ma-brand{display:flex;align-items:center;gap:8px;padding:4px 6px 12px;border-bottom:1px solid #1e293b;margin-bottom:10px}
+  .ma-brand .mk{width:26px;height:26px;border-radius:7px;background:#18924c;display:grid;place-items:center;color:#fff;font-size:13px;flex:none}
+  .ma-brand b{display:block;font-size:13px;color:#fff} .ma-brand i{font-style:normal;font-size:10.5px;color:#7c8aa0}
+  .ma-grp{font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:#64748b;margin:10px 6px 4px}
+  .ma-nav{display:flex;flex-direction:column;gap:1px}
+  .ma-nav a{display:flex;align-items:center;gap:8px;padding:7px 9px;border-radius:7px;color:#cbd5e1;cursor:pointer;text-decoration:none;font-size:12.5px;position:relative}
+  .ma-nav a:hover{background:#1e293b}
+  .ma-nav a.on{background:#18924c;color:#fff;font-weight:600}
+  .ma-nav a.soon{color:#5d6b80;cursor:default}
+  .ma-nav a.soon .tag{margin-left:auto;font-size:9px;background:#1e293b;border-radius:6px;padding:1px 6px;color:#8595ac}
+  .ma-ico{width:15px;height:15px;flex:none}
+  .ma-nbadge{margin-left:auto;background:var(--alert);color:#fff;font-size:10.5px;font-weight:700;border-radius:999px;min-width:18px;height:18px;display:grid;place-items:center;padding:0 4px}
+  .ma-main{background:#f4f6f9;min-height:300px}
+  .ma-top{background:#fff;border-bottom:1px solid var(--line);padding:11px 16px;display:flex;align-items:center;gap:12px}
+  .ma-top .tt{font-weight:700;color:#0f172a;font-size:15px} .ma-top .ts{font-size:11.5px;color:#64748b}
+  .ma-content{padding:16px}
+
+  /* dashboard mini */
+  .ma-kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+  @media(max-width:560px){.ma-kpis{grid-template-columns:1fr 1fr}}
+  .ma-kpi{background:#fff;border:1px solid var(--line);border-radius:11px;padding:11px 12px}
+  .ma-kpi .lab{font-size:11px;color:#64748b;display:block;min-height:28px}
+  .ma-kpi .num{font-size:24px;font-weight:700;color:#0f172a;font-variant-numeric:tabular-nums;line-height:1.1}
+  .ma-kpi .num small{font-size:13px;font-weight:600;color:#64748b}
+  .ma-kpi.alert{border-color:var(--bad-line);background:var(--bad-tint)}
+  .ma-kpi.alert .num{color:var(--bad-ink)}
+  .ma-kpi .foot{font-size:10.5px;color:#94a3b8;margin-top:3px}
+  .ma-gauge{height:5px;border-radius:999px;background:#e2e8f0;margin:6px 0 0;overflow:hidden}
+  .ma-gauge i{display:block;height:100%;background:var(--warn-solid)}
+  .ma-stack{display:flex;height:34px;border-radius:8px;overflow:hidden;margin:12px 0 10px;font-size:12px;color:#fff;font-weight:700}
+  .ma-stack div{display:grid;place-items:center;transition:flex .4s}
+  .ma-leg{display:flex;flex-direction:column;gap:5px}
+  .ma-leg .li{display:flex;align-items:center;gap:8px;font-size:12.5px}
+  .ma-leg .sw{width:11px;height:11px;border-radius:3px;flex:none}
+  .ma-leg .nm{flex:1;color:#334155} .ma-leg .vl{font-weight:700;font-variant-numeric:tabular-nums} .ma-leg .pc{color:#94a3b8;width:42px;text-align:right;font-variant-numeric:tabular-nums}
+
+  /* inventaire mini */
+  .ma-toolbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:10px}
+  .ma-field{flex:1;min-width:150px;display:flex;align-items:center;gap:7px;background:#fff;border:1px solid var(--line);border-radius:8px;padding:6px 10px}
+  .ma-field input{border:0;outline:0;font:inherit;width:100%;font-size:13px;background:transparent}
+  .ma-sel{background:#fff;border:1px solid var(--line);border-radius:8px;padding:6px 9px;font:inherit;font-size:12.5px;color:#334155}
+  .ma-chip{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:#fff;border-radius:999px;padding:5px 11px;font-size:12px;font-weight:600;color:#475569;cursor:pointer}
+  .ma-chip[aria-pressed="true"]{background:var(--green);border-color:var(--green);color:#fff}
+  .ma-count{font-size:12px;color:#64748b}
+  .ma-tbl{width:100%;border-collapse:collapse;font-size:12.5px;background:#fff;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+  .ma-tbl th{background:#f6f8fb;color:#475569;font-size:11px;text-transform:uppercase;letter-spacing:.03em;padding:8px 10px;text-align:left;border-bottom:1px solid var(--line)}
+  .ma-tbl td{padding:8px 10px;border-bottom:1px solid var(--line);color:#334155}
+  .ma-tbl tr:last-child td{border-bottom:0}
+  .ma-tbl .ref{font-family:"Cascadia Code",Consolas,monospace;font-size:11.5px;color:#0f172a;font-weight:600}
+  .ma-tbl .inv{display:block;font-size:10px;color:#94a3b8}
+  .ma-flchip{display:inline-block;background:#eef1f5;border-radius:6px;padding:1px 7px;font-size:11px;font-weight:600;color:#475569}
+  .ma-old{color:var(--bad-ink);font-weight:700}
+  .ma-empty{padding:18px;text-align:center;color:#94a3b8;font-size:13px}
+
+  /* vue d'étage / plan */
+  .plan-bar{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px;align-items:center}
+  .fb{border:1px solid var(--line);background:#fff;border-radius:8px;padding:5px 13px;cursor:pointer;font-weight:600;color:#64748b;font-size:12.5px}
+  .fb.on{background:var(--green);color:#fff;border-color:var(--green)}
+  .plan-wrap{display:grid;grid-template-columns:1.5fr 1fr;gap:12px}
+  @media(max-width:680px){.plan-wrap{grid-template-columns:1fr}}
+  .plan{background:#eef2f7;border:1px solid var(--line);border-radius:11px;padding:10px;display:flex;flex-direction:column;gap:5px}
+  .plan-row{display:flex;gap:5px}
+  .plan-corr{background:#e4eaf2;border-radius:6px;text-align:center;font-size:10px;color:#8595ac;padding:3px;letter-spacing:.05em}
+  .cell{flex:1;border-radius:8px;border:1.5px solid;padding:7px 6px;cursor:pointer;min-height:50px;position:relative;transition:transform .12s,box-shadow .12s;display:flex;flex-direction:column;justify-content:space-between}
+  .cell:hover{transform:translateY(-2px);box-shadow:0 6px 14px rgba(0,0,0,.12)}
+  .cell.sel{outline:3px solid rgba(31,122,84,.4);outline-offset:1px}
+  .cell .glyph{position:absolute;top:5px;right:7px;font-size:12px;font-weight:800;opacity:.7}
+  .cell .num{font-size:12px;font-weight:700;line-height:1.1}
+  .cell .nm{font-size:9.5px;opacity:.85;line-height:1.15}
+  .cell .pc{font-size:9px;font-weight:600;opacity:.75;margin-top:2px}
+  .c-ok{background:var(--ok-tint);border-color:var(--ok-line);color:var(--ok-ink)}
+  .c-warn{background:var(--warn-tint);border-color:var(--warn-line);color:var(--warn-ink)}
+  .c-bad{background:var(--bad-tint);border-color:var(--bad-line);color:var(--bad-ink)}
+  .c-gone{background:var(--gone-tint);border-color:var(--gone-line);color:var(--gone-ink)}
+  .c-none{background:var(--none-tint);border-color:var(--none-line);color:var(--none-ink)}
+  .c-alert{background:#fee2e2;border-color:var(--alert-d);color:var(--alert-d);animation:pulse 1.6s infinite}
+  @keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(239,68,68,.4)}50%{box-shadow:0 0 0 4px rgba(239,68,68,0)}}
+  .cell.stair{background:#dde4ee;border-color:#9aa7bb;color:#56627a;cursor:default;flex:none;width:42px;align-items:center;justify-content:center;font-size:9px;text-align:center}
+  .cell.stair:hover{transform:none;box-shadow:none}
+  .rowlab{width:30px;flex:none;display:grid;place-items:center;font-size:9.5px;color:#94a3b8;font-weight:700;writing-mode:vertical-rl;transform:rotate(180deg)}
+  .detail{background:#fff;border:1px solid var(--line);border-radius:11px;padding:14px;min-height:200px}
+  .detail h4{margin:0 0 6px;color:#0f172a;font-size:15px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+  .detail .meta{font-size:12px;color:#64748b;margin:0 0 10px}
+  .post{display:flex;align-items:center;gap:9px;padding:7px 0;border-top:1px solid var(--line);font-size:12.5px}
+  .post .pic{width:26px;height:26px;border-radius:7px;background:#eef1f5;display:grid;place-items:center;color:#475569;flex:none}
+  .post .pr{font-family:"Cascadia Code",Consolas,monospace;font-size:11px;font-weight:600;color:#0f172a}
+  .post .pm{font-size:11px;color:#64748b}
+  .post .ps{margin-left:auto}
+  .alert-banner{background:#fee2e2;border:1px solid var(--alert-d);color:var(--alert-d);border-radius:8px;padding:7px 10px;font-size:12px;font-weight:600;margin-bottom:10px;display:flex;align-items:center;gap:7px}
+
+  /* signalement / réparation */
+  .sg-flow{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+  @media(max-width:680px){.sg-flow{grid-template-columns:1fr 1fr}}
+  .sg-step{background:#fff;border:1px solid var(--line);border-radius:11px;padding:13px}
+  .sg-step .st-n{width:24px;height:24px;border-radius:7px;background:var(--green);color:#fff;display:grid;place-items:center;font-weight:700;font-size:12px;margin-bottom:7px}
+  .sg-step h4{margin:0 0 4px;font-size:13.5px;color:var(--green-d)} .sg-step p{margin:0;font-size:12px;color:var(--muted)}
+  .repdemo{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:680px){.repdemo{grid-template-columns:1fr}}
+  .sgl-card{border:1px solid var(--line);border-left-width:4px;border-radius:10px;padding:11px 13px;background:#fff;margin-bottom:9px}
+  .sgl-card.st-ouvert{border-left-color:var(--bad-solid)} .sgl-card.st-en_cours{border-left-color:var(--warn-solid)} .sgl-card.st-resolu{border-left-color:var(--ok-solid)}
+  .sgl-top{display:flex;justify-content:space-between;align-items:center;gap:8px}
+  .sgl-pb{font-weight:700;font-size:13px;color:#0f172a}
+  .sgl-eq{font-size:11.5px;color:#64748b;margin:3px 0} .sgl-eq .fl{background:#eef1f5;border-radius:5px;padding:0 6px;font-size:10px;font-weight:600;margin-left:5px}
+  .sgl-desc{font-size:12px;color:#475569;margin:4px 0;font-style:italic}
+  .sgl-who{font-size:11px;color:#94a3b8}
+  .stbadge{border-radius:999px;padding:2px 9px;font-size:11px;font-weight:700;border:1px solid}
+  .stbadge.st-ouvert{background:var(--bad-tint);border-color:var(--bad-line);color:var(--bad-ink)}
+  .stbadge.st-en_cours{background:var(--warn-tint);border-color:var(--warn-line);color:var(--warn-ink)}
+  .stbadge.st-resolu{background:var(--ok-tint);border-color:var(--ok-line);color:var(--ok-ink)}
+  .sgl-acts{display:flex;gap:5px;margin-top:8px;flex-wrap:wrap}
+  .sgl-btn{border:1px solid var(--line);background:#fff;border-radius:7px;padding:4px 9px;font-size:11px;font-weight:600;color:#475569;cursor:pointer}
+  .sgl-btn.on{background:var(--green);color:#fff;border-color:var(--green)}
+  .mailbox{background:#0f172a;border-radius:10px;padding:13px;color:#cbd5e1;font-size:11.5px;font-family:"Cascadia Code",Consolas,monospace;white-space:pre-wrap;line-height:1.5;min-height:200px}
+  .mailbox .k{color:#7bf3b3}
+  .copybtn{margin-top:8px;background:var(--green);color:#fff;border:0;border-radius:8px;padding:7px 14px;font:inherit;font-size:13px;font-weight:600;cursor:pointer}
+  .copybtn.ok{background:var(--ok-solid)}
+
+  /* QR */
+  .qrlabel{display:inline-flex;gap:11px;border:1px dashed #94a3b8;border-radius:10px;padding:11px;background:#fff;align-items:center}
+  .qrlabel .qr{width:74px;height:74px;flex:none}
+  .qrlabel .qi b{display:block;font-family:"Cascadia Code",Consolas,monospace;font-size:12.5px;color:#0f172a}
+  .qrlabel .qi span{font-size:11px;color:#64748b;display:block}
+  .qrlabel .qi .cta{display:inline-block;background:none;color:var(--green-d);margin:4px 0 0;padding:0;font-size:11px;font-weight:700}
 </style>
 </head>
 <body>
 <header class="top">
   <div class="wrap">
     <span class="badge">Annexe A7 · Rapport référent numérique 2025-2026</span>
-    <h1>Parc numérique — outil de pilotage</h1>
-    <p>Document interactif de présentation. Application web interne d'inventaire et de pilotage du parc informatique du collège, qui remplace le recensement statique par une vue dynamique de l'état de santé du matériel, salle par salle et étage par étage.</p>
+    <h1>Parc numérique — outil web de pilotage du parc informatique</h1>
+    <p>Application web interne d'inventaire et de pilotage du parc informatique du collège. Elle remplace le recensement statique (tableur) par une base vivante : chaque poste est fiché, géolocalisé par salle et par étage, suivi par son <strong>état de santé</strong>, et relié à un circuit de signalement de pannes par QR code. Ce document reproduit fidèlement, en démos intégrées et fonctionnelles, les écrans réels du logiciel.</p>
   </div>
 </header>
 
 <main class="wrap">
 
+  <!-- 1. États sémantiques -->
   <section>
     <div class="card">
       <h2><span class="n">1</span> Le fil conducteur : un code d'états sémantiques</h2>
-      <p class="lead">Une même grammaire de couleur parcourt toute l'interface, du badge jusqu'à la maquette 3D. L'état n'est <strong>jamais codé par la couleur seule</strong> : toujours doublé d'un libellé et d'une icône (accessibilité WCAG AA).</p>
+      <p class="lead">Une même grammaire de couleur parcourt toute l'interface — du badge de la liste jusqu'à la maquette 3D du collège. L'état n'est <strong>jamais codé par la couleur seule</strong> : il est toujours doublé d'un libellé et d'une icône (accessibilité WCAG AA, contrastes vérifiés). Quatre états, plus un cas « salle sans poste ».</p>
       <div class="legend">
-        <span class="lg"><span class="dot" style="background:var(--vert)"></span> Vert · fonctionnel</span>
-        <span class="lg"><span class="dot" style="background:var(--ambre)"></span> Ambre · vétuste</span>
-        <span class="lg"><span class="dot" style="background:var(--rouge)"></span> Rouge · en panne</span>
-        <span class="lg"><span class="dot" style="background:var(--gris)"></span> Gris · réformé</span>
+        <span class="lg"><span class="dot" style="background:var(--ok-solid)"></span> Fonctionnel <span style="opacity:.6">✓</span></span>
+        <span class="lg"><span class="dot" style="background:var(--warn-solid)"></span> Vétuste <span style="opacity:.6">!</span></span>
+        <span class="lg"><span class="dot" style="background:var(--bad-solid)"></span> En panne <span style="opacity:.6">✕</span></span>
+        <span class="lg"><span class="dot" style="background:var(--gone-solid)"></span> Réformé <span style="opacity:.6">–</span></span>
+        <span class="lg"><span class="dot" style="background:var(--none-ink)"></span> Sans poste <span style="opacity:.6">·</span></span>
+      </div>
+      <p class="note" style="margin-top:14px">Règle de santé d'une salle (fonction <code>santeFromList</code> du dépôt) : on ignore les postes <em>réformés</em> ; s'il reste au moins une panne → <strong>En panne</strong> ; sinon au moins un vétuste → <strong>Vétuste</strong> ; sinon <strong>Fonctionnel</strong> ; aucune machine active → <strong>Sans poste</strong>. Une salle qui a reçu un <strong>signalement non résolu</strong> passe en <strong style="color:var(--alert-d)">alerte rouge vif</strong>, prioritaire sur la santé d'inventaire.</p>
+    </div>
+  </section>
+
+  <!-- 2. Tableau de bord (démo) -->
+  <section>
+    <h2><span class="n">2</span> Tableau de bord — indicateurs réactifs</h2>
+    <p class="lead">L'écran d'accueil (<code>/</code>) calcule ses indicateurs <strong>en direct</strong> à partir de l'inventaire : total, âge moyen, part de matériel de plus de 5 ans, et nombre d'équipements en panne. La démo ci-dessous recalcule réellement ces KPI : <strong>basculez l'état de quelques postes</strong> et observez les compteurs, la barre de répartition et la jauge se mettre à jour, exactement comme le composant React.</p>
+    <div class="demo">
+      <div class="demo-bar"><span class="live"></span> Démo intégrée · tableau de bord <small>recalcul en direct · ANNÉE_REF = 2026</small></div>
+      <div class="demo-body">
+        <div class="miniapp">
+          <div class="ma-side">
+            <div class="ma-brand"><span class="mk">▦</span><div><b>Parc numérique</b><i>Collège P. Mendès France</i></div></div>
+            <div class="ma-grp">Pilotage</div>
+            <div class="ma-nav">
+              <a class="on">▦ Tableau de bord</a>
+              <a>▭ Équipements</a>
+              <a>◈ Vue du collège</a>
+              <a>🎫 Signalements <span id="dashSglBadge" class="ma-nbadge" style="display:none">1</span></a>
+            </div>
+            <div class="ma-grp">Bientôt</div>
+            <div class="ma-nav">
+              <a class="soon">▤ Logiciels <span class="tag">Bientôt</span></a>
+              <a class="soon">⇄ Demandes <span class="tag">Bientôt</span></a>
+              <a class="soon">▥ Mémoire <span class="tag">Bientôt</span></a>
+            </div>
+          </div>
+          <div class="ma-main">
+            <div class="ma-top"><div><div class="tt">Tableau de bord</div><div class="ts">Vue d'ensemble du parc — données d'exemple</div></div></div>
+            <div class="ma-content">
+              <div class="ma-kpis" id="dashKpis"></div>
+              <div class="card-pad" style="margin-top:14px">
+                <h3 style="font-size:13px;margin-bottom:8px">Répartition par état</h3>
+                <div class="ma-stack" id="dashStack"></div>
+                <div class="ma-leg" id="dashLeg"></div>
+              </div>
+              <h3 style="font-size:13px;margin:16px 0 7px">Modifier l'état d'un poste d'exemple</h3>
+              <div id="dashEditor" style="display:flex;flex-direction:column;gap:6px"></div>
+            </div>
+          </div>
+        </div>
+        <p style="font-size:12px;color:var(--muted);margin:12px 0 0">Dans l'application réelle, ces 4 indicateurs et la barre de répartition proviennent du composant <code>Dashboard.tsx</code> ; l'âge moyen et le « % +5 ans » se déduisent de l'année d'acquisition par rapport à <code>ANNEE_REF</code>.</p>
       </div>
     </div>
   </section>
 
+  <!-- 3. Vue du collège / plan (démo) -->
   <section>
-    <h2><span class="n">2</span> Tableau de bord — indicateurs clés</h2>
-    <p class="lead">D'un coup d'œil : l'état de santé global du parc (données de démonstration).</p>
-    <div class="grid g4">
-      <div class="kpi"><b>128</b><span>équipements inventoriés</span></div>
-      <div class="kpi"><b>6,2 ans</b><span>âge moyen du parc</span></div>
-      <div class="kpi"><b>41 %</b><span>matériel de plus de 5 ans</span></div>
-      <div class="kpi"><b>9</b><span>équipements en panne</span></div>
-    </div>
-    <div class="card" style="margin-top:14px">
-      <h4 style="margin:0 0 8px;color:var(--green-d)">Répartition par état</h4>
-      <table>
-        <tr><th>État</th><th>Nombre</th><th>Part</th></tr>
-        <tr><td><span class="dot" style="display:inline-block;background:var(--vert)"></span> Fonctionnel</td><td>74</td><td>58 %</td></tr>
-        <tr><td><span class="dot" style="display:inline-block;background:var(--ambre)"></span> Vétuste</td><td>31</td><td>24 %</td></tr>
-        <tr><td><span class="dot" style="display:inline-block;background:var(--rouge)"></span> En panne</td><td>9</td><td>7 %</td></tr>
-        <tr><td><span class="dot" style="display:inline-block;background:var(--gris)"></span> Réformé</td><td>14</td><td>11 %</td></tr>
-      </table>
+    <h2><span class="n">3</span> Vue du collège — plan d'étage cliquable</h2>
+    <p class="lead">La version en ligne propose une <strong>maquette 3D Three.js</strong> du bâtiment réel de Mendès France : chaque salle est un volume teinté selon la santé de son matériel ; au clic, la salle s'élève et s'illumine pendant que le reste s'estompe, et un panneau latéral détaille ses postes. Hors-ligne, la 3D n'est pas reproductible sans dépendances externes — voici donc une <strong>vue d'étage 2D fidèle au plan</strong> (rangée nord / couloir / rangée sud, escaliers Ouest-Centre-Est), avec les mêmes teintes et la même logique. <strong>Cliquez une salle</strong> pour voir le détail de ses postes ; le plan reflète l'état édité au tableau de bord et l'alerte de signalement de la section 4.</p>
+    <div class="demo">
+      <div class="demo-bar"><span class="live"></span> Démo intégrée · vue d'étage <small>plan réel du collège · RDC → R+3</small></div>
+      <div class="demo-body">
+        <div class="plan-bar" id="planBar"></div>
+        <div class="plan-wrap">
+          <div>
+            <div class="plan" id="plan"></div>
+            <div class="legend" style="margin-top:8px">
+              <span class="lg" style="font-size:11.5px;padding:3px 9px"><span class="dot" style="width:10px;height:10px;background:var(--ok-solid)"></span> Fonctionnel</span>
+              <span class="lg" style="font-size:11.5px;padding:3px 9px"><span class="dot" style="width:10px;height:10px;background:var(--warn-solid)"></span> Vétuste</span>
+              <span class="lg" style="font-size:11.5px;padding:3px 9px"><span class="dot" style="width:10px;height:10px;background:var(--bad-solid)"></span> En panne</span>
+              <span class="lg" style="font-size:11.5px;padding:3px 9px"><span class="dot" style="width:10px;height:10px;background:var(--none-ink)"></span> Sans poste</span>
+              <span class="lg" style="font-size:11.5px;padding:3px 9px"><span class="dot" style="width:10px;height:10px;background:var(--alert)"></span> Alerte signalement</span>
+            </div>
+          </div>
+          <div class="detail" id="planDetail">
+            <h4>Sélectionnez une salle</h4>
+            <p class="meta">Cliquez une salle du plan pour afficher ses postes, leur état et leur référence.</p>
+          </div>
+        </div>
+        <p style="font-size:12px;color:var(--muted);margin:12px 0 0">Plan transcrit du dépôt (<code>college3d/geometry.ts</code> et <code>data/parc.ts</code>) : RDC = pôle infirmerie + salle Speechi 12 postes ; R+1 = CDI (11 postes), salle informatique 210 (15 postes), salle des profs ; R+2 = salle 305 (12 postes) ; etc. Le <strong>R+1</strong> correspond à l'inventaire réel relevé.</p>
+      </div>
     </div>
   </section>
 
+  <!-- 4. Inventaire (démo) -->
   <section>
-    <h2><span class="n">3</span> Vue du collège — explorez un étage</h2>
-    <p class="lead">La version en ligne propose une <strong>maquette 3D Three.js</strong> où chaque salle est teintée selon la santé de son matériel. Voici une version simplifiée et cliquable : <strong>choisissez un étage, puis une salle</strong> pour afficher son détail.</p>
-    <div class="card">
-      <div class="floor-btns">
-        <button class="fb on" onclick="setFloor(this,'rdc')">RDC</button>
-        <button class="fb" onclick="setFloor(this,'r1')">R+1</button>
-        <button class="fb" onclick="setFloor(this,'r2')">R+2</button>
-        <button class="fb" onclick="setFloor(this,'r3')">R+3</button>
+    <h2><span class="n">4</span> Inventaire des équipements — recherche & filtres</h2>
+    <p class="lead">L'écran <code>/equipements</code> est une table triable couvrant tout le parc, avec recherche plein-texte (référence, modèle, salle, n° de série, n° d'inventaire), filtres par type / état / étage et un filtre rapide « + de 5 ans ». Chaque ligne ouvre une fiche éditable (CRUD complet vers Supabase). La démo ci-dessous filtre réellement un extrait de l'<strong>inventaire authentique</strong> du collège (postes <code>PNC-NG</code> i3-12100, Windows 11, propriété du Conseil départemental, n° d'inventaire <code>213.1.01.xxxx</code>).</p>
+    <div class="demo">
+      <div class="demo-bar"><span class="live"></span> Démo intégrée · inventaire <small>extrait réel · 79 postes en base</small></div>
+      <div class="demo-body">
+        <div class="ma-toolbar">
+          <div class="ma-field"><span style="color:#94a3b8">🔎</span><input id="invSearch" name="invSearch" aria-label="Rechercher un équipement" placeholder="Rechercher par référence, modèle, salle…"></div>
+          <select class="ma-sel" id="invType" name="invType" aria-label="Filtrer par type"><option value="">Tous les types</option></select>
+          <select class="ma-sel" id="invEtat" name="invEtat" aria-label="Filtrer par état"><option value="">Tous les états</option><option value="fonctionnel">Fonctionnel</option><option value="vetuste">Vétuste</option><option value="panne">En panne</option><option value="reforme">Réformé</option></select>
+          <select class="ma-sel" id="invEtage" name="invEtage" aria-label="Filtrer par étage"><option value="">Tous les étages</option><option value="0">Rez-de-chaussée</option><option value="1">1ᵉʳ étage</option><option value="2">2ᵉ étage</option><option value="3">3ᵉ étage</option></select>
+          <button class="ma-chip" id="invVieux" aria-pressed="false">✓ + de 5 ans</button>
+          <span class="ma-count"><b id="invCount">0</b> équipements</span>
+        </div>
+        <table class="ma-tbl">
+          <thead><tr><th>Référence</th><th>Type</th><th>Modèle</th><th>Salle</th><th>Étage</th><th>Acquis.</th><th>État</th></tr></thead>
+          <tbody id="invBody"></tbody>
+        </table>
+        <div class="ma-empty" id="invEmpty" style="display:none">Aucun équipement ne correspond à ces critères.</div>
       </div>
-      <div class="grid g2" style="grid-template-columns:1.3fr 1fr">
-        <div class="floor" id="floor"></div>
-        <div class="detail" id="detail">
-          <h4>Sélectionnez une salle</h4>
-          <p style="color:var(--muted);font-size:14px;margin:6px 0 0">Cliquez sur une salle de l'étage pour voir le détail de son matériel et de son état.</p>
+    </div>
+  </section>
+
+  <!-- 5. Signalements -->
+  <section>
+    <h2><span class="n">5</span> Signalement de pannes par QR code — temps réel</h2>
+    <p class="lead">Innovation majeure de cette version : chaque équipement porte une <strong>étiquette QR</strong> imprimable (planche A4 dans l'app, encodée via <code>qrcode.react</code>). Un enseignant qui scanne tombe sur une page mobile <code>/signaler/:id</code> propre à l'appareil concerné. Avant tout, une <strong>FAQ d'auto-dépannage</strong> filtrée par type lui propose les vérifications de base ; s'il signale malgré tout, le signalement est écrit dans Supabase, le référent reçoit un <strong>email</strong> (EmailJS côté navigateur + Edge Function serveur en doublon fiable), et la salle passe en <strong>alerte rouge</strong> dans toute l'app, en <strong>temps réel</strong> (souscription Supabase Realtime), sans rechargement.</p>
+    <div class="sg-flow">
+      <div class="sg-step"><div class="st-n">1</div><h4>Scan du QR</h4><p>L'enseignant scanne l'étiquette collée sur la machine. Ouvre la page de l'appareil exact.</p></div>
+      <div class="sg-step"><div class="st-n">2</div><h4>Auto-dépannage</h4><p>FAQ filtrée par type (PC, VPI, visualiseur…) : « l'écran reste noir », « le VPI n'affiche rien »…</p></div>
+      <div class="sg-step"><div class="st-n">3</div><h4>Signalement</h4><p>Catégorie de problème, détails, nom (email optionnel). Écrit en base + email au référent.</p></div>
+      <div class="sg-step"><div class="st-n">4</div><h4>Alerte temps réel</h4><p>La salle vire au rouge sur la maquette ; un badge compteur apparaît dans la barre latérale.</p></div>
+    </div>
+    <p class="note" style="margin-top:12px">Catégories de problème réelles proposées à l'enseignant : <em>Ne s'allume pas · Écran / affichage · Réseau / Wifi · Son · Clavier / souris · Vidéoprojecteur (VPI) · Logiciel · Autre</em>. Étiquette QR (démo statique reproduisant la planche imprimable) :</p>
+    <div style="margin-top:12px" class="qrlabel">
+      <svg class="qr" viewBox="0 0 25 25" shape-rendering="crispEdges" id="qrDemo" aria-label="QR code de démonstration"></svg>
+      <div class="qi">
+        <b>PC-FIX-210-07</b>
+        <span>Inv. 213.1.01.0014</span>
+        <span>Salle informatique · 210 · R+1</span>
+        <span class="cta">📲 Scannez pour signaler une panne</span>
+        <span style="margin-top:3px">Collège Pierre Mendès France</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. File des signalements + demande de réparation (démo) -->
+  <section>
+    <h2><span class="n">6</span> Traitement côté référent — statuts & demande de réparation</h2>
+    <p class="lead">L'écran <code>/signalements</code> liste les pannes remontées, filtrables par statut (<strong>Ouvert · En cours · Résolu</strong>), avec mise à jour optimiste du statut. Pour chaque cas, un bouton « <strong>Préparer la demande</strong> » génère un message précomplété (objet + corps, enrichi du n° de série et du n° d'inventaire de la fiche) à coller dans le <strong>Guichet Unique de Moselle Éducation</strong>, un email ou un message au gestionnaire ; le destinataire et la signature sont mémorisés (localStorage). Démo : <strong>changez le statut</strong> (cela met à jour l'alerte du plan et le badge de la barre latérale), puis générez et copiez la demande.</p>
+    <div class="demo">
+      <div class="demo-bar"><span class="live"></span> Démo intégrée · signalements + demande de réparation <small>statut en direct → met à jour le plan</small></div>
+      <div class="demo-body">
+        <div class="repdemo">
+          <div>
+            <h3 style="font-size:13px;margin-bottom:8px">File des signalements</h3>
+            <div id="sglList"></div>
+          </div>
+          <div>
+            <h3 style="font-size:13px;margin-bottom:8px">Demande de réparation <span id="sglFor" style="font-weight:500;color:var(--muted);font-size:11px"></span></h3>
+            <div class="mailbox" id="mailbox">Sélectionnez « Préparer la demande » sur un signalement.</div>
+            <button class="copybtn" id="copyBtn">Copier le message</button>
+          </div>
         </div>
       </div>
     </div>
-    <div class="note" style="margin-top:12px">Le <strong>R+1 est l'étage « réel »</strong> de la démonstration (CDI, salle informatique 210, labo…) ; les autres étages illustrent le code couleur.</div>
   </section>
 
+  <!-- 7. Écrans -->
   <section>
-    <h2><span class="n">4</span> Les écrans de l'application</h2>
+    <h2><span class="n">7</span> Les écrans de l'application</h2>
     <div class="grid g2">
-      <div class="feature"><h4>Tableau de bord</h4><p>Indicateurs clés, répartition par état, parc par étage, salles à surveiller, répartition par type.</p></div>
-      <div class="feature"><h4>Inventaire des équipements</h4><p>Table triable avec recherche et filtres (type, état, étage) + filtre rapide « + de 5 ans ».</p></div>
-      <div class="feature"><h4>Vue du collège (3D)</h4><p>Maquette interactive : la salle s'élève et s'illumine au clic, le reste s'estompe, panneau latéral détaillé.</p></div>
-      <div class="feature"><h4>Système de design</h4><p>Palette, états sémantiques, échelle typographique, rayons, ombres, composants réutilisables.</p></div>
+      <div class="feature"><h4>Tableau de bord <code>/</code></h4><p>KPI calculés en direct, répartition par état, maquette 3D, salles à surveiller, répartition par type.</p></div>
+      <div class="feature"><h4>Équipements <code>/equipements</code></h4><p>Table triable, recherche, filtres type/état/étage + « +5 ans », fiche éditable (CRUD), export, planche d'étiquettes QR.</p></div>
+      <div class="feature"><h4>Vue du collège <code>/vue-college</code></h4><p>Maquette 3D plein écran : salles teintées + icône, sélecteur d'étage RDC→R+3, panneau de détail, rotation souris.</p></div>
+      <div class="feature"><h4>Signalements <code>/signalements</code></h4><p>File filtrable par statut, changement de statut, panneau « Préparer la demande de réparation ».</p></div>
+      <div class="feature"><h4>Signaler <code>/signaler/:id</code></h4><p>Page publique mobile ouverte par QR : FAQ d'auto-dépannage par type + formulaire de signalement.</p></div>
+      <div class="feature"><h4>Système de design <code>/design-system</code></h4><p>Palette, états sémantiques, échelle typo, rayons, ombres, composants réutilisables.</p></div>
     </div>
+    <p class="note" style="margin-top:12px">Modules annoncés « Bientôt » dans la barre latérale : <strong>Logiciels</strong>, <strong>Demandes</strong>, <strong>Mémoire</strong>.</p>
   </section>
 
+  <!-- 8. Technique -->
   <section>
-    <h2><span class="n">5</span> Technique & accès</h2>
+    <h2><span class="n">8</span> Technique & accès</h2>
     <div class="grid g2">
       <div class="card">
-        <h4 style="margin:0 0 8px;color:var(--green-d)">Stack</h4>
+        <h3>Pile technique</h3>
         <span class="pill">Vite + React 18 + TypeScript</span>
         <span class="pill">React Router</span>
-        <span class="pill">Three.js / react-three-fiber</span>
-        <span class="pill">Design tokens CSS</span>
-        <span class="pill">Prévu pour Supabase</span>
+        <span class="pill">Three.js + react-three-fiber + drei</span>
+        <span class="pill">Supabase (base + Realtime)</span>
+        <span class="pill">Supabase Edge Function</span>
+        <span class="pill">EmailJS</span>
+        <span class="pill">qrcode.react</span>
+        <span class="pill">Design tokens CSS · Geist</span>
         <span class="pill">WCAG AA</span>
-        <p style="font-size:13.5px;color:var(--muted);margin-top:10px">Données de démonstration fictives ; l'outil est pensé pour être branché à une base de données réelle. Déploiement automatique sur GitHub Pages.</p>
+        <ul class="tight">
+          <li>Inventaire = source de vérité Supabase ; les <strong>salles</strong> (plan du bâtiment) restent des données statiques typées.</li>
+          <li>Amorçage idempotent : si la base est vide, le jeu réel (79 postes) est inséré (upsert sur la référence, protégé du double-montage StrictMode).</li>
+          <li>Signalements tenus à jour en temps réel via un canal Supabase Realtime.</li>
+          <li>Déploiement automatique sur GitHub Pages (GitHub Actions, Node 24), servi sous <code>/parc-numerique/</code>.</li>
+        </ul>
       </div>
       <div class="card">
-        <h4 style="margin:0 0 8px;color:var(--green-d)">Démonstration en ligne</h4>
-        <p style="font-size:14px;color:var(--muted)">Une version complète, avec la vraie maquette 3D, est consultable en ligne :</p>
+        <h3>Démonstration en ligne</h3>
+        <p style="font-size:14px;color:var(--muted)">La version complète, avec la vraie maquette 3D Three.js et la base Supabase connectée, est consultable en ligne :</p>
         <a class="cta" href="https://qwetsh.github.io/parc-numerique/" target="_blank" rel="noopener">Ouvrir la démo →</a>
         <p style="font-size:12.5px;color:var(--muted);margin-top:10px">qwetsh.github.io/parc-numerique</p>
+        <p class="note" style="margin-top:14px">Données d'inventaire issues de l'audit CD57 / Atos (« inventaire ordinateur salle.xlsx ») ; specs PNC-NG : écran 22", Core i3-12100, 8 Go, SSD 256 Go, Windows 11, garantie 5 ans.</p>
       </div>
     </div>
   </section>
@@ -159,64 +416,480 @@
 </main>
 
 <footer class="wrap">
-  Annexe A7 · Parc numérique — outil de pilotage du parc informatique<br>
+  Annexe A7 · Parc numérique — outil web de pilotage du parc informatique<br>
   Compte rendu d'activité du référent numérique 2025-2026 · Collège Pierre Mendès France, Woippy · M. Thomas Charles
 </footer>
 
 <script>
-  var C={vert:'#cdeed9',ambre:'#f6e4bf',rouge:'#f4ccca',gris:'#dfe3e6'};
-  var SB={vert:'#2e9e5b',ambre:'#e0a020',rouge:'#d6453f',gris:'#9098a0'};
-  var SN={vert:'Fonctionnel',ambre:'Vétuste',rouge:'En panne',gris:'Réformé'};
-  var data={
-    rdc:[
-      {n:'Accueil',t:'2 postes administratifs',s:'vert',d:'2 PC bureautiques (2023), 1 imprimante. Tout opérationnel.'},
-      {n:'Vie scolaire',t:'3 postes',s:'vert',d:'3 PC récents, 1 photocopieur partagé.'},
-      {n:'Salle 008',t:'Salle de cours',s:'ambre',d:'Vidéoprojecteur de 2016, lampe en fin de vie. À surveiller.'},
-      {n:'Loge',t:'1 poste',s:'rouge',d:'PC en panne (alimentation HS). Ticket de support ouvert.'}
-    ],
-    r1:[
-      {n:'CDI',t:'6 postes élèves',s:'vert',d:'6 PC (2022) en réseau, 2 tablettes de prêt. Bon état.'},
-      {n:'Salle info 210',t:'15 postes',s:'ambre',d:'Parc de 2018 homogène mais vieillissant. Renouvellement à planifier.'},
-      {n:'Labo SVT',t:'4 postes + capteurs',s:'vert',d:'4 PC, ExAO, microscopes numériques. Opérationnel.'},
-      {n:'Salle 215',t:'TNI',s:'rouge',d:'Tableau numérique interactif HS depuis 2 semaines. En attente d’intervention.'}
-    ],
-    r2:[
-      {n:'Salle 308',t:'VPI',s:'vert',d:'Vidéoprojecteur interactif récent (2024). Très bon état.'},
-      {n:'Salle 311',t:'Poste enseignant',s:'ambre',d:'PC de 2017, lent au démarrage. Usage encore possible.'},
-      {n:'Salle 314',t:'Ancien poste',s:'gris',d:'PC réformé, sorti de l’inventaire actif, en attente d’enlèvement.'},
-      {n:'Réserve',t:'Matériel stocké',s:'gris',d:'Anciens écrans cathodiques réformés.'}
-    ],
-    r3:[
-      {n:'Salle 405',t:'VPI',s:'vert',d:'Installation 2023, fonctionnelle.'},
-      {n:'Salle 408',t:'Poste enseignant',s:'rouge',d:'Carte graphique défaillante. Ticket en cours.'},
-      {n:'Salle 410',t:'2 postes',s:'ambre',d:'Postes de 2016, à renouveler dans l’année.'},
-      {n:'Salle 412',t:'Poste enseignant',s:'vert',d:'PC 2022, opérationnel.'}
-    ]
-  };
-  function setFloor(btn,f){
-    document.querySelectorAll('.fb').forEach(function(b){b.classList.remove('on')});
-    btn.classList.add('on');
-    render(f);
-  }
-  function render(f){
-    var fl=document.getElementById('floor'); fl.innerHTML='';
-    data[f].forEach(function(r,i){
+"use strict";
+/* ============================================================
+   ÉTAT SÉMANTIQUE — libellés, classes et couleurs (tokens.css)
+   ============================================================ */
+var ANNEE_REF = 2026;
+var ETATS = {
+  fonctionnel:{label:'Fonctionnel', cls:'ok', solid:'#18924c', glyph:'✓'},
+  vetuste:    {label:'Vétuste',     cls:'warn',solid:'#c9790a', glyph:'!'},
+  panne:      {label:'En panne',    cls:'bad', solid:'#d23b2c', glyph:'✕'},
+  reforme:    {label:'Réformé',     cls:'gone',solid:'#5b6b7f', glyph:'–'}
+};
+var ETAT_ORDER = ['fonctionnel','vetuste','panne','reforme'];
+var SANTE = {
+  fonctionnel:{cls:'ok',label:'Fonctionnel',glyph:'✓'}, vetuste:{cls:'warn',label:'Vétuste',glyph:'!'},
+  panne:{cls:'bad',label:'En panne',glyph:'✕'}, reforme:{cls:'gone',label:'Réformé',glyph:'–'},
+  none:{cls:'none',label:'Sans poste',glyph:'·'}
+};
+var TYPE_ICON = {'PC fixe':'🖥️','PC portable':'💻','VPI':'📽️','Visualiseur':'🎥','Tablette':'📱'};
+
+/** Santé d'une salle à partir des états de ses postes (port de santeFromList). */
+function santeFromList(items){
+  var actifs = items.filter(function(e){return e.etat!=='reforme';});
+  if(actifs.length===0) return 'none';
+  if(actifs.some(function(e){return e.etat==='panne';})) return 'panne';
+  if(actifs.some(function(e){return e.etat==='vetuste';})) return 'vetuste';
+  return 'fonctionnel';
+}
+function etatBadge(etat){
+  var d=ETATS[etat];
+  return '<span class="ebadge e-'+d.cls+'"><span class="d"></span>'+d.label+'</span>';
+}
+
+/* ============================================================
+   DONNÉES — extrait fidèle de l'inventaire réel (data/parc.ts).
+   On garde un sous-ensemble représentatif par salle. Les états
+   sont éditables dans la démo (tableau de bord) ; le plan et les
+   compteurs s'en déduisent.
+   ============================================================ */
+// Métadonnées des salles utilisées dans les démos (du plan réel).
+var SALLES = {
+  // RDC
+  '0|105':{nom:'Salle Speechi',  etage:0,cote:'nord'}, '0|107':{nom:'Infirmerie',etage:0,cote:'nord'},
+  '0|110':{nom:'Permanence',     etage:0,cote:'sud'},  '0|113':{nom:'Salle 113', etage:0,cote:'nord'},
+  '0|114':{nom:'Salle 114',      etage:0,cote:'sud'},  '0|106':{nom:'Salle 106', etage:0,cote:'sud'},
+  '0|116':{nom:'Salle 116',      etage:0,cote:'sud'},  '0|117':{nom:'Salle 117', etage:0,cote:'nord'},
+  // R+1
+  '1|204':{nom:'CDI',etage:1,cote:'sud'}, '1|205':{nom:'Salle 205',etage:1,cote:'nord'},
+  '1|208':{nom:'Salle 208',etage:1,cote:'sud'}, '1|209':{nom:'Salle 209',etage:1,cote:'nord'},
+  '1|210':{nom:'Salle informatique',etage:1,cote:'sud'}, '1|211':{nom:'Salle 211',etage:1,cote:'nord'},
+  '1|212':{nom:'Salle 212',etage:1,cote:'sud'}, '1|215':{nom:'Salle 215',etage:1,cote:'nord'},
+  '1|SDP':{nom:'Salle des profs',etage:1,cote:'sud'}, '1|203':{nom:'Salle 203',etage:1,cote:'nord'},
+  '1|207':{nom:'Salle 207',etage:1,cote:'nord'},'1|213':{nom:'Salle 213',etage:1,cote:'nord'},'1|214':{nom:'Salle 214',etage:1,cote:'sud'},
+  // R+2
+  '2|301':{nom:'Salle 301',etage:2,cote:'nord'}, '2|305':{nom:'Salle 305',etage:2,cote:'nord'},
+  '2|307':{nom:'Salle 307',etage:2,cote:'nord'}, '2|304':{nom:'Salle 304',etage:2,cote:'sud'},
+  '2|306':{nom:'Salle 306',etage:2,cote:'sud'}, '2|311':{nom:'Salle 311',etage:2,cote:'nord'},
+  '2|302':{nom:'Salle 302',etage:2,cote:'sud'},'2|303':{nom:'Salle 303',etage:2,cote:'nord'},
+  '2|309':{nom:'Salle 309',etage:2,cote:'nord'},'2|310':{nom:'Salle 310',etage:2,cote:'sud'},'2|312':{nom:'Salle 312',etage:2,cote:'sud'},
+  // R+3
+  '3|401':{nom:'Salle 401',etage:3,cote:'nord'}, '3|407':{nom:'Salle 407',etage:3,cote:'nord'},
+  '3|408':{nom:'Salle 408',etage:3,cote:'sud'}, '3|411':{nom:'Salle 411',etage:3,cote:'nord'},
+  '3|412':{nom:'Salle 412',etage:3,cote:'sud'},'3|402':{nom:'Salle 402',etage:3,cote:'sud'},
+  '3|403':{nom:'Salle 403',etage:3,cote:'nord'},'3|405':{nom:'Salle 405',etage:3,cote:'nord'}
+};
+function salleMeta(etage,num){ return SALLES[etage+'|'+num] || {nom:'Salle '+num,etage:etage,cote:'nord'}; }
+
+// Inventaire (extrait représentatif — refs/inv/séries réels du dépôt + lignes d'exemple d'autres états).
+var EQUIP = [
+  // RDC
+  {reference:'PC-FIX-110-01',type:'PC fixe',modele:'Poste standard PNC-NG (i3-12100)',annee:2023,etat:'fonctionnel',etage:0,salle:'110',inv:'213.1.01.0002'},
+  {reference:'PC-FIX-113-01',type:'PC fixe',modele:'Poste standard PNC-NG (i3-12100)',annee:2023,etat:'fonctionnel',etage:0,salle:'113',inv:'213.1.01.0003'},
+  {reference:'PC-FIX-114-01',type:'PC fixe',modele:'Poste standard PNC-NG (i3-12100)',annee:2023,etat:'fonctionnel',etage:0,salle:'114',inv:'213.1.01.0068'},
+  {reference:'PC-FIX-116-01',type:'PC fixe',modele:'Poste standard PNC-NG (i3-12100)',annee:2023,etat:'fonctionnel',etage:0,salle:'116',inv:'213.1.01.0004'},
+  {reference:'PC-FIX-117-01',type:'PC fixe',modele:'Poste standard PNC-NG (i3-12100)',annee:2023,etat:'fonctionnel',etage:0,salle:'117',inv:'213.1.01.0005'},
+  {reference:'PC-FIX-105-01',type:'PC fixe',modele:'HP ProDesk 400 G6',annee:2019,etat:'fonctionnel',etage:0,salle:'105',inv:null},
+  {reference:'PC-FIX-106-01',type:'PC fixe',modele:'Dell OptiPlex 7010',annee:2015,etat:'panne',etage:0,salle:'106',inv:null},
+  {reference:'VPI-113-01',type:'VPI',modele:'Epson EB-695Wi',annee:2020,etat:'fonctionnel',etage:0,salle:'113',inv:null},
+  // R+1
+  {reference:'PC-FIX-204-01',type:'PC fixe',modele:'Poste standard PNC-NG (i3-12100)',annee:2023,etat:'fonctionnel',etage:1,salle:'204',inv:'213.1.01.0001'},
+  {reference:'PC-FIX-204-02',type:'PC fixe',modele:'Poste standard PNC-NG (i3-12100)',annee:2023,etat:'fonctionnel',etage:1,salle:'204',inv:'213.1.01.0058'},
+  {reference:'PC-PORT-204-01',type:'PC portable',modele:'HP ProBook 440 G9',annee:2022,etat:'fonctionnel',etage:1,salle:'204',inv:null},
+  {reference:'VISU-204-01',type:'Visualiseur',modele:'AverVision F50',annee:2021,etat:'fonctionnel',etage:1,salle:'204',inv:null},
+  {reference:'PC-FIX-205-01',type:'PC fixe',modele:'Dell OptiPlex 7010',annee:2014,etat:'vetuste',etage:1,salle:'205',inv:'213.1.01.0006'},
+  {reference:'PC-FIX-208-01',type:'PC fixe',modele:'Dell OptiPlex 7010',annee:2015,etat:'panne',etage:1,salle:'208',inv:null},
+  {reference:'PC-FIX-209-01',type:'PC fixe',modele:'HP ProDesk 400 G6',annee:2020,etat:'fonctionnel',etage:1,salle:'209',inv:'213.1.01.0007'},
+  {reference:'PC-FIX-210-01',type:'PC fixe',modele:'Poste standard PNC-NG (i3-12100)',annee:2023,etat:'fonctionnel',etage:1,salle:'210',inv:'213.1.01.0008'},
+  {reference:'PC-FIX-210-02',type:'PC fixe',modele:'Poste standard PNC-NG (i3-12100)',annee:2023,etat:'fonctionnel',etage:1,salle:'210',inv:'213.1.01.0009'},
+  {reference:'PC-FIX-210-07',type:'PC fixe',modele:'Poste standard PNC-NG (i3-12100)',annee:2023,etat:'fonctionnel',etage:1,salle:'210',inv:'213.1.01.0014'},
+  {reference:'PC-FIX-211-01',type:'PC fixe',modele:'Poste standard PNC-NG (i3-12100)',annee:2023,etat:'fonctionnel',etage:1,salle:'211',inv:'213.1.01.0022'},
+  {reference:'PC-PORT-212-01',type:'PC portable',modele:'Dell Latitude 3540',annee:2016,etat:'vetuste',etage:1,salle:'212',inv:null},
+  {reference:'PC-FIX-215-01',type:'PC fixe',modele:'Dell OptiPlex 3080',annee:2022,etat:'fonctionnel',etage:1,salle:'215',inv:'213.1.01.0023'},
+  {reference:'PC-FIX-SDP-01',type:'PC fixe',modele:'Poste standard PNC-NG (i3-12100)',annee:2023,etat:'fonctionnel',etage:1,salle:'SDP',inv:'213.1.01.0065'},
+  // R+2
+  {reference:'PC-FIX-301-01',type:'PC fixe',modele:'Poste standard PNC-NG (i3-12100)',annee:2023,etat:'fonctionnel',etage:2,salle:'301',inv:'213.1.01.0025'},
+  {reference:'PC-FIX-304-01',type:'PC fixe',modele:'Dell OptiPlex 7010',annee:2015,etat:'panne',etage:2,salle:'304',inv:'213.1.01.0034'},
+  {reference:'PC-FIX-305-01',type:'PC fixe',modele:'Poste standard PNC-NG (i3-12100)',annee:2023,etat:'fonctionnel',etage:2,salle:'305',inv:'213.1.01.0024'},
+  {reference:'PC-FIX-307-01',type:'PC fixe',modele:'Dell OptiPlex 7010',annee:2014,etat:'vetuste',etage:2,salle:'307',inv:'213.1.01.0044'},
+  {reference:'PC-FIX-311-01',type:'PC fixe',modele:'Poste standard PNC-NG (i3-12100)',annee:2023,etat:'fonctionnel',etage:2,salle:'311',inv:'213.1.01.0046'},
+  {reference:'PC-FIX-310-OLD',type:'PC fixe',modele:'Dell OptiPlex 780',annee:2011,etat:'reforme',etage:2,salle:'306',inv:null},
+  // R+3
+  {reference:'PC-FIX-401-01',type:'PC fixe',modele:'Poste standard PNC-NG (i3-12100)',annee:2023,etat:'fonctionnel',etage:3,salle:'401',inv:'213.1.01.0047'},
+  {reference:'PC-FIX-407-01',type:'PC fixe',modele:'Dell OptiPlex 7010',annee:2014,etat:'vetuste',etage:3,salle:'407',inv:null},
+  {reference:'PC-FIX-408-01',type:'PC fixe',modele:'Dell OptiPlex 7010',annee:2015,etat:'panne',etage:3,salle:'408',inv:null},
+  {reference:'VPI-411-01',type:'VPI',modele:'Epson EB-695Wi',annee:2020,etat:'fonctionnel',etage:3,salle:'411',inv:null},
+  {reference:'PC-FIX-412-01',type:'PC fixe',modele:'Poste standard PNC-NG (i3-12100)',annee:2022,etat:'fonctionnel',etage:3,salle:'412',inv:'213.1.01.0057'}
+];
+EQUIP.forEach(function(e){ e.salleNom = salleMeta(e.etage,e.salle).nom; });
+
+/* Signalements actifs (panne signalée par un enseignant via QR). Statut éditable. */
+var SIGNALEMENTS = [
+  {id:'s1',ref:'PC-FIX-208-01',etage:1,salle:'208',probleme:'Ne s’allume pas',description:'L’unité centrale ne réagit pas, aucun voyant.',qui:'Mme Laurent',date:'06 juin 14:20',statut:'ouvert',serie:null,inv:null},
+  {id:'s2',ref:'VPI-411-01',etage:3,salle:'411',probleme:'Vidéoprojecteur (VPI)',description:'Image qui clignote puis s’éteint après 5 min.',qui:'M. Diallo',date:'06 juin 10:05',statut:'en_cours',serie:null,inv:null},
+  {id:'s3',ref:'PC-FIX-210-02',etage:1,salle:'210',probleme:'Réseau / Wifi',description:'Pas d’accès au réseau pédagogique sur ce poste.',qui:'Mme Bernard',date:'05 juin 16:40',statut:'resolu',serie:'CZC3227DSF',inv:'213.1.01.0009'}
+];
+var STATUT_LABEL = {ouvert:'Ouvert',en_cours:'En cours',resolu:'Résolu'};
+
+/* État éditable du parc : on copie les états initiaux et on les modifie via la démo. */
+function etatOf(ref){ var e=EQUIP.find(function(x){return x.reference===ref;}); return e?e.etat:null; }
+
+/* Salles ayant un signalement non résolu → alerte. */
+function alerteSalle(etage,num){
+  return SIGNALEMENTS.some(function(s){return s.statut!=='resolu' && s.etage===etage && String(s.salle)===String(num);});
+}
+
+/* ============================================================
+   2 · TABLEAU DE BORD
+   ============================================================ */
+var DASH_EDIT_REFS = ['PC-FIX-205-01','PC-FIX-208-01','PC-FIX-307-01','PC-FIX-210-01'];
+function computeKpis(){
+  var total=EQUIP.length;
+  var age=EQUIP.reduce(function(a,e){return a+(ANNEE_REF-e.annee);},0)/total;
+  var vieux=EQUIP.filter(function(e){return (ANNEE_REF-e.annee)>5;}).length;
+  var pct=Math.round(vieux/total*100);
+  var panne=EQUIP.filter(function(e){return e.etat==='panne';}).length;
+  var counts={fonctionnel:0,vetuste:0,panne:0,reforme:0};
+  EQUIP.forEach(function(e){counts[e.etat]++;});
+  return {total:total,age:age,vieux:vieux,pct:pct,panne:panne,counts:counts};
+}
+function renderDash(){
+  var k=computeKpis();
+  var kp=document.getElementById('dashKpis');
+  kp.innerHTML=
+    '<div class="ma-kpi"><span class="lab">Équipements au total</span><div class="num">'+k.total+'</div><div class="foot">sur 4 étages · 1 site</div></div>'+
+    '<div class="ma-kpi"><span class="lab">Âge moyen du parc</span><div class="num">'+k.age.toFixed(1)+'<small> ans</small></div><div class="foot">renouvelé en 2024</div></div>'+
+    '<div class="ma-kpi"><span class="lab">Matériel de + de 5 ans</span><div class="num">'+k.pct+'<small> %</small></div><div class="ma-gauge"><i style="width:'+k.pct+'%"></i></div><div class="foot">'+k.vieux+' équipements concernés</div></div>'+
+    '<div class="ma-kpi'+(k.panne>0?' alert':'')+'"><span class="lab">Équipements en panne</span><div class="num">'+k.panne+'</div><div class="foot">à traiter en priorité</div></div>';
+  // barre empilée
+  var stack=document.getElementById('dashStack'); stack.innerHTML='';
+  ETAT_ORDER.forEach(function(o){
+    if(k.counts[o]>0){
       var d=document.createElement('div');
-      d.className='room'; d.style.background=C[r.s];
-      d.innerHTML='<b>'+r.n+'</b><span>'+r.t+'</span>';
-      d.onclick=function(){
-        document.querySelectorAll('.room').forEach(function(x){x.classList.remove('sel')});
-        d.classList.add('sel');
-        document.getElementById('detail').innerHTML=
-          '<h4>'+r.n+'</h4>'+
-          '<span class="state-badge" style="background:'+SB[r.s]+'">'+SN[r.s]+'</span>'+
-          '<p style="font-size:14px;margin:10px 0 4px"><strong>'+r.t+'</strong></p>'+
-          '<p style="font-size:14px;color:#33473e;margin:0">'+r.d+'</p>';
-      };
-      fl.appendChild(d);
+      d.style.flex=k.counts[o]; d.style.background=ETATS[o].solid; d.title=ETATS[o].label;
+      d.textContent=k.counts[o]; stack.appendChild(d);
+    }
+  });
+  var leg=document.getElementById('dashLeg'); leg.innerHTML='';
+  ETAT_ORDER.forEach(function(o){
+    leg.insertAdjacentHTML('beforeend',
+      '<div class="li"><span class="sw" style="background:'+ETATS[o].solid+'"></span>'+
+      '<span class="nm">'+ETATS[o].label+'</span><span class="vl">'+k.counts[o]+'</span>'+
+      '<span class="pc">'+Math.round(k.counts[o]/k.total*100)+' %</span></div>');
+  });
+  // éditeur d'états
+  var ed=document.getElementById('dashEditor'); ed.innerHTML='';
+  DASH_EDIT_REFS.forEach(function(ref){
+    var e=EQUIP.find(function(x){return x.reference===ref;}); if(!e) return;
+    var row=document.createElement('div');
+    row.style.cssText='display:flex;align-items:center;gap:9px;background:#fff;border:1px solid var(--line);border-radius:9px;padding:7px 11px;font-size:12.5px';
+    var sel=ETAT_ORDER.map(function(o){return '<option value="'+o+'"'+(e.etat===o?' selected':'')+'>'+ETATS[o].label+'</option>';}).join('');
+    row.innerHTML='<span style="font-family:Consolas,monospace;font-size:11.5px;color:#0f172a;font-weight:600;min-width:130px">'+e.reference+'</span>'+
+      '<span style="color:#64748b;flex:1">'+e.salleNom+'</span>'+
+      '<select class="ma-sel" name="etat-'+ref+'" aria-label="État de '+e.reference+'" data-ref="'+ref+'">'+sel+'</select>';
+    ed.appendChild(row);
+  });
+  ed.querySelectorAll('select').forEach(function(s){
+    s.addEventListener('change',function(){
+      var e=EQUIP.find(function(x){return x.reference===s.getAttribute('data-ref');});
+      e.etat=s.value; renderDash(); renderInv(); renderPlan(currentFloor);
+    });
+  });
+  // badge signalements (cohérent avec la file de la section 6)
+  var nb=SIGNALEMENTS.filter(function(s){return s.statut!=='resolu';}).length;
+  var b=document.getElementById('dashSglBadge');
+  if(nb>0){ b.style.display='grid'; b.textContent=nb; } else { b.style.display='none'; }
+}
+
+/* ============================================================
+   3 · VUE D'ÉTAGE (plan 2D fidèle : nord / couloir / sud + escaliers)
+   ============================================================ */
+// Disposition par étage (transcrite de geometry.ts ; on ne garde que les salles
+// présentes dans l'inventaire de démo, dans l'ordre du plan).
+var FLOOR_LAYOUT = {
+  0:{nord:['105','113','117'], sud:['106','110','114','116'], stairs:['O','C','E']},
+  1:{nord:['205','209','211','215'], sud:['SDP','204','208','210','212'], stairs:['O','C','E']},
+  2:{nord:['301','305','307','311'], sud:['302','304','306','310','312'], stairs:['O','C','E']},
+  3:{nord:['401','403','405','407','411'], sud:['402','408','412'], stairs:['O','E']}
+};
+var ETAGE_COURT={0:'RDC',1:'R+1',2:'R+2',3:'R+3'};
+var currentFloor=1;
+
+function postesOf(etage,num){
+  return EQUIP.filter(function(e){return e.etage===etage && String(e.salle)===String(num);});
+}
+function buildFloorBar(){
+  var bar=document.getElementById('planBar'); bar.innerHTML='';
+  [0,1,2,3].forEach(function(f){
+    var b=document.createElement('button');
+    b.className='fb'+(f===currentFloor?' on':'');
+    b.textContent=ETAGE_COURT[f];
+    b.addEventListener('click',function(){ currentFloor=f; buildFloorBar(); renderPlan(f); });
+    bar.appendChild(b);
+  });
+}
+function cellFor(etage,num){
+  var meta=salleMeta(etage,num);
+  var postes=postesOf(etage,num);
+  var sante=santeFromList(postes);
+  var alerte=alerteSalle(etage,num);
+  var cls = alerte ? 'alert' : SANTE[sante].cls;
+  var glyph = alerte ? '!' : SANTE[sante].glyph;
+  var n=postes.length;
+  var d=document.createElement('div');
+  d.className='cell c-'+cls;
+  d.setAttribute('data-key',etage+'|'+num);
+  d.innerHTML='<span class="glyph">'+glyph+'</span>'+
+    '<div><div class="num">'+num+'</div><div class="nm">'+meta.nom+'</div></div>'+
+    '<div class="pc">'+(n?n+' poste'+(n>1?'s':''):'—')+'</div>';
+  d.addEventListener('click',function(){
+    document.querySelectorAll('#plan .cell').forEach(function(x){x.classList.remove('sel');});
+    d.classList.add('sel');
+    showDetail(etage,num);
+  });
+  return d;
+}
+function stairCell(label){
+  var s={'O':'Esc. Ouest','C':'Esc. Centre','E':'Esc. Est'};
+  var d=document.createElement('div'); d.className='cell stair'; d.textContent=s[label]||label;
+  return d;
+}
+function renderPlan(etage){
+  var L=FLOOR_LAYOUT[etage]; var plan=document.getElementById('plan'); plan.innerHTML='';
+  var hasC = L.stairs.indexOf('C')>=0;
+  // rangée NORD
+  var rN=document.createElement('div'); rN.className='plan-row';
+  var labN=document.createElement('div'); labN.className='rowlab'; labN.textContent='NORD'; rN.appendChild(labN);
+  L.nord.forEach(function(num){ rN.appendChild(cellFor(etage,num)); });
+  plan.appendChild(rN);
+  // couloir
+  var corr=document.createElement('div'); corr.className='plan-corr'; corr.textContent='— couloir —'; plan.appendChild(corr);
+  // rangée SUD (avec escaliers d'extrémité + central)
+  var rS=document.createElement('div'); rS.className='plan-row';
+  var labS=document.createElement('div'); labS.className='rowlab'; labS.textContent='SUD'; rS.appendChild(labS);
+  rS.appendChild(stairCell('O'));
+  if(hasC){
+    var half=Math.ceil(L.sud.length/2);
+    L.sud.slice(0,half).forEach(function(num){ rS.appendChild(cellFor(etage,num)); });
+    rS.appendChild(stairCell('C'));
+    L.sud.slice(half).forEach(function(num){ rS.appendChild(cellFor(etage,num)); });
+  } else {
+    L.sud.forEach(function(num){ rS.appendChild(cellFor(etage,num)); });
+  }
+  rS.appendChild(stairCell('E'));
+  plan.appendChild(rS);
+}
+function showDetail(etage,num){
+  var meta=salleMeta(etage,num); var postes=postesOf(etage,num);
+  var sante=santeFromList(postes); var alerte=alerteSalle(etage,num);
+  var det=document.getElementById('planDetail');
+  var santeBadge = alerte
+    ? '<span class="ebadge e-bad"><span class="d"></span>Alerte signalement</span>'
+    : '<span class="ebadge e-'+SANTE[sante].cls+'"><span class="d"></span>'+SANTE[sante].label+'</span>';
+  var html='<h4>'+meta.nom+' · '+num+' '+santeBadge+'</h4>'+
+    '<p class="meta">'+ETAGE_COURT[etage]+' · côté '+meta.cote+' · '+(postes.length?postes.length+' poste'+(postes.length>1?'s':''):'aucun poste inventorié')+'</p>';
+  if(alerte){
+    var sig=SIGNALEMENTS.filter(function(s){return s.statut!=='resolu' && s.etage===etage && String(s.salle)===String(num);})[0];
+    html+='<div class="alert-banner">⚠ Signalement '+(STATUT_LABEL[sig.statut].toLowerCase())+' — '+sig.probleme+' ('+sig.ref+')</div>';
+  }
+  if(postes.length===0){
+    html+='<p class="meta">Salle sans équipement inventorié (circulation, bureau, sanitaire…).</p>';
+  } else {
+    postes.forEach(function(e){
+      html+='<div class="post"><span class="pic">'+(TYPE_ICON[e.type]||'▫')+'</span>'+
+        '<div><span class="pr">'+e.reference+'</span><span class="pm">'+e.type+' · '+e.modele+' · '+e.annee+'</span></div>'+
+        '<span class="ps">'+etatBadge(e.etat)+'</span></div>';
     });
   }
-  render('rdc');
+  det.innerHTML=html;
+}
+
+/* ============================================================
+   4 · INVENTAIRE — recherche + filtres
+   ============================================================ */
+var invState={q:'',type:'',etat:'',etage:'',vieux:false};
+function initInvTypes(){
+  var sel=document.getElementById('invType');
+  var types=[]; EQUIP.forEach(function(e){ if(types.indexOf(e.type)<0) types.push(e.type); });
+  types.forEach(function(t){ var o=document.createElement('option'); o.value=t; o.textContent=t; sel.appendChild(o); });
+}
+function renderInv(){
+  var age=function(a){return ANNEE_REF-a;};
+  var rows=EQUIP.filter(function(e){
+    if(invState.type && e.type!==invState.type) return false;
+    if(invState.etat && e.etat!==invState.etat) return false;
+    if(invState.etage!=='' && String(e.etage)!==invState.etage) return false;
+    if(invState.vieux && age(e.annee)<=5) return false;
+    if(invState.q){
+      var n=invState.q.toLowerCase();
+      var hay=(e.reference+' '+e.modele+' '+e.salleNom+' '+e.salle+' '+e.type+' '+(e.inv||'')).toLowerCase();
+      if(hay.indexOf(n)<0) return false;
+    }
+    return true;
+  });
+  rows.sort(function(a,b){ return a.etage-b.etage || String(a.salle).localeCompare(String(b.salle)); });
+  var body=document.getElementById('invBody'); body.innerHTML='';
+  rows.forEach(function(e){
+    var a=age(e.annee);
+    var showNum = e.salleNom!=='Salle '+e.salle;
+    var tr=document.createElement('tr');
+    tr.innerHTML=
+      '<td><span class="ref">'+e.reference+'</span>'+(e.inv?'<span class="inv">Inv. '+e.inv+'</span>':'')+'</td>'+
+      '<td>'+(TYPE_ICON[e.type]||'')+' '+e.type+'</td>'+
+      '<td>'+e.modele+'</td>'+
+      '<td>'+(showNum? e.salleNom+' · '+e.salle : e.salleNom)+'</td>'+
+      '<td><span class="ma-flchip">'+ETAGE_COURT[e.etage]+'</span></td>'+
+      '<td>'+e.annee+' <span class="'+(a>5?'ma-old':'')+'" style="font-size:11px;color:#94a3b8">('+a+' an'+(a>1?'s':'')+')</span></td>'+
+      '<td>'+etatBadge(e.etat)+'</td>';
+    body.appendChild(tr);
+  });
+  document.getElementById('invCount').textContent=rows.length;
+  document.getElementById('invEmpty').style.display=rows.length?'none':'block';
+}
+function bindInv(){
+  document.getElementById('invSearch').addEventListener('input',function(){invState.q=this.value;renderInv();});
+  document.getElementById('invType').addEventListener('change',function(){invState.type=this.value;renderInv();});
+  document.getElementById('invEtat').addEventListener('change',function(){invState.etat=this.value;renderInv();});
+  document.getElementById('invEtage').addEventListener('change',function(){invState.etage=this.value;renderInv();});
+  var vx=document.getElementById('invVieux');
+  vx.addEventListener('click',function(){
+    invState.vieux=!invState.vieux; vx.setAttribute('aria-pressed',invState.vieux?'true':'false'); renderInv();
+  });
+}
+
+/* ============================================================
+   6 · SIGNALEMENTS + DEMANDE DE RÉPARATION
+   ============================================================ */
+var currentDemande=null;
+function localisation(s){
+  var meta=salleMeta(s.etage,s.salle);
+  var base=meta.nom||('Salle '+s.salle);
+  var num=(meta.nom && s.salle)?' ('+s.salle+')':'';
+  return base+num+' · '+ETAGE_COURT[s.etage];
+}
+function buildObjet(s){ return 'Demande de réparation — '+(s.ref||'équipement')+' · '+localisation(s); }
+function buildCorps(s){
+  var l=['Bonjour,','','Je vous signale une panne sur un équipement du parc numérique du collège, à prendre en charge :','',
+    '• Équipement   : '+(s.ref||'—')];
+  if(s.serie) l.push('• N° de série   : '+s.serie);
+  if(s.inv)   l.push('• N° inventaire : '+s.inv);
+  l.push('• Localisation : '+localisation(s),'• Problème     : '+s.probleme);
+  if(s.description) l.push('• Détails      : '+s.description);
+  l.push('• Signalé par  : '+s.qui+', le '+s.date,'','Pourriez-vous programmer une intervention ? Je reste à disposition.','','Cordialement,','Le référent numérique','Collège Pierre Mendès France');
+  return l.join('\n');
+}
+function renderSgl(){
+  var list=document.getElementById('sglList'); list.innerHTML='';
+  SIGNALEMENTS.forEach(function(s){
+    var card=document.createElement('div'); card.className='sgl-card st-'+s.statut;
+    var acts=['ouvert','en_cours','resolu'].map(function(st){
+      return '<button class="sgl-btn'+(s.statut===st?' on':'')+'" data-id="'+s.id+'" data-st="'+st+'">'+STATUT_LABEL[st]+'</button>';
+    }).join('');
+    card.innerHTML=
+      '<div class="sgl-top"><span class="sgl-pb">'+s.probleme+'</span><span class="stbadge st-'+s.statut+'">'+STATUT_LABEL[s.statut]+'</span></div>'+
+      '<div class="sgl-eq">'+s.ref+' · '+salleMeta(s.etage,s.salle).nom+'<span class="fl">'+ETAGE_COURT[s.etage]+'</span></div>'+
+      (s.description?'<div class="sgl-desc">« '+s.description+' »</div>':'')+
+      '<div class="sgl-who">'+s.qui+' · '+s.date+'</div>'+
+      '<div class="sgl-acts">'+acts+'<button class="sgl-btn" data-prep="'+s.id+'">✉ Préparer la demande</button></div>';
+    list.appendChild(card);
+  });
+  list.querySelectorAll('button[data-st]').forEach(function(b){
+    b.addEventListener('click',function(){
+      var s=SIGNALEMENTS.find(function(x){return x.id===b.getAttribute('data-id');});
+      s.statut=b.getAttribute('data-st');
+      renderSgl(); renderDash(); renderPlan(currentFloor);
+      // si la salle affichée est concernée, rafraîchir le détail
+      var sel=document.querySelector('#plan .cell.sel');
+      if(sel){ var k=sel.getAttribute('data-key').split('|'); showDetail(Number(k[0]),k[1]); }
+    });
+  });
+  list.querySelectorAll('button[data-prep]').forEach(function(b){
+    b.addEventListener('click',function(){
+      currentDemande=SIGNALEMENTS.find(function(x){return x.id===b.getAttribute('data-prep');});
+      renderMail();
+    });
+  });
+}
+function renderMail(){
+  var box=document.getElementById('mailbox'); var lbl=document.getElementById('sglFor');
+  if(!currentDemande){ box.textContent='Sélectionnez « Préparer la demande » sur un signalement.'; lbl.textContent=''; return; }
+  lbl.textContent='· '+currentDemande.ref;
+  var txt='Objet : '+buildObjet(currentDemande)+'\n\n'+buildCorps(currentDemande);
+  // surligne l'entête objet
+  box.innerHTML='<span class="k">Objet :</span> '+escapeHtml(buildObjet(currentDemande))+'\n\n'+escapeHtml(buildCorps(currentDemande));
+  box.setAttribute('data-raw',txt);
+}
+function escapeHtml(s){ return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function bindCopy(){
+  var btn=document.getElementById('copyBtn');
+  btn.addEventListener('click',function(){
+    var box=document.getElementById('mailbox'); var raw=box.getAttribute('data-raw');
+    if(!raw) return;
+    function done(){ btn.textContent='✓ Copié dans le presse-papiers'; btn.classList.add('ok');
+      setTimeout(function(){ btn.textContent='Copier le message'; btn.classList.remove('ok'); },2000); }
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(raw).then(done,fallback);
+    } else { fallback(); }
+    function fallback(){
+      var ta=document.createElement('textarea'); ta.value=raw; ta.style.position='fixed'; ta.style.opacity='0';
+      document.body.appendChild(ta); ta.select();
+      try{ document.execCommand('copy'); done(); }catch(e){}
+      document.body.removeChild(ta);
+    }
+  });
+}
+
+/* ============================================================
+   5 · QR de démonstration — généré localement (pas de dépendance).
+   Motif décoratif déterministe (ce n'est pas un vrai encodage,
+   juste une illustration fidèle de la planche d'étiquettes).
+   ============================================================ */
+function drawQr(){
+  var svg=document.getElementById('qrDemo'); var N=25; var seed=0xA7F3;
+  function rnd(){ seed=(seed*1103515245+12345)&0x7fffffff; return seed/0x7fffffff; }
+  var cells='';
+  // motifs de repère (3 coins) typiques d'un QR
+  function finder(ox,oy){
+    var s='';
+    for(var y=0;y<7;y++)for(var x=0;x<7;x++){
+      var edge=(x===0||x===6||y===0||y===6); var core=(x>=2&&x<=4&&y>=2&&y<=4);
+      if(edge||core) s+='<rect x="'+(ox+x)+'" y="'+(oy+y)+'" width="1" height="1"/>';
+    }
+    return s;
+  }
+  cells+=finder(0,0)+finder(N-7,0)+finder(0,N-7);
+  for(var y=0;y<N;y++)for(var x=0;x<N;x++){
+    var inFinder=(x<8&&y<8)||(x>N-9&&y<8)||(x<8&&y>N-9);
+    if(inFinder) continue;
+    if(rnd()>0.55) cells+='<rect x="'+x+'" y="'+y+'" width="1" height="1"/>';
+  }
+  svg.innerHTML='<rect width="25" height="25" fill="#fff"/><g fill="#0f172a">'+cells+'</g>';
+}
+
+/* ============================================================
+   INIT
+   ============================================================ */
+buildFloorBar();
+renderPlan(currentFloor);
+renderDash();
+initInvTypes();
+bindInv();
+renderInv();
+renderSgl();
+bindCopy();
+renderMail();
+drawQr();
+// pré-sélectionne la salle informatique 210 (R+1) pour montrer le détail riche
+(function(){
+  var c=document.querySelector('#plan .cell[data-key="1|210"]');
+  if(c) c.click();
+})();
 </script>
 </body>
 </html>

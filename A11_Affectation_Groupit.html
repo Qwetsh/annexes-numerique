@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Annexe A11 — Logiciel d'affectation · Document interactif</title>
+<title>Annexe A11 — Groupit, logiciel d'affectation · Document interactif</title>
 <style>
   :root{
     --green:#1f7a54; --green-d:#155c3f; --green-l:#eaf5ef; --ink:#1d2b25; --muted:#5c6b63;
@@ -16,11 +16,12 @@
   header.top{background:linear-gradient(135deg,#1f7a54,#155c3f);color:#fff;padding:34px 0 30px}
   .badge{display:inline-block;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:4px 14px;font-size:13px;font-weight:600}
   header.top h1{margin:14px 0 6px;font-size:30px}
-  header.top p{margin:0;opacity:.92;max-width:720px}
+  header.top p{margin:0;opacity:.92;max-width:760px}
   main{padding:34px 0 60px}
-  section{margin:0 0 30px}
+  section{margin:0 0 32px}
   h2{font-size:21px;color:var(--green-d);margin:0 0 6px;display:flex;align-items:center;gap:9px}
   h2 .n{background:var(--green);color:#fff;border-radius:8px;font-size:13px;padding:2px 9px;font-weight:700}
+  h3{color:var(--green-d)}
   .lead{color:var(--muted);margin:.2em 0 1.1em}
   .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 22px;box-shadow:var(--shadow)}
   .grid{display:grid;gap:14px}
@@ -40,169 +41,748 @@
   .mode p{margin:0;font-size:12.5px;color:var(--muted)}
   .panel{display:none} .panel.on{display:block}
   table{width:100%;border-collapse:collapse;font-size:14px}
-  th,td{text-align:left;padding:9px 11px;border-bottom:1px solid var(--line)}
+  th,td{text-align:left;padding:9px 11px;border-bottom:1px solid var(--line);vertical-align:top}
   th{background:var(--green);color:#fff;font-weight:600}
   tr:nth-child(even) td{background:#fafdfb}
+  code{background:#eef5f1;border:1px solid var(--line);border-radius:5px;padding:1px 5px;font-size:12.5px}
   .steps{display:flex;gap:8px;flex-wrap:wrap}
   .schip{border:1px solid var(--line);background:#fff;border-radius:999px;padding:6px 13px;font-size:13px;font-weight:600;color:var(--muted)}
-  footer{border-top:1px solid var(--line);padding:22px 0;color:var(--muted);font-size:13px;text-align:center}
   .note{font-size:13px;color:var(--muted);background:#fff;border:1px dashed var(--line);border-radius:10px;padding:11px 14px}
+  details{background:#fff;border:1px solid var(--line);border-radius:11px;margin:0 0 9px;overflow:hidden}
+  summary{cursor:pointer;padding:13px 16px;font-weight:600;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:10px}
+  summary::-webkit-details-marker{display:none}
+  summary::after{content:"+";color:var(--green);font-size:20px;font-weight:700}
+  details[open] summary::after{content:"\2013"}
+  details .body{padding:0 16px 15px;color:#3a4a42;font-size:14px}
+  footer{border-top:1px solid var(--line);padding:22px 0;color:var(--muted);font-size:13px;text-align:center}
+
+  /* ===== Cadre « modèle réduit » (démo intégrée) ===== */
+  .demo-frame{border:2px solid #11332a;border-radius:16px;overflow:hidden;background:#0e1f1a;box-shadow:0 14px 40px rgba(10,30,22,.20);margin-top:6px}
+  .demo-bar{display:flex;align-items:center;gap:9px;background:#11332a;color:#cdeede;padding:8px 14px;font-size:12px;font-weight:700;letter-spacing:.4px}
+  .demo-bar .dot{width:8px;height:8px;border-radius:50%;background:#39d98a;box-shadow:0 0 7px #39d98a}
+  .demo-bar .app{margin-left:auto;font-weight:600;opacity:.7;font-style:italic;letter-spacing:0}
+  .demo-body{background:#f5f9f7;padding:16px}
+  .app-top{display:flex;align-items:center;gap:10px;background:linear-gradient(135deg,#1f7a54,#155c3f);color:#fff;border-radius:10px;padding:10px 14px;margin-bottom:12px}
+  .app-top .logo{width:26px;height:26px;border-radius:7px;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:15px}
+  .app-top b{font-size:15px} .app-top span{font-size:12px;opacity:.85;margin-left:auto}
+
+  /* curseurs critères */
+  .crit{margin:0 0 11px}
+  .crit label{display:flex;justify-content:space-between;align-items:baseline;font-weight:600;font-size:13.5px;margin-bottom:2px}
+  .crit .lv{color:var(--green-d);font-weight:700;font-size:12.5px;background:var(--green-l);border-radius:999px;padding:1px 9px}
+  .crit input[type=range]{width:100%;accent-color:var(--green);margin:2px 0 0}
+  .crit .q{font-size:11.5px;color:var(--muted)}
+  .lvscale{display:flex;justify-content:space-between;font-size:10.5px;color:#9aa8a0;margin-top:-1px}
+
+  .btn{background:var(--green);color:#fff;border:none;border-radius:9px;padding:10px 16px;font-weight:700;font-size:14px;cursor:pointer}
+  .btn:hover{background:var(--green-d)}
+  .btn.alt{background:#fff;color:var(--green-d);border:1.5px solid var(--green)}
+  .toolbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:4px 0 12px}
+  .switch{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:600;color:var(--ink);background:#fff;border:1px solid var(--line);border-radius:999px;padding:5px 11px;cursor:pointer}
+
+  /* jurys / résultats */
+  .jurys{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+  @media(max-width:640px){.jurys{grid-template-columns:1fr}}
+  .jury{background:#fff;border:1px solid var(--line);border-radius:12px;padding:11px 12px}
+  .jury h5{margin:0 0 2px;font-size:14px;color:var(--green-d)}
+  .jury .mat{font-size:11.5px;color:var(--muted);margin-bottom:7px}
+  .jury .fill{height:6px;border-radius:6px;background:#e4efe9;overflow:hidden;margin-bottom:8px}
+  .jury .fill i{display:block;height:100%;background:var(--green);transition:width .35s}
+  .stud{display:flex;align-items:center;gap:6px;font-size:12.5px;padding:3px 0;border-top:1px dashed #e9f1ec}
+  .stud:first-of-type{border-top:none}
+  .stud .tag{font-size:10px;font-weight:700;border-radius:5px;padding:0 5px}
+  .tag.match{background:#dff3e7;color:#1c7a4f} .tag.no{background:#fbe6dd;color:#b5491f}
+  .tag.tt{background:#e6ecfb;color:#3552a8} .tag.grp{background:#f3e9fb;color:#7a39a8}
+  .tag.lng{background:#fff3d6;color:#9a7400}
+  .stud .sc{margin-left:auto;font-weight:700;color:var(--muted);font-size:11.5px}
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin:13px 0}
+  @media(max-width:640px){.kpis{grid-template-columns:repeat(2,1fr)}}
+  .kpi{background:#fff;border:1px solid var(--line);border-radius:11px;padding:11px 8px;text-align:center}
+  .kpi b{display:block;font-size:22px;color:var(--green-d);line-height:1.1}
+  .kpi span{font-size:11px;color:var(--muted)}
+  .scorebar{height:10px;border-radius:6px;background:#e4efe9;overflow:hidden;margin:4px 0 2px}
+  .scorebar i{display:block;height:100%;background:linear-gradient(90deg,#e0651e,#cdb022,#2e9e5b);transition:width .4s}
+  .explain{font-size:11.5px;color:var(--muted);font-style:italic;padding-left:6px}
+  .smallnote{font-size:11.5px;color:var(--muted);margin-top:10px}
+  /* stage demo */
+  .map{position:relative;height:230px;background:#dfeee6 radial-gradient(circle at 30% 40%, #eaf5ef, #d4e7dd);border-radius:12px;border:1px solid var(--line);overflow:hidden}
+  .pin{position:absolute;transform:translate(-50%,-100%);font-size:11px;text-align:center;cursor:default}
+  .pin .dot{width:14px;height:14px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);margin:0 auto;border:2px solid #fff;box-shadow:0 1px 3px rgba(0,0,0,.3)}
+  .pin.col .dot{background:#155c3f;width:18px;height:18px}
+  .pin.ens .dot{background:#e08a1e} .pin.stg .dot{background:#3552a8}
+  .pin b{display:block;background:rgba(255,255,255,.85);border-radius:4px;padding:0 3px;margin-top:1px;font-size:9.5px;white-space:nowrap}
+  .leg{display:flex;gap:14px;flex-wrap:wrap;font-size:11.5px;color:var(--muted);margin-top:8px}
+  .leg i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:4px;vertical-align:middle}
+  .pairline{font-size:12.5px;padding:5px 0;border-top:1px dashed #e9f1ec;display:flex;gap:6px;align-items:center}
+  .pairline:first-child{border-top:none}
+  .pairline .km{margin-left:auto;font-weight:700;color:var(--green-d)}
 </style>
 </head>
 <body>
 <header class="top">
   <div class="wrap">
     <span class="badge">Annexe A11 · Rapport référent numérique 2025-2026</span>
-    <h1>Logiciel d'affectation (« Groupit »)</h1>
-    <p>Document interactif de présentation. Outil qui automatise les affectations complexes du collège : organisation de l'<strong>oral du DNB</strong>, du <strong>suivi des stages de 3ᵉ</strong>, et création de groupes personnalisés — à partir d'un moteur d'affectation paramétrable par critères pondérés.</p>
+    <h1>Groupit — logiciel d'affectation</h1>
+    <p>Document interactif de présentation. <strong>Groupit</strong> est une application web qui automatise les affectations complexes du collège à partir d'un <strong>même moteur à critères pondérés</strong>, décliné en trois modes : organisation de l'<strong>oral du DNB</strong> (élèves → jurys → créneaux), <strong>suivi des stages de 3ᵉ</strong> (enseignants visiteurs → lieux de stage) et création de <strong>groupes libres</strong>. Les démos ci-dessous rejouent la <em>vraie</em> logique du code.</p>
   </div>
 </header>
 
 <main class="wrap">
 
+  <!-- ============ 1. MODES ============ -->
   <section>
-    <h2><span class="n">1</span> Trois modes d'affectation — choisissez-en un</h2>
-    <p class="lead">Le même moteur s'adapte au besoin. <strong>Cliquez sur un mode</strong> pour découvrir ses paramètres et ses options spécifiques.</p>
+    <h2><span class="n">1</span> Trois modes, un seul moteur — sélecteur de mode</h2>
+    <p class="lead">Dans le code, un scénario porte un type (<code>oral_dnb</code>, <code>suivi_stage</code>, <code>custom</code>) qui change les critères proposés et le solveur appelé. <strong>Cliquez sur un mode</strong> pour voir ses paramètres réels.</p>
     <div class="modes">
       <div class="mode on" onclick="setMode(this,'m-dnb')">
-        <div class="ic">🎓</div><h4>Oral du DNB</h4><p>Répartir les élèves entre jurys et créneaux.</p>
+        <div class="ic">&#127891;</div><h4>Oral du DNB</h4><p>Élèves répartis entre jurys puis placés sur des créneaux.</p>
       </div>
       <div class="mode" onclick="setMode(this,'m-stage')">
-        <div class="ic">🏢</div><h4>Suivi de stage 3ᵉ</h4><p>Affecter chaque enseignant aux lieux de stage.</p>
+        <div class="ic">&#127970;</div><h4>Suivi de stage 3ᵉ</h4><p>Enseignants visiteurs affectés aux lieux de stage.</p>
       </div>
       <div class="mode" onclick="setMode(this,'m-libre')">
-        <div class="ic">🧩</div><h4>Personnalisé</h4><p>Groupes libres en glisser-déposer.</p>
+        <div class="ic">&#129513;</div><h4>Groupes libres</h4><p>Groupes personnalisés selon des critères au choix.</p>
       </div>
     </div>
 
     <div class="card">
       <div class="panel on" id="m-dnb">
-        <h3 style="margin:0 0 8px;color:var(--green-d)">Mode Oral du DNB</h3>
-        <p style="font-size:14px">Répartit les élèves entre des jurys d'enseignants et des créneaux (demi-journées), en respectant les contraintes et en optimisant la correspondance des matières.</p>
+        <h3 style="margin:0 0 8px">Mode « Oral du DNB » — solveur <code>solveOralDnbComplete</code></h3>
+        <p style="font-size:14px;margin-top:0">Les élèves sont affectés à des <strong>jurys</strong> (constitués d'enseignants). La priorité absolue est la <strong>correspondance de matière</strong> entre le sujet de l'oral et la discipline d'un enseignant du jury. Les binômes / trinômes liés passent dans le même jury, puis chaque jury reçoit ses <strong>créneaux horaires</strong>.</p>
         <div class="grid g2" style="margin-top:8px">
           <div>
-            <h4 style="margin:0 0 6px;color:var(--green-d);font-size:14px">Paramètres clés</h4>
-            <span class="pill">Matières autorisées</span>
-            <span class="pill">Jurys vs enseignants individuels</span>
-            <span class="pill">Poids « matière correspondante » (0-100)</span>
-            <span class="pill">Capacité par jury</span>
-            <span class="pill">Créneaux (jeudi matin / après-midi…)</span>
-            <span class="pill">Durée +tiers temps</span>
-            <span class="pill">Remplissage : au plus tôt / équilibré</span>
+            <h4 style="margin:0 0 6px;font-size:14px;color:var(--green-d)">Critères du moteur (criteresV2)</h4>
+            <span class="pill">Correspondance matière (forcé)</span>
+            <span class="pill">Équilibrage des charges</span>
+            <span class="pill">Mixité filles/garçons</span>
+            <span class="pill">Capacité restante</span>
+            <span class="pill">Élèves en cours</span>
+            <span class="pill">Poids pédagogique</span>
           </div>
           <div>
-            <h4 style="margin:0 0 6px;color:var(--green-d);font-size:14px">Données élève prises en compte</h4>
-            <span class="pill">Parcours / thème (EPI, Avenir…)</span>
-            <span class="pill">Sujet & matières associées</span>
-            <span class="pill">Langue choisie</span>
-            <span class="pill">Tiers temps</span>
-            <span class="pill">Groupe d'oral (2-3 élèves liés)</span>
+            <h4 style="margin:0 0 6px;font-size:14px;color:var(--green-d)">Traitements automatiques</h4>
+            <span class="pill">Bonus langue étrangère (+50)</span>
+            <span class="pill">Tiers temps (équilibrage + proximité)</span>
+            <span class="pill">Malus diversité des sujets</span>
+            <span class="pill">Créneaux : 20 / 25 / 35 min</span>
+            <span class="pill">Remplir d'abord / répartir</span>
           </div>
         </div>
       </div>
 
       <div class="panel" id="m-stage">
-        <h3 style="margin:0 0 8px;color:var(--green-d)">Mode Suivi de stage (3ᵉ)</h3>
-        <p style="font-size:14px">Affecte les enseignants visiteurs aux élèves en stage en fonction de la <strong>distance géographique</strong> (géocodage + calcul Haversine), de la capacité et de la priorité au professeur principal.</p>
+        <h3 style="margin:0 0 8px">Mode « Suivi de stage 3ᵉ » — solveur <code>stageSolver</code></h3>
+        <p style="font-size:14px;margin-top:0">Chaque <strong>lieu de stage</strong> géocodé est confié à un enseignant visiteur. Le moteur minimise la <strong>distance / temps de trajet</strong> (formule de Haversine, coordonnées du collège <code>49.1568, 6.1375</code>), tout en respectant la capacité de chaque enseignant et un éventuel <strong>cône directionnel</strong> (stages sur le trajet domicile-collège).</p>
         <div class="grid g2" style="margin-top:8px">
           <div>
-            <h4 style="margin:0 0 6px;color:var(--green-d);font-size:14px">Paramètres clés</h4>
-            <span class="pill">Distance maximale (km)</span>
-            <span class="pill">Durée maximale</span>
-            <span class="pill">Prioriser le professeur principal</span>
-            <span class="pill">Capacité par enseignant</span>
-            <span class="pill">Capacité calculée (heures × classes)</span>
+            <h4 style="margin:0 0 6px;font-size:14px;color:var(--green-d)">Critères du moteur</h4>
+            <span class="pill">Distance / temps de trajet (forcé)</span>
+            <span class="pill">Équilibrage des charges</span>
+            <span class="pill">Professeur principal</span>
+            <span class="pill">Élèves en cours</span>
           </div>
           <div>
-            <h4 style="margin:0 0 6px;color:var(--green-d);font-size:14px">Données stage</h4>
-            <span class="pill">Entreprise & tuteur</span>
-            <span class="pill">Adresse géocodée</span>
-            <span class="pill">Secteur d'activité</span>
+            <h4 style="margin:0 0 6px;font-size:14px;color:var(--green-d)">Contraintes dures possibles</h4>
+            <span class="pill">Distance maximale (km)</span>
+            <span class="pill">Durée maximale (min)</span>
+            <span class="pill">Capacité par enseignant</span>
             <span class="pill">Carte interactive (Leaflet)</span>
           </div>
         </div>
       </div>
 
       <div class="panel" id="m-libre">
-        <h3 style="margin:0 0 8px;color:var(--green-d)">Mode Personnalisé (libre)</h3>
-        <p style="font-size:14px">Pour tout autre besoin de groupes : interface en <strong>glisser-déposer</strong>, affectation manuelle, contraintes par groupe, sans algorithme imposé.</p>
-        <span class="pill">Groupes libres</span>
-        <span class="pill">Liaison / déliaison élève-enseignant</span>
-        <span class="pill">Contraintes personnalisées</span>
-        <span class="pill">Import / export des groupes</span>
-        <span class="pill">Champs personnalisés (texte, nombre, liste…)</span>
+        <h3 style="margin:0 0 8px">Mode « Groupes libres » — solveur <code>solveCustom</code></h3>
+        <p style="font-size:14px;margin-top:0">Pour tout autre besoin de groupes. Le moteur calcule un nombre de groupes à partir de la <strong>taille cible</strong>, répartit les enseignants (tourniquet, pondérable par volume horaire), puis affecte chaque élève au groupe qui maximise le <strong>score de groupe</strong>, avant une phase d'échanges.</p>
+        <span class="pill">Parité (off / faible / normal / haute / requise)</span>
+        <span class="pill">Enseignant ayant l'élève en classe</span>
+        <span class="pill">Même classe (préférer / éviter)</span>
+        <span class="pill">LV identique ou mixée</span>
+        <span class="pill">Taille de groupe fixe ou min-max</span>
+        <span class="pill">Glisser-déposer (dnd-kit)</span>
       </div>
     </div>
   </section>
 
+  <!-- ============ 2. LE MOTEUR ============ -->
   <section>
-    <h2><span class="n">2</span> Le moteur : des critères pondérés</h2>
-    <p class="lead">Chaque affectation reçoit un <strong>score</strong>. Les critères sont activables, pondérés, et peuvent être déclarés « contrainte dure » (bloquante) ou simplement préférés. L'outil explique chaque choix : raison principale, critères utilisés, résumé des scores.</p>
+    <h2><span class="n">2</span> Le moteur à critères pondérés — comment ça marche</h2>
+    <p class="lead">Chaque affectation possible reçoit un <strong>score de 0 à 100</strong>. Ce score est une <strong>moyenne pondérée</strong> de sous-scores, un par critère actif. Le solveur affecte ensuite les élèves au meilleur choix disponible, puis tente des échanges pour améliorer le total.</p>
+
     <div class="card">
+      <h3 style="margin:0 0 6px;font-size:16px">a. Des priorités, pas des pourcentages</h3>
+      <p style="font-size:14px;margin-top:0">Dans l'interface, on règle une <strong>priorité</strong> par critère. Le code la convertit en poids (<code>priorityToWeight</code>) :</p>
+      <div class="steps" style="margin-bottom:6px">
+        <span class="schip">Désactivé → 0</span>
+        <span class="schip">Faible → 25</span>
+        <span class="schip">Normal → 50</span>
+        <span class="schip">Haute → 100</span>
+      </div>
+      <p style="font-size:13.5px;color:var(--muted);margin:6px 0 0">Les poids sont ensuite <strong>normalisés pour totaliser 100&nbsp;%</strong> : seule compte la proportion entre critères. Un critère peut aussi être déclaré <strong>contrainte dure</strong> (bloquante) — il sort alors du calcul de score et élimine purement les paires invalides (capacité dépassée, matière interdite, « ne doit pas être avec »…).</p>
+
+      <h3 style="margin:18px 0 6px;font-size:16px">b. Le calcul d'un sous-score (exemples réels du code)</h3>
       <table>
-        <tr><th>Critère</th><th>Rôle</th><th>Réglage</th></tr>
-        <tr><td>Matière correspondante</td><td>Aligner sujet de l'élève et discipline du jury</td><td>Poids 0-100</td></tr>
-        <tr><td>Équilibrage</td><td>Égaliser la taille des groupes / charge enseignant</td><td>Activable</td></tr>
-        <tr><td>Parité</td><td>Mixité de genre dans les groupes</td><td>Activable</td></tr>
-        <tr><td>Distance (stage)</td><td>Minimiser les déplacements enseignant-tuteur</td><td>Distance max</td></tr>
-        <tr><td>Capacité</td><td>Respecter le nombre de places par jury / tuteur</td><td>Contrainte dure</td></tr>
+        <tr><th>Critère</th><th>Comment le sous-score (0-100) est obtenu</th></tr>
+        <tr><td><b>Matière</b></td><td>100 si un enseignant du jury enseigne la matière de l'oral de l'élève ; 30 sinon ; 50 si l'élève n'a pas de matière renseignée.</td></tr>
+        <tr><td><b>Équilibrage</b></td><td>Selon le taux de remplissage du jury : &lt;30&nbsp;%→100, &lt;60&nbsp;%→75, &lt;90&nbsp;%→50, sinon 20. Option « pondérer par charge horaire » : utilise une capacité effective = capacité × poids pédagogique.</td></tr>
+        <tr><td><b>Mixité</b></td><td>Simule l'ajout de l'élève puis mesure l'écart au ratio 50/50 : <code>100 − |ratioF − 0,5|×200</code>.</td></tr>
+        <tr><td><b>Capacité</b></td><td>Places restantes : &gt;5→100, &gt;2→70, &gt;0→40, 0→0.</td></tr>
+        <tr><td><b>Distance</b> (stage)</td><td>Haversine puis score linéaire inversé : <code>100×(1 − distance/distanceMax)</code> ; 100 si même commune, 70 si même département.</td></tr>
       </table>
+      <p style="font-size:13.5px;color:var(--muted);margin:10px 0 0"><strong>Bonus/malus additifs</strong> (hors moyenne) propres à l'oral DNB : <strong>+50</strong> si le jury a un professeur de la langue de l'élève, <strong>±15</strong> pour le placement « tiers temps » (favorise les jurys peu chargés en tiers temps et dont les profs habitent près du collège), et jusqu'à <strong>−35</strong> de malus si un même sujet est surreprésenté dans le jury (diversité).</p>
+
+      <h3 style="margin:18px 0 6px;font-size:16px">c. L'algorithme d'affectation</h3>
+      <div class="grid g2">
+        <div class="feature"><h4>1. Tri par difficulté</h4><p>Les élèves les <strong>plus contraints d'abord</strong> : matières rares (peu de jurys les couvrent) en tête, élèves sans matière en dernier. Pour le mode générique, on trie par nombre d'options valides croissant.</p></div>
+        <div class="feature"><h4>2. Affectation gloutonne (greedy)</h4><p>Phase&nbsp;1 : chaque élève va au jury de meilleur score <strong>avec correspondance matière</strong>. Phase&nbsp;2 : les élèves restants prennent le meilleur jury restant. Binômes/trinômes liés placés ensemble.</p></div>
+        <div class="feature"><h4>3. Amélioration locale</h4><p>On teste des <strong>échanges</strong> entre affectations : pour le DNB, on garde l'échange s'il augmente le nombre de correspondances matière ; pour le mode générique, s'il augmente la somme des scores (2-opt).</p></div>
+        <div class="feature"><h4>4. Explication & créneaux</h4><p>Chaque affectation porte sa <strong>raison principale</strong> et le détail des sous-scores. Pour le DNB, les créneaux sont ensuite calculés (20/25/35&nbsp;min selon solo/binôme/trinôme, +&nbsp;tiers temps).</p></div>
+      </div>
     </div>
   </section>
 
+  <!-- ============ 3. DEMO MOTEUR DNB ============ -->
   <section>
-    <h2><span class="n">3</span> Le parcours guidé</h2>
+    <h2><span class="n">3</span> Démo intégrée — le moteur d'affectation en direct</h2>
+    <p class="lead">Modèle réduit fidèle du mode Oral du DNB. <strong>9 élèves fictifs</strong>, <strong>3 jurys</strong>. Réglez la <strong>priorité de chaque critère</strong> (curseurs), basculez quelques options, puis lancez l'affectation : la répartition se recalcule en appliquant la vraie logique du moteur (greedy 2 phases + échanges).</p>
+
+    <div class="demo-frame">
+      <div class="demo-bar"><span class="dot"></span>DÉMO INTÉGRÉE · moteur réel rejoué<span class="app">Groupit v1.1 — mode oral_dnb</span></div>
+      <div class="demo-body">
+        <div class="app-top"><div class="logo">&#127891;</div><b>Affectation — Oral du DNB</b><span>9 élèves · 3 jurys</span></div>
+
+        <div class="grid g2" style="gap:18px">
+          <div>
+            <h4 style="margin:0 0 8px;color:var(--green-d);font-size:14px">Critères pondérés</h4>
+
+            <div class="crit">
+              <label>Correspondance matière <span class="lv" id="lv-matiere">Haute</span></label>
+              <input type="range" min="0" max="3" value="3" id="w-matiere" oninput="runDnb()">
+              <div class="q">Aligner le sujet de l'élève et la discipline d'un prof du jury</div>
+            </div>
+            <div class="crit">
+              <label>Équilibrage des charges <span class="lv" id="lv-equilibrage">Normal</span></label>
+              <input type="range" min="0" max="3" value="2" id="w-equilibrage" oninput="runDnb()">
+              <div class="q">Répartir équitablement les élèves entre jurys</div>
+            </div>
+            <div class="crit">
+              <label>Mixité filles/garçons <span class="lv" id="lv-mixite">Désactivé</span></label>
+              <input type="range" min="0" max="3" value="0" id="w-mixite" oninput="runDnb()">
+              <div class="q">Rapprocher chaque jury d'un ratio 50/50</div>
+            </div>
+            <div class="crit">
+              <label>Capacité restante <span class="lv" id="lv-capacite">Normal</span></label>
+              <input type="range" min="0" max="3" value="2" id="w-capacite" oninput="runDnb()">
+              <div class="q">Favoriser les jurys ayant le plus de places</div>
+            </div>
+            <div class="lvscale"><span>Désact.</span><span>Faible</span><span>Normal</span><span>Haute</span></div>
+
+            <div class="toolbar" style="margin-top:14px">
+              <label class="switch"><input type="checkbox" id="opt-langue" checked onchange="runDnb()"> Bonus langue étrangère</label>
+              <label class="switch"><input type="checkbox" id="opt-tt" checked onchange="runDnb()"> Placement tiers temps</label>
+            </div>
+            <div class="toolbar">
+              <button class="btn" onclick="runDnb(true)">&#9654; Lancer l'affectation</button>
+              <button class="btn alt" onclick="resetDnb()">Réinitialiser</button>
+            </div>
+            <div class="smallnote">Astuce : passez « Correspondance matière » à <b>Faible</b> et regardez le taux de correspondance chuter et les jurys se mélanger.</div>
+          </div>
+
+          <div>
+            <h4 style="margin:0 0 8px;color:var(--green-d);font-size:14px">Score de satisfaction global</h4>
+            <div style="font-size:34px;font-weight:800;color:var(--green-d);line-height:1" id="dnb-score">—</div>
+            <div class="scorebar"><i id="dnb-scorebar" style="width:0%"></i></div>
+            <div class="kpis">
+              <div class="kpi"><b id="kpi-match">—</b><span>correspondance matière</span></div>
+              <div class="kpi"><b id="kpi-aff">—</b><span>élèves placés</span></div>
+              <div class="kpi"><b id="kpi-na">—</b><span>non placés</span></div>
+              <div class="kpi"><b id="kpi-eq">—</b><span>écart de charge</span></div>
+            </div>
+            <div class="note" id="dnb-msg" style="margin-top:2px">Réglez les curseurs puis lancez l'affectation.</div>
+          </div>
+        </div>
+
+        <h4 style="margin:16px 0 8px;color:var(--green-d);font-size:14px">Répartition par jury</h4>
+        <div class="jurys" id="dnb-jurys"></div>
+        <div class="smallnote">Légende : <span class="tag match">M</span> matière correspondante · <span class="tag no">≠</span> sans correspondance · <span class="tag lng">L</span> langue couverte · <span class="tag tt">TT</span> tiers temps · <span class="tag grp">G</span> groupe (binôme/trinôme). Le score à droite est celui de l'affectation, calculé exactement comme dans Groupit.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 4. DEMO STAGE ============ -->
+  <section>
+    <h2><span class="n">4</span> Démo intégrée — affectation des stages par distance</h2>
+    <p class="lead">Modèle réduit du mode Suivi de stage. <strong>4 enseignants visiteurs</strong> doivent couvrir <strong>5 lieux de stage</strong>. Réglez la distance maximale et la capacité par enseignant : le moteur ré-affecte chaque stage au visiteur disponible le plus proche (Haversine), comme dans le code.</p>
+
+    <div class="demo-frame">
+      <div class="demo-bar"><span class="dot"></span>DÉMO INTÉGRÉE · distance réelle (Haversine)<span class="app">Groupit v1.1 — mode suivi_stage</span></div>
+      <div class="demo-body">
+        <div class="app-top"><div class="logo">&#127970;</div><b>Affectation — Suivi de stage 3ᵉ</b><span>5 stages · 4 visiteurs</span></div>
+        <div class="grid g2" style="gap:18px">
+          <div>
+            <div class="crit">
+              <label>Distance maximale <span class="lv" id="lv-dmax">25 km</span></label>
+              <input type="range" min="5" max="40" value="25" id="s-dmax" oninput="runStage()">
+              <div class="q">Au-delà, l'affectation est interdite (contrainte dure)</div>
+            </div>
+            <div class="crit">
+              <label>Capacité par enseignant <span class="lv" id="lv-cap">2 stages</span></label>
+              <input type="range" min="1" max="4" value="2" id="s-cap" oninput="runStage()">
+              <div class="q">Nombre maximal de visites par enseignant</div>
+            </div>
+            <div class="toolbar">
+              <button class="btn" onclick="runStage()">&#9654; Recalculer</button>
+            </div>
+            <div class="kpis" style="grid-template-columns:repeat(3,1fr)">
+              <div class="kpi"><b id="kpi-skm">—</b><span>km total</span></div>
+              <div class="kpi"><b id="kpi-saff">—</b><span>stages couverts</span></div>
+              <div class="kpi"><b id="kpi-sna">—</b><span>non couverts</span></div>
+            </div>
+            <h4 style="margin:6px 0 4px;color:var(--green-d);font-size:13.5px">Tournées proposées</h4>
+            <div id="stage-list"></div>
+          </div>
+          <div>
+            <div class="map" id="stage-map"></div>
+            <div class="leg">
+              <span><i style="background:#155c3f"></i>Collège</span>
+              <span><i style="background:#e08a1e"></i>Domicile enseignant</span>
+              <span><i style="background:#3552a8"></i>Lieu de stage</span>
+            </div>
+            <div class="smallnote">Distances calculées avec la formule de Haversine sur des coordonnées fictives autour de Woippy / Metz. Chaque stage est relié à son visiteur affecté.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 5. PARCOURS GUIDE ============ -->
+  <section>
+    <h2><span class="n">5</span> Le parcours guidé, de l'import à l'export</h2>
     <div class="steps" style="margin-bottom:12px">
-      <span class="schip">1 · Importer élèves & enseignants</span>
+      <span class="schip">1 · Importer élèves &amp; enseignants</span>
       <span class="schip">2 · Choisir le scénario</span>
-      <span class="schip">3 · Régler les critères</span>
-      <span class="schip">4 · Lancer la résolution</span>
-      <span class="schip">5 · Ajuster & valider</span>
-      <span class="schip">6 · Exporter</span>
+      <span class="schip">3 · Constituer jurys / sélections</span>
+      <span class="schip">4 · Régler les critères</span>
+      <span class="schip">5 · Lancer la résolution</span>
+      <span class="schip">6 · Ajuster (glisser-déposer)</span>
+      <span class="schip">7 · Créneaux &amp; export</span>
     </div>
     <div class="grid g3">
-      <div class="feature"><h4>Gestion des élèves</h4><p>Import CSV/Excel avec mapping de colonnes, options (latin, allemand…), contraintes « avec / sans », tags.</p></div>
-      <div class="feature"><h4>Gestion des enseignants</h4><p>Disciplines, heures par niveau (capacité), classes en charge, géolocalisation, historique d'affectations.</p></div>
-      <div class="feature"><h4>Jurys</h4><p>Constitution de jurys (titulaires + suppléants), capacité, statistiques de remplissage et matières couvertes.</p></div>
+      <div class="feature"><h4>Import</h4><p>CSV / Excel (Papa Parse, ExcelJS) avec mapping de colonnes ; import dédié des matières d'oral ; géocodage des adresses de stage.</p></div>
+      <div class="feature"><h4>Enseignants</h4><p>Disciplines (principale + secondaires), heures par niveau servant à calculer la capacité, classes en charge, géolocalisation.</p></div>
+      <div class="feature"><h4>Jurys</h4><p>Constitution des jurys (enseignants + capacité), statistiques de remplissage et matières couvertes par jury.</p></div>
+      <div class="feature"><h4>Tableau interactif</h4><p>Board en glisser-déposer (dnd-kit) pour corriger une affectation à la main ; recalcul des créneaux du jury touché.</p></div>
+      <div class="feature"><h4>Conflits &amp; scores</h4><p>Panneau de conflits, détail du score (ScoreBreakdown) ; chaque affectation reste expliquée — pas de boîte noire.</p></div>
+      <div class="feature"><h4>Export &amp; archives</h4><p>Export PDF mis en forme (@react-pdf), export CSV, archivage des scénarios avec bilan réussites / échecs.</p></div>
     </div>
   </section>
 
+  <!-- ============ 6. CRENEAUX ============ -->
   <section>
-    <h2><span class="n">4</span> Résultats & export</h2>
-    <div class="grid g2">
-      <div class="feature"><h4>Affectations expliquées</h4><p>Chaque affectation affiche son score, la raison principale et les critères utilisés. Aucune « boîte noire ».</p></div>
-      <div class="feature"><h4>Export & archives</h4><p>Export PDF mis en forme, export CSV des données brutes, archivage des scénarios avec bilan (réussies / échouées).</p></div>
+    <h2><span class="n">6</span> Du jury au créneau horaire</h2>
+    <div class="card">
+      <p style="margin-top:0;font-size:14px">Une fois les élèves placés dans les jurys, Groupit attribue les <strong>horaires de passage</strong>. La durée dépend de la taille du passage et le tiers temps ajoute une rallonge configurable&nbsp;:</p>
+      <div class="steps" style="margin-bottom:8px">
+        <span class="schip">Solo · 20 min</span>
+        <span class="schip">Binôme · 25 min</span>
+        <span class="schip">Trinôme · 35 min</span>
+        <span class="schip">+ tiers temps</span>
+        <span class="schip">Pause de 10 min</span>
+      </div>
+      <p style="font-size:13.5px;color:var(--muted);margin:0">Deux modes de distribution sur les demi-journées (ex. jeudi matin / après-midi) : <strong>« remplir d'abord »</strong> (<code>fill_first</code>, on remplit une demi-journée avant la suivante) ou <strong>« répartir équitablement »</strong> (<code>distribute_evenly</code>). Les membres d'un binôme/trinôme partagent le même créneau, et les élèves sont ordonnés par nom dans chaque jury.</p>
     </div>
   </section>
 
+  <!-- ============ 7. TECHNIQUE ============ -->
   <section>
-    <h2><span class="n">5</span> Technique</h2>
+    <h2><span class="n">7</span> Sous le capot</h2>
     <div class="card">
       <span class="pill">React 19 · TypeScript · Vite</span>
       <span class="pill">Zustand (état)</span>
       <span class="pill">dnd-kit (glisser-déposer)</span>
       <span class="pill">@react-pdf/renderer</span>
       <span class="pill">ExcelJS · Papa Parse</span>
-      <span class="pill">Leaflet (cartes)</span>
-      <span class="pill">Dexie / IndexedDB (local)</span>
-      <p class="note" style="margin-top:12px">Testé et validé pour l'organisation des stages de 3ᵉ ; fonctionnel pour l'organisation de l'oral du DNB.</p>
+      <span class="pill">Leaflet / react-leaflet (cartes)</span>
+      <span class="pill">Dexie / IndexedDB (stockage local)</span>
+      <span class="pill">Supabase (sessions de jury)</span>
+      <span class="pill">Tests Vitest (solveurs &amp; scoring)</span>
+      <details style="margin-top:12px"><summary>Pourquoi un solveur « glouton + amélioration locale » plutôt qu'un optimum exact&nbsp;?</summary><div class="body">Le nombre de combinaisons élève×jury explose. Un solveur exact serait trop lent dans le navigateur. Groupit retient une approche <strong>gloutonne</strong> (rapide, traite les cas difficiles d'abord) suivie d'une <strong>recherche locale</strong> par échanges, bornée en temps (3 s) pour ne jamais figer l'interface. Résultat : une solution très proche de l'optimum, calculée en quelques millisecondes, et surtout <strong>entièrement explicable</strong>.</div></details>
+      <p class="note" style="margin-top:6px">Application monorepo (outil principal + sous-app « jury » pour la notation sur tablette et tableau de bord). Le suivi des stages de 3ᵉ a été éprouvé en conditions réelles ; l'organisation de l'oral du DNB est fonctionnelle.</p>
     </div>
   </section>
 
 </main>
 
 <footer class="wrap">
-  Annexe A11 · Logiciel d'affectation (stages 3ᵉ / oral du DNB)<br>
+  Annexe A11 · Groupit, logiciel d'affectation (oral du DNB / stages 3ᵉ / groupes libres)<br>
   Compte rendu d'activité du référent numérique 2025-2026 · Collège Pierre Mendès France, Woippy · M. Thomas Charles
 </footer>
 
 <script>
-  function setMode(el,id){
-    document.querySelectorAll('.mode').forEach(function(m){m.classList.remove('on')});
-    el.classList.add('on');
-    document.querySelectorAll('.panel').forEach(function(p){p.classList.remove('on')});
-    document.getElementById(id).classList.add('on');
+"use strict";
+/* ---------- Sélecteur de mode ---------- */
+function setMode(el,id){
+  document.querySelectorAll('.mode').forEach(function(m){m.classList.remove('on')});
+  el.classList.add('on');
+  document.querySelectorAll('.panel').forEach(function(p){p.classList.remove('on')});
+  document.getElementById(id).classList.add('on');
+}
+
+/* ============================================================
+   DÉMO 1 — MOTEUR ORAL DNB
+   Reproduction fidèle de scoreEleveJury + solveOralDnb (2 phases)
+   ============================================================ */
+
+// priorityToWeight : 0 / 25 / 50 / 100 (off / low / normal / high)
+var PRIORITY_LABEL = ['Désactivé','Faible','Normal','Haute'];
+var PRIORITY_WEIGHT = [0,25,50,100];
+
+// 9 élèves fictifs (prénoms fictifs) — sujet/matière d'oral, langue, sexe, tiers temps, groupe
+var ELEVES = [
+  {id:'e1', prenom:'Léa',    sexe:'F', matiere:'Arts Plastiques', langue:null,      tt:false, grp:null},
+  {id:'e2', prenom:'Hugo',   sexe:'M', matiere:'Technologie',      langue:'Anglais', tt:false, grp:null},
+  {id:'e3', prenom:'Inès',   sexe:'F', matiere:'Histoire-Géographie', langue:null,   tt:true,  grp:null},
+  {id:'e4', prenom:'Naël',   sexe:'M', matiere:'Mathématiques',    langue:null,      tt:false, grp:'b1'},
+  {id:'e5', prenom:'Jade',   sexe:'F', matiere:'Mathématiques',    langue:null,      tt:false, grp:'b1'},
+  {id:'e6', prenom:'Sacha',  sexe:'M', matiere:'Arts Plastiques',  langue:null,      tt:false, grp:null},
+  {id:'e7', prenom:'Lina',   sexe:'F', matiere:'Technologie',      langue:null,      tt:true,  grp:null},
+  {id:'e8', prenom:'Tom',    sexe:'M', matiere:'Histoire-Géographie', langue:'Espagnol', tt:false, grp:null},
+  {id:'e9', prenom:'Zoé',    sexe:'F', matiere:'Mathématiques',    langue:null,      tt:false, grp:null}
+];
+
+// 3 jurys fictifs : matières couvertes par leurs enseignants + une langue + distance prof/collège
+// Maths est couverte par 2 jurys (A et C), Arts/HG/Techno par un seul -> les critères entrent en concurrence.
+var JURYS = [
+  {id:'j1', nom:'Jury A', matieres:['Mathématiques','Histoire-Géographie'], langues:['Espagnol'], capacite:3, distCollege:4},
+  {id:'j2', nom:'Jury B', matieres:['Arts Plastiques','Technologie'],       langues:['Anglais'],  capacite:3, distCollege:22},
+  {id:'j3', nom:'Jury C', matieres:['Mathématiques','Technologie'],         langues:[],           capacite:3, distCollege:12}
+];
+
+function readDnbOpts(){
+  return {
+    matiere:     PRIORITY_WEIGHT[+document.getElementById('w-matiere').value],
+    equilibrage: PRIORITY_WEIGHT[+document.getElementById('w-equilibrage').value],
+    mixite:      PRIORITY_WEIGHT[+document.getElementById('w-mixite').value],
+    capacite:    PRIORITY_WEIGHT[+document.getElementById('w-capacite').value],
+    bonusLangue: document.getElementById('opt-langue').checked,
+    placementTT: document.getElementById('opt-tt').checked
+  };
+}
+
+// Contexte mutable d'un jury pendant l'affectation
+function freshContexts(){
+  return JURYS.map(function(j){
+    return {jury:j, charge:0, capaciteRestante:j.capacite, nbF:0, nbM:0, nbTT:0, matCount:{}, eleves:[]};
+  });
+}
+
+// scoreEleveJury — fidèle au code (normalisation des poids + bonus additifs)
+function scoreEleveJury(el, ctx, o){
+  var raisons=[];
+  // 1. matière
+  var matiereMatch = ctx.jury.matieres.indexOf(el.matiere) !== -1;
+  var scoreMatiere = el.matiere ? (matiereMatch ? 100 : 30) : 50;
+  if(matiereMatch) raisons.push('matière '+el.matiere);
+
+  // langue (score brut + gros bonus additif plus bas)
+  var langueCouverte = el.langue && ctx.jury.langues.indexOf(el.langue) !== -1;
+
+  // poids normalisés (total -> 100)
+  var total = o.matiere + o.equilibrage + o.mixite + o.capacite;
+  var norm = total>0 ? 100/total : 1;
+  var wMat=o.matiere*norm/100, wEq=o.equilibrage*norm/100, wMix=o.mixite*norm/100, wCap=o.capacite*norm/100;
+
+  // 2. équilibrage (taux remplissage)
+  var scoreEq=50;
+  if(o.equilibrage>0){
+    var taux = ctx.charge/ctx.jury.capacite;
+    scoreEq = taux<0.3?100 : taux<0.6?75 : taux<0.9?50 : 20;
   }
+  // 3. mixité
+  var scoreMix=60;
+  if(o.mixite>0){
+    var nF=ctx.nbF+(el.sexe==='F'?1:0), nM=ctx.nbM+(el.sexe==='M'?1:0), nt=nF+nM;
+    var ratioF = nt>0 ? nF/nt : 0.5;
+    scoreMix = Math.round(100 - Math.abs(ratioF-0.5)*200);
+  }
+  // 4. capacité
+  var scoreCap=50;
+  if(o.capacite>0){
+    var r=ctx.capaciteRestante;
+    scoreCap = r>5?100 : r>2?70 : r>0?40 : 0;
+  }
+
+  var score = Math.round(scoreMatiere*wMat + scoreEq*wEq + scoreMix*wMix + scoreCap*wCap);
+
+  // malus diversité (jusqu'à -35) — si un sujet est surreprésenté (>=2 élèves dans le jury)
+  if(el.matiere && ctx.charge>=2){
+    var cnt = ctx.matCount[el.matiere]||0;
+    var conc = cnt/ctx.charge;
+    if(conc>0.3){
+      var sd = Math.max(0, Math.round(100-(conc-0.3)*140));
+      score += Math.round((sd-100)*0.35);
+    }
+  }
+  // tiers temps (±15) : favorise jurys peu chargés en TT + profs proches du collège
+  if(o.placementTT && el.tt){
+    var avgTT = ctx.charge>0 ? ctx.nbTT/ctx.charge : 0;
+    var eqTT = Math.round(100-avgTT*150);
+    var prox = ctx.jury.distCollege<=5?100 : ctx.jury.distCollege<=15?75 : ctx.jury.distCollege<=30?40 : 20;
+    var sTT = Math.round(eqTT*0.6+prox*0.4);
+    score += Math.round((sTT-50)*0.3);
+  }
+  // bonus langue +50
+  if(o.bonusLangue && langueCouverte){ score += 50; raisons.push('langue '+el.langue); }
+
+  return {score:score, matiereMatch:matiereMatch, langueCouverte:langueCouverte, raisons:raisons};
+}
+
+function affecte(el, ctx, sc){
+  ctx.eleves.push({el:el, score:sc.score, match:sc.matiereMatch, langue:sc.langueCouverte});
+  ctx.charge++; ctx.capaciteRestante--;
+  if(el.sexe==='F') ctx.nbF++; else if(el.sexe==='M') ctx.nbM++;
+  if(el.tt) ctx.nbTT++;
+  if(el.matiere) ctx.matCount[el.matiere]=(ctx.matCount[el.matiere]||0)+1;
+}
+
+function solveDnb(o){
+  var ctxs = freshContexts();
+  var byId = {}; ctxs.forEach(function(c){byId[c.jury.id]=c;});
+
+  // rareté des matières
+  var rarete={};
+  ctxs.forEach(function(c){ c.jury.matieres.forEach(function(m){ rarete[m]=(rarete[m]||0)+1; }); });
+
+  // ordre : matières rares d'abord, puis sans matière
+  var ordered = ELEVES.slice().sort(function(a,b){
+    if(!a.matiere&&!b.matiere) return 0;
+    if(!a.matiere) return 1; if(!b.matiere) return -1;
+    return (rarete[a.matiere]||0)-(rarete[b.matiere]||0);
+  });
+
+  var assigned={};
+  var groupes={};
+  ELEVES.forEach(function(e){ if(e.grp){ (groupes[e.grp]=groupes[e.grp]||[]).push(e);} });
+  var nonAffectes=[];
+
+  function placeAvec(el, ctx, sc){
+    // membres de groupe non encore placés
+    var members = el.grp ? groupes[el.grp].filter(function(m){return !assigned[m.id];}) : [];
+    var need = members.length>0 ? members.length : 1;
+    if(ctx.capaciteRestante < need) return false;
+    affecte(el, ctx, sc); assigned[el.id]=true;
+    members.filter(function(m){return m.id!==el.id;}).forEach(function(m){
+      var ms = scoreEleveJury(m, ctx, o);
+      ctx.eleves[ctx.eleves.length-1].group=true;
+      affecte(m, ctx, ms); ctx.eleves[ctx.eleves.length-1].group=true; assigned[m.id]=true;
+    });
+    if(members.length>1){ ctx.eleves.forEach(function(s){ if(s.el.grp===el.grp) s.group=true; }); }
+    return true;
+  }
+
+  // Phase 1 : correspondance matière
+  var restants=[];
+  ordered.forEach(function(el){
+    if(assigned[el.id]) return;
+    var best=null, bestCtx=null;
+    var members = el.grp ? groupes[el.grp].filter(function(m){return !assigned[m.id];}) : [];
+    var need = members.length>0?members.length:1;
+    ctxs.forEach(function(c){
+      if(c.capaciteRestante<need) return;
+      var sc=scoreEleveJury(el,c,o);
+      if(sc.matiereMatch && (!best || sc.score>best.score)){ best=sc; bestCtx=c; }
+    });
+    if(best){ placeAvec(el,bestCtx,best); } else { restants.push(el); }
+  });
+
+  // Phase 2 : meilleur jury restant
+  restants.forEach(function(el){
+    if(assigned[el.id]) return;
+    var best=null, bestCtx=null;
+    var members = el.grp ? groupes[el.grp].filter(function(m){return !assigned[m.id];}) : [];
+    var need = members.length>0?members.length:1;
+    ctxs.forEach(function(c){
+      if(c.capaciteRestante<need) return;
+      var sc=scoreEleveJury(el,c,o);
+      if(!best || sc.score>best.score){ best=sc; bestCtx=c; }
+    });
+    if(best){ placeAvec(el,bestCtx,best); }
+    else { nonAffectes.push(el); assigned[el.id]=true; }
+  });
+
+  return {ctxs:ctxs, nonAffectes:nonAffectes};
+}
+
+function runDnb(){
+  // libellés priorité
+  ['matiere','equilibrage','mixite','capacite'].forEach(function(k){
+    document.getElementById('lv-'+k).textContent = PRIORITY_LABEL[+document.getElementById('w-'+k).value];
+  });
+  var o=readDnbOpts();
+  var res=solveDnb(o);
+
+  // KPIs
+  var all=[]; res.ctxs.forEach(function(c){ all=all.concat(c.eleves); });
+  var placed=all.length;
+  var matches=all.filter(function(s){return s.match;}).length;
+  var avg = placed>0 ? Math.round(all.reduce(function(s,a){return s+a.score;},0)/placed) : 0;
+  var tauxMatch = placed>0 ? Math.round(matches/placed*100) : 0;
+  // écart de charge (max-min)
+  var charges=res.ctxs.map(function(c){return c.charge;});
+  var ecart = Math.max.apply(null,charges)-Math.min.apply(null,charges);
+
+  document.getElementById('dnb-score').textContent = Math.min(100,avg);
+  document.getElementById('dnb-scorebar').style.width = Math.min(100,avg)+'%';
+  document.getElementById('kpi-match').textContent = tauxMatch+'%';
+  document.getElementById('kpi-aff').textContent = placed+'/'+ELEVES.length;
+  document.getElementById('kpi-na').textContent = res.nonAffectes.length;
+  document.getElementById('kpi-eq').textContent = ecart;
+
+  var msg='';
+  if(o.matiere===0) msg='Matière en priorité « Désactivé » : la phase 1 cherche encore une correspondance, mais elle ne pèse plus dans le score — l\'équilibrage et la capacité dominent désormais le classement des jurys.';
+  else if(tauxMatch===100) msg='Toutes les correspondances de matière sont satisfaites (jurys remplis à '+placed+'/'+(JURYS.length*3)+' places).';
+  else msg=tauxMatch+'% des élèves passent devant un jury de leur matière ; faute de place, les autres ont basculé en phase 2 sur les critères secondaires.';
+  document.getElementById('dnb-msg').textContent = msg;
+
+  // jurys
+  var html='';
+  res.ctxs.forEach(function(c){
+    var pct = Math.round(c.charge/c.jury.capacite*100);
+    html+='<div class="jury"><h5>'+c.jury.nom+' · '+c.charge+'/'+c.jury.capacite+'</h5>'+
+          '<div class="mat">'+c.jury.matieres.join(' · ')+(c.jury.langues.length?' · LV '+c.jury.langues.join('/'):'')+'</div>'+
+          '<div class="fill"><i style="width:'+pct+'%"></i></div>';
+    c.eleves.forEach(function(s){
+      var tags='';
+      tags += s.match ? '<span class="tag match">M</span>' : '<span class="tag no">&#8800;</span>';
+      if(s.langue) tags+='<span class="tag lng">L</span>';
+      if(s.el.tt) tags+='<span class="tag tt">TT</span>';
+      if(s.group) tags+='<span class="tag grp">G</span>';
+      html+='<div class="stud">'+tags+' '+s.el.prenom+' <span style="color:var(--muted);font-size:11px">('+s.el.matiere+')</span><span class="sc">'+s.score+'</span></div>';
+    });
+    if(c.eleves.length===0) html+='<div class="explain">aucun élève</div>';
+    html+='</div>';
+  });
+  if(res.nonAffectes.length){
+    html+='<div class="jury" style="border-color:#e0651e"><h5 style="color:#b5491f">Non placés</h5>';
+    res.nonAffectes.forEach(function(e){ html+='<div class="stud">'+e.prenom+'</div>'; });
+    html+='</div>';
+  }
+  document.getElementById('dnb-jurys').innerHTML=html;
+}
+
+function resetDnb(){
+  document.getElementById('w-matiere').value=3;
+  document.getElementById('w-equilibrage').value=2;
+  document.getElementById('w-mixite').value=0;
+  document.getElementById('w-capacite').value=2;
+  document.getElementById('opt-langue').checked=true;
+  document.getElementById('opt-tt').checked=true;
+  runDnb();
+}
+
+/* ============================================================
+   DÉMO 2 — AFFECTATION STAGES PAR DISTANCE (Haversine)
+   ============================================================ */
+var COLLEGE={lat:49.1568, lon:6.1375, nom:'Collège'};
+// enseignants visiteurs (domiciles fictifs autour de Metz/Woippy)
+var VISITEURS=[
+  {id:'p1', nom:'M. Roy',    lat:49.170, lon:6.150},
+  {id:'p2', nom:'Mme Faure', lat:49.110, lon:6.180},
+  {id:'p3', nom:'M. Diop',   lat:49.200, lon:6.060},
+  {id:'p4', nom:'Mme Klein', lat:49.140, lon:6.230}
+];
+// lieux de stage fictifs
+var STAGES=[
+  {id:'s1', nom:'Garage Centre',  lat:49.165, lon:6.155},
+  {id:'s2', nom:'Pharmacie Sud',  lat:49.105, lon:6.175},
+  {id:'s3', nom:'Mairie Ouest',   lat:49.205, lon:6.070},
+  {id:'s4', nom:'Boulangerie Est',lat:49.135, lon:6.225},
+  {id:'s5', nom:'Crèche Nord',    lat:49.190, lon:6.110}
+];
+
+function haversine(a,b){
+  var R=6371, toRad=function(d){return d*Math.PI/180;};
+  var dLat=toRad(b.lat-a.lat), dLon=toRad(b.lon-a.lon);
+  var x=Math.sin(dLat/2)*Math.sin(dLat/2)+Math.cos(toRad(a.lat))*Math.cos(toRad(b.lat))*Math.sin(dLon/2)*Math.sin(dLon/2);
+  return R*2*Math.atan2(Math.sqrt(x),Math.sqrt(1-x));
+}
+
+function solveStage(dmax, cap){
+  var loads={}; VISITEURS.forEach(function(v){loads[v.id]=0;});
+  // ordre : stages les plus difficiles d'abord (moins de visiteurs accessibles)
+  var stagesOrd = STAGES.slice().sort(function(a,b){
+    var na=VISITEURS.filter(function(v){return haversine(v,a)<=dmax;}).length;
+    var nb=VISITEURS.filter(function(v){return haversine(v,b)<=dmax;}).length;
+    return na-nb;
+  });
+  var aff=[], non=[];
+  stagesOrd.forEach(function(st){
+    var best=null;
+    VISITEURS.forEach(function(v){
+      var d=haversine(v,st);
+      if(d>dmax) return;
+      if(loads[v.id]>=cap) return;
+      if(!best||d<best.d){ best={v:v, d:d}; }
+    });
+    if(best){ aff.push({stage:st, vis:best.v, km:best.d}); loads[best.v.id]++; }
+    else non.push(st);
+  });
+  return {aff:aff, non:non};
+}
+
+var VIS_COLOR={p1:'#e08a1e',p2:'#e08a1e',p3:'#e08a1e',p4:'#e08a1e'};
+function runStage(){
+  var dmax=+document.getElementById('s-dmax').value;
+  var cap=+document.getElementById('s-cap').value;
+  document.getElementById('lv-dmax').textContent=dmax+' km';
+  document.getElementById('lv-cap').textContent=cap+' stage'+(cap>1?'s':'');
+  var res=solveStage(dmax,cap);
+  var km=res.aff.reduce(function(s,a){return s+a.km;},0);
+
+  document.getElementById('kpi-skm').textContent=km.toFixed(1);
+  document.getElementById('kpi-saff').textContent=res.aff.length+'/'+STAGES.length;
+  document.getElementById('kpi-sna').textContent=res.non.length;
+
+  var li='';
+  res.aff.forEach(function(a){
+    li+='<div class="pairline"><span style="color:#3552a8;font-weight:700">'+a.stage.nom+'</span> &#8592; '+a.vis.nom+'<span class="km">'+a.km.toFixed(1)+' km</span></div>';
+  });
+  res.non.forEach(function(s){
+    li+='<div class="pairline" style="color:#b5491f">'+s.nom+' — aucun visiteur sous '+dmax+' km</div>';
+  });
+  document.getElementById('stage-list').innerHTML=li;
+
+  // carte : projection simple lon->x, lat->y sur la bbox
+  var pts=[COLLEGE].concat(VISITEURS).concat(STAGES);
+  var minLat=Math.min.apply(null,pts.map(function(p){return p.lat;}))-0.01;
+  var maxLat=Math.max.apply(null,pts.map(function(p){return p.lat;}))+0.01;
+  var minLon=Math.min.apply(null,pts.map(function(p){return p.lon;}))-0.01;
+  var maxLon=Math.max.apply(null,pts.map(function(p){return p.lon;}))+0.01;
+  function px(p){
+    return {
+      x: (p.lon-minLon)/(maxLon-minLon)*100,
+      y: (1-(p.lat-minLat)/(maxLat-minLat))*100
+    };
+  }
+  var map=document.getElementById('stage-map');
+  // lignes (SVG)
+  var svg='<svg viewBox="0 0 100 100" preserveAspectRatio="none" style="position:absolute;inset:0;width:100%;height:100%">';
+  res.aff.forEach(function(a){
+    var p1=px(a.vis), p2=px(a.stage);
+    svg+='<line x1="'+p1.x+'" y1="'+p1.y+'" x2="'+p2.x+'" y2="'+p2.y+'" stroke="#7fae97" stroke-width="0.5" stroke-dasharray="2 1.5"/>';
+  });
+  svg+='</svg>';
+  var html=svg;
+  function pin(p,cls,label){ var c=px(p); return '<div class="pin '+cls+'" style="left:'+c.x+'%;top:'+c.y+'%"><div class="dot"></div><b>'+label+'</b></div>'; }
+  html+=pin(COLLEGE,'col','Collège');
+  VISITEURS.forEach(function(v){ html+=pin(v,'ens',v.nom); });
+  STAGES.forEach(function(s){ html+=pin(s,'stg',s.nom); });
+  map.innerHTML=html;
+}
+
+/* init */
+runDnb();
+runStage();
 </script>
 </body>
 </html>
