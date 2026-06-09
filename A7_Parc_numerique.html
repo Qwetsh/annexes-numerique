@@ -228,20 +228,20 @@
 
   <!-- 2. Tableau de bord (démo) -->
   <section>
-    <h2><span class="n">2</span> Tableau de bord — indicateurs réactifs</h2>
-    <p class="lead">L'écran d'accueil (<code>/</code>) calcule ses indicateurs <strong>en direct</strong> à partir de l'inventaire : total, âge moyen, part de matériel de plus de 5 ans, et nombre d'équipements en panne. La démo ci-dessous recalcule réellement ces KPI : <strong>basculez l'état de quelques postes</strong> et observez les compteurs, la barre de répartition et la jauge se mettre à jour, exactement comme le composant React.</p>
+    <h2><span class="n">2</span> Tableau de bord — la mini-app navigable</h2>
+    <p class="lead">L'écran d'accueil (<code>/</code>) calcule ses indicateurs <strong>en direct</strong> à partir de l'inventaire : total, âge moyen, part de matériel de plus de 5 ans, et nombre d'équipements en panne. <strong>La barre latérale ci-dessous est navigable</strong> : cliquez les quatre onglets (<em>Tableau de bord</em>, <em>Équipements</em>, <em>Vue du collège</em>, <em>Signalements</em>) pour faire basculer le panneau principal entre les écrans réels du logiciel, exactement comme la navigation React (<code>/</code>, <code>/equipements</code>, <code>/vue-college</code>, <code>/signalements</code>). Les quatre vues partagent les mêmes données : basculez l'état d'un poste sur le tableau de bord et tout le reste se met à jour.</p>
     <div class="demo">
-      <div class="demo-bar"><span class="live"></span> Démo intégrée · tableau de bord <small>recalcul en direct · ANNÉE_REF = 2026</small></div>
+      <div class="demo-bar"><span class="live"></span> Démo intégrée · application navigable <small>4 onglets · données partagées en direct</small></div>
       <div class="demo-body">
         <div class="miniapp">
           <div class="ma-side">
             <div class="ma-brand"><span class="mk">▦</span><div><b>Parc numérique</b><i>Collège P. Mendès France</i></div></div>
             <div class="ma-grp">Pilotage</div>
-            <div class="ma-nav">
-              <a class="on">▦ Tableau de bord</a>
-              <a>▭ Équipements</a>
-              <a>◈ Vue du collège</a>
-              <a>🎫 Signalements <span id="dashSglBadge" class="ma-nbadge" style="display:none">1</span></a>
+            <div class="ma-nav" id="maNav">
+              <a class="on" data-view="dash" href="#" role="button">▦ Tableau de bord</a>
+              <a data-view="equip" href="#" role="button">▭ Équipements</a>
+              <a data-view="college" href="#" role="button">◈ Vue du collège</a>
+              <a data-view="sgl" href="#" role="button">🎫 Signalements <span id="dashSglBadge" class="ma-nbadge" style="display:none">1</span></a>
             </div>
             <div class="ma-grp">Bientôt</div>
             <div class="ma-nav">
@@ -251,8 +251,10 @@
             </div>
           </div>
           <div class="ma-main">
-            <div class="ma-top"><div><div class="tt">Tableau de bord</div><div class="ts">Vue d'ensemble du parc — données d'exemple</div></div></div>
-            <div class="ma-content">
+            <div class="ma-top"><div><div class="tt" id="maTitle">Tableau de bord</div><div class="ts" id="maSub">Vue d'ensemble du parc — données d'exemple</div></div></div>
+
+            <!-- VUE : Tableau de bord -->
+            <div class="ma-content ma-view" data-view="dash">
               <div class="ma-kpis" id="dashKpis"></div>
               <div class="card-pad" style="margin-top:14px">
                 <h3 style="font-size:13px;margin-bottom:8px">Répartition par état</h3>
@@ -262,9 +264,59 @@
               <h3 style="font-size:13px;margin:16px 0 7px">Modifier l'état d'un poste d'exemple</h3>
               <div id="dashEditor" style="display:flex;flex-direction:column;gap:6px"></div>
             </div>
+
+            <!-- VUE : Équipements -->
+            <div class="ma-content ma-view" data-view="equip" style="display:none">
+              <div class="ma-toolbar">
+                <div class="ma-field"><span style="color:#94a3b8">🔎</span><input id="maEquipSearch" name="maEquipSearch" aria-label="Rechercher un équipement" placeholder="Référence, modèle, salle…"></div>
+                <select class="ma-sel" id="maEquipEtat" name="maEquipEtat" aria-label="Filtrer par état"><option value="">Tous les états</option><option value="fonctionnel">Fonctionnel</option><option value="vetuste">Vétuste</option><option value="panne">En panne</option><option value="reforme">Réformé</option></select>
+                <span class="ma-count"><b id="maEquipCount">0</b> équipements</span>
+              </div>
+              <div style="max-height:300px;overflow:auto">
+                <table class="ma-tbl">
+                  <thead><tr><th>Référence</th><th>Type</th><th>Salle</th><th>Étage</th><th>État</th></tr></thead>
+                  <tbody id="maEquipBody"></tbody>
+                </table>
+              </div>
+              <div class="ma-empty" id="maEquipEmpty" style="display:none">Aucun équipement ne correspond à ces critères.</div>
+            </div>
+
+            <!-- VUE : Vue du collège -->
+            <div class="ma-content ma-view" data-view="college" style="display:none">
+              <div class="plan-bar" id="maPlanBar"></div>
+              <div class="plan-wrap">
+                <div>
+                  <div class="plan" id="maPlan"></div>
+                  <div class="legend" style="margin-top:8px">
+                    <span class="lg" style="font-size:11px;padding:3px 9px"><span class="dot" style="width:9px;height:9px;background:var(--ok-solid)"></span> Fonctionnel</span>
+                    <span class="lg" style="font-size:11px;padding:3px 9px"><span class="dot" style="width:9px;height:9px;background:var(--warn-solid)"></span> Vétuste</span>
+                    <span class="lg" style="font-size:11px;padding:3px 9px"><span class="dot" style="width:9px;height:9px;background:var(--bad-solid)"></span> En panne</span>
+                    <span class="lg" style="font-size:11px;padding:3px 9px"><span class="dot" style="width:9px;height:9px;background:var(--alert)"></span> Alerte</span>
+                  </div>
+                </div>
+                <div class="detail" id="maPlanDetail">
+                  <h4>Sélectionnez une salle</h4>
+                  <p class="meta">Cliquez une salle du plan pour afficher ses postes.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- VUE : Signalements -->
+            <div class="ma-content ma-view" data-view="sgl" style="display:none">
+              <div class="ma-toolbar">
+                <button class="ma-chip" data-sglf="" aria-pressed="true">Tous</button>
+                <button class="ma-chip" data-sglf="ouvert" aria-pressed="false">Ouvert</button>
+                <button class="ma-chip" data-sglf="en_cours" aria-pressed="false">En cours</button>
+                <button class="ma-chip" data-sglf="resolu" aria-pressed="false">Résolu</button>
+                <span class="ma-count"><b id="maSglCount">0</b> signalement(s)</span>
+              </div>
+              <div id="maSglList"></div>
+              <div class="ma-empty" id="maSglEmpty" style="display:none">Aucun signalement pour ce filtre.</div>
+            </div>
+
           </div>
         </div>
-        <p style="font-size:12px;color:var(--muted);margin:12px 0 0">Dans l'application réelle, ces 4 indicateurs et la barre de répartition proviennent du composant <code>Dashboard.tsx</code> ; l'âge moyen et le « % +5 ans » se déduisent de l'année d'acquisition par rapport à <code>ANNEE_REF</code>.</p>
+        <p style="font-size:12px;color:var(--muted);margin:12px 0 0">Les quatre onglets reproduisent les écrans réels (composants <code>Dashboard.tsx</code>, <code>Equipements.tsx</code>, <code>VueCollege</code> et <code>Signalements.tsx</code>) ; ils lisent et écrivent la même source de données. Les sections 3, 4 et 6 ci-dessous en proposent des versions développées.</p>
       </div>
     </div>
   </section>
@@ -598,7 +650,11 @@ function renderDash(){
   ed.querySelectorAll('select').forEach(function(s){
     s.addEventListener('change',function(){
       var e=EQUIP.find(function(x){return x.reference===s.getAttribute('data-ref');});
-      e.etat=s.value; renderDash(); renderInv(); renderPlan(currentFloor);
+      e.etat=s.value;
+      renderDash(); renderInv(); renderPlan(currentFloor); refreshPlanDetail();
+      // propage aux vues compactes de la mini-app
+      if(typeof renderMaEquip==='function') renderMaEquip();
+      if(typeof renderMaPlan==='function'){ renderMaPlan(maFloor); refreshMaPlanDetail(); }
     });
   });
   // badge signalements (cohérent avec la file de la section 6)
@@ -709,6 +765,10 @@ function showDetail(etage,num){
   }
   det.innerHTML=html;
 }
+function refreshPlanDetail(){
+  var sel=document.querySelector('#plan .cell.sel');
+  if(sel){ var k=sel.getAttribute('data-key').split('|'); showDetail(Number(k[0]),k[1]); }
+}
 
 /* ============================================================
    4 · INVENTAIRE — recherche + filtres
@@ -803,10 +863,10 @@ function renderSgl(){
     b.addEventListener('click',function(){
       var s=SIGNALEMENTS.find(function(x){return x.id===b.getAttribute('data-id');});
       s.statut=b.getAttribute('data-st');
-      renderSgl(); renderDash(); renderPlan(currentFloor);
-      // si la salle affichée est concernée, rafraîchir le détail
-      var sel=document.querySelector('#plan .cell.sel');
-      if(sel){ var k=sel.getAttribute('data-key').split('|'); showDetail(Number(k[0]),k[1]); }
+      renderSgl(); renderDash(); renderPlan(currentFloor); refreshPlanDetail();
+      // propage aux vues compactes de la mini-app (section 2)
+      if(typeof renderMaSgl==='function') renderMaSgl();
+      if(typeof renderMaPlan==='function'){ renderMaPlan(maFloor); refreshMaPlanDetail(); }
     });
   });
   list.querySelectorAll('button[data-prep]').forEach(function(b){
@@ -873,6 +933,203 @@ function drawQr(){
 }
 
 /* ============================================================
+   2bis · MINI-APP NAVIGABLE (section 2) — 4 vues compactes
+   partageant EQUIP / SIGNALEMENTS avec le reste de la page.
+   ============================================================ */
+var MA_VIEW = 'dash';
+var MA_META = {
+  dash:    {tt:'Tableau de bord', ts:"Vue d'ensemble du parc — données d'exemple"},
+  equip:   {tt:'Équipements',     ts:'Inventaire filtrable — extrait réel'},
+  college: {tt:'Vue du collège',  ts:'Plan d’étage cliquable — RDC → R+3'},
+  sgl:     {tt:'Signalements',    ts:'File des pannes remontées — statut en direct'}
+};
+
+/* ---- Vue Équipements (compacte) ---- */
+var maEquipState = {q:'', etat:''};
+function renderMaEquip(){
+  var rows = EQUIP.filter(function(e){
+    if(maEquipState.etat && e.etat!==maEquipState.etat) return false;
+    if(maEquipState.q){
+      var n=maEquipState.q.toLowerCase();
+      var hay=(e.reference+' '+e.modele+' '+e.salleNom+' '+e.salle+' '+e.type+' '+(e.inv||'')).toLowerCase();
+      if(hay.indexOf(n)<0) return false;
+    }
+    return true;
+  });
+  rows.sort(function(a,b){ return a.etage-b.etage || String(a.salle).localeCompare(String(b.salle)); });
+  var body=document.getElementById('maEquipBody'); body.innerHTML='';
+  rows.forEach(function(e){
+    var showNum = e.salleNom!=='Salle '+e.salle;
+    var tr=document.createElement('tr');
+    tr.innerHTML=
+      '<td><span class="ref">'+e.reference+'</span>'+(e.inv?'<span class="inv">Inv. '+e.inv+'</span>':'')+'</td>'+
+      '<td>'+(TYPE_ICON[e.type]||'')+' '+e.type+'</td>'+
+      '<td>'+(showNum? e.salleNom+' · '+e.salle : e.salleNom)+'</td>'+
+      '<td><span class="ma-flchip">'+ETAGE_COURT[e.etage]+'</span></td>'+
+      '<td>'+etatBadge(e.etat)+'</td>';
+    body.appendChild(tr);
+  });
+  document.getElementById('maEquipCount').textContent=rows.length;
+  document.getElementById('maEquipEmpty').style.display=rows.length?'none':'block';
+}
+function bindMaEquip(){
+  document.getElementById('maEquipSearch').addEventListener('input',function(){maEquipState.q=this.value;renderMaEquip();});
+  document.getElementById('maEquipEtat').addEventListener('change',function(){maEquipState.etat=this.value;renderMaEquip();});
+}
+
+/* ---- Vue Collège (plan compact, même logique que section 3) ---- */
+var maFloor = 1;
+function buildMaFloorBar(){
+  var bar=document.getElementById('maPlanBar'); bar.innerHTML='';
+  [0,1,2,3].forEach(function(f){
+    var b=document.createElement('button');
+    b.className='fb'+(f===maFloor?' on':'');
+    b.textContent=ETAGE_COURT[f];
+    b.addEventListener('click',function(){ maFloor=f; buildMaFloorBar(); renderMaPlan(f); });
+    bar.appendChild(b);
+  });
+}
+function maCellFor(etage,num){
+  var meta=salleMeta(etage,num);
+  var postes=postesOf(etage,num);
+  var sante=santeFromList(postes);
+  var alerte=alerteSalle(etage,num);
+  var cls = alerte ? 'alert' : SANTE[sante].cls;
+  var glyph = alerte ? '!' : SANTE[sante].glyph;
+  var n=postes.length;
+  var d=document.createElement('div');
+  d.className='cell c-'+cls;
+  d.setAttribute('data-key',etage+'|'+num);
+  d.innerHTML='<span class="glyph">'+glyph+'</span>'+
+    '<div><div class="num">'+num+'</div><div class="nm">'+meta.nom+'</div></div>'+
+    '<div class="pc">'+(n?n+' poste'+(n>1?'s':''):'—')+'</div>';
+  d.addEventListener('click',function(){
+    document.querySelectorAll('#maPlan .cell').forEach(function(x){x.classList.remove('sel');});
+    d.classList.add('sel');
+    showMaDetail(etage,num);
+  });
+  return d;
+}
+function renderMaPlan(etage){
+  var L=FLOOR_LAYOUT[etage]; var plan=document.getElementById('maPlan'); plan.innerHTML='';
+  var hasC = L.stairs.indexOf('C')>=0;
+  var rN=document.createElement('div'); rN.className='plan-row';
+  var labN=document.createElement('div'); labN.className='rowlab'; labN.textContent='NORD'; rN.appendChild(labN);
+  L.nord.forEach(function(num){ rN.appendChild(maCellFor(etage,num)); });
+  plan.appendChild(rN);
+  var corr=document.createElement('div'); corr.className='plan-corr'; corr.textContent='— couloir —'; plan.appendChild(corr);
+  var rS=document.createElement('div'); rS.className='plan-row';
+  var labS=document.createElement('div'); labS.className='rowlab'; labS.textContent='SUD'; rS.appendChild(labS);
+  rS.appendChild(stairCell('O'));
+  if(hasC){
+    var half=Math.ceil(L.sud.length/2);
+    L.sud.slice(0,half).forEach(function(num){ rS.appendChild(maCellFor(etage,num)); });
+    rS.appendChild(stairCell('C'));
+    L.sud.slice(half).forEach(function(num){ rS.appendChild(maCellFor(etage,num)); });
+  } else {
+    L.sud.forEach(function(num){ rS.appendChild(maCellFor(etage,num)); });
+  }
+  rS.appendChild(stairCell('E'));
+  plan.appendChild(rS);
+}
+function showMaDetail(etage,num){
+  var meta=salleMeta(etage,num); var postes=postesOf(etage,num);
+  var sante=santeFromList(postes); var alerte=alerteSalle(etage,num);
+  var det=document.getElementById('maPlanDetail');
+  var santeBadge = alerte
+    ? '<span class="ebadge e-bad"><span class="d"></span>Alerte signalement</span>'
+    : '<span class="ebadge e-'+SANTE[sante].cls+'"><span class="d"></span>'+SANTE[sante].label+'</span>';
+  var html='<h4>'+meta.nom+' · '+num+' '+santeBadge+'</h4>'+
+    '<p class="meta">'+ETAGE_COURT[etage]+' · côté '+meta.cote+' · '+(postes.length?postes.length+' poste'+(postes.length>1?'s':''):'aucun poste inventorié')+'</p>';
+  if(alerte){
+    var sig=SIGNALEMENTS.filter(function(s){return s.statut!=='resolu' && s.etage===etage && String(s.salle)===String(num);})[0];
+    html+='<div class="alert-banner">⚠ Signalement '+(STATUT_LABEL[sig.statut].toLowerCase())+' — '+sig.probleme+' ('+sig.ref+')</div>';
+  }
+  if(postes.length===0){
+    html+='<p class="meta">Salle sans équipement inventorié.</p>';
+  } else {
+    postes.forEach(function(e){
+      html+='<div class="post"><span class="pic">'+(TYPE_ICON[e.type]||'▫')+'</span>'+
+        '<div><span class="pr">'+e.reference+'</span><span class="pm">'+e.type+' · '+e.modele+' · '+e.annee+'</span></div>'+
+        '<span class="ps">'+etatBadge(e.etat)+'</span></div>';
+    });
+  }
+  det.innerHTML=html;
+}
+function refreshMaPlanDetail(){
+  var sel=document.querySelector('#maPlan .cell.sel');
+  if(sel){ var k=sel.getAttribute('data-key').split('|'); showMaDetail(Number(k[0]),k[1]); }
+}
+
+/* ---- Vue Signalements (file compacte, statut en direct) ---- */
+var maSglFilter='';
+function renderMaSgl(){
+  var list=document.getElementById('maSglList'); list.innerHTML='';
+  var rows=SIGNALEMENTS.filter(function(s){ return !maSglFilter || s.statut===maSglFilter; });
+  rows.forEach(function(s){
+    var card=document.createElement('div'); card.className='sgl-card st-'+s.statut;
+    var acts=['ouvert','en_cours','resolu'].map(function(st){
+      return '<button class="sgl-btn'+(s.statut===st?' on':'')+'" data-maid="'+s.id+'" data-st="'+st+'">'+STATUT_LABEL[st]+'</button>';
+    }).join('');
+    card.innerHTML=
+      '<div class="sgl-top"><span class="sgl-pb">'+s.probleme+'</span><span class="stbadge st-'+s.statut+'">'+STATUT_LABEL[s.statut]+'</span></div>'+
+      '<div class="sgl-eq">'+s.ref+' · '+salleMeta(s.etage,s.salle).nom+'<span class="fl">'+ETAGE_COURT[s.etage]+'</span></div>'+
+      (s.description?'<div class="sgl-desc">« '+s.description+' »</div>':'')+
+      '<div class="sgl-who">'+s.qui+' · '+s.date+'</div>'+
+      '<div class="sgl-acts">'+acts+'</div>';
+    list.appendChild(card);
+  });
+  document.getElementById('maSglCount').textContent=rows.length;
+  document.getElementById('maSglEmpty').style.display=rows.length?'none':'block';
+  list.querySelectorAll('button[data-st]').forEach(function(b){
+    b.addEventListener('click',function(){
+      var s=SIGNALEMENTS.find(function(x){return x.id===b.getAttribute('data-maid');});
+      s.statut=b.getAttribute('data-st');
+      // propage à toute la page
+      renderMaSgl(); renderDash(); renderSgl();
+      renderPlan(currentFloor); refreshPlanDetail();
+      renderMaPlan(maFloor); refreshMaPlanDetail();
+    });
+  });
+}
+function bindMaSgl(){
+  var chips=document.querySelectorAll('.ma-view[data-view="sgl"] .ma-chip');
+  chips.forEach(function(c){
+    c.addEventListener('click',function(){
+      maSglFilter=c.getAttribute('data-sglf');
+      chips.forEach(function(x){ x.setAttribute('aria-pressed', x===c ? 'true':'false'); });
+      renderMaSgl();
+    });
+  });
+}
+
+/* ---- Navigation de la barre latérale ---- */
+function showView(v){
+  MA_VIEW=v;
+  document.querySelectorAll('#maNav a[data-view]').forEach(function(a){
+    a.classList.toggle('on', a.getAttribute('data-view')===v);
+  });
+  document.querySelectorAll('.ma-view').forEach(function(el){
+    el.style.display = (el.getAttribute('data-view')===v) ? '' : 'none';
+  });
+  document.getElementById('maTitle').textContent=MA_META[v].tt;
+  document.getElementById('maSub').textContent=MA_META[v].ts;
+  // (re)rend la vue active pour refléter l'état partagé courant
+  if(v==='equip')   renderMaEquip();
+  if(v==='college') { buildMaFloorBar(); renderMaPlan(maFloor); refreshMaPlanDetail(); }
+  if(v==='sgl')     renderMaSgl();
+  if(v==='dash')    renderDash();
+}
+function bindMaNav(){
+  document.querySelectorAll('#maNav a[data-view]').forEach(function(a){
+    a.addEventListener('click',function(ev){
+      ev.preventDefault();
+      showView(a.getAttribute('data-view'));
+    });
+  });
+}
+
+/* ============================================================
    INIT
    ============================================================ */
 buildFloorBar();
@@ -885,9 +1142,20 @@ renderSgl();
 bindCopy();
 renderMail();
 drawQr();
-// pré-sélectionne la salle informatique 210 (R+1) pour montrer le détail riche
+// mini-app navigable (section 2)
+bindMaNav();
+bindMaEquip();
+bindMaSgl();
+showView('dash');
+// pré-sélectionne la salle informatique 210 (R+1) pour montrer le détail riche (section 3)
 (function(){
   var c=document.querySelector('#plan .cell[data-key="1|210"]');
+  if(c) c.click();
+})();
+// pré-sélectionne aussi la salle 210 dans la vue compacte du collège (mini-app)
+(function(){
+  buildMaFloorBar(); renderMaPlan(maFloor);
+  var c=document.querySelector('#maPlan .cell[data-key="1|210"]');
   if(c) c.click();
 })();
 </script>
